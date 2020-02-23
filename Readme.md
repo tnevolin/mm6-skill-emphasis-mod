@@ -14,7 +14,7 @@ damage rate = average damage \* chance to hit / (100 - recovery time)
 
 ## New damage rate formula
 
-damage rate = average damage \* chance to hit / 100 \* (100 + recovery rate) / 100
+damage rate = average damage \* chance to hit / 100 \* (100 + recovery time) / 100
 
 # Weapon skills
 
