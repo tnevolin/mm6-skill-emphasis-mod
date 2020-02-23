@@ -22,11 +22,13 @@ Not all weapon skills provide all effects. For example, Staff skill does not red
 
 Effects are kicked in when their appropriate skill rank is achieved. For example Sword skill reduces recovery time starting from expert rank.
 
-|skill effect|increase per skill level|damage rate change<br>per skill level<br>early game - late game|comment|
+Table below 
+
+|affected stat|stat increase<br>per level|damage rate change<br>per level<br>early game - late game|comment|
 |----|----:|----|----|
-|Attack bonus|10|15% - 5%|All weapon skills have it at normal rank.|
-|Recovery time|10|10% - 5%|Some weapon skills have it at expert rank.|
-|Damage bonus|5|50% - 10%|Some weapon skills have it at master rank.|
+|Attack bonus|10|15% - 5%||
+|Recovery time|10|10% - 5%||
+|Damage bonus|5|50% - 10%||
 |Armor Class|5|25% - 5%||
 |Chance to stun|5|5%-5%|50% at level 10.|
 |Chance to cause triple damage|5|5%-5%|50% at level 10.|
