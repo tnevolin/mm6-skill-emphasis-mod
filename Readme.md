@@ -30,8 +30,8 @@ Table below
 |Recovery time|10|10% - 5%||
 |Damage bonus|5|50% - 10%||
 |Armor Class|5|25% - 5%||
-|Chance to stun|5|5%-5%|50% at level 10.|
-|Chance to cause triple damage|5|5%-5%|50% at level 10.|
+|Chance to stun|5|5% - 5%|50% at level 10.|
+|Chance to cause triple damage|5|5% - 5%|50% at level 10.|
 
 ## Example for Axe skill
 
@@ -54,14 +54,33 @@ Shield bonus is doubled with Expert and tripled with Master.
 |shield|30|30|30|
 |leather|20|10|0|
 |chain|40|20|0|
-|plate|60|30|00|
+|plate|60|30|0|
 
 # Magic skills
 
+Most spells generally progress well with skil level. This is just minor adjustment.
 
+All minor projectile spells now always hit.
 
-Armor recovery penalty is 60
-Armor recovery penalty is 60
-Armor recovery penalty is 60
+|spell|effect|
+|----|----|
+|All protections|trippled effect|
+|Flame Arrow|always hits|
+|Ring Of Fire|6 + *1-6*|
+|Meteor Shower|8 + *1-4*|
+|Inferno|12 + *1-3*|
+|Starburst|20 + *1-2*|
+|Ice Blast|12 + *1-8*|
+|Magic Arrow|always hits|
+|Stone Skin|5 + *5*|
+|Blades|0 + *1-7*, always hits|
+|Death Blossom|20 + *1-2*|
+|Spirit Arrow|always hits|
+|Bless|5 + *5*|
+|Healing Touch|3-7 (~5), *6-14* (~10), *9-21* (~15)|
+|Heroism|5 + *2*|
+|First Aid|5, *10*, *15*|
+|Cure Wounds|5 + *5*|
+|Power Cure|10 + *5*|
+|Prismatic Light|25 + *1-2*|
 
-AC bonus increases by 5 per skill.
