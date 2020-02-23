@@ -4,17 +4,17 @@
 
 RPG character advancement should be mainly based on their skill progression with some small non skill based effects here and there from equipment, barrels, quests, etc. Putting it simply high skill should be a primary source of every property character has. That what R in RPG is. You build a role by pumping skill points into certain area. Like if you are focusing on axe skill only then you expect this character to be an outstanding axeman but appaling swordman. This is *NOT* like that in M&M engine. Expensive item gives about same bonus in attack and damage as master level skill. Even though acquiring master level skill is uncomparably more difficult than any expensive item. I would love to turn this around and give skills their well deserved attention. Usually one could raise their selected skills somewhere to level 10 on average by the end of the game. Since there are so few of them we should make player to cherish and rush every possibility to raise their character level even if by just one. The effect should be highly noticeable too.
 
-# Recovery rate
+# Recovery time
 
-Turn recovery rate into a damage rate multiplier, rather than divisor. That eliminates hard bottom cap problem and bonuses can stack indefinitely.
+Turn recovery time into a damage rate multiplier, rather than divisor. That eliminates hard bottom cap problem and recovery time bonuses can stack indefinitely.
 
 ## Current damage rate formula
 
-damage rate = average damage \* chance to hit / (100 - recovery rate bonus)
+damage rate = average damage \* chance to hit / (100 - recovery time)
 
 ## New damage rate formula
 
-damage rate = average damage \* chance to hit / 100 \* (100 + recovery rate bonus) / 100
+damage rate = average damage \* chance to hit / 100 \* (100 + recovery rate) / 100
 
 # Weapon skills
 
