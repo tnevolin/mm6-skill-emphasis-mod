@@ -75,8 +75,8 @@ All protection spells have trippled strength.
 |----|----:|----:|
 |Ring Of Fire|0|1-5|
 |Meteor Shower|4|1-3|
-|Inferno|0|1-5|
-|Starburst|10|1-3|
+|Inferno|0|1-4|
+|Starburst|10|1-4|
 |Ice Blast|0|1-11|
 |Stone Skin|5|5|
 |Blades|0|1-7|
