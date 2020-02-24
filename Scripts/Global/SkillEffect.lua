@@ -1,3 +1,11 @@
+-- Turns recovery time into a multiplier rather than divisor
+function events.GetAttackDelay(t)
+	MessageBox(t.Result)
+	debug.Message(t.Result)
+	debug.ErrorMessage(t.Result)
+	ErrorMessage(t.Result)
+end
+
 function events.CalcStatBonusBySkills(t)
 	-- calculate axe damage by skill
 	if t.Stat == const.Stats.MeleeDamageBase then

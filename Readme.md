@@ -8,6 +8,24 @@ RPG character advancement should be mainly based on their skill progression with
 
 Turn recovery time into a damage rate multiplier, rather than divisor. That eliminates hard bottom cap problem and recovery time bonuses can stack indefinitely.
 
+#### Example
+
+##### Vanilla
+
+<pre>
+Dagger (60 base recovery time), 500 speed (-30 recovery time), haste (-25 recovery time) = 5 recovery time, capped at 30
+</pre>
+
+##### This mod
+
+<pre>
+recovery time bonus = 100 - 5
+corrected recovery time = 100 \* 100 / (1 + recovery time bonus) = 51 recovery time, no capping needed
+</pre>
+
+Melee cap is reached at the skill level 24 which is pretty high. Range cap is reached at the skill level 190 which is never.
+Regardless of caps recovery time in this model is never negative.
+
 ## Current damage rate formula
 
 damage rate = average damage \** chance to hit / (100 - recovery time)
