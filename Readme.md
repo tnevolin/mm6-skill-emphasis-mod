@@ -43,13 +43,13 @@ Stats affected by weapon skill, their increase per skill level, approximate resu
 |Chance to stun| 5|05%|50% at level 10|
 |Chance to cause triple damage| 5|05%|50% at level 10|
 
-## Example for Axe skill
+#### Example for Axe skill
 
-|game stage|skill rank|damage increase for each skill level increase|
-|----|----|----:|
-|early game|novice|15%|
-|mid game|expert|15%|
-|late game|master|20%|
+|skill rank|damage rate increase per skill level|comment|
+|----|----:|----|
+|normal|15%|Attack bonus|
+|expert|15%|Attack bonus, Recovery time|
+|master|20%|Attack bonus, Recovery time, Damage bonus|
 
 # Shield and armor skills
 
