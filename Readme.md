@@ -72,7 +72,7 @@ All spells always hit.
 All protection spells have trippled strength.
 
 |spell|fixed|per level|
-|----|----|----|
+|----|----:|----:|
 |Ring Of Fire|0|1-5|
 |Meteor Shower|4|1-3|
 |Inferno|0|1-5|
