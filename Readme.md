@@ -30,30 +30,16 @@ corrected recovery time = 100 \* 100 / (1 + recovery time bonus) = 51 recovery t
 Melee cap is reached at the skill level 24 which is pretty high. Range cap is reached at the skill level 190 which is never.
 Regardless of caps recovery time in this model is never negative.
 
-## Current damage rate formula
-
-damage rate = average damage \** chance to hit / (100 - recovery time)
-
-## New damage rate formula
-
-damage rate = average damage \** chance to hit / 100 \** (100 + recovery time) / 100
-
 # Weapon skills
 
-Not all weapon skills provide all effects. For example, Staff skill does not reduce recovery time.
-
-Effects are kicked in when their appropriate skill rank is achieved. For example Sword skill reduces recovery time starting from expert rank.
-
-Table below 
-
-|affected stat|stat increase<br>per level|damage rate change<br>per level<br>early game - late game|comment|
-|----|----:|----|----|
+|stat affected by skill|stat increase per level|damage rate change<br>per level<br>early game - late game|comment|
+|----|----|----|----|
 |Attack bonus|10|15% - 5%||
 |Recovery time|10|10% - 5%||
-|Damage bonus|5|50% - 10%||
-|Armor Class|5|25% - 5%||
-|Chance to stun|5|5% - 5%|50% at level 10.|
-|Chance to cause triple damage|5|5% - 5%|50% at level 10.|
+|Damage bonus| 5|50% - 10%||
+|Armor Class| 5|25% - 5%||
+|Chance to stun| 5|5% - 5%|50% at level 10|
+|Chance to cause triple damage| 5|5% - 5%|50% at level 10|
 
 ## Example for Axe skill
 
