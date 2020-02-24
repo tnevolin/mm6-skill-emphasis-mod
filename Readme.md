@@ -32,8 +32,10 @@ Regardless of caps recovery time in this model is never negative.
 
 # Weapon skills
 
-|stat affected by skill|stat increase per level|damage rate change<br>per level<br>early game - late game|comment|
-|----|----|----|----|
+Stats affected by weapon skill, their increase per skill level, approximate resulting damage rate increase throughout the game.
+
+|stat affected|stat increase|damage rate increase|comment|
+|----|----:|----|----|
 |Attack bonus|10|15% - 5%||
 |Recovery time|10|10% - 5%||
 |Damage bonus| 5|50% - 10%||
