@@ -53,9 +53,7 @@ Stats affected by weapon skill, their increase per skill level, approximate resu
 
 # Shield and armor skills
 
-AC bonus increases by 5 per skill.
-
-Shield bonus is doubled with Expert and tripled with Master.
+AC bonus increases by 5 per skill level.
 
 ## Recovery penalties
 
@@ -70,27 +68,24 @@ Shield bonus is doubled with Expert and tripled with Master.
 
 Most spells generally progress well with skil level. This is just minor adjustment.
 
-All minor projectile spells now always hit.
+All spells always hit.
+All protection spells have trippled strength.
 
-|spell|effect|
-|----|----|
-|All protections|trippled effect|
-|Flame Arrow|always hits|
-|Ring Of Fire|6 + **1-6**|
-|Meteor Shower|8 + **1-4**|
-|Inferno|12 + **1-3**|
-|Starburst|20 + **1-2**|
-|Ice Blast|12 + **1-8**|
-|Magic Arrow|always hits|
-|Stone Skin|5 + **5**|
-|Blades|0 + **1-7**, always hits|
-|Death Blossom|20 + **1-2**|
-|Spirit Arrow|always hits|
-|Bless|5 + **5**|
-|Healing Touch|3-7 (~5), **6-14** (~10), **9-21** (~15)|
-|Heroism|5 + **2**|
-|First Aid|5, **10**, **15**|
-|Cure Wounds|5 + **5**|
-|Power Cure|10 + **5**|
-|Prismatic Light|25 + **1-2**|
+|spell|fixed|per level|
+|----|----|----|
+|Ring Of Fire|0|1-5|
+|Meteor Shower|4|1-3|
+|Inferno|0|1-5|
+|Starburst|10|1-3|
+|Ice Blast|0|1-11|
+|Stone Skin|5|5|
+|Blades|0|1-7|
+|Death Blossom|0|1-9|
+|Bless|5|5|
+|Healing Touch|3-7, 6-14, 9-21||
+|Heroism|5|2|
+|First Aid|5, 15, 25||
+|Cure Wounds|5|5|
+|Power Cure|10|4|
+|Prismatic Light|0|1-9|
 
