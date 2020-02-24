@@ -13,7 +13,11 @@ Turn recovery time into a damage rate multiplier, rather than divisor. That elim
 ##### Vanilla
 
 <pre>
-Dagger (60 base recovery time), 500 speed (-30 recovery time), haste (-25 recovery time) = 5 recovery time, capped at 30
+Dagger		=  60 base recovery time
+500 speed	= -30 recovery time bonus
+haste		= -25 recovery time bonus
+
+summary		=   5 recovery time, capped at 30
 </pre>
 
 ##### This mod
