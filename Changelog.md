@@ -1,4 +1,7 @@
 # version 1
 
 * Recovery time increases multiplier instead of decreasing divider.
-* Expert Axe and Sword skill recovery time bonus is 10.
+* Recovery time bonus is 10.
+* Attack bonus is 10.
+* Damage bonus is 5.
+

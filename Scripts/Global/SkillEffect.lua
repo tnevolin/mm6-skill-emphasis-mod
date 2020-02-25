@@ -75,20 +75,76 @@ function events.GetAttackDelay(t)
 end
 
 function events.CalcStatBonusBySkills(t)
-	-- calculate axe damage by skill
-	if t.Stat == const.Stats.MeleeDamageBase then
+
+	-- calculate attack bonus by skill
+	
+	if t.Stat == const.Stats.MeleeAttack then
+	
 		local mainHandItemNumber = t.Player.ItemMainHand
+		
 		if mainHandItemNumber ~= 0 then
+		
 			local mainHandItem = t.Player.Items[mainHandItemNumber]
-			if (Game.ItemsTxt[mainHandItem.Number].Skill - 1) == const.Skills.Axe and not mainHandItem.Broken then
-				if t.Player.Skills[const.Skills.Axe] ~= 0 then
-					local skill, mastery = SplitSkill(t.Player.Skills[const.Skills.Axe])
-					if mastery >= const.Master then
-						t.Result = skill * 10
-					end
+			
+			if Game.ItemsTxt[mainHandItem.Number].Skill ~= 0 then
+			
+				local mainHandItemSkill = Game.ItemsTxt[mainHandItem.Number].Skill - 1
+
+				if t.Player.Skills[mainHandItemSkill] ~= 0 then
+				
+					local skill, mastery = SplitSkill(t.Player.Skills[mainHandItemSkill])
+					
+					-- set attack bonus step to 10
+					
+					t.Result = t.Result + (skill * 9)
+					
 				end
+				
 			end
+			
 		end
+		
 	end
+	
+	-- calculate attack damage by skill
+	
+	if t.Stat == const.Stats.MeleeDamageBase then
+	
+		local mainHandItemNumber = t.Player.ItemMainHand
+		
+		if mainHandItemNumber ~= 0 then
+		
+			local mainHandItem = t.Player.Items[mainHandItemNumber]
+			
+			if Game.ItemsTxt[mainHandItem.Number].Skill ~= 0 then
+			
+				local mainHandItemSkill = Game.ItemsTxt[mainHandItem.Number].Skill - 1
+				
+				if t.Player.Skills[mainHandItemSkill] ~= 0 then
+				
+					local skill, mastery = SplitSkill(t.Player.Skills[mainHandItemSkill])
+					
+					-- set attack bonus step to 10 for Axe, Spear, Mace
+					
+					if
+						(mainHandItemSkill == const.Skills.Axe and mastery >= const.Master)
+						or
+						(mainHandItemSkill == const.Skills.Spear and mastery >= const.Master)
+						or
+						(mainHandItemSkill == const.Skills.Mace and mastery >= const.Expert)
+					then
+					
+						t.Result = t.Result + (skill * 4)
+						
+					end
+					
+				end
+				
+			end
+			
+		end
+		
+	end
+	
 end
 
