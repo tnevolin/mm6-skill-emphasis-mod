@@ -111,7 +111,7 @@ Here is how much +1 recovery time bonus increases attack frequency based on bare
 ||70|1.4%|
 |late game|80|1.3%|
 
-Early game imporvement is huge due to low combined damage at the time. End game improvements are still about twice as better as recovery time bonus.
+Early game imporvement is huge due to low combined damage at the time. End game improvement is still about twice as better as for recovery time bonus.
 
 ## AC bonus
 
@@ -140,7 +140,9 @@ Let assume monster attack bonus about as fast as our bare AC throughout the game
 
 Similar to attack bonus the effectiveness of AC bonus falls drastically toward the end of the game.
 
-# Weapon skills
+# Proposed skill modification
+
+## Weapon
 
 Stats affected by weapon skill, their increase per skill level.
 
@@ -149,22 +151,35 @@ Stats affected by weapon skill, their increase per skill level.
 |Attack bonus|10|
 |Recovery time|10|
 |Damage bonus|5|
-|Armor Class|5|
+|Armor Class|10|
 |Chance to stun|5|
 |Chance to cause triple damage|5|
 
-# Shield and armor skills
+## Armor
 
-AC bonus increases by 5 per skill level.
+|stat affected|stat increase per level|
+|----|----:|
+|Armor Class|10|
 
-## Recovery penalties
+### Recovery penalties
 
-|defense type|penalty normal|penalty expert|penalty master|
+|armor type|normal|expert|master|
 |----|----:|----:|----:|
-|shield|30|30|30|
 |leather|20|10|0|
 |chain|40|20|0|
 |plate|60|30|0|
+
+## Shield
+
+|stat affected|stat increase per level|
+|----|----:|
+|Armor Class|10|
+
+### AC multiplier
+
+|armor type|normal|expert|master|
+|----|----:|----:|----:|
+|shield|1|2|3|
 
 # Magic skills
 
