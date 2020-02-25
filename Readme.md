@@ -181,16 +181,15 @@ Stats affected by weapon skill, their increase per skill level.
 |----|----:|----:|----:|
 |shield|1|2|3|
 
-# Magic skills
+# Spells
 
 All spells always hit.
-
-All individual protection spells (not from Day of Protection) have tripple strength. Otherwise, they are pretty useless.
 
 Most spells generally progress well with skill level. This is an adjustment for those that do not. I've reshuffled their fixed and per level values so that they have more standard strength formula: X + 1-X / level. At the same time I tried to make old and new versions about equally strong at level 4.
 
 |spell|fixed|per level|
 |----|----:|----:|
+|All protection spells|10|1,2,3|
 |Ring Of Fire|3|1-3|
 |Meteor Shower|4|1-4|
 |Inferno|5|1-5|
@@ -208,4 +207,8 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Flying Fist|14|1-14|
 |Power Cure|10|4|
 |Prismatic Light|10|1-10|
+
+## Hour Of Power problem
+
+This spell is insanely overpowered. While master level 10 Bless/Heroism grant only +15 attack/damage master level 10 Hour Of Power grants +45 of each. This is an enourmous advantage that renders basic self magic spells utterly useless. The only fix to that I found is to increase skill multiplier for them same way as protection spells do.
 
