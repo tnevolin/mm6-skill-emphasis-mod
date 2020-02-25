@@ -6,7 +6,7 @@ RPG character advancement should be mainly based on their skill progression with
 
 # Recovery time
 
-Turn recovery time into a damage rate multiplier, rather than divisor. That eliminates hard bottom cap problem and recovery time bonuses can stack indefinitely.
+Turn recovery time into a damage rate multiplier, rather than divisor. That eliminates hard bottom cap problem and recovery time bonuses can stack indefinitely. This modification is not directly related to weapon skill emphasis. It allows to avoid hitting the cap quite early with higher recovery time bonus per skill level awareded.
 
 #### Example
 
@@ -30,6 +30,116 @@ corrected recovery time = 100 \* 100 / (1 + recovery time bonus) = 51 recovery t
 Melee cap is reached at the skill level 24 which is pretty high. Range cap is reached at the skill level 190 which is never.
 Regardless of caps recovery time in this model is never negative.
 
+# Skill effects progression analysis
+
+## Attack bonus
+
+Bare bonus not including weapon skill
+
+|source|value (early game)|value (late game)|
+|----|----:|----:|
+|accuracy effect|0|10|
+|weapon bonus|0|10|
+|second weapon bonus|0|10|
+|buffs (Bless, Hour of Power)|5|45|
+|total|5|75|
+
+Average monster AC throughout the game: 0 - 100.
+
+Let assume monster AC grows about as fast as our bare attack bonus throughout the game for calculation simplicity. Here is how much +1 attack bonus increases chance to hit based on bare bonus player already has at the time.
+
+|game stage|bare bonus|chance to hit improvement for +1 attack bonus|
+|----|----:|----:|
+|early game|0|1.7%|
+||10|1.0%|
+||20|0.7%|
+||30|0.6%|
+||40|0.5%|
+|late game|50|0.4%|
+
+Early game imporvement is relatively noticeable but it decreases strongly as game progresses.
+
+## Recovery time
+
+Bare bonus not including weapon skill
+
+|source|value (early game)|value (late game)|
+|----|----:|----:|
+|speed effect|0|10|
+|swift weapon|0|20|
+|buffs (Haste)|25|25|
+|total|25|55|
+
+Here is how much +1 recovery time bonus increases attack frequency based on bare bonus player already has at the time.
+
+|game stage|bare bonus|attack frequency improvement for +1 recovery time bonus|
+|----|----:|----:|
+|early game|0|1.0%|
+||10|0.9%|
+||20|0.8%|
+||30|0.8%|
+||40|0.7%|
+|late game|50|0.7%|
+
+Early game imporvement is less than corresponding attack bonus one. However it declines not as drastically as game progresses.
+
+## Damage bonus
+
+Bare bonus not including weapon skill
+
+|source|value (early game)|value (late game)|
+|----|----:|----:|
+|might effect|0|10|
+|weapon damage|10|10|
+|second weapon damage|0|10|
+|weapon bonus|0|10|
+|weapon enchantments|0|10|
+|second weapon enchantments|0|10|
+|buffs (Heroism, Hour of Power)|5|45|
+|total|15|105|
+
+Here is how much +1 recovery time bonus increases attack frequency based on bare bonus player already has at the time.
+
+|game stage|bare bonus|attack damage improvement for +1 damage bonus|
+|----|----:|----:|
+|early game|10|10.0%|
+||20|5.0%|
+||30|3.3%|
+||40|2.5%|
+||50|2.0%|
+||60|1.7%|
+||70|1.4%|
+|late game|80|1.3%|
+
+Early game imporvement is huge due to low combined damage at the time. End game improvements are still about twice as better as recovery time bonus.
+
+## AC bonus
+
+Bare bonus not including weapon skill
+
+|source|value (early game)|value (late game)|
+|----|----:|----:|
+|speed effect|0|10|
+|equipment AC|0|80|
+|AC enchantments|0|10|
+|buffs (Stone Skin)|5|45|
+|total|5|145|
+
+Average monster attack bonus throughout the game: 0 - 200.
+
+Let assume monster attack bonus about as fast as our bare AC throughout the game for calculation simplicity. Here is how much +1 AC decreases monster's chance to hit us based on bare bonus player already has at the time.
+
+|game stage|bare bonus|monster's chance to hit decrease for +1 AC|
+|----|----:|----:|
+|early game|0|5.0%|
+||20|1.0%|
+||40|0.6%|
+||60|0.4%|
+||80|0.3%|
+|late game|100|0.2%|
+
+Similar to attack bonus the effectiveness of AC bonus falls drastically toward the end of the game.
+
 # Weapon skills
 
 Stats affected by weapon skill, their increase per skill level.
@@ -42,14 +152,6 @@ Stats affected by weapon skill, their increase per skill level.
 |Armor Class|5|
 |Chance to stun|5|
 |Chance to cause triple damage|5|
-
-#### Example for Axe skill
-
-|skill rank|damage rate increase per skill level|comment|
-|----|----:|----|
-|normal|15%|Attack bonus|
-|expert|15%|Attack bonus, Recovery time|
-|master|20%|Attack bonus, Recovery time, Damage bonus|
 
 # Shield and armor skills
 
