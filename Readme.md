@@ -185,9 +185,9 @@ Stats affected by weapon skill, their increase per skill level.
 
 All spells always hit.
 
-All protection spells have tripple strength. Otherwise, they are pretty useless.
+All individual protection spells (not from Day of Protection) have tripple strength. Otherwise, they are pretty useless.
 
-Most spells generally progress well with skil level. This is an adjustment for those that do not.
+Most spells generally progress well with skill level. This is an adjustment for those that do not. I've reshuffled their fixed and per level values so that they have more standard strength formula: X + 1-X / level. At the same time I tried to make old and new versions about equally strong at level 4.
 
 |spell|fixed|per level|
 |----|----:|----:|
