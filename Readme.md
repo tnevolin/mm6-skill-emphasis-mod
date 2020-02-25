@@ -197,9 +197,9 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Ice Blast|10|1-10|
 |Stone Skin|5|5|
 |Death Blossom|8|1-8|
-|Bless|5|5|
+|Bless|10|2,2,4|
 |Healing Touch|3-7, 6-14, 9-21||
-|Heroism|5|2|
+|Heroism|10|1,1,2|
 |Mind Blast|4|1-4|
 |First Aid|5, 15, 25||
 |Harm|5|1-5|
@@ -208,7 +208,7 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Power Cure|10|4|
 |Prismatic Light|10|1-10|
 
-## Hour Of Power problem
+## Bless, Heroism, Hour Of Power problem
 
-This spell is insanely overpowered. While master level 10 Bless/Heroism grant only +15 attack/damage master level 10 Hour Of Power grants +45 of each. This is an enourmous advantage that renders basic self magic spells utterly useless. The only fix to that I found is to increase skill multiplier for them same way as protection spells do.
+Bless and Heroism grant relatively small bonus of +15 even at master level 10. Whereas, Hour Of Power is insanely overpowered granting +45 of both attack and damage at master level 10. This is an enourmous advantage that renders basic self magic spells utterly useless. The only fix to that I found is to increase skill multiplier for basic self spells based on mastery.
 
