@@ -2,13 +2,16 @@ function events.GetAttackDelay(t)
 
 	-- correct weapon skill recovery time bonus
 	
+	-- find recovery time skill
+	
+	local recoveryTimeSkill = nil
+		
 	if t.Ranged then
+	
+		recoveryTimeSkill = const.Skills.Bow
+		
 	else
 	
-		-- find recovery time skill
-	
-		local recoveryTimeSkill = nil
-		
 		local itemMainHandNumber = t.Player.ItemMainHand
 		if itemMainHandNumber ~= 0 then
 			local itemMainHand = t.Player.Items[itemMainHandNumber]
@@ -46,44 +49,21 @@ function events.GetAttackDelay(t)
 			
 		end
 		
-		if recoveryTimeSkill ~= nil then
-			
-			local itemExtraHandNumber = t.Player.ItemExtraHand
-			if itemExtraHandNumber ~= 0 then
-				local itemExtraHand = t.Player.Items[itemExtraHandNumber]
-				local itemExtraHandSkillInc = Game.ItemsTxt[itemExtraHand.Number].Skill
-				
-				if itemExtraHandSkillInc ~= 0 then
-					local itemExtraHandSkill = itemExtraHandSkillInc - 1
-					
-					if	 	itemExtraHandSkill == const.Skills.Sword	then
-						if baseRecoveryTime < 90 then
-							recoveryTimeSkill = itemExtraHandSkill
-							baseRecoveryTime = 90
-						end
-					end
-					
-				end
-				
-			end
-			
-		end
-		
-		-- calculate recovery time adjustment
-		
-		if recoveryTimeSkill ~= nil then
-			
-			if recoveryTimeSkill == const.Skills.Sword or recoveryTimeSkill == const.Skills.Axe then
-				if t.Player.Skills[recoveryTimeSkill] ~= 0 then
-					local skill, mastery = SplitSkill(t.Player.Skills[recoveryTimeSkill])
-					if mastery >= const.Expert then
-						t.Result = t.Result - (skill * 9)
-					end
-				end
-			end
-			
-		end
+	end
 	
+	-- calculate recovery time adjustment
+	
+	if recoveryTimeSkill ~= nil then
+		
+		if recoveryTimeSkill == const.Skills.Sword or recoveryTimeSkill == const.Skills.Axe or recoveryTimeSkill == const.Skills.Bow then
+			if t.Player.Skills[recoveryTimeSkill] ~= 0 then
+				local skill, mastery = SplitSkill(t.Player.Skills[recoveryTimeSkill])
+				if mastery >= const.Expert then
+					t.Result = t.Result - (skill * 9)
+				end
+			end
+		end
+		
 	end
 	
 	-- turn recovery time into a multiplier rather than divisor
