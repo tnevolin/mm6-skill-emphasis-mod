@@ -32,16 +32,16 @@ Regardless of caps recovery time in this model is never negative.
 
 # Weapon skills
 
-Stats affected by weapon skill, their increase per skill level, approximate resulting damage rate increase throughout the game.
+Stats affected by weapon skill, their increase per skill level.
 
-|stat affected|stat increase|damage rate increase|comment|
-|----|----:|----:|----|
-|Attack bonus|10|15% - 00%||
-|Recovery time|10|10% - 05%||
-|Damage bonus| 5|50% - 10%||
-|Armor Class| 5|25% - 05%||
-|Chance to stun| 5|05%|50% at level 10|
-|Chance to cause triple damage| 5|05%|50% at level 10|
+|stat affected|stat increase per level|
+|----|----:|
+|Attack bonus|10|
+|Recovery time|10|
+|Damage bonus|5|
+|Armor Class|5|
+|Chance to stun|5|
+|Chance to cause triple damage|5|
 
 #### Example for Axe skill
 
