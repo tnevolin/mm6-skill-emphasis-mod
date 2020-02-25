@@ -66,26 +66,29 @@ AC bonus increases by 5 per skill level.
 
 # Magic skills
 
-Most spells generally progress well with skil level. This is just minor adjustment.
-
 All spells always hit.
-All protection spells have trippled strength.
+
+All protection spells have tripple strength. Otherwise, they are pretty useless.
+
+Most spells generally progress well with skil level. This is an adjustment for those that do not.
 
 |spell|fixed|per level|
 |----|----:|----:|
-|Ring Of Fire|0|1-5|
-|Meteor Shower|4|1-3|
-|Inferno|0|1-4|
-|Starburst|10|1-4|
-|Ice Blast|0|1-11|
+|Ring Of Fire|3|1-3|
+|Meteor Shower|4|1-4|
+|Inferno|5|1-5|
+|Starburst|8|1-8|
+|Ice Blast|10|1-10|
 |Stone Skin|5|5|
-|Blades|0|1-7|
-|Death Blossom|0|1-9|
+|Death Blossom|8|1-8|
 |Bless|5|5|
 |Healing Touch|3-7, 6-14, 9-21||
 |Heroism|5|2|
+|Mind Blast|4|1-4|
 |First Aid|5, 15, 25||
-|Cure Wounds|5|5|
+|Harm|5|1-5|
+|Cure Wounds|5|4|
+|Flying Fist|14|1-14|
 |Power Cure|10|4|
-|Prismatic Light|0|1-9|
+|Prismatic Light|10|1-10|
 

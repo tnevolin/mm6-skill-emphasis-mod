@@ -1,9 +1,15 @@
--- Turns recovery time into a multiplier rather than divisor
 function events.GetAttackDelay(t)
-	MessageBox(t.Result)
-	debug.Message(t.Result)
-	debug.ErrorMessage(t.Result)
-	ErrorMessage(t.Result)
+
+	-- get recovery time bonus
+	local recoveryTimeBonus = 100 - t.Result
+	
+	-- correct weapon skill recovery time bonus
+	
+	
+	-- turn recovery time into a multiplier rather than divisor
+	local correctedRecoveryTime = math.floor(100 * 100 / (100 + recoveryTimeBonus))
+	t.Result = correctedRecoveryTime
+	
 end
 
 function events.CalcStatBonusBySkills(t)
