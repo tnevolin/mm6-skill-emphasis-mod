@@ -142,17 +142,15 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 
 # Proposed skill modification
 
-## Weapon
+## Weapon bonuses increase per skill level depending on rank
 
-Stats affected by weapon skill, their increase per skill level.
-
-|stat affected|stat increase per level|
-|----|----:|
-|Attack bonus|10|
-|Recovery time|10|
-|Damage bonus|5|
-|Armor Class|10|
-|Chance to stun|5|
+|bonus affected|normal|expert|master|
+|----|----:|----:|----:|
+|Attack bonus|6|8|10|
+|Recovery time|6|8|10|
+|Damage bonus|3|4|5|
+|Armor Class|6|8|10|
+|Chance to stun|1|2|3|
 |Chance to cause triple damage|5|
 
 ## Armor
@@ -173,7 +171,7 @@ Stats affected by weapon skill, their increase per skill level.
 
 |stat affected|stat increase per level|
 |----|----:|
-|Armor Class|10|
+|Armor Class|2|
 
 ### AC multiplier
 
