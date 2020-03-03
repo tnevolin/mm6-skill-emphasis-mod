@@ -28,7 +28,7 @@ corrected recovery time = 100 \* 100 / (1 + recovery time bonus) = 51 recovery t
 </pre>
 
 Melee cap is reached at the skill level 24 which is pretty high. Range cap is reached at the skill level 190 which is never.
-Regardless of caps recovery time in this model is never negative.
+Regardless of caps recovery time in this model it is never negative.
 
 # Skill effects progression analysis
 
@@ -142,20 +142,55 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 
 # Proposed skill modification
 
-## Weapon bonuses increase per skill level depending on rank
+## Weapon
 
-|bonus affected|normal|expert|master|
-|----|----:|----:|----:|
-|Attack bonus|6|8|10|
-|Recovery time|6|8|10|
-|Damage bonus|3|4|5|
-|Armor Class|6|8|10|
-|Chance to stun|1|2|3|
-|Chance to cause triple damage|5|
+### Weapon bonuses increase per skill level depending on rank
+
+|bonus|normal|expert|master|bonus at master level 10|improvement compared to vanilla|
+|----|----:|----:|----:|----:|----|
+|Attack|6|8|10|+100|x1.5 increase in player hit frequency against toughest monsters (40% -> 60%).|
+|Speed|4|6|8|+80|x1.5 increase in attack speed (150 -> 250).|
+|Damage|3|4|5|+50|x1.5 increase in damage (100 -> 150).|
+|Dagger chance to cause triple damage|3|4|5|+50|x2 dagger damage multiplier (1 -> 2).|
+|Armor Class|9|12|15|+150|x1.5 decrease in toughest monster hit frequency against player (60% -> 40%).|
+|Resistances|3|4|5|+50|x2 decrease in magic attack damage against player (100% -> 50%).|
+
+### Resulting weapon damage rate increase at master level 10 due to improved skills
+
+|weapon|attack|speed|damage|damage rate improvement compared to vanilla|
+|----|----:|----:|----:|----:|
+|Staff|+100|0|0|1.5|
+|Sword|+100|+100|0|2.2|
+|Dagger|+100|0|x2|3.0|
+|Axe|+100|+100|+100|3.4|
+|Spear|+100|0|+100|2.2|
+|Mace|+100|0|+100|2.2|
+
+### Mace special ability
+
+Mace has a chance to stun opponent. This ability is immediatelly available at normal skill rank.
+
+* Chance to stun = 10%.
+* Paralyze duration = 1 minute per skill level.
+
+Mace master level 10 roughly keeps one enemy out of turns all the time.
+
+### Staff special ability
+
+Staff adds to AC and all resistances. See multiplers in weapon bonuses table above.
+
+Staff has a chance to curse and feeblemind. These abilities are immediatelly available at normal skill rank.
+
+* Chance to curse or feeblemind = 10% each.
+* Effect duration = 1 minute per skill level.
+
+Staff master level 10 roughly keeps one enemy out of spells and with half attack success rate all the time.
 
 ## Armor
 
-|stat affected|stat increase per level|
+### AC bonus per level
+
+|bonus|stat increase per level|
 |----|----:|
 |Armor Class|10|
 
@@ -167,17 +202,13 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 |chain|40|20|0|
 |plate|60|30|0|
 
-## Shield
+## Shield 
 
-|stat affected|stat increase per level|
-|----|----:|
-|Armor Class|2|
+### AC bonus per level
 
-### AC multiplier
-
-|armor type|normal|expert|master|
+|bonus|normal|expert|master|
 |----|----:|----:|----:|
-|shield|1|2|3|
+|Armor Class|6|8|10|
 
 # Spells
 
