@@ -147,7 +147,7 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 
 ### Weapon bonuses increase per skill level depending on rank
 
-|bonus|normal|expert|master|bonus at master level 10|improvement compared to vanilla|
+|bonus|normal|expert|master|master level 10|improvement compared to vanilla|
 |----|----:|----:|----:|----:|----|
 |Attack|6|8|10|+100|x1.5 increase in player hit frequency against toughest monsters (40% -> 60%).|
 |Speed|4|6|8|+80|x1.5 increase in attack speed (150 -> 250).|
