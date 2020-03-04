@@ -168,12 +168,13 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 
 ### Mace special ability
 
-Mace has a chance to stun opponent. This ability is immediatelly available at normal skill rank.
+Mace has a chance to slow opponent. This ability is immediatelly available at normal skill rank.
 
-* Chance to stun = 10%.
-* Paralyze duration = 1 minute per skill level.
+I've replaced stun to slow because stun doesn't work in MM6 and does not add to monster recovery (= useless). Slow at least can be timed and visible in monster stats.
 
-Mace master level 10 roughly keeps one enemy out of turns all the time.
+**Chance to cause an effect = 10%, duration = 1 minute per skill level.**
+
+*Mace master level 10 roughly keeps one enemy slow all the time.*
 
 ### Staff special ability
 
@@ -181,10 +182,9 @@ Staff adds to AC and all resistances. See multiplers in weapon bonuses table abo
 
 Staff has a chance to curse and feeblemind. These abilities are immediatelly available at normal skill rank.
 
-* Chance to curse or feeblemind = 10% each.
-* Effect duration = 1 minute per skill level.
+**Chance to cause an effect = 10%, duration = 1 minute per skill level.**
 
-Staff master level 10 roughly keeps one enemy out of spells and with half attack success rate all the time.
+*Staff master level 10 roughly keeps one enemy out of spells and with half attack success rate all the time.*
 
 ## Armor
 
