@@ -4,31 +4,32 @@
 
 RPG character advancement should be mainly based on their skill progression with some small non skill based effects here and there from equipment, barrels, quests, etc. Putting it simply high skill should be a primary source of every property character has. That what R in RPG is. You build a role by pumping skill points into certain area. Like if you are focusing on axe skill only then you expect this character to be an outstanding axeman but appaling swordman. This is **NOT** like that in M&M engine. Expensive item gives about same bonus in attack and damage as master level skill. Even though acquiring master level skill is uncomparably more difficult than any expensive item. I would love to turn this around and give skills their well deserved attention. Usually one could raise their selected skills somewhere to level 10 on average by the end of the game. Since there are so few of them we should make player to cherish and rush every possibility to raise their character level even if by just one. The effect should be highly noticeable too.
 
-# Recovery time
+# Recovery time cap problem solution
 
-Turn recovery time into a damage rate multiplier, rather than divisor. That eliminates hard bottom cap problem and recovery time bonuses can stack indefinitely. This modification is not directly related to weapon skill emphasis. It allows to avoid hitting the cap quite early with higher recovery time bonus per skill level awareded.
+Recovery time cap is relatively easy reacheable. As soon as it hits the cap further investment in recovery time reduction is a waste. I propose to tunr recovery time reduction bonus into attack speed increase bonus. Then it naturally will be treated same exactly way as any other game stat. Meaning adding 100 atack speed bonus on top of base 100 recovery time makes player attack twice as fast and so on. With this approach reaching recovery time is still possible but it reqires enormouos investments into skill. So we safely can stop worrying about it. See computation example below.
 
-#### Example
+#### Computation example
 
 ##### Vanilla
 
 <pre>
-Dagger		=  60 base recovery time
+Dagger		=  60 base recovery time (40 recovery time reduction bonus)
 500 speed	= -30 recovery time bonus
 haste		= -25 recovery time bonus
 
-summary		=   5 recovery time, capped at 30
+result		=   5 recovery time but it is capped at 30
 </pre>
 
 ##### This mod
 
 <pre>
-recovery time bonus = 100 - 5
-corrected recovery time = 100 \* 100 / (1 + recovery time bonus) = 51 recovery time, no capping needed
+Total recovery time reduction bonus from above example = 100 - 5 = 95
+This mod treats it as attack speed increase bonus = 95
+Resulting attack speed = 100 + 95 = 195
+Resulting recovery time = 100 \* (100 / 195) = 51 recovery time, no capping needed
 </pre>
 
-Melee cap is reached at the skill level 24 which is pretty high. Range cap is reached at the skill level 190 which is never.
-Regardless of caps recovery time in this model it is never negative.
+With all additional bonuses added melee cap is reached at the skill level 22 which is pretty high and rarely reacheable. Range cap is reached at the skill level 190 which is never. Regardless of caps recovery time in this model it is never negative.
 
 # Skill effects progression analysis
 
