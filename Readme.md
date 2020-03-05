@@ -173,7 +173,7 @@ Mace has a chance to paralize opponent. This ability is immediatelly available a
 
 I've replaced stun to paralize because stun does not add to monster recovery in MM6 (= useless). Paralize is a stronger version of stun that has duration and is visual.
 
-* Chance to cause an effect = 3% on normal, 4% on expert, 5% on master.
+* Chance to cause an effect = 6% on normal, 8% on expert, 10% on master.
 * Duration of an effect = 1 minute per skill level.
 
 **Skill master level 20 roughly keeps one enemy under effect all the time.**
@@ -184,7 +184,7 @@ Staff adds to AC and all resistances. See multiplers in weapon bonuses table abo
 
 Staff has a chance to slow and feeblemind. These abilities are immediatelly available at normal skill rank.
 
-* Chance to cause an effect = 6% on normal, 8% on expert, 10% on master.
+* Chance to cause an effect = 12% on normal, 16% on expert, 20% on master.
 * Duration of an effect = 1 minute per skill level.
 
 **Skill master level 10 roughly keeps one enemy under effect all the time.**
