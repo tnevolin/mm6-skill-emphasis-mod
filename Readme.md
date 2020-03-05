@@ -154,7 +154,7 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 |Damage|3|4|5|+50|x1.5 increase in damage (100 -> 150).|
 |Dagger chance to cause triple damage|3|4|5|+50|x2 dagger damage multiplier (1 -> 2).|
 |Armor Class|9|12|15|+150|x1.5 decrease in toughest monster hit frequency against player (60% -> 40%).|
-|Resistances|3|4|5|+50|x2 decrease in magic attack damage against player (100% -> 50%).|
+|Resistances|3|4|5|+50|x1.5 decrease in magic attack damage against player (75% -> 45%).|
 
 ### Resulting weapon damage rate increase at master level 10 due to improved skills
 
@@ -163,29 +163,24 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 |Staff|+100|0|0|1.5|
 |Sword|+100|+100|0|2.2|
 |Dagger|+100|0|x2|3.0|
-|Axe|+100|+100|+100|3.4|
-|Spear|+100|0|+100|2.2|
-|Mace|+100|0|+100|2.2|
+|Axe|+100|+100|+50|3.4|
+|Spear|+100|0|+50|2.2|
+|Mace|+100|0|+50|2.2|
 
-### Mace special ability
+### Mace and staff special abilities
 
-Mace has a chance to slow opponent. This ability is immediatelly available at normal skill rank.
+Mace has a chance to paralize opponent. This ability is immediatelly available at normal skill rank.
 
-I've replaced stun to slow because stun doesn't work in MM6 and does not add to monster recovery (= useless). Slow at least can be timed and visible in monster stats.
-
-**Chance to cause an effect = 10%, duration = 1 minute per skill level.**
-
-*Mace master level 10 roughly keeps one enemy slow all the time.*
-
-### Staff special ability
+I've replaced stun to paralize because stun does not add to monster recovery in MM6 (= useless). Paralize is a stronger version of stun that has duration and is visual.
 
 Staff adds to AC and all resistances. See multiplers in weapon bonuses table above.
 
-Staff has a chance to curse and feeblemind. These abilities are immediatelly available at normal skill rank.
+Staff has a chance to slow and feeblemind. These abilities are immediatelly available at normal skill rank.
 
-**Chance to cause an effect = 10%, duration = 1 minute per skill level.**
+* Chance to cause an effect = 3% on normal, 4% on expert, 5% on master.
+* Duration of an effect = 1 minute per skill level.
 
-*Staff master level 10 roughly keeps one enemy out of spells and with half attack success rate all the time.*
+**Skill master level 20 roughly keeps one enemy under effect all the time.**
 
 ## Armor
 
