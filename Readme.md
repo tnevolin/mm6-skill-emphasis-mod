@@ -167,20 +167,27 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 |Spear|+100|0|+50|2.2|
 |Mace|+100|0|+50|2.2|
 
-### Mace and staff special abilities
+### Mace special abilities
 
 Mace has a chance to paralize opponent. This ability is immediatelly available at normal skill rank.
 
 I've replaced stun to paralize because stun does not add to monster recovery in MM6 (= useless). Paralize is a stronger version of stun that has duration and is visual.
 
-Staff adds to AC and all resistances. See multiplers in weapon bonuses table above.
-
-Staff has a chance to slow and feeblemind. These abilities are immediatelly available at normal skill rank.
-
 * Chance to cause an effect = 3% on normal, 4% on expert, 5% on master.
 * Duration of an effect = 1 minute per skill level.
 
 **Skill master level 20 roughly keeps one enemy under effect all the time.**
+
+### Staff special abilities
+
+Staff adds to AC and all resistances. See multiplers in weapon bonuses table above.
+
+Staff has a chance to slow and feeblemind. These abilities are immediatelly available at normal skill rank.
+
+* Chance to cause an effect = 6% on normal, 8% on expert, 10% on master.
+* Duration of an effect = 1 minute per skill level.
+
+**Skill master level 10 roughly keeps one enemy under effect all the time.**
 
 ## Armor
 
