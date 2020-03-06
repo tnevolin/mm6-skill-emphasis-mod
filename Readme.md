@@ -6,7 +6,7 @@ RPG character advancement should be mainly based on their skill progression with
 
 # Recovery time cap problem
 
-Recovery time cap is relatively easy reacheable. As soon as it hits the cap further investment in recovery time reduction is a waste. I propose to tunr recovery time reduction bonus into attack speed increase bonus. Then it naturally will be treated same exactly way as any other game stat. Meaning adding 100 atack speed bonus on top of base 100 recovery time makes player attack twice as fast and so on. With this approach reaching recovery time is still possible but it reqires enormouos investments into skill. So we safely can stop worrying about it. See computation example below.
+Recovery time cap is relatively easy reacheable. As soon as it hits the cap further investment in recovery time reduction is a waste. I propose to turn recovery time reduction bonus into attack speed increase bonus. Then it naturally will be treated same exactly way as any other game stat. Meaning adding 100 atack speed bonus on top of base 100 recovery time makes player attack twice as fast and so on. With this approach reaching recovery time is still possible but it reqires enormouos investments into skill. So we safely can stop worrying about it. See computation example below.
 
 With this approach any constant speed bonus like Haste or weapon skill benefits slightly more to slower weapon.
 
