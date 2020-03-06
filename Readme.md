@@ -180,6 +180,10 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 |Spear|+100|0|+50|2.2|
 |Mace|+100|0|+50|2.2|
 
+Axe is being an ultimate weapon of destruction as game intende it to be. Axe - Sword is now also a most destructive dual wield combo (see dual wield section for details).
+
+Other weapons are somewhat weaker but possess some other qualities instead. Staff is an ultimate anti magic and complete protection tool. Sword is powerful dual wield companion. Spear is for physical damage protection. Mace is a counter attack tool. Dagger is faster and stronger at the beginning but doesn't progress that well with skill.
+
 ### Mace special abilities
 
 Mace has a chance to paralize opponent. This ability is immediatelly available at normal skill rank.
