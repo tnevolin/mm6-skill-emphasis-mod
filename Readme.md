@@ -4,7 +4,7 @@
 
 RPG character advancement should be mainly based on their skill progression with some small non skill based effects here and there from equipment, barrels, quests, etc. Putting it simply high skill should be a primary source of every property character has. That what R in RPG is. You build a role by pumping skill points into certain area. Like if you are focusing on axe skill only then you expect this character to be an outstanding axeman but appaling swordman. This is **NOT** like that in M&M engine. Mastering the skill is undoubtedly more difficult endeavour than aquiring an expensive item. Yet those expensive items give about same bonus in attack and damage as mastering the skill. I would love to turn this around and give skills their well deserved attention. Usually one could raise their selected skills somewhere to level 10 on average by the end of the game. Since there are so few of them we should make player to cherish each skill point and use every possibility to invest more in primary weapon skills.
 
-# Recovery time cap problem solution
+# Recovery time cap problem
 
 Recovery time cap is relatively easy reacheable. As soon as it hits the cap further investment in recovery time reduction is a waste. I propose to tunr recovery time reduction bonus into attack speed increase bonus. Then it naturally will be treated same exactly way as any other game stat. Meaning adding 100 atack speed bonus on top of base 100 recovery time makes player attack twice as fast and so on. With this approach reaching recovery time is still possible but it reqires enormouos investments into skill. So we safely can stop worrying about it. See computation example below.
 
