@@ -163,7 +163,7 @@ Similar to attack bonus the effectiveness of AC bonus falls drastically toward t
 |bonus|normal|expert|master|master level 10|improvement compared to vanilla|
 |----|----:|----:|----:|----:|----|
 |Attack|6|8|10|+100|x1.5 increase in player hit frequency against toughest monsters (40% -> 60%).|
-|Speed|4|6|8|+80|x1.5 increase in attack speed (150 -> 250).|
+|Speed|4|6|8|+80|x1.5 increase in attack speed (150 -> 230).|
 |Damage|3|4|5|+50|x1.5 increase in damage (100 -> 150).|
 |Dagger chance to cause triple damage|3|4|5|+50|x2 dagger damage multiplier (1 -> 2).|
 |Armor Class|9|12|15|+150|x1.5 decrease in toughest monster hit frequency against player (60% -> 40%).|
