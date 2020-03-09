@@ -237,7 +237,7 @@ Dual wield rules are quite complicated in MM6. Player need to remember which wea
 ## Dual wield modification proposal
 
 * Weapon skill attack bonuses are combined. This makes them hit roughly 50% more often with both skills on master level 10.
-* Weapon skill damage bonuses are combined. This does not change anything since off hand weapons (dagger, sword) do not increase damage with skill.
+* Weapon skill damage bonuses are combined. This does not change anything since off hand weapons (dagger, sword) do not increase damage with skill. Unless character class is melee combat oriented (Knight, Paladin). Then it does a tremendous difference. (See "Weapon usage preference analysis" below)
 * Weapon skill speed bonuses are averaged. This slows down speed progression for spear/mace-sword combo making it eventually less devastating comparing to axe-sword.
 
 # Two handed weapon
