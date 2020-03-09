@@ -248,23 +248,58 @@ Dual wield is superior to two handed weapon in MM6 as it combines both weapons b
 
 * Two handed weapon increases damage by 40%.
 
+# Class speciality
+
+MM6 classes are kind of undistingushable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
+
+## Additional weapon skill damage/level for classes
+
+|initial class|weapon type affected|initial|1st promotion|2nd promotion|
+|----|----|----:|----:|----:|
+|Knight|all melee weapons|4|5|6|
+|Paladin|all melee weapons|1|2|3|
+|Archer|all ranged weapons|1|2|3|
+
+This is similar to armsmaster bonus in MM7 but more distinctive. Knight become an ultimate weapon armsmaster with Paladin following. Archer specializes in ranged damage instead and now becomes quite powerful shooter.
+
+## Weapon usage preference analysis
+
+### Dual weild recovery
+
+Now when dual wield recovery is an average of **actual** both weapon recoveries it is beneficial to combine any weapon with any to get a recovery bonus from weapon in each hand.
+
+#### Examples
+
+Spear + Dagger benefits from dagger speed and result in 70 recovery instead of 80 in vanilla.
+
+Spear + Sword has initial recovery of 85 instead of 90 in vanilla. However, it progresses about half as slow as in vanilla due to Sword contributing only half of its bonus with skill advancement.
+
+Axe + Sword has initial recovery of 95 instead of 100 in vanilla. However, it progresses faster than any other combo due to both weapon skills contributing to recovery. It becomes fastest combo when both weapon skills contribute -25 recovery to common pool.
+
+### Dual wield vs. two handed weapon
+
+Dual wield is very beneficial at low skill level as it combines base damage and attack of both weapons. Then it keeps combining attack from both weapons. However, attack is the least beneficial parameter. Its progression slows down tremendously at higher skill levels. On top of that it is capped at 100% hig chance. Will all huge attack bonuses in this mod it is impossible to improve hit chance more than twice comparing to vanilla. Damage, in turn, keeps growing lineraly and is not limited. Will all other conditions being equal two handed weapon will prevail toward the end of the game. This is true to non melee combat oriented classes (Archer, Cleric, Druid, Sourcerer).
+
+It is different for melee combat oriented classes like Knight (and Paladin to lesser extent). With their inherent skill damage bonus it adds to **ALL** weapons including those normally not increasing damage with skill like Sword and Dagger. With dual wielding Knight keeps adding to damage of both weapons which eventually overruns two handed damage bonus.
+
+Knight should master Sword and switch to dual wielding as soon as possible. Paladin may start working toward Sword mastery after it reaches mastery in some other weapon like Axe or Spear. Other non melee combat oriented classes may use Dagger in left hand for its added speed and damage if they don't plan to invest in weapons much. Otherwise, they may invest in two handed Axe or Spear. Spear actually is even stronger at the beginning due to additional two handed damage roll. Axe becomes faster than Spear when it accumulates 20 recovery (about expert level 5).
+
 # Spells
 
-All spells always hit.
+All spells always hit. Making just a few spells to hit depending on skill level is too fine grained and hard to visualize mechanics that is absolutely not needed.
 
 Most spells generally progress well with skill level. This is an adjustment for those that do not. I've reshuffled their fixed and per level values so that they have more standard strength formula: X + 1-X / level. At the same time I tried to make old and new versions about equally strong at level 4.
 
 |spell|fixed|per level|
 |----|----:|----:|
-|All protection spells|10|1,2,3|
 |Ring Of Fire|3|1-3|
 |Meteor Shower|4|1-4|
 |Inferno|5|1-5|
 |Starburst|8|1-8|
 |Ice Blast|10|1-10|
-|Stone Skin|5|5|
+|Stone Skin|0|5|
 |Death Blossom|8|1-8|
-|Bless|10|2,2,4|
+|Bless|0|5|
 |Healing Touch|3-7, 6-14, 9-21||
 |Heroism|10|1,1,2|
 |Mind Blast|4|1-4|

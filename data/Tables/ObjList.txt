@@ -1,0 +1,233 @@
+Name	Id	Radius	Height	Invisible	Untouchable	Temporary	LifetimeInSFT	NoPickup	NoGravity	InterceptAction	Bounce	TrailParticles	TrailFire	TrailLine	SFTGroup	LifeTime	Speed	ParticleR	ParticleG	ParticleB
+null	0	16	16	-	-	-	-	-	-	-	-	-	-	-	null	0	0	0	0	0
+widget	666	8	6	-	-	x	-	x	-	-	-	-	-	-	key	768	0	0	0	0
+long sword	1	64	16	-	-	-	-	-	-	-	-	-	-	-	3LSWORD	0	0	0	0	0
+two-handed sword	2	64	16	-	-	-	-	-	-	-	-	-	-	-	32HSWORD	0	0	0	0	0
+broadsword	3	64	16	-	-	-	-	-	-	-	-	-	-	-	3BRSWRD	0	0	0	0	0
+cutlass	4	64	16	-	-	-	-	-	-	-	-	-	-	-	3CUTLASS	0	0	0	0	0
+dagger	5	64	16	-	-	-	-	-	-	-	-	-	-	-	3DAGGER	0	0	0	0	0
+long dagger	6	64	16	-	-	-	-	-	-	-	-	-	-	-	3LDAGGER	0	0	0	0	0
+axe	7	64	16	-	-	-	-	-	-	-	-	-	-	-	3AXE	0	0	0	0	0
+two-handed axe	8	64	16	-	-	-	-	-	-	-	-	-	-	-	32HAXE	0	0	0	0	0
+spear	9	64	16	-	-	-	-	-	-	-	-	-	-	-	3SPEAR	0	0	0	0	0
+halberd	10	64	16	-	-	-	-	-	-	-	-	-	-	-	3HALBERD	0	0	0	0	0
+trident	11	64	16	-	-	-	-	-	-	-	-	-	-	-	3TRIDENT	0	0	0	0	0
+long bow	12	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOW	0	0	0	0	0
+crossbow	13	64	16	-	-	-	-	-	-	-	-	-	-	-	3CROSBOW	0	0	0	0	0
+mace	14	64	16	-	-	-	-	-	-	-	-	-	-	-	3MACE	0	0	0	0	0
+war hammer	15	64	16	-	-	-	-	-	-	-	-	-	-	-	3HAMMER	0	0	0	0	0
+club	16	64	16	-	-	-	-	-	-	-	-	-	-	-	3CLUB	0	0	0	0	0
+staff	17	64	16	-	-	-	-	-	-	-	-	-	-	-	3STAFF	0	0	0	0	0
+blaster	18	64	16	-	-	-	-	-	-	-	-	-	-	-	3BLASTER	0	0	0	0	0
+blaster rifle	19	64	16	-	-	-	-	-	-	-	-	-	-	-	3BLASTR2	0	0	0	0	0
+leather armor	20	64	16	-	-	-	-	-	-	-	-	-	-	-	3LEATHER	0	0	0	0	0
+chain mail	21	64	16	-	-	-	-	-	-	-	-	-	-	-	3CHAIN	0	0	0	0	0
+plate mail	22	64	16	-	-	-	-	-	-	-	-	-	-	-	3PLATE	0	0	0	0	0
+large shield	23	64	16	-	-	-	-	-	-	-	-	-	-	-	3LSHIELD	0	0	0	0	0
+small shield	24	64	16	-	-	-	-	-	-	-	-	-	-	-	3SSHIELD	0	0	0	0	0
+helm	25	64	16	-	-	-	-	-	-	-	-	-	-	-	3HELM	0	0	0	0	0
+hat	26	64	16	-	-	-	-	-	-	-	-	-	-	-	3HAT	0	0	0	0	0
+crown	27	64	16	-	-	-	-	-	-	-	-	-	-	-	3CROWN	0	0	0	0	0
+belt	28	64	16	-	-	-	-	-	-	-	-	-	-	-	3BELT	0	0	0	0	0
+cape	29	64	16	-	-	-	-	-	-	-	-	-	-	-	3CAPE	0	0	0	0	0
+gauntlets	30	64	16	-	-	-	-	-	-	-	-	-	-	-	3GNTLET	0	0	0	0	0
+boots	31	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOOTS	0	0	0	0	0
+ring	32	64	16	-	-	-	-	-	-	-	-	-	-	-	3RING	0	0	0	0	0
+amulet	33	64	16	-	-	-	-	-	-	-	-	-	-	-	3AMULET	0	0	0	0	0
+wand	34	64	16	-	-	-	-	-	-	-	-	-	-	-	3WAND	0	0	0	0	0
+scroll	35	64	16	-	-	-	-	-	-	-	-	-	-	-	3SCROLL	0	0	0	0	0
+bottle	37	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL02	0	0	0	0	0
+bottle	38	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL03	0	0	0	0	0
+bottle	39	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL04	0	0	0	0	0
+bottle	40	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL05	0	0	0	0	0
+bottle	41	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL06	0	0	0	0	0
+bottle	42	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL07	0	0	0	0	0
+bottle	43	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL08	0	0	0	0	0
+bottle	44	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL09	0	0	0	0	0
+bottle	45	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOTL10	0	0	0	0	0
+key	67	64	16	-	-	-	-	-	-	-	-	-	-	-	3KEY	0	0	0	0	0
+keyring	68	64	16	-	-	-	-	-	-	-	-	-	-	-	3KEYRING	0	0	0	0	0
+leather pouch	69	64	16	-	-	-	-	-	-	-	-	-	-	-	3POUCH	0	0	0	0	0
+book	70	64	16	-	-	-	-	-	-	-	-	-	-	-	3BOOK	0	0	0	0	0
+hourglass	71	64	16	-	-	-	-	-	-	-	-	-	-	-	3HRGLASS	0	0	0	0	0
+chalice	72	64	16	-	-	-	-	-	-	-	-	-	-	-	3chalice	0	0	0	0	0
+horn	73	64	16	-	-	-	-	-	-	-	-	-	-	-	3HORN	0	0	0	0	0
+crystal ball	75	64	16	-	-	-	-	-	-	-	-	-	-	-	3crysball	0	0	0	0	0
+Deck of Fate	76	64	16	-	-	-	-	-	-	-	-	-	-	-	3TAROT	0	0	0	0	0
+ankh	77	64	16	-	-	-	-	-	-	-	-	-	-	-	3ANKH	0	0	0	0	0
+candelabra	78	64	16	-	-	-	-	-	-	-	-	-	-	-	3cndlAbra	0	0	0	0	0
+tiger statuette	79	64	16	-	-	-	-	-	-	-	-	-	-	-	3Stat1	0	0	0	0	0
+bear statuette	80	64	16	-	-	-	-	-	-	-	-	-	-	-	3Stat2	0	0	0	0	0
+wolf statuette	81	64	16	-	-	-	-	-	-	-	-	-	-	-	3Stat3	0	0	0	0	0
+eagle statuette	82	64	16	-	-	-	-	-	-	-	-	-	-	-	3STAT4	0	0	0	0	0
+dragon statuette	83	64	16	-	-	-	-	-	-	-	-	-	-	-	3Stat5	0	0	0	0	0
+dragon claw	84	64	16	-	-	-	-	-	-	-	-	-	-	-	3CLAW	0	0	0	0	0
+Mystery Cube	85	64	16	-	-	-	-	-	-	-	-	-	-	-	3CUBE	0	0	0	0	0
+glass shard	86	64	16	-	-	-	-	-	-	-	-	-	-	-	3SHARD	0	0	0	0	0
+black pearl	87	64	16	-	-	-	-	-	-	-	-	-	-	-	3Blkperl	0	0	0	0	0
+white pearl	88	64	16	-	-	-	-	-	-	-	-	-	-	-	3Wytperl	0	0	0	0	0
+rose	89	64	16	-	-	-	-	-	-	-	-	-	-	-	3Rose	0	0	0	0	0
+bell	90	64	16	-	-	-	-	-	-	-	-	-	-	-	3BELL	0	0	0	0	0
+gong	91	64	16	-	-	-	-	-	-	-	-	-	-	-	3GONG	0	0	0	0	0
+horse shoe	92	64	16	-	-	-	-	-	-	-	-	-	-	-	3HORSHOE	0	0	0	0	0
+skull	93	64	16	-	-	-	-	-	-	-	-	-	-	-	3SKULL	0	0	0	0	0
+bone	94	64	16	-	-	-	-	-	-	-	-	-	-	-	3BONE	0	0	0	0	0
+crystal skull	95	64	16	-	-	-	-	-	-	-	-	-	-	-	3crystal	0	0	0	0	0
+shovel	96	64	16	-	-	-	-	-	-	-	-	-	-	-	3SHOVEL	0	0	0	0	0
+lock picks	97	64	16	-	-	-	-	-	-	-	-	-	-	-	3LOCKPIK	0	0	0	0	0
+rope	98	64	16	-	-	-	-	-	-	-	-	-	-	-	3ROPE	0	0	0	0	0
+stone	99	64	16	-	-	-	-	-	-	-	-	-	-	-	3stone	0	0	0	0	0
+quill	100	64	16	-	-	-	-	-	-	-	-	-	-	-	3QUILL	0	0	0	0	0
+pyramid	101	64	16	-	-	-	-	-	-	-	-	-	-	-	3PYRAMID	0	0	0	0	0
+torch	102	64	16	-	-	-	-	-	-	-	-	-	-	-	3TORCH	0	0	0	0	0
+map	103	64	16	-	-	-	-	-	-	-	-	-	-	-	3MAP	0	0	0	0	0
+keg	104	64	64	-	-	-	-	-	-	-	-	-	-	-	3KEG	0	0	0	0	0
+egg	105	16	16	-	-	-	-	-	-	-	-	-	-	-	3EGG	0	0	0	0	0
+chime	106	64	16	-	-	-	-	-	-	-	-	-	-	-	3CHIME	0	0	0	0	0
+tooth	107	64	16	-	-	-	-	-	-	-	-	-	-	-	3TOOTH	0	0	0	0	0
+four leafed clover	108	64	16	-	-	-	-	-	-	-	-	-	-	-	3CLOVER	0	0	0	0	0
+flute	109	64	16	-	-	-	-	-	-	-	-	-	-	-	3FLUTE	0	0	0	0	0
+harp	110	64	16	-	-	-	-	-	-	-	-	-	-	-	3HARP	0	0	0	0	0
+jewelled egg	111	64	16	-	-	-	-	-	-	-	-	-	-	-	3jewlegG	0	0	0	0	0
+living heart	112	64	16	-	-	-	-	-	-	-	-	-	-	-	3HEART	0	0	0	0	0
+fossil	113	64	16	-	-	-	-	-	-	-	-	-	-	-	3AMBER	0	0	0	0	0
+magic lamp	114	64	16	-	-	-	-	-	-	-	-	-	-	-	3ALDNLMP	0	0	0	0	0
+apple	115	64	16	-	-	-	-	-	-	-	-	-	-	-	3APPLE	0	0	0	0	0
+gem	116	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem01	0	0	0	0	0
+gem	117	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem02	0	0	0	0	0
+gem	118	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem03	0	0	0	0	0
+gem	119	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem04	0	0	0	0	0
+gem	120	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem05	0	0	0	0	0
+gem	121	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem06	0	0	0	0	0
+gem	122	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem07	0	0	0	0	0
+gem	123	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem08	0	0	0	0	0
+gem	124	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem09	0	0	0	0	0
+gem	125	64	16	-	-	-	-	-	-	-	-	-	-	-	3gem10	0	0	0	0	0
+herb	126	64	16	-	-	-	-	-	-	-	-	-	-	-	3herb03	0	0	0	0	0
+herb	127	64	16	-	-	-	-	-	-	-	-	-	-	-	3herb02	0	0	0	0	0
+herb	128	64	16	-	-	-	-	-	-	-	-	-	-	-	3herb01	0	0	0	0	0
+A small pile of gold	129	64	16	-	-	-	-	-	-	-	-	-	-	-	3coinsm	0	0	0	0	0
+A pile of gold	130	64	16	-	-	-	-	-	-	-	-	-	-	-	3coinMid	0	0	0	0	0
+a large pile of gold	131	64	16	-	-	-	-	-	-	-	-	-	-	-	3coinLG	0	0	0	0	0
+Memory Crystal	132	64	16	-	-	-	-	-	-	-	-	-	-	-	mcryst01	0	0	0	0	0
+rat's tail	133	64	16	-	-	-	-	-	-	-	-	-	-	-	null	0	0	0	0	0
+Memory Crystal	134	64	16	-	-	-	-	-	-	-	-	-	-	-	null	0	0	0	0	0
+firetrap	811	16	16	-	-	x	x	x	x	-	-	x	-	-	mslX03	96	0	255	0	0
+coldtrap	812	16	16	-	-	x	x	x	x	-	-	x	-	-	airX07	48	0	255	255	0
+electrap	813	16	16	-	-	x	x	x	x	-	-	x	-	-	coldX02	96	0	0	128	255
+poistrap	814	16	16	-	-	x	x	x	x	-	-	x	-	-	coldx04	96	0	0	128	255
+arrow	500	16	16	-	-	x	-	x	x	x	-	-	-	-	msl01	768	6000	0	0	0
+fire arrow	510	16	16	-	-	x	-	x	x	x	-	-	-	-	msl02	768	6000	0	0	0
+fire	520	16	16	-	-	x	-	x	x	x	-	-	-	-	msl03	768	6000	0	0	0
+explosion	521	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX03	96	0	0	0	0
+electric	530	16	16	-	-	x	-	x	x	x	-	-	-	-	msl04	768	6000	0	0	0
+explosion	531	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX04	96	0	0	0	0
+cold	540	16	16	-	-	x	-	x	x	x	-	-	-	-	msl05	768	6000	0	0	0
+explosion	541	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX05	96	0	0	0	0
+poison	550	16	16	-	-	x	-	x	x	x	-	-	-	-	msl06	768	6000	0	0	0
+explosion	551	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX06	80	0	0	0	0
+energy	560	16	16	-	-	x	-	x	x	x	-	-	-	-	msl07	768	6000	0	0	0
+explosion	561	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX07	96	0	0	0	0
+magic	570	16	16	-	-	x	-	x	x	x	-	-	-	-	msl08	768	6000	0	0	0
+explosion	571	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX08	80	0	0	0	0
+rock	580	16	16	-	-	x	-	x	x	x	-	-	-	-	msl09	768	6000	0	0	0
+explosion	581	16	16	-	-	x	x	x	x	-	-	-	-	-	mslX09	80	0	0	0	0
+laser bolt	590	16	16	-	-	x	-	x	x	x	-	-	-	-	msl10	1768	6000	0	0	0
+splash	800	0	0	-	-	x	x	x	x	-	-	-	-	-	splash	48	0	0	0	0
+flare	1000	16	16	-	-	x	-	x	-	-	x	x	-	-	null	768	2000	128	128	255
+flame arrow	1010	16	16	-	-	x	-	x	x	x	-	x	-	-	fire02	768	3500	255	0	0
+fire bolt	1030	16	16	-	-	x	-	x	x	x	-	x	-	-	fire04	768	4000	255	0	0
+explosion	1031	16	16	-	-	x	x	x	x	-	-	-	-	-	fireX04	48	0	0	0	0
+fireball	1050	16	16	-	-	x	-	x	x	x	-	x	-	-	fire06	768	4000	255	0	0
+explosion	1051	16	16	-	-	x	x	x	x	-	-	x	-	-	fireX06	48	0	255	0	0
+ring of fire	1060	16	16	-	-	-	-	x	-	-	-	-	-	-	mind03	768	4000	0	0	0
+explosion	1061	16	16	-	-	x	x	x	x	-	-	x	-	-	fireX07	48	0	255	0	0
+fireblast	1070	16	16	-	-	x	-	x	x	x	-	x	-	-	fire08	768	4000	255	0	0
+explosion	1071	16	16	-	-	x	x	x	x	-	-	x	-	-	fireX08	48	0	255	0	0
+meteor	1080	64	64	-	-	x	-	x	-	x	-	x	-	-	fire09	768	1000	255	0	0
+explosion	1081	16	16	-	-	x	x	x	x	-	-	x	-	-	fireX09	48	0	255	0	0
+Inferno	1090	16	16	-	-	-	-	x	-	x	-	x	-	-	null	0	6000	255	0	0
+explosion	1091	16	16	-	-	x	x	x	x	-	-	x	-	-	fireX10	48	0	255	0	0
+incinerate	1100	16	16	-	-	x	-	x	x	x	-	x	-	-	fire11	768	4000	255	0	0
+explosion	1110	16	16	-	-	x	x	x	x	-	-	x	-	-	fireX11	48	0	255	0	0
+static charge	2010	16	16	-	-	x	-	x	x	x	-	x	-	-	air02	768	4000	255	255	0
+explosion	2011	16	16	-	-	x	x	x	x	-	-	x	-	-	airX02	48	0	255	255	0
+sparks	2030	16	16	-	-	x	-	x	-	x	x	x	-	-	air04	768	1000	255	255	0
+explosion	2031	16	16	-	-	x	x	x	x	-	-	x	-	-	airX04	48	0	255	255	0
+lightning	2060	16	16	-	-	x	-	x	x	x	-	x	-	-	air07	768	4000	255	255	0
+explosion	2061	16	16	-	-	x	x	x	x	-	-	x	-	-	airX07	48	0	255	255	0
+implosion	2080	16	16	-	-	x	-	x	x	x	-	x	-	-	air09	768	4000	255	255	0
+explosion	2081	16	16	-	-	x	x	x	x	-	-	x	-	-	airX09	48	0	255	255	0
+starburst	2100	16	16	-	-	x	-	x	-	x	-	x	-	-	air11	768	4000	255	255	0
+explosion	2101	16	16	-	-	x	x	x	x	-	-	x	-	-	airX11	48	0	255	255	0
+Cold Beam	3010	16	16	-	-	x	-	x	x	x	-	x	-	-	cold02	768	4000	0	128	255
+explosion	3011	16	16	-	-	x	x	x	x	-	-	x	-	-	coldX02	96	0	0	128	255
+Poison Spray	3030	16	16	-	-	x	-	x	x	x	-	x	-	-	cold04	768	1500	0	128	255
+explosion	3031	16	16	-	-	x	x	x	x	-	-	x	-	-	coldx04	96	0	0	128	255
+Ice Bolt	3050	16	16	-	-	x	-	x	x	x	-	x	-	-	cold06	768	4000	0	128	255
+explosion	3051	16	16	-	-	x	x	x	x	-	-	x	-	-	coldX06	48	0	0	128	255
+Acid Burst	3070	16	16	-	-	x	-	x	x	x	-	x	-	-	cold08	768	4000	0	128	255
+explosion	3071	16	16	-	-	x	x	x	x	-	-	x	-	-	coldX08	56	0	0	128	255
+Ice Blast	3090	16	16	-	-	x	-	x	x	x	-	x	-	-	cold10	768	4000	0	128	255
+explosion	3091	16	16	-	-	x	x	x	x	-	-	x	-	-	coldX10	48	0	0	128	255
+shard	3092	16	16	-	-	x	-	x	-	x	-	x	-	-	coldZ10	768	4000	0	128	255
+stun	4000	16	16	-	-	x	-	x	x	x	-	-	-	-	earth01	768	3000	0	0	0
+explosion	4001	16	16	-	-	x	x	x	x	-	-	-	-	-	earthx01	64	0	0	0	0
+magic arrow	4010	16	16	-	-	x	-	x	x	x	-	-	-	-	earth02	768	3500	0	0	0
+deadly swarm	4030	16	16	-	-	x	-	x	x	x	-	-	-	-	earth04	768	4000	0	0	0
+explosion	4031	16	16	-	-	x	x	x	x	-	-	-	-	-	earthX04	64	0	0	0	0
+blades	4050	16	16	-	-	x	-	x	x	x	-	-	-	-	earth06	768	3000	0	0	0
+rock blast	4070	16	16	-	-	x	-	x	-	x	-	-	-	-	earth08	256	4000	0	0	0
+explosion	4071	16	16	-	-	x	x	x	x	-	-	-	-	-	earthX08	80	0	0	0	0
+Turn To Stone	4080	16	16	-	-	x	-	x	x	x	-	-	-	-	earth09	768	4000	0	0	0
+explosion	4081	16	16	-	-	x	x	x	x	-	-	-	-	-	earthx09	96	0	0	0	0
+death blossom	4090	16	16	-	-	x	-	x	-	x	-	-	-	-	earth10	768	1500	0	0	0
+explosion	4091	96	96	-	-	x	x	x	x	-	-	-	-	-	earthX10	96	0	0	0	0
+distortion	4100	16	16	-	-	x	-	x	x	x	-	-	-	-	earth11	768	4000	0	0	0
+explosion	4101	16	16	-	-	x	x	x	x	-	-	-	-	-	earthX11	48	0	0	0	0
+Spirit Arrow	5000	16	16	-	-	x	-	x	x	x	-	x	-	-	earth02	768	4000	128	0	128
+Turn Undead	5070	16	16	-	-	x	-	x	x	x	-	x	-	-	mind03	768	4000	128	0	128
+explosion	5071	96	96	-	-	x	x	x	x	-	-	-	-	-	mindX06	64	0	0	0	0
+mind blast	6020	16	16	-	-	x	-	x	x	x	-	x	-	x	mind03	768	4000	255	128	0
+explosion	6021	16	16	-	-	x	x	x	x	-	-	x	-	-	mindX03	64	0	255	128	0
+Charm	6050	16	16	-	-	x	-	x	x	x	-	x	-	-	mind06	768	4000	255	128	0
+explosion	6051	16	16	-	-	x	x	x	x	-	-	x	-	-	mindX06	64	0	255	128	0
+Mass Fear	6060	16	16	-	-	x	-	x	x	x	-	x	-	x	mind07	768	4000	255	128	0
+explosion	6061	16	16	-	-	x	x	x	x	-	-	x	-	-	mindX07	64	0	255	128	0
+Feeblemind	6070	16	16	-	-	x	-	x	x	x	-	x	-	-	mind08	768	4000	255	128	0
+explosion	6071	16	16	-	-	x	x	x	x	-	-	x	-	-	mindX08	64	0	255	128	0
+psychic shock	6090	16	16	-	-	x	-	x	x	x	-	x	-	-	mind10	768	4000	255	128	0
+explosion	6091	16	16	-	-	x	x	x	x	-	-	-	-	-	mindX10	64	0	0	0	0
+harm	7030	16	16	-	-	x	-	x	x	x	-	-	-	-	body04	768	4000	0	0	0
+flying fist	7090	16	16	-	-	x	-	x	x	x	-	x	-	-	body10	768	4000	0	255	0
+Dispel Magic	8020	16	16	-	-	x	-	x	x	x	-	x	-	-	light03	768	4000	255	255	0
+explosion	8021	16	16	-	-	x	x	x	x	-	-	x	-	-	lightX03	96	4000	255	255	0
+slow	8030	16	16	-	-	x	-	x	x	x	-	x	-	-	light04	768	4000	255	255	0
+explosion	8031	16	16	-	-	x	x	x	x	-	-	x	-	-	lightX04	96	4000	255	255	0
+destroy undead	8040	16	16	-	-	x	-	x	x	x	-	x	-	-	light05	768	4000	255	255	0
+explosion	8041	16	16	-	-	x	x	x	x	-	-	x	-	-	lightX05	80	0	255	255	0
+Prismatic Light	8070	16	16	-	-	x	-	x	x	x	-	x	-	-	light07	768	4000	255	255	0
+explosion	8071	16	16	-	-	x	x	x	x	-	-	x	-	-	lightx07	48	0	255	255	0
+Paralyze	8080	16	16	-	-	x	-	x	x	x	-	x	-	-	light09	768	3000	255	255	0
+explosion	8081	16	16	-	-	x	x	x	x	-	-	x	-	-	lightX09	96	0	255	255	0
+Sun Ray	8090	16	16	-	-	x	-	x	x	x	-	x	-	-	light10	768	3000	255	255	0
+explosion	8091	16	16	-	-	x	x	x	x	-	-	x	-	-	lightx10	56	0	255	255	0
+Re-Animate	9000	16	16	-	-	x	-	x	x	x	-	-	-	-	dark01	768	1000	0	0	0
+explosion	9001	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX01	96	0	0	0	0
+Toxic Cloud	9010	16	16	-	-	x	-	x	x	x	-	-	-	-	dark02	768	1000	0	0	0
+explosion	9011	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX02	80	0	0	0	0
+Mass Curse	9020	16	16	-	-	x	-	x	x	x	-	-	-	-	null	768	1000	0	0	0
+explosion	9021	16	16	-	-	x	x	x	x	-	-	-	-	-	darkx03	128	0	0	0	0
+Shrapmetal	9030	16	16	-	-	x	-	x	x	x	-	x	x	-	dark04	768	4000	200	200	20
+Shrinking Ray	9040	16	16	-	-	x	-	x	x	x	-	-	-	-	dark05	768	2500	0	0	0
+explosion	9041	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX05	96	0	0	0	0
+Finger of Death	9060	16	16	-	-	x	-	x	x	x	-	-	-	-	dark07	768	4000	0	0	0
+explosion	9061	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX07	48	0	0	0	0
+Moonray	9070	16	16	-	-	x	-	x	x	x	-	-	-	-	dark08	768	4000	0	0	0
+explosion	9071	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX08	32	0	0	0	0
+dragon breath	9080	16	16	-	-	x	-	x	x	x	-	-	-	-	dark09	768	4000	0	0	0
+explosion	9081	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX09	40	0	0	0	0
+Armageddon	9090	16	16	-	-	x	-	x	x	x	-	-	-	-	dark10	768	4000	0	0	0
+explosion	9091	16	16	-	-	x	x	x	x	-	-	-	-	-	darkX10	48	0	0	0	0
+Dark Containment	9100	16	16	-	-	x	-	x	x	x	-	-	-	-	dark11	768	1000	0	0	0
+explosion	9101	16	16	-	-	x	x	x	x	-	-	-	-	-	darkx11	48	0	0	0	0

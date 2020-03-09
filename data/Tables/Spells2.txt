@@ -1,0 +1,101 @@
+Spell	DelayNormal	DelayExpert	DelayMaster
+0  	0	0	0
+1  Torch Light	60	60	60
+2  Flame Arrow	100	90	80
+3  Protection from Fire	120	120	120
+4  Fire Bolt	110	100	90
+5  Haste	120	120	120
+6  Fireball	110	100	90
+7  Ring of Fire	110	100	90
+8  Fire Blast	110	90	70
+9  Meteor Shower	120	110	100
+10  Inferno	140	120	100
+11  Incinerate	150	130	110
+12  Wizard Eye	60	60	60
+13  Static Charge	100	90	90
+14  Protection from Electricity	120	120	120
+15  Sparks	110	100	90
+16  Feather Fall	120	120	120
+17  Shield	120	120	120
+18  Lightning Bolt	110	100	90
+19  Jump	110	90	70
+20  Implosion	120	110	100
+21  Fly	250	250	250
+22  Starburst	150	130	110
+23  Awaken	60	60	60
+24  Cold Beam	90	80	80
+25  Protection from Cold	120	120	120
+26  Poison Spray	110	100	90
+27  Water Walk	150	120	120
+28  Ice Bolt	110	100	90
+29  Enchant Item	140	140	140
+30  Acid Burst	110	100	90
+31  Town Portal	200	200	200
+32  Ice Blast	120	100	80
+33  Lloyd's Beacon	250	250	250
+34  Stun	80	80	80
+35  Magic Arrow	100	90	80
+36  Protection from Magic	120	120	120
+37  Deadly Swarm	110	100	90
+38  Stone Skin	120	120	120
+39  Blades	110	100	90
+40  Stone to Flesh	140	140	140
+41  Rock Blast	110	100	90
+42  Turn to Stone	130	130	130
+43  Death Blossom	120	110	100
+44  Mass Distortion	140	120	100
+45  Spirit Arrow	90	80	80
+46  Bless	100	100	100
+47  Healing Touch	100	100	100
+48  Lucky Day	120	120	120
+49  Remove Curse	120	120	120
+50  Guardian Angel	120	120	120
+51  Heroism	120	120	120
+52  Turn Undead	140	120	100
+53  Raise Dead	240	240	240
+54  Shared Life	150	150	150
+55  Resurrection	1000	1000	1000
+56  Meditation	120	120	120
+57  Remove Fear	120	120	120
+58  Mind Blast	110	100	90
+59  Precision	120	120	120
+60  Cure Paralysis	120	120	120
+61  Charm	100	100	100
+62  Mass Fear	100	90	80
+63  Feeblemind	110	100	90
+64  Cure Insanity	120	120	120
+65  Psychic Shock	130	120	110
+66  Telekinesis	250	250	250
+67  Cure Weakness	120	120	120
+68  First Aid	80	80	80
+69  Protection from Poison	120	120	120
+70  Harm	110	100	90
+71  Cure Wounds	100	90	80
+72  Cure Poison	120	120	120
+73  Speed	120	120	120
+74  Cure Disease	120	120	120
+75  Power	120	120	120
+76  Flying Fist	130	120	110
+77  Power Cure	150	125	100
+78  Create Food	100	100	100
+79  Golden Touch	100	100	100
+80  Dispel Magic	120	110	100
+81  Slow	120	100	80
+82  Destroy Undead	120	110	100
+83  Day of the Gods	500	500	500
+84  Prismatic Light	150	135	120
+85  Hour of Power	250	250	250
+86  Paralyze	160	140	120
+87  Sun Ray	180	165	150
+88  Divine Intervention	300	300	300
+89  Reanimate	100	100	100
+90  Toxic Cloud	120	110	100
+91  Mass Curse	120	120	120
+92  Shrapmetal	100	90	80
+93  Shrinking Ray	120	120	120
+94  Day of Protection	500	500	500
+95  Finger of Death	130	130	130
+96  Moon Ray	150	140	130
+97  Dragon Breath	160	140	120
+98  Armageddon	250	250	250
+99  Dark Containment	300	300	300

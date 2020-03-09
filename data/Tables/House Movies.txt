@@ -1,0 +1,119 @@
+#	FileName	Background	NPCPic	HouseType	Sounds
+0		4	500	0	0
+1	blcksrch	22	505	Weapon Shop	34
+2	Blcksmid	13	506	Weapon Shop	33
+3	blcksPor	23	507	Weapon Shop	32
+4	Apthcrch	10	501	Magic Shop	46
+5	Apthcmid	14	502	Magic Shop	45
+6	Apthcwch	42	503	Magic Shop	44
+7	magrch	30	516	Magic Shop	43
+8	magmid	7	517	Magic Shop	42
+9	magicpor	36	518	Magic Shop	41
+10	genstrch	14	513	General Store	40
+11	genstmid	12	514	General Store	39
+12	genstpor	11	515	General Store	38
+13	Cityrich	16	0	Town Hall	14
+14	Citymid	41	0	Town Hall	13
+15	CityPoor	14	0	Town Hall	12
+16	CitySpec	30	0	Town Hall	0
+17	Citytrtr	16	0	Town Hall	0
+18	throne06	25	0	Throne	61
+19	throne03	9	0	Throne	60
+20	throne02	34	0	Throne	59
+21	throne01	19	0	Throne	63
+22	throne05	18	0	Throne	62
+23	throne04	38	0	Throne	64
+24	tavpoor1	13	175	Tavern	21
+25	tavrich	15	530	Tavern	20
+26	tavpoor2	21	20	Tavern	22
+27	TavMid	36	297	Tavern	23
+28	tavpirat	13	358	Tavern	24
+29	tavgob	20	552	Tavern	25
+30	temppoor	36	550	Temple	16
+31	tempmid	31	549	Temple	18
+32	temprich	18	548	Temple	17
+33	tempevil	30	551	Temple	19
+34	tempruin	32	0		0
+35	t7	24	0	Dungeon Ent	0
+36	t6	49	0	Dungeon Ent	0
+37	t1	24	0	Dungeon Ent	0
+38	t4	49	0	Dungeon Ent	0
+39	t5	20	0	Dungeon Ent	0
+40	t8	49	0	Dungeon Ent	0
+41	oracrich	17	0	Seer	2
+42	oracpoor	33	0	Seer	1
+43	circus1	55	0	Circus	0
+44	Bank	6	504	Bank	15
+45	stables	33	385	Stables	11
+46	ship	15	72	Boats	10
+47	jail	49	0	Jail	0
+48	thfrich	37	533	Thieves Guild	28
+49	thfpoor	35	534	Thieves Guild	27
+50	thfpirat	36	535	Thieves Guild	26
+51	mercrich	39	519	Merc Guild	31
+52	mercmid	39	520	Merc Guild	30
+53	mercpoor	39	521	Merc Guild	29
+54	elemFire	28	510	Fire Guild	47
+55	elemerth	27	509	Earth Guild	50
+56	elemair	29	508	Air Guild	48
+57	elemwatr	26	511	Water Guild	49
+58	elemall	43	512	Element Guild	56
+59	mirpthl	24	332	Light Guild	54
+60	mirpthd	24	91	Dark Guild	55
+61	mirpthdl	24	0	16	58
+62	selfspir	25	260	Spirit Guild	51
+63	selfmind	38	61	Mind Guild	52
+64	selfbody	25	549	Body Guild	53
+65	selfall	18	256	Self Guild	57
+66	roompor1	8	0		0
+67	roompor2	3	0		0
+68	roompor3	13	0		0
+69	roompor4	2	0		0
+70	roommid1	36	0		0
+71	roommid2	36	0		0
+72	roommid3	1	0		0
+73	roommid4	15	0		0
+74	roomrch1	9	0		0
+75	roomrch2	41	0		0
+76	roomrch3	30	0		0
+77	roomrch4	24	0		0
+78	ArmRich	22	545	Armor Shop	37
+79	Armmid	36	546	Armor Shop	36
+80	Armpoor	13	547	Armor Shop	35
+81	train1	40	532	Training	3
+82	train2	44	532	Training	4
+83	train3	45	532	Training	5
+84	train4	24	532	Training	6
+85	train5	22	532	Training	7
+86	train6	8	532	Training	8
+87	Pyramid	53	0	Dungeon Ent	0
+88	hive	54	0	Dungeon Ent	0
+89	d14	52	0	Dungeon Ent	0
+90	d06	24	0	Dungeon Ent	0
+91	d16	49	0	Dungeon Ent	0
+92	d05	13	0	Dungeon Ent	0
+93	d15	46	0	Dungeon Ent	0
+94	d13	25	0	Dungeon Ent	0
+95	d17	25	0	Dungeon Ent	0
+96	d03	30	0	Dungeon Ent	0
+97	d09	51	0	Dungeon Ent	0
+98	d12	25	0	Dungeon Ent	0
+99	t2	25	0	Dungeon Ent	0
+100	t3	47	0	Dungeon Ent	0
+101	d10	49	0	Dungeon Ent	0
+102	d11	13	0	Dungeon Ent	0
+103	d02	20	0	Dungeon Ent	0
+104	d04	49	0	Dungeon Ent	0
+105	d18	49	0	Dungeon Ent	0
+106	d19	20	0	Dungeon Ent	0
+107	d07	51	0	Dungeon Ent	0
+108	d20	49	0	Dungeon Ent	0
+109	d08	19	0	Dungeon Ent	0
+110	CstlGood	14	0	Castle Entrance	9
+111	d01	49	0	Dungeon Ent	0
+112	cd1	25	0	Dungeon Ent	0
+113	cd2	49	0	Dungeon Ent	0
+114	cd3	36	0	Dungeon Ent	0
+115	circus2	55	0	Circus	0
+116	statue	55	0		0
+117	archloop	55	0		0
