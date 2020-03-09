@@ -1,8 +1,0 @@
-	Knight	Cleric	Sorcerer	Paladin	Archer	Druid
-Might	14	7	7	14	9	7
-Intellect	7	9	14	7	14	14
-Personality	7	14	9	14	7	14
-Endurance	14	11	11	11	11	11
-Accuracy	11	11	7	11	14	7
-Speed	11	7	14	9	11	11
-Luck	9	14	11	7	7	9
