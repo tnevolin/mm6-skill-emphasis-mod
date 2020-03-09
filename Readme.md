@@ -284,6 +284,17 @@ It is different for melee combat oriented classes like Knight (and Paladin to le
 
 Knight should master Sword and switch to dual wielding as soon as possible. Paladin may start working toward Sword mastery after it reaches mastery in some other weapon like Axe or Spear. Other non melee combat oriented classes may use Dagger in left hand for its added speed and damage if they don't plan to invest in weapons much. Otherwise, they may invest in two handed Axe or Spear. Spear actually is even stronger at the beginning due to additional two handed damage roll. Axe becomes faster than Spear when it accumulates 20 recovery (about expert level 5).
 
+### Class weapon usage suggestions
+
+|class|suggestions|
+|----|----|
+|Knight|Axe+Sword, invest all extra skill points in it.|
+|Paladin|Any dual wielding or two handed weapon is good to level 5-10. Put rest into magic. If you didn't plan to evolve magic at all choose Knight instead|
+|Archer|Two handed Spear for additional AC and damage. Invest the rest to ranged weapon!|
+|Cleric|Mace+Shield for AC and paralization. Invest the rest to magic.|
+|Druic|Dual Daggers for additional damage or Dagger+Sheid for AC. Invest the rest to magic.|
+|Sourcerer|Staff for AC and slow/feeblemind. Invest the rest to magic.|
+
 # Spells
 
 All spells always hit. Making just a few spells to hit depending on skill level is too fine grained and hard to visualize mechanics that is absolutely not needed.
