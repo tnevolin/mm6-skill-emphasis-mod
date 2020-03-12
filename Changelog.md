@@ -1,6 +1,20 @@
 # version 1
 
+## recovery/speed
+
 * Recovery time bonus is now attack speed bonus.
+* Weapon base recovery/speed bonuses are doubled:
+|weapon|old|new|
+|----|----:|----:|
+|bow|0|0|
+|staff|0|0|
+|axe|0|0|
+|sword|10|20|
+|spear|20|40|
+|mace|20|40|
+|dagger|40|80|
+* Dual wielding recovery is now an average of both weapons recovery all effects and skill bonuses included.
+
 * Weapon skill adds 6/8/10 attack/level for all weapons.
 * Weapon skill adds 4/6/8 speed/level for weapons with recovery bonus.
 * Weapon skill adds 3/4/5 damage/level for weapons with damage bonus.
