@@ -1,22 +1,9 @@
 # version 1
 
-## recovery/speed
-
 * Recovery time bonus is now attack speed bonus.
-* Weapon base recovery/speed bonuses are doubled:
-
-|weapon|old|new|
-|----|----:|----:|
-|bow|0|0|
-|staff|0|0|
-|axe|0|0|
-|sword|10|20|
-|spear|20|40|
-|mace|20|40|
-|dagger|40|80|
-
+* Weapon base recovery/speed bonuses are doubled (see readme).
 * Dual wielding recovery is now an average of both weapons recovery all effects and skill bonuses included.
-
+* Chance to hit formulas changed (see readme).
 * Weapon skill adds 6/8/10 attack/level for all weapons.
 * Weapon skill adds 4/6/8 speed/level for weapons with recovery bonus.
 * Weapon skill adds 3/4/5 damage/level for weapons with damage bonus.
@@ -25,10 +12,10 @@
 * Mace chance to cause paralysis is 6/8/10.
 * Staff chance to cause slow and feeblemind is 12/16/20.
 * Mace and staff effect duration is 1 minute per skill level.
+* Two handed weapon adds 2/3/4 damage/level to all two handed weapons.
 * Knight/Cavalier/Champion adds 2/3/4 damage/level to all melee weapons.
 * Paladin/Crusader/Hero adds 0/1/2 damage/level to all melee weapons.
 * Archer/BattleMage/WarriorMage adds 0/1/2 damage/level to all ranged weapons.
-* Two handed weapon adds 1/2/3 damage/level to all two handed weapons.
 * All 4 spells those hit chance was based on skill level are now always hit.
 * Ring of Fire damage is 3 + 1-3 per level.
 * Meteor Shower damage is 4 + 1-4 per level.
@@ -43,8 +30,8 @@
 * Stone Skin adds 5 AC per level.
 * Bless adds 5 attack per level.
 * Heroism adds 2 damage per level.
-* Healing Touch - TODO.
-* First Aid - TODO.
-* Cure Wounds - TODO.
-* Power Cure - TODO.
+* Healing Touch heals 3-7/9-21/15-35.
+* First Aid heals 5/15/25.
+* Cure Wounds heals 5 \* level.
+* Power Cure heals 5 \* level.
 

@@ -61,7 +61,7 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
-|Attack|2|4|6|
+|Attack|6|8|10|
 |Speed|4|6|8|
 |Damage|3|4|5|
 |Dagger chance to cause triple damage|3|4|5|
@@ -74,7 +74,7 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 |bonus|description|ratio|
 |----|----|----:|
-|Attack|player to hit chance against toughest monsters|1.5|
+|Attack|player to hit chance against toughest monsters|1.8|
 |Speed|attack frequency|1.5|
 |Damage|increase in damage|1.5|
 |Dagger chance to cause triple damage|damage multiplier|2.0|
@@ -217,13 +217,13 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Harm|5|1-5|
 |Flying Fist|14|1-14|
 |Prismatic Light|10|1-10|
-|Stone Skin|0|5|
-|Bless|0|5|
-|Heroism|0|2|
-|Healing Touch|3-7, 6-14, 9-21||
+|Stone Skin||5|
+|Bless||5|
+|Heroism||2|
+|Healing Touch|3-7, 9-21, 15-35||
 |First Aid|5, 15, 25||
-|Cure Wounds|5|4|
-|Power Cure|10|4|
+|Cure Wounds||5|
+|Power Cure||5|
 
 ## Bless, Heroism, Hour Of Power problem
 
