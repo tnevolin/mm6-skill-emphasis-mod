@@ -4,11 +4,15 @@
 
 RPG character advancement should be mainly based on their skill progression with some small non skill based effects here and there from equipment, barrels, quests, etc. Putting it simply high skill should be a primary source of every property character has. That what R in RPG is. You build a role by pumping skill points into certain area. Like if you are focusing on axe skill only then you expect this character to be an outstanding axeman but appaling swordman. This is **NOT** like that in M&M engine. Mastering the skill is undoubtedly more difficult endeavour than aquiring an expensive item. Yet those expensive items give about same bonus in attack and damage as mastering the skill. I would love to turn this around and give skills their well deserved attention. Usually one could raise their selected skills somewhere to level 10 on average by the end of the game. Since there are so few of them we should make player to cherish each skill point and use every possibility to invest more in primary weapon skills.
 
-# Convert recovery bonus into speed bonus
+# Recovery mechanics
 
-Recovery time cap is relatively easy reacheable. As soon as it hits the cap further investment in recovery time reduction is a waste. I propose to turn recovery time *reduction* bonus into attack speed *increase* bonus. Then it naturally grow same exactly way as any other game stat. Meaning adding 100 speed bonus on top of initial 100 speed value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. Thus we safely can stop worrying about the cap. See computation example below.
+Standard game stat mechanics is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics is an opposite which makes it a little difficult to grasp at first. Besides, due to this reverted scale it is pretty limited as cap is quite easily reacheable. From then on it is a complete waste to invest into recovery any more.
+
+I propose to turn recovery time *reduction* bonus into attack speed *increase* bonus. Then it naturally grow same exactly way as any other game stat. Meaning adding 100 speed bonus on top of initial 100 speed value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. Thus we safely can stop worrying about the cap. See computation example below.
 
 With all additional bonuses added melee cap is reached at the skill level 22 which is pretty high and rarely reacheable. Range cap is reached at the skill level 190 which is never. Regardless of caps recovery time in this model it is never negative.
+
+Keep in mind that even though computation mechanics changed the speed value is still converted to recovery. It is still called recovery all over the place. I don't want to change it everywhere in the texts.
 
 #### Computation example
 
@@ -124,13 +128,25 @@ Staff has a chance to slow and feeblemind. These abilities are immediatelly avai
 
 **Skill master level 10 roughly keeps one enemy under effect all the time.**
 
-## Armor recovery penalties
+## Armor speed penalties
 
 |armor type|normal|expert|master|
 |----|----:|----:|----:|
 |leather|20|10|0|
 |chain|40|20|0|
 |plate|60|30|0|
+
+## Armor special abilities
+
+Armor types in MM6 are boringly indistinguisable. Best plate adds 30 more AC than best leather. That is about 10% monster chance to hit difference by the end of the game. I think armor special abilities add some variety to the game and desire to keep at least one of each type in the party.
+
+Leather skill adds to resistances.
+
+Chain skill reduces physical melee damage.
+
+Plate skill redistributes damage from other party members to self. Plate wearer is perceived as a tough guy rushing into the fight and protecting the rest of the party by drawing enemy attention to itself. Bonus is additive if there are many plate wearers in the party.
+
+Shield slightly reduces missile damage to party. Bonus is additive if there are many shield wearers in the party.
 
 # Dual wield
 
@@ -150,7 +166,7 @@ Dual wield is superior to two handed weapon in MM6 as it combines both weapons b
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
-|damage|2|3|4|
+|damage|0|1|2|
 
 # Class speciality
 
@@ -228,4 +244,10 @@ Most spells generally progress well with skill level. This is an adjustment for 
 ## Bless, Heroism, Hour Of Power problem
 
 Bless and Heroism grant relatively small bonus of +15 even at master level 10. Whereas, Hour Of Power is insanely overpowered granting +45 of both attack and damage at master level 10. This is an enourmous advantage that renders basic self magic spells utterly useless. The only fix to that I found is to increase skill multiplier for basic self spells based on mastery.
+
+# Monsters
+
+Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Player damage to monster is halved.
+
+# Experience
 
