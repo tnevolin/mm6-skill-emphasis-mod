@@ -236,8 +236,8 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Stone Skin||5|
 |Bless||5|
 |Heroism||2|
-|Healing Touch|3-7, 9-21, 15-35||
-|First Aid|5, 15, 25||
+|Healing Touch|3-7, 6-14, 15-35||
+|First Aid|5, 10, 25||
 |Cure Wounds||5|
 |Power Cure||5|
 

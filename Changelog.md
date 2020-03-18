@@ -1,3 +1,8 @@
+# version 3
+
+* Healing Touch heals 3-7/6-14/15-35. Reduced expert rank effect.
+* First Aid heals 5/10/25. Reduced expert rank effect.
+
 # version 2
 
 * Fixed Healing Touch.

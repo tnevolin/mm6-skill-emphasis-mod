@@ -860,14 +860,14 @@ mem.asmpatch(0x00426D49, "imul    ecx, 2", 3)
 mem.asmpatch(0x00426C4C, "imul    ecx, 2", 3)
 
 -- Healing Touch
-mem.asmpatch(0x00426917, "mov     edx, 7", 5)
-mem.asmpatch(0x00426926, "add     eax, 7", 3)
+mem.asmpatch(0x00426917, "mov     edx, 5", 5)
+mem.asmpatch(0x00426926, "add     eax, 4", 3)
 mem.asmpatch(0x00426903, "mov     edx, 11", 5)
 mem.asmpatch(0x00426912, "add     eax, 13", 3)
 
 -- First Aid
 mem.bytecodepatch(0x00427E46, "\005", 1)
-mem.bytecodepatch(0x00427E3C, "\015", 1)
+mem.bytecodepatch(0x00427E3C, "\010", 1)
 mem.bytecodepatch(0x00427E32, "\025", 1)
 
 -- Cure Wounds
