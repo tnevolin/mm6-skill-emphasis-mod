@@ -888,7 +888,7 @@ end
 function events.GameInitialized2()
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
-		-- monster HP x2
+		-- monster HP x4
 		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
 		-- monster XP x2
 		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * 2

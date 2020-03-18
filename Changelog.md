@@ -1,6 +1,5 @@
 # version 2
 
-* Monsters have 2 times hit points.
 
 # version 1
 
