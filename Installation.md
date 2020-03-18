@@ -20,9 +20,7 @@ https://github.com/tnevolin/mm6-skill-emphasis-mod/raw/master/_external/MMExtens
 * Unpack it to a separate folder.
 * Copy all content to game installation directory overriding existing folders/files if needed.
 
-##### Note
-
-MMExtension generate data tables at first run. You'll see black screen for a minute or so. Don't panic and let it finish. It happens only once.
+*MMExtension generate data tables at first run. You'll see black screen for a minute or so. Don't panic and let it finish. It happens only once.*
 
 ## Install this mod
 
