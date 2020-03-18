@@ -1,5 +1,6 @@
 # version 2
 
+* Fixed Healing Touch.
 
 # version 1
 

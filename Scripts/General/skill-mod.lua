@@ -861,9 +861,9 @@ mem.asmpatch(0x00426C4C, "imul    ecx, 2", 3)
 
 -- Healing Touch
 mem.asmpatch(0x00426917, "mov     edx, 7", 5)
-mem.asmpatch(0x00426926, "add     eax, 7", 5)
+mem.asmpatch(0x00426926, "add     eax, 7", 3)
 mem.asmpatch(0x00426903, "mov     edx, 11", 5)
-mem.asmpatch(0x00426912, "add     eax, 13", 5)
+mem.asmpatch(0x00426912, "add     eax, 13", 3)
 
 -- First Aid
 mem.bytecodepatch(0x00427E46, "\005", 1)
@@ -889,7 +889,7 @@ function events.GameInitialized2()
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 		-- monster HP x4
-		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
+		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 4
 		-- monster XP x2
 		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * 2
 	end
