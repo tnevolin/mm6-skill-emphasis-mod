@@ -1,6 +1,9 @@
 # Might & Magic 6: skill emphasis mod installation
 
-This mod **REQUIRES** GrayFace patch and MMExtension installed.
+[This installation in nice formatting](https://github.com/tnevolin/mm6-skill-emphasis-mod/blob/master/Installation.md)
+
+**This mod REQUIRES GrayFace patch and MMExtension installed.**\
+You need to install them only once. Skip their installation if you already have them.
 
 ## Install GrayFace patch
 
