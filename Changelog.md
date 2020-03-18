@@ -1,3 +1,7 @@
+# version 2
+
+* Monsters have 2 times hit points.
+
 # version 1
 
 * Recovery time bonus is attack speed bonus.
