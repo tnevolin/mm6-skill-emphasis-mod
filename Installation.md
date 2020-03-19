@@ -22,7 +22,7 @@ https://github.com/tnevolin/mm6-skill-emphasis-mod/tree/master/_releases
 * Open mm6.ini in game directory and add following lines at the bottom
 <pre>
 [ExeMods]
-MMExtension=<path to the game directory>\ExeMods\MMExtension.dll
+MMExtension=(path to the game directory)\ExeMods\MMExtension.dll
 </pre>
 * Run game. MMExtension will generate data tables at first run. You'll see black screen for a minute or so. Don't panic and let it finish. Then play game normally.
 
