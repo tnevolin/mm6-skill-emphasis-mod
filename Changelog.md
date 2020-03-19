@@ -1,3 +1,11 @@
+# version 5
+
+* Updated MMExtension.
+
+# version 4
+
+* Updated installation package and instructions.
+
 # version 3
 
 * Healing Touch heals 3-7/6-14/15-35. Reduced expert rank effect.
