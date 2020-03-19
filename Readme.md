@@ -241,13 +241,94 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Cure Wounds||5|
 |Power Cure||5|
 
-## Bless, Heroism, Hour Of Power problem
+# Monsters toughness and XP
 
-Bless and Heroism grant relatively small bonus of +15 even at master level 10. Whereas, Hour Of Power is insanely overpowered granting +45 of both attack and damage at master level 10. This is an enourmous advantage that renders basic self magic spells utterly useless. The only fix to that I found is to increase skill multiplier for basic self spells based on mastery.
+Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Monster HP is quadrupled.
 
-# Monsters
+Monster XP is doubled to let player advance skills faster especially in the beginning.
 
-Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Player damage to monster is halved.
+# Hirelings
 
-# Experience
+I've changed the probability of different professions appearence based on nice analysis [here](https://gamefaqs.gamespot.com/pc/41610-might-and-magic-vi-the-mandate-of-heaven/faqs/24566).
+
+Some useless professions should not appear at all. Some profession cost are adjusted.
+
+| profession | random chance | cost |
+|----|----:|----:|
+| Smith | 10 | 100 |
+| Armorer | 10 | 100 |
+| Alchemist | 10 | 100 |
+| Scholar | 10 | 500 |
+| Guide | 0 | 100 |
+| Tracker | 10 | 200 |
+| Pathfinder | 10 | 300 |
+| Sailor | 10 | 100 |
+| Navigator | 10 | 200 |
+| Healer | 10 | 500 |
+| Expert Healer | 10 | 2000 |
+| Master Healer | 10 | 5000 |
+| Teacher | 10 | 300 |
+| Instructor | 10 | 700 |
+| Arms Master | 10 | 300 |
+| Weapons Master | 10 | 400 |
+| Apprentice | 10 | 200 |
+| Mystic | 10 | 1000 |
+| Spell Master | 10 | 2000 |
+| Trader | 10 | 100 |
+| Merchant | 10 | 200 |
+| Scout | 10 | 300 |
+| Counselor | 0 | 200 |
+| Barrister | 0 | 300 |
+| Tinker | 10 | 200 |
+| Locksmith | 10 | 300 |
+| Fool | 10 | 100 |
+| Chimney Sweep | 10 | 200 |
+| Porter | 10 | 100 |
+| Quarter Master | 0 | 200 |
+| Factor | 10 | 500 |
+| Banker | 10 | 1000 |
+| Cook | 0 | 300 |
+| Chef | 10 | 400 |
+| Horseman | 10 | 100 |
+| Bard | 10 | 1000 |
+| Enchanter | 10 | 1000 |
+| Cartographer | 10 | 200 |
+| Wind Master | 10 | 2000 |
+| Water Master | 10 | 1000 |
+| Gate Master | 10 | 2000 |
+| Acolyte | 10 | 200 |
+| Piper | 10 | 300 |
+| Explorer | 10 | 100 |
+| Pirate | 10 | 500 |
+| Squire | 10 | 600 |
+| Psychic | 10 | 400 |
+| Gypsy | 10 | 100 |
+| Negotiator | 0 | 500 |
+| Duper | 10 | 200 |
+| Burglar | 10 | 2000 |
+| Peasant | 0 | 1 |
+| Serf | 0 | 1 |
+| Tailor | 0 | 5 |
+| Laborer | 0 | 1 |
+| Farmer | 0 | 1 |
+| Cooper | 0 | 5 |
+| Potter | 0 | 2 |
+| Weaver | 0 | 2 |
+| Cobbler | 0 | 3 |
+| Ditch Digger | 0 | 1 |
+| Miller | 0 | 2 |
+| Carpenter | 10 | 5 |
+| Stone Cutter | 10 | 4 |
+| Jester | 0 | 10 |
+| Trapper | 0 | 5 |
+| Beggar | 0 | 1 |
+| Rustler | 0 | 3 |
+| Hunter | 0 | 5 |
+| Scribe | 0 | 10 |
+| Missionary | 0 | 10 |
+| Clerk | 0 | 8 |
+| Guard | 0 | 10 |
+| Follower of Baa | 0 | 1 |
+| Noble | 0 | 100 |
+| Gambler | 0 | 10 |
 
