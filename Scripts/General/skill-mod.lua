@@ -26,11 +26,41 @@ local armorAdditionalSpeedPenalties =
 	[const.Skills.Plate] = 30,
 }
 
-local armorSkillNewBonusByRank =
+local armorSkillNewBonusBySkillAndRank =
 {
-	[const.Novice] = 15,
-	[const.Expert] = 20,
-	[const.Master] = 25,
+	[const.Skills.Shield] =
+	{
+		[const.Novice] = 20,
+		[const.Expert] = 25,
+		[const.Master] = 30,
+	},
+	[const.Skills.Leather] =
+	{
+		[const.Novice] = 5,
+		[const.Expert] = 10,
+		[const.Master] = 15,
+	},
+	[const.Skills.Chain] =
+	{
+		[const.Novice] = 10,
+		[const.Expert] = 15,
+		[const.Master] = 20,
+	},
+	[const.Skills.Plate] =
+	{
+		[const.Novice] = 15,
+		[const.Expert] = 20,
+		[const.Master] = 25,
+	},
+}
+local armorSkillResistanceBonusBySkillAndRank =
+{
+	[const.Skills.Leather] =
+	{
+		[const.Novice] = 3,
+		[const.Expert] = 4,
+		[const.Master] = 5,
+	},
 }
 
 local shieldSkillNewBonusByRank =
@@ -674,27 +704,27 @@ function events.CalcStatBonusBySkills(t)
 			
 		end
 		
-		-- AC bonus from armor skill
-		local armor = equipmentData.armor
-		if equipmentData.armor.equipped then
-		
-			-- subtract old bonus
-			t.Result = t.Result - armor.level
-			
-			-- add new bonus
-			t.Result = t.Result + (armorSkillNewBonusByRank[armor.rank] * armor.level)
-			
-		end
-		
-		-- AC bonus from shiel skill
+		-- AC bonus from shield skill
 		local shield = equipmentData.shield
-		if equipmentData.shield.equipped then
+		if shield.equipped then
 		
 			-- subtract old bonus
 			t.Result = t.Result - shield.rank * shield.level
 			
 			-- add new bonus
-			t.Result = t.Result + (shieldSkillNewBonusByRank[shield.rank] * shield.level)
+			t.Result = t.Result + (armorSkillNewBonusBySkillAndRank[shield.skill][shield.rank] * shield.level)
+			
+		end
+		
+		-- AC bonus from armor skill
+		local armor = equipmentData.armor
+		if armor.equipped then
+		
+			-- subtract old bonus
+			t.Result = t.Result - armor.level
+			
+			-- add new bonus
+			t.Result = t.Result + (armorSkillNewBonusBySkillAndRank[armor.skill][armor.rank] * armor.level)
 			
 		end
 		
@@ -704,7 +734,8 @@ end
 
 function events.CalcStatBonusByMagic(t)
 
-	-- calculate resistance bonus by skill
+	local equipmentData = getPlayerEquipmentData(t.Player)
+	
 	if
 		t.Stat == const.Stats.FireResistance
 		or
@@ -717,37 +748,16 @@ function events.CalcStatBonusByMagic(t)
 		t.Stat == const.Stats.MagicResistance
 	then
 	
-		local mainHandItemNumber = t.Player.ItemMainHand
+		-- resistance bonus from armor
+		local armor = equipmentData.armor
+		if armor.equipped then
 		
-		if mainHandItemNumber ~= 0 then
-		
-			local mainHandItem = t.Player.Items[mainHandItemNumber]
-			
-			if Game.ItemsTxt[mainHandItem.Number].Skill ~= 0 then
-			
-				local mainHandItemSkill = Game.ItemsTxt[mainHandItem.Number].Skill - 1
-				
-				if
-					(mainHandItemSkill == const.Skills.Staff)
-				then
-				
-					if t.Player.Skills[mainHandItemSkill] ~= 0 then
-					
-						local skill, mastery = SplitSkill(t.Player.Skills[mainHandItemSkill])
-						
-						-- add new bonus
-						
-						local weaponResistanceBonusMultiplier = weaponResistanceBonusByMastery[mastery]
-						t.Result = t.Result + (skill * weaponResistanceBonusMultiplier)
-						
-					end
-					
-				end
-				
+			if armorSkillResistanceBonusBySkillAndRank[armor.skill] ~= nil then
+				t.Result = t.Result + (armorSkillResistanceBonusBySkillAndRank[armor.skill][armor.rank] * armor.level)
 			end
 			
 		end
-		
+
 	end
 	
 end

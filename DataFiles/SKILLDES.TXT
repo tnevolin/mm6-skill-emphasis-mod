@@ -71,22 +71,24 @@ Shield	Shield skill directly improves a character’s armor class while a shield i
 
 Recovery penalty and AC increment/level
 ------------------------------------------------------------
-           Recovery penalty   Armor Class	|                 10 |            20 |	|                 10 |            30 |	|                 10 |            40 |
-Leather	Leather armor is the lightest armor a character can wear.  While leather provides less protection than chain or plate armor, it also slows your character down the least.  Leather armor skill increases the protection offered by leather armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
+           Recovery penalty  AC	|                 10 | 20 |	|                 10 |            25 |	|                 10 |            30 |
+Leather	Leather armor is the lightest armor a character can wear.  While leather provides less protection than chain or plate armor, it also slows your character down the least.  Leather armor skill increases the protection offered by leather armor.  As with all armors, Expert and Master ranking reduce the amount the armor slows you down.
+
+Leather armor is the weakest but it protects from spell damage
 
 Recovery penalty and AC increment/level
 ------------------------------------------------------------
-           Recovery penalty   Armor Class	|                 20 |            15 |	|                 10 |            20 |	|                 _0 |            25 |
+           Recovery penalty  AC   Resistances	|                 20 | _5 |           _3 |	|                 10 | 10 |           _4 |	|                 _0 | 15 |           _5 |
 Chain	Chain armor is the medium armor type.  It provides more protection than leather and less than plate, but it also slows your character down more than leather.  Chain armor skill increases the protection offered by chain armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
 
 Recovery penalty and AC increment/level
 ------------------------------------------------------------
-           Recovery penalty   Armor Class	|                 40 |            15 |	|                 20 |            20 |	|                 _0 |            25 |
+           Recovery penalty  AC	|                 40 | 10 |	|                 20 | 15 |	|                 _0 | 20 |
 Plate	Plate armor is the heaviest armor type.  It provides the most protection, but it slows your character down more than leather or chain.  Plate armor skill increases the protection offered by plate armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
 
 Recovery penalty and AC increment/level
 ------------------------------------------------------------
-           Recovery penalty   Armor Class	|                 60 |            15 |	|                 30 |            20 |	|                 _0 |            25 |
+           Recovery penalty  AC	|                 60 | 15 |	|                 30 | 20 |	|                 _0 | 25 |
 Fire	Fire magic is a good source of offensive spells and includes spells having to do with speed.  Expert and master ranking permit access to greater versions of fire spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell
 Air	Air magic tends to be defensive and informational in nature and includes spells having to do with flight.  Expert and master ranking permit access to greater versions of air spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell
 Water	Water magic is equally defensive and offensive and concentrates on spells that move or change things.  Expert and master ranking permit access to greater versions of water spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell

@@ -70,9 +70,11 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Damage|3|4|5|
 |Dagger chance to cause triple damage|3|4|5|
 |Armor Class from weapon|9|12|15|
-|Resistances|3|4|5|
-|Armor Class from armor|15|20|25|
-|Armor Class from shield|20|30|40|
+|Armor Class from shield|20|25|30|
+|Armor Class from leather|5|10|15|
+|Armor Class from chain|10|15|20|
+|Armor Class from plate|15|20|25|
+|Resistances from leather|3|4|5|
 
 ## Bonus improvement at master level 10 comparing to vanilla
 

@@ -1,3 +1,12 @@
+# version 6
+
+* Staff does not add to resistances.
+* Armor Class from shield: |20|25|30|
+* Armor Class from leather: |5|10|15|
+* Armor Class from chain: |10|15|20|
+* Armor Class from plate: |15|20|25|
+* Resistances from leather: |3|4|5|
+
 # version 5
 
 * Updated MMExtension.
