@@ -1,4 +1,4 @@
-# version 6
+# version 7
 
 * Staff does not add to resistances.
 * Armor Class from shield: |20|25|30|
