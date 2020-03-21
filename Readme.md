@@ -295,5 +295,36 @@ Some useless professions should not appear at all. Some profession cost are adju
 
 # Stat effect
 
-Stat effect is linear.
+Stat effect is linear. Here is the modified table below. Up to 15 it is the same as in vanilla. Beyond that you get 2/5 effect per stat increase on average. However, breakpoint intervals getting bigger and bigger starting from 5 in 15-50 range then 10 in 50-100 range then 20 in 100-200 range then 50 in 200-300 range and then 100 in 300-500 range. Most likely you will never go above 200 so your Extreme Energy will always work and produce same predictable result.
 
+| Statistic | Effect |
+|----:|----:|
+| 500 | 196 |
+| 400 | 156 |
+| 300 | 116 |
+| 250 | 96 |
+| 200 | 76 |
+| 180 | 68 |
+| 160 | 60 |
+| 140 | 52 |
+| 120 | 44 |
+| 100 | 36 |
+| 90 | 32 |
+| 80 | 28 |
+| 70 | 24 |
+| 60 | 20 |
+| 50 | 16 |
+| 45 | 14 |
+| 40 | 12 |
+| 35 | 10 |
+| 30 | 8 |
+| 25 | 6 |
+| 20 | 4 |
+| 15 | 2 |
+| 13 | 0 |
+| 11 | -1 |
+| 9 | -2 |
+| 7 | -3 |
+| 5 | -4 |
+| 3 | -5 |
+| 1 | -6 |

@@ -903,6 +903,10 @@ function events.GameInitialized2()
 end
 
 function events.GetStatisticEffect(t)
-	t.Result = math.ceil((t.Value - 1) / 2) - 6
+	t.Result = math.floor((t.Value - 1) / 2) - 6
+	if t.Value == 25 then
+		MessageBox(t.Value)
+		MessageBox(t.Result)
+	end
 end
 
