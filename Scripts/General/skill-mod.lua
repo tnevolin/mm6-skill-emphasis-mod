@@ -30,44 +30,43 @@ local armorSkillNewBonusBySkillAndRank =
 {
 	[const.Skills.Shield] =
 	{
-		[const.Novice] = 20,
-		[const.Expert] = 25,
-		[const.Master] = 30,
-	},
-	[const.Skills.Leather] =
-	{
-		[const.Novice] = 5,
-		[const.Expert] = 10,
-		[const.Master] = 15,
-	},
-	[const.Skills.Chain] =
-	{
 		[const.Novice] = 10,
 		[const.Expert] = 15,
 		[const.Master] = 20,
 	},
-	[const.Skills.Plate] =
-	{
-		[const.Novice] = 15,
-		[const.Expert] = 20,
-		[const.Master] = 25,
-	},
-}
-local armorSkillResistanceBonusBySkillAndRank =
-{
 	[const.Skills.Leather] =
 	{
 		[const.Novice] = 3,
 		[const.Expert] = 4,
 		[const.Master] = 5,
 	},
+	[const.Skills.Chain] =
+	{
+		[const.Novice] = 6,
+		[const.Expert] = 8,
+		[const.Master] = 10,
+	},
+	[const.Skills.Plate] =
+	{
+		[const.Novice] = 9,
+		[const.Expert] = 12,
+		[const.Master] = 15,
+	},
 }
-
-local shieldSkillNewBonusByRank =
+local armorSkillResistanceBonusBySkillAndRank =
 {
-	[const.Novice] = 20,
-	[const.Expert] = 30,
-	[const.Master] = 40,
+	[const.Skills.Leather] =
+	{
+		[const.Novice] = 6,
+		[const.Expert] = 8,
+		[const.Master] = 10,
+	},
+	[const.Skills.Chain] =
+	{
+		[const.Novice] = 3,
+		[const.Expert] = 4,
+		[const.Master] = 5,
+	},
 }
 
 local weaponSkillRecoveryBonuses =
@@ -81,7 +80,6 @@ local weaponSkillRecoveryBonuses =
 	[const.Skills.Dagger] = 0,
 }
 
--- weapon skill damage bonuses
 local weaponSkillDamageBonuses =
 {
 	[const.Skills.Bow] = 0,
@@ -94,11 +92,10 @@ local weaponSkillDamageBonuses =
 }
 
 -- skill effect multipliers
-local attackBonusByMastery = {[const.Novice] = 6, [const.Expert] = 8, [const.Master] = 10, }
-local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local damageBonusByMastery = {[const.Novice] = 3, [const.Expert] = 4, [const.Master] = 5, }
-local weaponACBonusByMastery = {[const.Novice] = 9, [const.Expert] = 12, [const.Master] = 15, }
-local weaponResistanceBonusByMastery = {[const.Novice] = 3, [const.Expert] = 4, [const.Master] = 5, }
+local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
+local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 
 -- special weapon skill chances
@@ -486,10 +483,9 @@ end
 -- corrects attack delay
 function events.GetAttackDelay(t)
 
-	-- weapon
-
 	local equipmentData = getPlayerEquipmentData(t.Player)
 	
+	-- weapon
 	if t.Ranged then
 	
 		local bow = equipmentData.bow
@@ -530,9 +526,7 @@ function events.GetAttackDelay(t)
 	end
 	
 	-- armor
-	
 	local itemArmorNumber = t.Player.ItemArmor
-	
 	if itemArmorNumber ~= 0 then
 	
 		local itemArmor = t.Player.Items[itemArmorNumber]
@@ -552,9 +546,9 @@ function events.GetAttackDelay(t)
 	end
 	
 	-- turn recovery time into a multiplier rather than divisor
-	-- local recoveryBonus = 100 - t.Result
-	-- local correctedRecoveryTime = math.floor(100 * 100 / (100 + recoveryBonus))
-	-- t.Result = correctedRecoveryTime
+	local recoveryBonus = 100 - t.Result
+	local correctedRecoveryTime = math.floor(100 * 100 / (100 + recoveryBonus))
+	t.Result = correctedRecoveryTime
 	
 end
 
@@ -900,8 +894,8 @@ end
 function events.GameInitialized2()
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
-		-- monster HP x4
-		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 4
+		-- monster HP x2
+		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
 		-- monster XP x2
 		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * 2
 	end

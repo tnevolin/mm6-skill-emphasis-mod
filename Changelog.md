@@ -1,6 +1,15 @@
 # version 8
 
 * Stat effect = ((S - 1) / 2) - 6
+* Shield skill AC bonus reduced.
+* Armor skill AC bonus reduced.
+* Armor skill resistance bonus increased.
+* Weapon skill attack bonus reduced.
+* Weapon skill speed bonus reduced.
+* Weapon skill damage bonus reduced.
+* Weapon skill AC bonus reduced.
+* Weapon skill resistance bonus removed.
+* Monster HP is reduced (x2 now).
 
 # version 7
 

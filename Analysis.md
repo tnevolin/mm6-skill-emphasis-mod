@@ -47,7 +47,7 @@ I am calculating effects for new positive speed bonus mechanics not for vanilla 
 |10|0.9%|
 |20|0.8%|
 |30|0.8%|
-|40|0.7%|
+|40|0.7%|	
 |50|0.7%|
 
 Early game imporvement is moderate. However it declines moderately too.

@@ -65,46 +65,17 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
-|Attack|6|8|10|
-|Speed|4|6|8|
-|Damage|3|4|5|
+|Attack|2|3|4|
+|Speed|4|5|6|
+|Damage|2|3|4|
 |Dagger chance to cause triple damage|3|4|5|
-|Armor Class from weapon|9|12|15|
-|Armor Class from shield|20|25|30|
-|Armor Class from leather|5|10|15|
-|Armor Class from chain|10|15|20|
-|Armor Class from plate|15|20|25|
-|Resistances from leather|3|4|5|
-
-## Bonus improvement at master level 10 comparing to vanilla
-
-|bonus|description|ratio|
-|----|----|----:|
-|Attack|player to hit chance against toughest monsters|1.8|
-|Speed|attack frequency|1.5|
-|Damage|increase in damage|1.5|
-|Dagger chance to cause triple damage|damage multiplier|2.0|
-|Armor Class from weapon|decrease in toughest monster to hit chance against player|1.4|
-|Resistances|decrease in magic attack damage|1.5|
-|Armor Class from armor|decrease in toughest monster to hit chance against player|1.6|
-|Armor Class from shield|decrease in toughest monster to hit chance against player|2.0|
-
-## Resulting weapon damage rate increase at master level 10 due to improved skills
-
-Damage rate defines amount of damage delivered in unit of time. It is a product of all three offensive parameters: hit chance, speed, damage. Hit chance is calculated based on attack. Speed and damage are directly influenced by skill.
-
-|weapon|attack|speed|damage|damage rate improvement compared to vanilla|
-|----|----:|----:|----:|----:|
-|Staff|+100|0|0|1.5|
-|Sword|+100|+100|0|2.2|
-|Dagger|+100|0|x2|3.0|
-|Axe|+100|+100|+50|3.4|
-|Spear|+100|0|+50|2.2|
-|Mace|+100|0|+50|2.2|
-
-Axe becomes an ultimate weapon of destruction as it is intended to be. Axe+Sword is now also a most destructive dual wield combo (see dual wield section for details).
-
-Other weapons are weaker but possess some other qualities instead. Staff is an ultimate anti magic and complete protection tool. Sword is powerful dual wield companion. Spear is for physical damage protection. Mace is a counter attack tool. Dagger is faster and stronger at the beginning but doesn't progress that well with skill.
+|Armor Class from weapon|4|6|8|
+|Armor Class from shield|10|15|20|
+|Armor Class from leather|3|4|5|
+|Armor Class from chain|6|8|10|
+|Armor Class from plate|9|12|15|
+|Resistances from leather|6|8|10|
+|Resistances from chain|3|4|5|
 
 ## Special abilities
 
@@ -138,21 +109,9 @@ Staff has a chance to slow and feeblemind. These abilities are immediatelly avai
 |chain|40|20|0|
 |plate|60|30|0|
 
-## Armor special abilities
+# Dual wielding
 
-Armor types in MM6 are boringly indistinguisable. Best plate adds 30 more AC than best leather. That is about 10% monster chance to hit difference by the end of the game. I think armor special abilities add some variety to the game and desire to keep at least one of each type in the party.
-
-Leather skill adds to resistances.
-
-Chain skill reduces physical melee damage.
-
-Plate skill redistributes damage from other party members to self. Plate wearer is perceived as a tough guy rushing into the fight and protecting the rest of the party by drawing enemy attention to itself. Bonus is additive if there are many plate wearers in the party.
-
-Shield slightly reduces missile damage to party. Bonus is additive if there are many shield wearers in the party.
-
-# Dual wield
-
-Dual wield rules are quite complicated in MM6. Player need to remember which weapon uses attack, speed, damage bonuses and which does not. Ugh. Moreover, some of the skill bonuses and enchantment effects may not work if you apply them to the weapon in wrong hand. Most of the time you are out of luck as you cannot possibly wield some weapons in off hand. This is certainly a waste of skills and enchantments. Why not make them all count? That makes it much easier to distribute skill points and fairer to both weapon skills.
+Dual wielding rules are quite complicated in MM6. Player need to remember which weapon uses attack, speed, damage bonuses and which does not. Ugh. Moreover, some of the skill bonuses and enchantment effects may not work if you apply them to the weapon in wrong hand. Most of the time you are out of luck as you cannot possibly wield some weapons in off hand. This is certainly a waste of skills and enchantments. Why not make them all count? That makes it much easier to distribute skill points and fairer to both weapon skills.
 
 ## Dual wield modification proposal
 
@@ -162,7 +121,7 @@ Dual wield rules are quite complicated in MM6. Player need to remember which wea
 
 # Two handed weapon
 
-Dual wield is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage.
+Dual wielding is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage.
 
 ## Two handed weapon damage
 
@@ -245,7 +204,7 @@ Most spells generally progress well with skill level. This is an adjustment for 
 
 # Monsters toughness and XP
 
-Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Monster HP is quadrupled.
+Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Monster HP is doubled.
 
 Monster XP is doubled to let player advance skills faster especially in the beginning.
 
