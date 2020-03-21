@@ -334,3 +334,7 @@ Some useless professions should not appear at all. Some profession cost are adju
 | Noble | 0 | 100 |
 | Gambler | 0 | 10 |
 
+# Stat effect
+
+Stat effect is linear.
+

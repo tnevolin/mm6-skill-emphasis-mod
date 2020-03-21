@@ -888,13 +888,15 @@ mem.asmpatch(0x00427F86, "lea     ecx, [eax+eax*4]", 4)
 -- Power Cure
 mem.asmpatch(0x00428596, "lea     ecx, [eax+eax*4]", 4)
 
+-- monster damage to player
 function events.CalcDamageToPlayer(t)
 
 	-- monster damage to player x2
 	t.Result = t.Result * 2
 	
 end
-
+-- monster HP
+-- monster XP
 function events.GameInitialized2()
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
@@ -904,5 +906,9 @@ function events.GameInitialized2()
 		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * 2
 	end
 	
+end
+
+function events.GetStatisticEffect(t)
+	t.Result = math.ceil((t.Value - 1) / 2) - 6
 end
 

@@ -1,3 +1,7 @@
+# version 8
+
+* Stat effect = ((S - 1) / 2) - 6
+
 # version 7
 
 * Staff does not add to resistances.
