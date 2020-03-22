@@ -1,3 +1,11 @@
+# version 10
+
+* Protection spells strength multiplier by rank: 3/4/5.
+
+# version 9
+
+* ?
+
 # version 8
 
 * Stat effect = ((S - 1) / 2) - 6

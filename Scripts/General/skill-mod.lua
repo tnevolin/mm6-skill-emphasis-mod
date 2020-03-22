@@ -259,25 +259,6 @@ local spellPowers =
 		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 	},
 }
--- party spell buff powers
-local partySpellBuffPowers =
-{
-	 -- Stone Skin
-	{
-		addresses = {0x0090A1DC, 0x0090B7F8, 0x0090CE14, 0x0090E430, },
-		power = {fixedMin = 0, fixedMax = 0, variableMin = 5, variableMax = 5, },
-	},
-	 -- Bless
-	{
-		addresses = {0x0090A19C, 0x0090B7B8, 0x0090CDD4, 0x0090E3F0, },
-		power = {fixedMin = 0, fixedMax = 0, variableMin = 5, variableMax = 5, },
-	},
-	 -- Heroism
-	{
-		addresses = {0x0090A1AC, 0x0090B7C8, 0x0090CDE4, 0x0090E400, },
-		power = {fixedMin = 0, fixedMax = 0, variableMin = 2, variableMax = 2, },
-	},
-}
 
 -- collects relevant player weapon data
 local function getPlayerEquipmentData(player)
@@ -921,8 +902,8 @@ mem.asmpatch(0x00426281, "imul    ecx, 5", 3)
 mem.asmpatch(0x0042617C, "imul    ecx, 5", 3)
 
 -- Bless
-mem.asmpatch(0x00426809, "imul    eax, 5", 3)
-mem.asmpatch(0x0042670F, "imul    ecx, 5", 3)
+mem.asmpatch(0x00426809, "imul    eax, 2", 3)
+mem.asmpatch(0x0042670F, "imul    ecx, 2", 3)
 
 -- Heroism
 mem.asmpatch(0x00426D49, "imul    ecx, 2", 3)
@@ -946,6 +927,56 @@ mem.asmpatch(0x00427F86, "lea     ecx, [eax+eax*4]", 4)
 
 -- Power Cure
 mem.asmpatch(0x00428596, "lea     ecx, [eax+eax*4]", 4)
+
+-- Protection from Fire
+mem.asmpatch(0x004236E3, [[
+mov    eax, DWORD [esp+0x10]
+mov    ecx, esi
+inc    ecx
+inc    ecx
+imul   ecx, eax
+mov    DWORD [esp+0x14], ecx
+]], 0x2D)
+
+-- Protection from Electricity
+mem.asmpatch(0x0042439D, [[
+mov    eax, DWORD[esp+0x10]
+mov    ecx, esi
+inc    ecx
+inc    ecx
+imul   ecx, eax
+mov    DWORD [esp+0x14], ecx
+]], 0x2D)
+
+-- Protection from Cold
+mem.asmpatch(0x00424F99, [[
+mov    eax, DWORD[esp+0x10]
+mov    ecx, esi
+inc    ecx
+inc    ecx
+imul   ecx, eax
+mov    DWORD [esp+0x14], ecx
+]], 0x2D)
+
+-- Protection from Magic
+mem.asmpatch(0x00426087, [[
+mov    eax, DWORD[esp+0x10]
+mov    ecx, esi
+inc    ecx
+inc    ecx
+imul   ecx, eax
+mov    DWORD [esp+0x14], ecx
+]], 0x2D)
+
+-- Protection from Poison
+mem.asmpatch(0x00427EBB, [[
+mov    eax, DWORD[esp+0x10]
+mov    ecx, esi
+inc    ecx
+inc    ecx
+imul   ecx, eax
+mov    DWORD [esp+0x14], ecx
+]], 0x2D)
 
 -- monster damage to player
 function events.CalcDamageToPlayer(t)
@@ -975,3 +1006,4 @@ for index,value in ipairs(attributeEffects) do
 	mem.bytecodepatch(0x004C289C + 1 * (index - 1), string.char(bit.band(value, 0xFF)), 1)
 end
 
+-- 

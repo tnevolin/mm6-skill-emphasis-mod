@@ -184,6 +184,7 @@ Most spells generally progress well with skill level. This is an adjustment for 
 
 |spell|fixed|per level|
 |----|----:|----:|
+|Protection from ...|0|3, 4, 5|
 |Ring Of Fire|3|1-3|
 |Meteor Shower|4|1-4|
 |Inferno|5|1-5|
@@ -195,7 +196,7 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Flying Fist|14|1-14|
 |Prismatic Light|10|1-10|
 |Stone Skin||5|
-|Bless||5|
+|Bless||2|
 |Heroism||2|
 |Healing Touch|3-7, 6-14, 15-35||
 |First Aid|5, 10, 25||
