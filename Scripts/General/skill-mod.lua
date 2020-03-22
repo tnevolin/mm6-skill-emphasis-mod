@@ -1,3 +1,68 @@
+local attributeBreakpoints =
+{
+	500,
+	400,
+	300,
+	200,
+	190,
+	180,
+	170,
+	160,
+	150,
+	140,
+	130,
+	120,
+	110,
+	100,
+	90,
+	80,
+	70,
+	60,
+	50,
+	45,
+	40,
+	35,
+	30,
+	25,
+	20,
+	15,
+	10,
+	5,
+	0,
+}
+local attributeEffects =
+{
+	194,
+	154,
+	114,
+	74,
+	70,
+	66,
+	62,
+	58,
+	54,
+	50,
+	46,
+	42,
+	38,
+	34,
+	30,
+	26,
+	22,
+	18,
+	14,
+	12,
+	10,
+	8,
+	6,
+	4,
+	2,
+	0,
+	-2,
+	-4,
+	-6,
+}
+
 local weaponOldBaseRecoveryBonuses =
 {
 	[const.Skills.Bow] = 0,
@@ -902,11 +967,11 @@ function events.GameInitialized2()
 	
 end
 
-function events.GetStatisticEffect(t)
-	t.Result = math.floor((t.Value - 1) / 2) - 6
-	if t.Value == 25 then
-		MessageBox(t.Value)
-		MessageBox(t.Result)
-	end
+-- primary statistics effect
+for index,value in ipairs(attributeBreakpoints) do
+	mem.bytecodepatch(0x004C2860 + 2 * (index - 1), string.char(bit.band(value, 0xFF), bit.band(bit.rshift(value, 8), 0xFF)), 2)
+end
+for index,value in ipairs(attributeEffects) do
+	mem.bytecodepatch(0x004C289C + 1 * (index - 1), string.char(bit.band(value, 0xFF)), 1)
 end
 
