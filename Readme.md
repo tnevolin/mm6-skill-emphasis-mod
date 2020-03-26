@@ -330,3 +330,11 @@ Stat effect is linear. Here is the modified table below. It is +2 effect per +5 
 | 5 | -4 |
 | 0 | -6 |
 
+# Skill progression
+
+Reducing skill progression cost acceleration a little to encourage specialization and discourage throwing cheap points into low level skills. This way low levels advancement is more expencive. It catches up at level 10 and after that becomes cheaper.
+
+<pre>
+Skill advancement cost = 5 + floor\[(level - 1) / 3\]
+</pre>
+

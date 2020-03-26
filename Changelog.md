@@ -1,3 +1,7 @@
+# version 11
+
+* Flattened skill advancement cost a little.
+
 # version 10
 
 * Protection spells strength multiplier by rank: 3/4/5.

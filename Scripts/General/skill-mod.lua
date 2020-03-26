@@ -1006,4 +1006,36 @@ for index,value in ipairs(attributeEffects) do
 	mem.bytecodepatch(0x004C289C + 1 * (index - 1), string.char(bit.band(value, 0xFF)), 1)
 end
 
--- 
+-- skill advancement
+local function calculateSkillAdvancementCost(level)
+	return 5 + math.floor((level - 1) / 3)
+end
+local function calculateSkillAdvancementCostToCheck(d, def)
+	local level = bit.band(d.eax, 0x3F)
+	local cost = calculateSkillAdvancementCost(level)
+	d.edx = cost
+end
+mem.hook(0x0042D0E2, calculateSkillAdvancementCostToCheck, 0x6)
+local function calculateRemainedSkillPointsAfterAdvancement(d, def)
+	local level = bit.band(d.eax, 0x3F) - 1
+	local cost = calculateSkillAdvancementCost(level)
+	d.edi = d.edi - cost
+end
+mem.hook(0x0042D109, calculateRemainedSkillPointsAfterAdvancement, 0x5)
+local function calculateSkillAdvancementCostToDisplay(d, def)
+	local level = bit.band(d.eax, 0x3F) - 1
+	local cost = calculateSkillAdvancementCost(level)
+	d.eax = cost
+end
+mem.autohook2(0x0041F8E5, calculateSkillAdvancementCostToDisplay, 0xE)
+local function adjustSkillPointsForSkillHighlight(d, def)
+	local level = d.esi
+	local cost = calculateSkillAdvancementCost(level)
+	if d.ecx >= cost then
+		d.ecx = level + 1
+	else
+		d.ecx = level
+	end
+end
+mem.autohook2(0x00415A0B, adjustSkillPointsForSkillHighlight, 0x7)
+
