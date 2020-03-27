@@ -1,3 +1,7 @@
+# version 12
+
+* ArmsMaster, WeaponsMaster, Squire now correctly add to weapon/armor skill.
+
 # version 11
 
 * Flattened skill advancement cost a little.

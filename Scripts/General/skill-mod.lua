@@ -297,7 +297,7 @@ local function getPlayerEquipmentData(player)
 			rank = nil,
 			level = nil,
 		},
-		armor =
+		shield =
 		{
 			equipped = false,
 			item = nil,
@@ -305,7 +305,7 @@ local function getPlayerEquipmentData(player)
 			rank = nil,
 			level = nil,
 		},
-		shield =
+		armor =
 		{
 			equipped = false,
 			item = nil,
@@ -409,19 +409,6 @@ local function getPlayerEquipmentData(player)
 		equipmentData.dualWield = true
 	end
 	
-	-- get armor data
-	
-	if player.ItemArmor ~= 0 then
-		
-		equipmentData.armor.equipped = true
-		
-		equipmentData.armor.item = player.Items[player.ItemArmor]
-		local itemArmorTxt = Game.ItemsTxt[equipmentData.armor.item.Number]
-		equipmentData.armor.skill = itemArmorTxt.Skill - 1
-		equipmentData.armor.level, equipmentData.armor.rank = SplitSkill(player.Skills[equipmentData.armor.skill])
-		
-	end
-	
 	-- get shield data
 	
 	if player.ItemExtraHand ~= 0 then
@@ -439,6 +426,61 @@ local function getPlayerEquipmentData(player)
 		end
 		
 	end
+	
+	-- get armor data
+	
+	if player.ItemArmor ~= 0 then
+		
+		equipmentData.armor.equipped = true
+		
+		equipmentData.armor.item = player.Items[player.ItemArmor]
+		local itemArmorTxt = Game.ItemsTxt[equipmentData.armor.item.Number]
+		equipmentData.armor.skill = itemArmorTxt.Skill - 1
+		equipmentData.armor.level, equipmentData.armor.rank = SplitSkill(player.Skills[equipmentData.armor.skill])
+		
+	end
+	
+	-- account for hirelings skill boost
+	
+	if Game.Party.HiredNPC[0] ~= nil then
+		local npc = Game.Party.HiredNPC[0]
+		if npc.Profession == const.NPCProfession.ArmsMaster then
+			if equipmentData.bow.level ~= nil then
+				equipmentData.bow.level = equipmentData.bow.level + 2
+			end
+			if equipmentData.main.level ~= nil then
+				equipmentData.main.level = equipmentData.main.level + 2
+			end
+			if equipmentData.extra.level ~= nil then
+				equipmentData.extra.level = equipmentData.extra.level + 2
+			end
+		else if npc.Profession == const.NPCProfession.ArmsMaster then
+			if equipmentData.bow.level ~= nil then
+				equipmentData.bow.level = equipmentData.bow.level + 3
+			end
+			if equipmentData.main.level ~= nil then
+				equipmentData.main.level = equipmentData.main.level + 3
+			end
+			if equipmentData.extra.level ~= nil then
+				equipmentData.extra.level = equipmentData.extra.level + 3
+			end
+		else if npc.Profession == const.NPCProfession.Squire then
+			if equipmentData.bow.level ~= nil then
+				equipmentData.bow.level = equipmentData.bow.level + 2
+			end
+			if equipmentData.main.level ~= nil then
+				equipmentData.main.level = equipmentData.main.level + 2
+			end
+			if equipmentData.extra.level ~= nil then
+				equipmentData.extra.level = equipmentData.extra.level + 2
+			end
+			if equipmentData.shield.level ~= nil then
+				equipmentData.shield.level = equipmentData.shield.level + 2
+			end
+			if equipmentData.armor.level ~= nil then
+				equipmentData.armor.level = equipmentData.armor.level + 2
+			end
+		end
 	
 	return equipmentData
 	
