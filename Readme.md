@@ -101,6 +101,13 @@ Staff has a chance to slow and feeblemind. These abilities are immediatelly avai
 
 **Skill master level 10 roughly keeps one enemy under effect all the time.**
 
+### Sword and dagger special abilities
+
+Sword and dagger special ability to serve as a secondary weapon is a foundation of dual wielding. However, holding sword/dagger in right hand ignores this ability. As such sword in right hand sucks comparing to comparable strength weapons: axe and spear. I decided to compensate sword/dagger in right hand so people still can find incentive in using it.
+
+* Sword and dagger can be used in left hand immediatelly. No need to acheve special rank for that.
+* Sword and dagger in right hand double their skill attack bonus to compencate abandoned ability.
+
 ## Armor speed penalties
 
 |armor type|normal|expert|master|
@@ -195,9 +202,9 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Harm|5|1-5|
 |Flying Fist|14|1-14|
 |Prismatic Light|10|1-10|
-|Stone Skin||5|
-|Bless||2|
-|Heroism||2|
+|Stone Skin|10|5|
+|Bless|5|2|
+|Heroism|5|2|
 |Healing Touch|3-7, 6-14, 15-35||
 |First Aid|5, 10, 25||
 |Cure Wounds||5|

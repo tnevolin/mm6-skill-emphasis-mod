@@ -1,3 +1,12 @@
+# version 13
+
+* Blade (sword, dagger) in right hand doubles its skill attack bonus.
+* Blade (sword, dagger) can be held in left hand at novice rank.
+* Bless adds 2 attack per level. (This was fixed at some previous version).
+* Stone Skin power = 10 + 5 * level
+* Bless power = 5 + 2 * level
+* Heroism power = 5 + 2 * level
+
 # version 12
 
 * ArmsMaster, WeaponsMaster, Squire now correctly add to weapon/armor skill.

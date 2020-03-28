@@ -188,75 +188,96 @@ local classRangedWeaponSkillDamageBonus =
 -- spell powers
 local spellPowers =
 {
-	 -- Ring of Fire
+	-- Ring of Fire
 	[7] =
 	{
 		[const.Novice] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
 		[const.Expert] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
 		[const.Master] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
 	},
-	 -- Meteor Shower
+	-- Meteor Shower
 	[9] =
 	{
 		[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 		[const.Expert] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 		[const.Master] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 	},
-	 -- Inferno
+	-- Inferno
 	[10] =
 	{
 		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
 		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
 		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
 	},
-	 -- Starburst
+	-- Starburst
 	[22] =
 	{
 		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 		[const.Expert] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 		[const.Master] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 	},
-	 -- Ice Blast
+	-- Ice Blast
 	[32] =
 	{
 		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 	},
-	 -- Death Blossom
+	-- Death Blossom
 	[43] =
 	{
 		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 		[const.Expert] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 		[const.Master] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 	},
-	 -- Mind Blast
+	-- Mind Blast
 	[58] =
 	{
 		[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 		[const.Expert] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 		[const.Master] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 	},
-	 -- Harm
+	-- Harm
 	[70] =
 	{
 		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
 		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
 		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
 	},
-	 -- Flying Fist
+	-- Flying Fist
 	[76] =
 	{
 		[const.Novice] = {fixedMin = 14, fixedMax = 14, variableMin = 1, variableMax = 14, },
 		[const.Expert] = {fixedMin = 14, fixedMax = 14, variableMin = 1, variableMax = 14, },
 		[const.Master] = {fixedMin = 14, fixedMax = 14, variableMin = 1, variableMax = 14, },
 	},
-	 -- Prismatic Light
+	-- Prismatic Light
 	[84] =
 	{
 		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
+	},
+}
+local spellBuffPowers =
+{
+	-- StoneSkin
+	["StoneSkin"] =
+	{
+		["fixed"] = 10,
+		["proportional"] = 5,
+	},
+	-- Bless
+	["Bless"] =
+	{
+		["fixed"] = 5,
+		["proportional"] = 2,
+	},
+	-- Heroism
+	["Heroism"] =
+	{
+		["fixed"] = 5,
+		["proportional"] = 2,
 	},
 }
 
@@ -442,45 +463,58 @@ local function getPlayerEquipmentData(player)
 	
 	-- account for hirelings skill boost
 	
-	if Game.Party.HiredNPC[0] ~= nil then
-		local npc = Game.Party.HiredNPC[0]
-		if npc.Profession == const.NPCProfession.ArmsMaster then
-			if equipmentData.bow.level ~= nil then
-				equipmentData.bow.level = equipmentData.bow.level + 2
-			end
-			if equipmentData.main.level ~= nil then
-				equipmentData.main.level = equipmentData.main.level + 2
-			end
-			if equipmentData.extra.level ~= nil then
-				equipmentData.extra.level = equipmentData.extra.level + 2
-			end
-		else if npc.Profession == const.NPCProfession.ArmsMaster then
-			if equipmentData.bow.level ~= nil then
-				equipmentData.bow.level = equipmentData.bow.level + 3
-			end
-			if equipmentData.main.level ~= nil then
-				equipmentData.main.level = equipmentData.main.level + 3
-			end
-			if equipmentData.extra.level ~= nil then
-				equipmentData.extra.level = equipmentData.extra.level + 3
-			end
-		else if npc.Profession == const.NPCProfession.Squire then
-			if equipmentData.bow.level ~= nil then
-				equipmentData.bow.level = equipmentData.bow.level + 2
-			end
-			if equipmentData.main.level ~= nil then
-				equipmentData.main.level = equipmentData.main.level + 2
-			end
-			if equipmentData.extra.level ~= nil then
-				equipmentData.extra.level = equipmentData.extra.level + 2
-			end
-			if equipmentData.shield.level ~= nil then
-				equipmentData.shield.level = equipmentData.shield.level + 2
-			end
-			if equipmentData.armor.level ~= nil then
-				equipmentData.armor.level = equipmentData.armor.level + 2
-			end
+	local hiredNPC = Game.Party.HiredNPC
+	if
+		(hiredNPC[1] ~= nil and hiredNPC[1].Profession == const.NPCProfession.ArmsMaster)
+		or
+		(hiredNPC[2] ~= nil and hiredNPC[2].Profession == const.NPCProfession.ArmsMaster)
+	then
+		if equipmentData.bow.level ~= nil then
+			equipmentData.bow.level = equipmentData.bow.level + 2
 		end
+		if equipmentData.main.level ~= nil then
+			equipmentData.main.level = equipmentData.main.level + 2
+		end
+		if equipmentData.extra.level ~= nil then
+			equipmentData.extra.level = equipmentData.extra.level + 2
+		end
+	end
+	if
+		(hiredNPC[1] ~= nil and hiredNPC[1].Profession == const.NPCProfession.WeaponsMaster)
+		or
+		(hiredNPC[2] ~= nil and hiredNPC[2].Profession == const.NPCProfession.WeaponsMaster)
+	then
+		if equipmentData.bow.level ~= nil then
+			equipmentData.bow.level = equipmentData.bow.level + 3
+		end
+		if equipmentData.main.level ~= nil then
+			equipmentData.main.level = equipmentData.main.level + 3
+		end
+		if equipmentData.extra.level ~= nil then
+			equipmentData.extra.level = equipmentData.extra.level + 3
+		end
+	end
+	if
+		(hiredNPC[1] ~= nil and hiredNPC[1].Profession == const.NPCProfession.Squire)
+		or
+		(hiredNPC[2] ~= nil and hiredNPC[2].Profession == const.NPCProfession.Squire)
+	then
+		if equipmentData.bow.level ~= nil then
+			equipmentData.bow.level = equipmentData.bow.level + 2
+		end
+		if equipmentData.main.level ~= nil then
+			equipmentData.main.level = equipmentData.main.level + 2
+		end
+		if equipmentData.extra.level ~= nil then
+			equipmentData.extra.level = equipmentData.extra.level + 2
+		end
+		if equipmentData.shield.level ~= nil then
+			equipmentData.shield.level = equipmentData.shield.level + 2
+		end
+		if equipmentData.armor.level ~= nil then
+			equipmentData.armor.level = equipmentData.armor.level + 2
+		end
+	end
 	
 	return equipmentData
 	
@@ -672,6 +706,12 @@ function events.CalcStatBonusBySkills(t)
 		
 		if main.weapon then
 			
+			-- double attack bonus for blade in main hand
+			local attackBonusMultiplier = 1
+			if main.skill == const.Skills.Sword or main.skill == const.Skills.Dagger then
+				attackBonusMultiplier = 2
+			end
+			
 			-- single wield
 			if not equipmentData.dualWield then
 				
@@ -679,7 +719,7 @@ function events.CalcStatBonusBySkills(t)
 				t.Result = t.Result - main.level
 				
 				-- add new bonus from main hand
-				t.Result = t.Result + (attackBonusByMastery[main.rank] * main.level)
+				t.Result = t.Result + attackBonusMultiplier * (attackBonusByMastery[main.rank] * main.level)
 			
 			-- dual wield
 			else
@@ -688,7 +728,7 @@ function events.CalcStatBonusBySkills(t)
 				t.Result = t.Result - extra.level
 				
 				-- add new bonus from main hand
-				t.Result = t.Result + (attackBonusByMastery[main.rank] * main.level)
+				t.Result = t.Result + attackBonusMultiplier * (attackBonusByMastery[main.rank] * main.level)
 			
 				-- add new bonus from extra hand
 				t.Result = t.Result + (attackBonusByMastery[extra.rank] * extra.level)
@@ -939,17 +979,40 @@ function events.CalcSpellDamage(t)
 	
 end
 
--- Stone Skin
-mem.asmpatch(0x00426281, "imul    ecx, 5", 3)
-mem.asmpatch(0x0042617C, "imul    ecx, 5", 3)
+-- spell buffs
+local function calculateSpellBuffPower(spellBuffName, level)
+	return spellBuffPowers[spellBuffName]["fixed"] + level * spellBuffPowers[spellBuffName]["proportional"]
+end
+
+-- StoneSkin
+local function setStoneSkinPowerNovice(d)
+	d.eax = calculateSpellBuffPower("StoneSkin", d.eax - 5)
+end
+mem.autohook(0x00426284, setStoneSkinPowerNovice, 0x8)
+local function setStoneSkinPowerExpert(d)
+	d.ecx = calculateSpellBuffPower("StoneSkin", d.ecx - 5)
+end
+mem.autohook(0x0042617F, setStoneSkinPowerExpert, 0x8)
 
 -- Bless
-mem.asmpatch(0x00426809, "imul    eax, 2", 3)
-mem.asmpatch(0x0042670F, "imul    ecx, 2", 3)
+local function setBlessPowerNovice(d)
+	d.eax = calculateSpellBuffPower("Bless", d.eax - 5)
+end
+mem.autohook(0x0042680C, setBlessPowerNovice, 0x8)
+local function setBlessPowerExpert(d)
+	d.ecx = calculateSpellBuffPower("Bless", d.ecx - 5)
+end
+mem.autohook(0x00426712, setBlessPowerExpert, 0x8)
 
 -- Heroism
-mem.asmpatch(0x00426D49, "imul    ecx, 2", 3)
-mem.asmpatch(0x00426C4C, "imul    ecx, 2", 3)
+local function setHeroismPowerNovice(d)
+	d.ecx = calculateSpellBuffPower("Heroism", d.ecx - 5)
+end
+mem.autohook(0x00426D4C, setHeroismPowerNovice, 0x8)
+local function setHeroismPowerExpert(d)
+	d.ecx = calculateSpellBuffPower("Heroism", d.ecx - 5)
+end
+mem.autohook(0x00426C4F, setHeroismPowerExpert, 0x8)
 
 -- Healing Touch
 mem.asmpatch(0x00426917, "mov     edx, 5", 5)
@@ -1080,4 +1143,10 @@ local function adjustSkillPointsForSkillHighlight(d, def)
 	end
 end
 mem.autohook2(0x00415A0B, adjustSkillPointsForSkillHighlight, 0x7)
+
+-- allow to hold sword in left hand at novice rank
+mem.asmpatch(0x0045A4AB, "test   BYTE [ebp+0x61],0xFF", 0x4)
+
+-- allow to hold dagger in left hand at novice rank
+mem.asmpatch(0x0045A3E8, "test   BYTE [ebp+0x62],0xFF", 0x4)
 
