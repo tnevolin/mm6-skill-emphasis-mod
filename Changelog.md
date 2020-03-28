@@ -6,6 +6,9 @@
 * Stone Skin power = 10 + 5 * level
 * Bless power = 5 + 2 * level
 * Heroism power = 5 + 2 * level
+* Arms Master costs 1000.
+* Weapons Master costs 1500.
+* Squire costs 2000.
 
 # version 12
 

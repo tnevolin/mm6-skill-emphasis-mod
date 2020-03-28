@@ -238,8 +238,8 @@ Some useless professions should not appear at all. Some profession cost are adju
 | Master Healer | 10 | 5000 |
 | Teacher | 10 | 300 |
 | Instructor | 10 | 700 |
-| Arms Master | 10 | 300 |
-| Weapons Master | 10 | 400 |
+| Arms Master | 10 | 1000 |
+| Weapons Master | 10 | 1500 |
 | Apprentice | 10 | 200 |
 | Mystic | 10 | 1000 |
 | Spell Master | 10 | 2000 |
@@ -269,7 +269,7 @@ Some useless professions should not appear at all. Some profession cost are adju
 | Piper | 10 | 300 |
 | Explorer | 10 | 100 |
 | Pirate | 10 | 500 |
-| Squire | 10 | 600 |
+| Squire | 10 | 2000 |
 | Psychic | 10 | 400 |
 | Gypsy | 10 | 100 |
 | Negotiator | 0 | 500 |

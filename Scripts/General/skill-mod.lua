@@ -820,6 +820,7 @@ function events.CalcStatBonusBySkills(t)
 				end
 				
 				-- add new bonus
+				MessageBox(weaponACBonusByMastery[main.rank] * main.level)
 				t.Result = t.Result + (weaponACBonusByMastery[main.rank] * main.level)
 				
 			end
