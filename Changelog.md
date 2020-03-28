@@ -3,12 +3,13 @@
 * Blade (sword, dagger) in right hand doubles its skill attack bonus.
 * Blade (sword, dagger) can be held in left hand at novice rank.
 * Bless adds 2 attack per level. (This was fixed at some previous version).
-* Stone Skin power = 10 + 5 * level
-* Bless power = 5 + 2 * level
-* Heroism power = 5 + 2 * level
+* Stone Skin power = 5 + 1 * level.
+* Bless power = 5 + 1 * level.
+* Heroism power = 5 + 1 * level.
 * Arms Master costs 1000.
 * Weapons Master costs 1500.
 * Squire costs 2000.
+* Attribute breakpoints changed.
 
 # version 12
 
