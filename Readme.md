@@ -189,8 +189,11 @@ All spells always hit. Making just a few spells to hit depending on skill level 
 
 Most spells generally progress well with skill level. This is an adjustment for those that do not. I've reshuffled their fixed and per level values so that they have more standard strength formula: X + 1-X / level. At the same time I tried to make old and new versions about equally strong at level 4.
 
+All stat boost spells affect whole party at novice level.
+
 |spell|fixed|per level|
 |----|----:|----:|
+|All stat boosts|10|5, 5, 5|
 |Protection from ...|0|3, 4, 5|
 |Ring Of Fire|3|1-3|
 |Meteor Shower|4|1-4|
@@ -210,11 +213,9 @@ Most spells generally progress well with skill level. This is an adjustment for 
 |Cure Wounds||5|
 |Power Cure||5|
 
-# Monsters toughness and XP
+# Monsters toughness
 
 Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Monster HP is doubled.
-
-Monster XP is doubled to let player advance skills faster especially in the beginning.
 
 # Hirelings
 
@@ -303,39 +304,51 @@ Some useless professions should not appear at all. Some profession cost are adju
 
 # Stat effect
 
-Stat effect is linear. Here is the modified table below. It is +2 effect per +5 stat increase along all scale. However, breakpoint intervals getting bigger and bigger at 50 and then at 200. Most likely you will never go above 200 so your Extreme Energy will always work and produce same predictable result.
+## Problem
+
+Extremely non-lenear stat breakpoint/effect progression renders any stat boosting effects (spells, potions) useless toward the end of the game.
+
+## Solution
+
+* Make stat effect either exactly linear or close to linear.
+* Reduce initial stat effect to stat value ratio from vanilla 1:2 down to 1:5.
+
+These changes together make stat boosts weak but relevant to the end of the game. At the same time it does not allow stat effect to overflow character secondary stats (attack, recovery, damage, AC, ...).
+
+
+ Here is the modified table below. It is +2 effect per +5 stat increase along all scale. However, breakpoint intervals getting bigger and bigger at 50 and then at 200. Most likely you will never go above 200 so your Extreme Energy will always work and produce same predictable result.
 
 | Statistic | Effect |
 |----:|----:|
-| 500 | 244 |
-| 400 | 194 |
-| 350 | 169 |
-| 300 | 144 |
-| 250 | 119 |
-| 200 | 94 |
-| 180 | 84 |
-| 160 | 74 |
-| 140 | 64 |
-| 120 | 54 |
-| 100 | 44 |
-| 90 | 39 |
-| 80 | 34 |
-| 70 | 29 |
-| 60 | 24 |
-| 50 | 19 |
-| 40 | 14 |
-| 30 | 9 |
+| 500 | 100 |
+| 400 | 80 |
+| 350 | 70 |
+| 300 | 60 |
+| 280 | 56 |
+| 260 | 52 |
+| 240 | 48 |
+| 220 | 44 |
+| 200 | 40 |
+| 180 | 36 |
+| 160 | 32 |
+| 140 | 28 |
+| 120 | 24 |
+| 100 | 20 |
+| 90 | 18 |
+| 80 | 16 |
+| 70 | 14 |
+| 60 | 12 |
+| 50 | 10 |
+| 45 | 9 |
+| 40 | 8 |
+| 35 | 7 |
+| 30 | 6 |
+| 25 | 5 |
 | 20 | 4 |
-| 18 | 3 |
-| 16 | 2 |
-| 14 | 1 |
-| 12 | 0 |
-| 10 | -1 |
-| 8 | -2 |
-| 6 | -3 |
-| 4 | -4 |
-| 2 | -5 |
-| 0 | -6 |
+| 15 | 3 |
+| 10 | 2 |
+| 5 | 1 |
+| 0 | 0 |
 
 # Skill advancement cost
 

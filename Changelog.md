@@ -1,3 +1,10 @@
+# version 15
+
+* Stat effects ratio is reduced to 1:5.
+* Monster XP is back to normal.
+* All stat boosts affect whole party.
+* All stat boosts formula is 10 + 5 \* level.
+
 # version 14
 
 * Skill advancement cost formula is reverted to vanilla but cost is capped at 10.

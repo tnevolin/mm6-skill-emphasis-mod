@@ -1,66 +1,66 @@
 local attributeBreakpoints =
 {
-	500,
-	400,
-	350,
-	300,
-	250,
-	200,
-	180,
-	160,
-	140,
-	120,
-	100,
-	90,
-	80,
-	70,
-	60,
-	50,
-	40,
-	30,
-	20,
-	18,
-	16,
-	14,
-	12,
-	10,
-	8,
-	6,
-	4,
-	2,
-	0,
+500,
+400,
+350,
+300,
+280,
+260,
+240,
+220,
+200,
+180,
+160,
+140,
+120,
+100,
+90,
+80,
+70,
+60,
+50,
+45,
+40,
+35,
+30,
+25,
+20,
+15,
+10,
+5,
+0,
 }
 local attributeEffects =
 {
-	244,
-	194,
-	169,
-	144,
-	119,
-	94,
-	84,
-	74,
-	64,
-	54,
-	44,
-	39,
-	34,
-	29,
-	24,
-	19,
-	14,
-	9,
-	4,
-	3,
-	2,
-	1,
-	0,
-	-1,
-	-2,
-	-3,
-	-4,
-	-5,
-	-6,
+100,
+80,
+70,
+60,
+56,
+52,
+48,
+44,
+40,
+36,
+32,
+28,
+24,
+20,
+18,
+16,
+14,
+12,
+10,
+9,
+8,
+7,
+6,
+5,
+4,
+3,
+2,
+1,
+0,
 }
 
 local weaponOldBaseRecoveryBonuses =
@@ -1091,14 +1091,11 @@ function events.CalcDamageToPlayer(t)
 	
 end
 -- monster HP
--- monster XP
 function events.GameInitialized2()
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 		-- monster HP x2
 		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
-		-- monster XP x2
-		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * 2
 	end
 	
 end
@@ -1149,4 +1146,43 @@ mem.asmpatch(0x0045A4AB, "test   BYTE [ebp+0x61],0xFF", 0x4)
 
 -- allow to hold dagger in left hand at novice rank
 mem.asmpatch(0x0045A3E8, "test   BYTE [ebp+0x62],0xFF", 0x4)
+
+-- stat boosts
+-- Lucky day does not create pointer
+mem.asmpatch(0x004220D5, "test   BYTE [eax+0x70],0xFF", 0x4)
+-- Lucky day affects whole party
+mem.asmpatch(0x004269CD, "cmp    esi,esi", 0x3)
+-- Lucky day multiplier = 5
+mem.asmpatch(0x0042699C, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004269A6, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004269B4, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+-- Meditation/Precision does not create pointer
+mem.asmpatch(0x004220E3, "test   BYTE [eax+0x71],0xFF", 0x4)
+-- Meditation affects whole party
+mem.asmpatch(0x00427399, "cmp    esi,esi", 0x3)
+-- Meditation multiplier = 5
+mem.asmpatch(0x00427380, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x00427372, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x00427368, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+-- Precision affects whole party
+mem.asmpatch(0x0042760D, "cmp    esi,esi", 0x3)
+-- Precision multiplier = 5
+mem.asmpatch(0x004275F4, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004275E6, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004275DC, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+-- Speed/Power does not create pointer
+mem.asmpatch(0x004220F6, "test   BYTE [eax+0x72],0xFF", 0x4)
+-- Speed affects whole party
+mem.asmpatch(0x00428154, "cmp    esi,esi", 0x3)
+-- Speed multiplier = 5
+mem.asmpatch(0x0042813B, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x0042812D, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x00428123, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+-- Power affects whole party
+mem.asmpatch(0x004283F8, "cmp    esi,esi", 0x3)
+-- Power multiplier = 5
+mem.asmpatch(0x004283DF, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004283D1, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004283C7, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+
 
