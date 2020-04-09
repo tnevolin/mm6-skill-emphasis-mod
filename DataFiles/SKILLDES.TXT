@@ -3,11 +3,13 @@ Staff	A staff is a two-handed pole equally good on offense and defense.
 
 Base speed = 100
 Skill improves Attack, AC, and special effect duration. Rank accelerates Attack and AC bonus progression and increases the chance to cause an effect.
-Special effects: slow and feeblemind (duration 1 minute per skill level).
 
-Bonus increment/level and special effect chance %
+Special effects: slow and feeblemind.
+Chance = 10% + 4% per skill level. Duration = 3 minutes.
+
+Bonus increment/level
 ------------------------------------------------------------
-           Attack   AC   Effect chance	|     _2 | _4 |             12 |	|     _3 | _6 |             16 |	|     _4 | _8 |             20 |
+           Attack   AC	|     _2 | _4 |	|     _3 | _6 |	|     _4 | _8 |
 Sword	The sword skill covers most types of blades longer than a knife.
 
 Base speed = 120
@@ -61,11 +63,13 @@ Mace	Mace skill covers all kinds of blunt trauma weapons ranging from batons to 
 
 Base speed = 140
 Skill improves Attack, Damage, and special effect duration. Rank accelerates bonus progression and increases the chance to cause an effect.
-Special effects: paralize (duration 1 minute per skill level).
+
+Special effects: paralize.
+Chance = 5% + 2% per skill level. Duration = 3 minutes.
 
 Bonus increment/level and special effect chance %
 ------------------------------------------------------------
-           Attack   Damage   Effect chance	|     _2 |       _2 |             _6 |	|     _3 |       _3 |             _8 |	|     _4 |       _4 |             10 |
+           Attack   Damage   Effect chance	|     _2 |       _2 |	|     _3 |       _3 |	|     _4 |       _4 |
 Blaster	"A weapon from before the Silence, their making has long since been lost.  Expert and Master Blasters gain double and triple accuracy with these awesome weapons."	Skill added to Attack Bonus	Skill added to Attack Bonus (double effect)	Skill added to Attack Bonus (triple effect)
 Shield	Shield skill directly improves a character’s armor class while a shield is employed.  Expert and master ranking in the shield increase this defensive bonus.
 

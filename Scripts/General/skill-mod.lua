@@ -164,9 +164,8 @@ local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.M
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 
 -- special weapon skill chances
-local maceChanceToInduceConditionByMastery = {[const.Novice] = 6, [const.Expert] = 8, [const.Master] = 10, }
-local staffChanceToInduceConditionByMastery = {[const.Novice] = 12, [const.Expert] = 16, [const.Master] = 20, }
-local conditionDurationMultiplier = 1
+local staffEffect = {["base"] = 10, ["multiplier"] = 4, ["duration"] = 3, }
+local maceEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 3, }
 
 -- class weapon skill damage bonus
 local classMeleeWeaponSkillDamageBonus =
@@ -180,9 +179,9 @@ local classMeleeWeaponSkillDamageBonus =
 }
 local classRangedWeaponSkillDamageBonus =
 {
-	[const.Class.Archer] = 0,
-	[const.Class.BattleMage] = 1,
-	[const.Class.WarriorMage] = 2,
+	[const.Class.Archer] = 2,
+	[const.Class.BattleMage] = 3,
+	[const.Class.WarriorMage] = 4,
 }
 
 -- spell powers
@@ -893,48 +892,23 @@ local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 	-- player holds weapon in main hand
 	if	player.ItemMainHand ~= 0 then
 		
-		-- Mace in main hand
-		if	(Game.ItemsTxt[player.Items[player.ItemMainHand].Number].Skill - 1) == const.Skills.Mace then
-			
-			-- Mace skill
-			if player.Skills[const.Skills.Mace] ~= 0 then
-			
-				local skill, mastery = SplitSkill(player.Skills[const.Skills.Mace])
-				
-				local chanceToInduceCondition = maceChanceToInduceConditionByMastery[mastery]
-				
-				-- roll dice
-				if math.random(1, 100) <= chanceToInduceCondition then
-				
-					-- apply buff
-					local spellBuff = monster.SpellBuffs[const.MonsterBuff.Paralyze]
-					spellBuff:Set(Game.Time + const.Minute * conditionDurationMultiplier * skill, mastery, 0, 0, 0)
-					
-					-- append to message
-					Game.TextBuffer = Game.TextBuffer .. " /Paralyzed"
-				
-				end
-				
-			end
-			
-		end
-		
 		-- Staff in main hand
 		if	(Game.ItemsTxt[player.Items[player.ItemMainHand].Number].Skill - 1) == const.Skills.Staff then
 			
 			-- Staff skill
 			if player.Skills[const.Skills.Staff] ~= 0 then
 			
-				local skill, mastery = SplitSkill(player.Skills[const.Skills.Staff])
+				local level, rank = SplitSkill(player.Skills[const.Skills.Staff])
 				
-				local chanceToInduceCondition = maceChanceToInduceConditionByMastery[mastery]
+				local chance = staffEffect["base"] + staffEffect["multiplier"] * level
+				local duration = staffEffect["multiplier"]
 				
 				-- roll dice
-				if math.random(1, 100) <= chanceToInduceCondition then
+				if math.random(1, 100) <= chance then
 				
 					-- apply buff
 					local spellBuff = monster.SpellBuffs[const.MonsterBuff.Slow]
-					spellBuff:Set(Game.Time + const.Minute * conditionDurationMultiplier * skill, mastery, 0, 0, 0)
+					spellBuff:Set(Game.Time + const.Minute * duration, rank, 0, 0, 0)
 					
 					-- append to message
 					Game.TextBuffer = Game.TextBuffer .. " /Slowed"
@@ -942,15 +916,42 @@ local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 				end
 				
 				-- roll dice
-				if math.random(1, 100) <= chanceToInduceCondition then
+				if math.random(1, 100) <= chance then
 				
 					-- apply buff
 					local spellBuff = monster.SpellBuffs[const.MonsterBuff.Feeblemind]
-					spellBuff:Set(Game.Time + const.Minute * conditionDurationMultiplier * skill, mastery, 0, 0, 0)
+					spellBuff:Set(Game.Time + const.Minute * duration, rank, 0, 0, 0)
 					
 					-- append to message
 					
 					Game.TextBuffer = Game.TextBuffer .. " /Feebleminded"
+				
+				end
+				
+			end
+			
+		end
+		
+		-- Mace in main hand
+		if	(Game.ItemsTxt[player.Items[player.ItemMainHand].Number].Skill - 1) == const.Skills.Mace then
+			
+			-- Mace skill
+			if player.Skills[const.Skills.Mace] ~= 0 then
+			
+				local level, rank = SplitSkill(player.Skills[const.Skills.Mace])
+				
+				local chance = maceEffect["base"] + maceEffect["multiplier"] * level
+				local duration = maceEffect["multiplier"]
+				
+				-- roll dice
+				if math.random(1, 100) <= chance then
+				
+					-- apply buff
+					local spellBuff = monster.SpellBuffs[const.MonsterBuff.Paralyze]
+					spellBuff:Set(Game.Time + const.Minute * duration, rank, 0, 0, 0)
+					
+					-- append to message
+					Game.TextBuffer = Game.TextBuffer .. " /Paralyzed"
 				
 				end
 				

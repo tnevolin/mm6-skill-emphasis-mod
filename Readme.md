@@ -79,27 +79,19 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 ## Special abilities
 
-### Mace special abilities
-
-Mace has a chance to paralize opponent. This ability is immediatelly available at normal skill rank.
-
-I've replaced stun to paralize because stun does not add to monster recovery in MM6 (= useless). Paralize is a stronger version of stun that has duration and is visual.
-
-* Chance to cause an effect = 6% on normal, 8% on expert, 10% on master.
-* Duration of an effect = 1 minute per skill level.
-
-**Skill master level 20 roughly keeps one enemy under effect all the time.**
-
 ### Staff special abilities
 
-Staff adds to AC and all resistances. See multiplers in weapon bonuses table above.
+Staff has a chance to slow and feeblemind opponent. These abilities are immediatelly available at normal skill rank.
 
-Staff has a chance to slow and feeblemind. These abilities are immediatelly available at normal skill rank.
+* Chance to cause an effect = 10% + 4% \* skill level.
+* Effect duration = 3 minutes.
 
-* Chance to cause an effect = 12% on normal, 16% on expert, 20% on master.
-* Duration of an effect = 1 minute per skill level.
+### Mace special abilities
 
-**Skill master level 10 roughly keeps one enemy under effect all the time.**
+Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
+
+* Chance to cause an effect = 5% + 2% \* skill level.
+* Effect duration = 3 minutes.
 
 ### Sword and dagger special abilities
 
@@ -146,7 +138,7 @@ MM6 classes are kind of undistingushable in weapon skills. That's why Paladin is
 |----|----|----:|----:|----:|
 |Knight|all melee weapons|2|3|4|
 |Paladin|all melee weapons|0|1|2|
-|Archer|all ranged weapons|0|1|2|
+|Archer|all ranged weapons|2|3|4|
 
 This is similar to armsmaster bonus in MM7 but more class special. Knight become an ultimate weapon armsmaster with Paladin following. Archer specializes in ranged damage instead and now becomes quite powerful shooter.
 

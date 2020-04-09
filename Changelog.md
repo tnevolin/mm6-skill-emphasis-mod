@@ -1,3 +1,11 @@
+# version 16
+
+* Archer/BattleMage/WarriorMage adds 2/3/4 damage/level to all ranged weapons.
+* Staff chance to cause an effect is 10% + 4% \* skill level.
+* Staff effect duration is 3 minutes.
+* Mace chance to cause an effect is 5% + 2% \* skill level.
+* Mace effect duration is 3 minutes.
+
 # version 15
 
 * Stat effects ratio is reduced to 1:5.
