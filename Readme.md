@@ -337,11 +337,17 @@ Stat effect is linear. Here is the modified table below. It is +2 effect per +5 
 | 2 | -5 |
 | 0 | -6 |
 
-# Skill progression
+# Skill advancement cost
 
-Reducing skill progression cost acceleration a little to encourage specialization and discourage throwing cheap points into low level skills. This way low levels advancement is more expencive. It catches up at level 10 and after that becomes cheaper.
+Capping skill advancement cost at **10** to encourage specialization and discourage throwing cheap points into low level skills. This way high levels advancement is less expensive.
 
-<pre>
-Skill advancement cost = 5 + floor[(level - 1) / 3]
-</pre>
+#### Examples
+
+How far can you get with same skill point investment in vanilla and this mod capped version.
+
+| vanilla | this mod |
+|----:|----:|
+|10|10|
+|20|25|
+|30|50|
 

@@ -1113,7 +1113,7 @@ end
 
 -- skill advancement
 local function calculateSkillAdvancementCost(level)
-	return 5 + math.floor((level - 1) / 3)
+	return math.min(10, level + 1)
 end
 local function calculateSkillAdvancementCostToCheck(d, def)
 	local level = bit.band(d.eax, 0x3F)

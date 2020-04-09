@@ -1,3 +1,7 @@
+# version 14
+
+* Skill advancement cost formula is reverted to vanilla but cost is capped at 10.
+
 # version 13
 
 * Blade (sword, dagger) in right hand doubles its skill attack bonus.
