@@ -1,3 +1,11 @@
+# version 18
+
+* Removed skill advancement cost modification. The vanilla version is good as is.
+
+# version 17
+
+* Two handed weapon adds 2 bonus damage per skill regardless of rank.
+
 # version 16
 
 * Archer/BattleMage/WarriorMage adds 2/3/4 damage/level to all ranged weapons.

@@ -161,7 +161,7 @@ local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Mas
 local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
+local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 2, [const.Master] = 2, }
 
 -- special weapon skill chances
 local staffEffect = {["base"] = 10, ["multiplier"] = 4, ["duration"] = 3, }
@@ -1109,6 +1109,7 @@ for index,value in ipairs(attributeEffects) do
 	mem.bytecodepatch(0x004C289C + 1 * (index - 1), string.char(bit.band(value, 0xFF)), 1)
 end
 
+--[[
 -- skill advancement
 local function calculateSkillAdvancementCost(level)
 	return math.min(10, level + 1)
@@ -1141,6 +1142,7 @@ local function adjustSkillPointsForSkillHighlight(d, def)
 	end
 end
 mem.autohook2(0x00415A0B, adjustSkillPointsForSkillHighlight, 0x7)
+--]]
 
 -- allow to hold sword in left hand at novice rank
 mem.asmpatch(0x0045A4AB, "test   BYTE [ebp+0x61],0xFF", 0x4)

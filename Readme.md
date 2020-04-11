@@ -118,15 +118,15 @@ Dual wielding rules are quite complicated in MM6. Player need to remember which 
 * Weapon skill damage bonuses are combined. This does not change anything since off hand weapons (dagger, sword) do not increase damage with skill. Unless character class is melee combat oriented (Knight, Paladin). Then it does a tremendous difference. (See "Weapon usage preference analysis" below)
 * Weapon skill speed bonuses are averaged. This allows both weapons to contribute their recovery bonuses if any. However, this also slows down speed progression for spear/mace-sword combo making it eventually slower comparing to axe-sword.
 
-# Two handed weapon
+# Two-handed weapon
 
-Dual wielding is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage.
+Dual wielding is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage to compete with dual wielding.
 
-## Two handed weapon damage
+#### Two handed weapon damage per skill level
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
-|damage|0|1|2|
+|damage|2|2|2|
 
 # Class speciality
 
@@ -298,7 +298,7 @@ Some useless professions should not appear at all. Some profession cost are adju
 
 ## Problem
 
-Extremely non-lenear stat breakpoint/effect progression renders any stat boosting effects (spells, potions) useless toward the end of the game.
+Extremely non-lenear stat breakpoint/effect progression renders any stat boosting effects useless toward the end of the game.
 
 ## Solution
 
@@ -341,18 +341,4 @@ These changes together make stat boosts weak but relevant to the end of the game
 | 10 | 2 |
 | 5 | 1 |
 | 0 | 0 |
-
-# Skill advancement cost
-
-Capping skill advancement cost at **10** to encourage specialization and discourage throwing cheap points into low level skills. This way high levels advancement is less expensive.
-
-#### Examples
-
-How far can you get with same skill point investment in vanilla and this mod capped version.
-
-| vanilla | this mod |
-|----:|----:|
-|10|10|
-|20|25|
-|30|50|
 

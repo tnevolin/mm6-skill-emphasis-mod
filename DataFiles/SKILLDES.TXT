@@ -2,7 +2,7 @@ Skill	Description	Normal	Expert	Master
 Staff	A staff is a two-handed pole equally good on offense and defense.
 
 Base speed = 100
-Skill improves Attack, AC, and special effect duration. Rank accelerates Attack and AC bonus progression and increases the chance to cause an effect.
+Skill improves Attack, AC, and chance to cause an effect.
 
 Special effects: slow and feeblemind.
 Chance = 10% + 4% per skill level. Duration = 3 minutes.
@@ -13,47 +13,54 @@ Bonus increment/level
 Sword	The sword skill covers most types of blades longer than a knife.
 
 Base speed = 120
-Skill improves Attack and Speed. Rank accelerates bonus progression.
-Master swordsmen may use any one-handed sword in their left hand and another weapon in their right.
+Skill improves Attack and Speed.
 
-Two-handed wielding adds more damage per level.
+Special ability: can be held in left hand as an auxilliary weapon.
+Special ability: Attack bonus from skill is doubled if NOT used as an auxilliary weapon.
+Special ability: Additional damage per skill level for two-handed weapon.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   Speed   2H Damage	|     _2 |     _4 |           _0 |	|     _3 |     _5 |           _1 |	|     _4 |     _6 |           _2 | left hand
+           Attack   Speed   2H Damage	|     _2 |     _4 |           _2 |	|     _3 |     _5 |           _2 |	|     _4 |     _6 |           _2 |
 Dagger	While daggers don’t do the kind of damage that a sword or an axe can deliver, they are very quick—sometimes letting you get two attacks for every one of your slower opponents.
 
 Base speed = 180
-Skill improves Attack and chance to cause triple damage. Rank accelerates bonus progression.
-Expert dagger fighters can wield a dagger in their left hand while using another weapon in their right.
+Skill improves Attack and chance to cause triple damage.
+
+Special ability: can be held in left hand as an auxilliary weapon.
+Special ability: Attack bonus from skill is doubled if NOT used as an auxilliary weapon.
+
+Note:
+Modified tripple damage chance is currently not implemented. It still works as in vanilla.
 
 Bonus increment/level and tripple damage chance %
 ------------------------------------------------------------
-           Attack   Damage x3 chance	|     _2 |                    _3 |	|     _3 |                    _4 | left hand	|     _4 |                    _5 | left hand
+           Attack   Damage x3 chance	|     _2 |                    _3 |	|     _3 |                    _4 |	|     _4 |                    _5 |
 Axe	A most offensive oriented weapon skill contributing all three effects to total damage rate. Best used by tough fighters who does not require additional protection or strong magic.
 
 Base speed = 100
-Skill improves Attack, Speed, and Damage. Rank accelerates bonus progression.
+Skill improves Attack, Speed, and Damage.
 
-Two-handed wielding adds more damage per level.
+Special ability: Additional damage per skill level for two-handed weapon.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   Speed   Damage   2H Damage	|     _2 |     _4 |       _2 |           _0 |	|     _3 |     _5 |       _3 |           _1 |	|     _4 |     _6 |       _4 |           _2 |
+           Attack   Speed   Damage   2H Damage	|     _2 |     _4 |       _2 |           _2 |	|     _3 |     _5 |       _3 |           _2 |	|     _4 |     _6 |       _4 |           _2 |
 Spear	Spear covers all kinds of pole weapons with blades attached to the business end. Spears are versatile and can be used one or two handed (they work better with two hands). They do not become faster but they add protection from physical attacks.
 
 Base speed = 140
-Skill improves Attack, AC, and Damage. Rank accelerates bonus progression.
+Skill improves Attack, AC, and Damage.
 
-Two-handed wielding adds more damage per level.
+Special ability: Additional damage per skill level for two-handed weapon.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   AC   Damage   2H Damage	|     _2 | _4 |       _2 |           _0 |	|     _3 | _6 |       _3 |           _1 |	|     _4 | _8 |       _4 |           _2 |
+           Attack   AC   Damage   2H Damage	|     _2 | _4 |       _2 |           _2 |	|     _3 | _6 |       _3 |           _2 |	|     _4 | _8 |       _4 |           _2 |
 Bow	Bow skill covers both bow and crossbow usage.
 
 Base speed = 100
-Skill improves Attack and Speed. Rank accelerates bonus progression.
+Skill improves Attack and Speed.
+
 Master archers can fire two arrows with every attack.
 
 Bonus increment/level
@@ -62,35 +69,39 @@ Bonus increment/level
 Mace	Mace skill covers all kinds of blunt trauma weapons ranging from batons to flails.
 
 Base speed = 140
-Skill improves Attack, Damage, and special effect duration. Rank accelerates bonus progression and increases the chance to cause an effect.
+Skill improves Attack, Damage, and chance to cause special effect.
 
 Special effects: paralize.
 Chance = 5% + 2% per skill level. Duration = 3 minutes.
 
-Bonus increment/level and special effect chance %
+Bonus increment/level
 ------------------------------------------------------------
-           Attack   Damage   Effect chance	|     _2 |       _2 |	|     _3 |       _3 |	|     _4 |       _4 |
+           Attack   Damage	|     _2 |       _2 |	|     _3 |       _3 |	|     _4 |       _4 |
 Blaster	"A weapon from before the Silence, their making has long since been lost.  Expert and Master Blasters gain double and triple accuracy with these awesome weapons."	Skill added to Attack Bonus	Skill added to Attack Bonus (double effect)	Skill added to Attack Bonus (triple effect)
 Shield	Shield skill directly improves a character’s armor class while a shield is employed.  Expert and master ranking in the shield increase this defensive bonus.
 
-Recovery penalty and AC increment/level
+Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
            Recovery penalty  AC	|                 10 | 10 |	|                 10 | 15 |	|                 10 | 20 |
 Leather	Leather armor is the lightest armor a character can wear.  While leather provides less protection than chain or plate armor, it also slows your character down the least.  Leather armor skill increases the protection offered by leather armor.  As with all armors, Expert and Master ranking reduce the amount the armor slows you down.
 
-Leather armor is the weakest but it protects from spell damage
+Leather armor is the weakest but it strongly protects from spell damage.
 
-Recovery penalty and AC increment/level
+Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
            Recovery penalty  AC   Resistances	|                 20 | _3 |           _6 |	|                 10 | _4 |           _8 |	|                 _0 | _5 |           10 |
 Chain	Chain armor is the medium armor type.  It provides more protection than leather and less than plate, but it also slows your character down more than leather.  Chain armor skill increases the protection offered by chain armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
 
-Recovery penalty and AC increment/level
+Chain armor is the medium and it mildly protects from spell damage.
+
+Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
            Recovery penalty  AC   Resistances	|                 40 | _6 |           _3 |	|                 20 | _8 |           _4 |	|                 _0 | 10 |           _5 |
 Plate	Plate armor is the heaviest armor type.  It provides the most protection, but it slows your character down more than leather or chain.  Plate armor skill increases the protection offered by plate armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
 
-Recovery penalty and AC increment/level
+Plate armor is the strongest one.
+
+Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
            Recovery penalty  AC	|                 60 | _9 |	|                 30 | 12 |	|                 _0 | 15 |
 Fire	Fire magic is a good source of offensive spells and includes spells having to do with speed.  Expert and master ranking permit access to greater versions of fire spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell
