@@ -1,6 +1,7 @@
 # version 18
 
 * Removed skill advancement cost modification. The vanilla version is good as is.
+* Learning skill bonus multiplers are 3/4/5 instead of 1/2/3 in vanilla.
 
 # version 17
 

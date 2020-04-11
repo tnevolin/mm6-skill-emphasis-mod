@@ -342,3 +342,9 @@ These changes together make stat boosts weak but relevant to the end of the game
 | 5 | 1 |
 | 0 | 0 |
 
+# Learning skill bonus multiplier
+
+* Novice triples bonus.
+* Expert quadruples bonus.
+* Mastre quintuples bonus.
+

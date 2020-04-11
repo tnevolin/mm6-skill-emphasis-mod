@@ -1188,4 +1188,9 @@ mem.asmpatch(0x004283DF, "lea    ecx,[eax+eax*4+0xa]", 0x4)
 mem.asmpatch(0x004283D1, "lea    ecx,[eax+eax*4+0xa]", 0x4)
 mem.asmpatch(0x004283C7, "lea    ecx,[eax+eax*4+0xa]", 0x4)
 
+-- learning skill bonus multiplier
+local function setLearningSkillBonusMultiplier(d, def)
+	d.ecx = d.ecx + 2
+end
+mem.autohook(0x004215E5, setLearningSkillBonusMultiplier, 5)
 
