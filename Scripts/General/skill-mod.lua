@@ -1091,13 +1091,24 @@ function events.CalcDamageToPlayer(t)
 	t.Result = t.Result * 2
 	
 end
--- monster HP
 function events.GameInitialized2()
 	
+	-- monster HP
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 		-- monster HP x2
 		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
 	end
+	
+	--[[
+	-- weapon modifiers
+	for itemTxtIndex = 1,Game.ItemsTxt.high do
+		local itemTxt = Game.ItemsTxt[itemTxtIndex]
+		if itemTxt.EquipStat == const.ItemType.Weapon - 1 then
+			-- weapon modifier x2
+			Game.ItemsTxt[itemTxtIndex].Mod2 = Game.ItemsTxt[itemTxtIndex].Mod2 * 2
+		end
+	end
+	--]]
 	
 end
 
