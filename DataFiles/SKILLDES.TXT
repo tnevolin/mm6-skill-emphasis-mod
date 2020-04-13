@@ -4,8 +4,8 @@ Staff	A staff is a two-handed pole equally good on offense and defense.
 Base speed = 100
 Skill improves Attack, AC, and chance to cause an effect.
 
-Special effects: slow and feeblemind.
-Chance = 10% + 4% per skill level. Duration = 3 minutes.
+Special effects: Shrunk and Feebleminded. Shrunk effect is based on Staff skill rank.
+Chance = 5% + 2% per skill level. Duration = 10 minutes.
 
 Bonus increment/level
 ------------------------------------------------------------
@@ -71,8 +71,8 @@ Mace	Mace skill covers all kinds of blunt trauma weapons ranging from batons to 
 Base speed = 140
 Skill improves Attack, Damage, and chance to cause special effect.
 
-Special effects: paralize.
-Chance = 5% + 2% per skill level. Duration = 3 minutes.
+Special effects: paralized.
+Chance = 5% + 2% per skill level. Duration = 10 minutes.
 
 Bonus increment/level
 ------------------------------------------------------------

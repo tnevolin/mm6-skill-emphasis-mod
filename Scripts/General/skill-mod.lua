@@ -164,8 +164,8 @@ local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.M
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 2, [const.Master] = 2, }
 
 -- special weapon skill chances
-local staffEffect = {["base"] = 10, ["multiplier"] = 4, ["duration"] = 3, }
-local maceEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 3, }
+local staffEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 10, }
+local maceEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 10, }
 
 -- class weapon skill damage bonus
 local classMeleeWeaponSkillDamageBonus =
@@ -790,7 +790,7 @@ function events.CalcStatBonusBySkills(t)
 			end
 			
 			-- add bonus for two handed weapon
-			if equipmentData.twoHanded then
+			if equipmentData.twoHanded and equipmentData.main.skill ~= const.Skills.Staff then
 				t.Result = t.Result + twoHandedWeaponDamageBonusByMastery[main.rank] * main.level
 			end
 			
@@ -907,11 +907,11 @@ local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 				if math.random(1, 100) <= chance then
 				
 					-- apply buff
-					local spellBuff = monster.SpellBuffs[const.MonsterBuff.Slow]
-					spellBuff:Set(Game.Time + const.Minute * duration, rank, 0, 0, 0)
+					local spellBuff = monster.SpellBuffs[const.MonsterBuff.ShrinkingRay]
+					spellBuff:Set(Game.Time + const.Minute * duration, rank, rank + 1, 0, 0)
 					
 					-- append to message
-					Game.TextBuffer = Game.TextBuffer .. " /Slowed"
+					Game.TextBuffer = Game.TextBuffer .. " /Shrunk"
 				
 				end
 				
@@ -1167,37 +1167,37 @@ mem.asmpatch(0x004220D5, "test   BYTE [eax+0x70],0xFF", 0x4)
 -- Lucky day affects whole party
 mem.asmpatch(0x004269CD, "cmp    esi,esi", 0x3)
 -- Lucky day multiplier = 5
-mem.asmpatch(0x0042699C, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x004269A6, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x004269B4, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004269B4, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004269A6, "lea     edx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x0042699C, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
 -- Meditation/Precision does not create pointer
 mem.asmpatch(0x004220E3, "test   BYTE [eax+0x71],0xFF", 0x4)
 -- Meditation affects whole party
 mem.asmpatch(0x00427399, "cmp    esi,esi", 0x3)
 -- Meditation multiplier = 5
-mem.asmpatch(0x00427380, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x00427372, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x00427368, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x00427380, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x00427372, "lea     edx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x00427368, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
 -- Precision affects whole party
 mem.asmpatch(0x0042760D, "cmp    esi,esi", 0x3)
 -- Precision multiplier = 5
-mem.asmpatch(0x004275F4, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x004275E6, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x004275DC, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004275F4, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004275E6, "lea     edx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004275DC, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
 -- Speed/Power does not create pointer
 mem.asmpatch(0x004220F6, "test   BYTE [eax+0x72],0xFF", 0x4)
 -- Speed affects whole party
 mem.asmpatch(0x00428154, "cmp    esi,esi", 0x3)
 -- Speed multiplier = 5
-mem.asmpatch(0x0042813B, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x0042812D, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x00428123, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x0042813B, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x0042812D, "lea     edx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x00428123, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
 -- Power affects whole party
 mem.asmpatch(0x004283F8, "cmp    esi,esi", 0x3)
 -- Power multiplier = 5
-mem.asmpatch(0x004283DF, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x004283D1, "lea    ecx,[eax+eax*4+0xa]", 0x4)
-mem.asmpatch(0x004283C7, "lea    ecx,[eax+eax*4+0xa]", 0x4)
+mem.asmpatch(0x004283DF, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004283D1, "lea     edx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004283C7, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
 
 -- learning skill bonus multiplier
 local function setLearningSkillBonusMultiplier(d, def)

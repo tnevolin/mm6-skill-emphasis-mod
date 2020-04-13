@@ -84,14 +84,14 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 Staff has a chance to slow and feeblemind opponent. These abilities are immediatelly available at normal skill rank.
 
 * Chance to cause an effect = 10% + 4% \* skill level.
-* Effect duration = 3 minutes.
+* Effect duration = 10 minutes.
 
 ### Mace special abilities
 
 Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
 
 * Chance to cause an effect = 5% + 2% \* skill level.
-* Effect duration = 3 minutes.
+* Effect duration = 10 minutes.
 
 ### Sword and dagger special abilities
 
@@ -120,7 +120,7 @@ Dual wielding rules are quite complicated in MM6. Player need to remember which 
 
 # Two-handed weapon
 
-Dual wielding is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage to compete with dual wielding.
+Dual wielding is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage to compete with dual wielding. This excludes Staff as it can be used two-handed only and cannot be part of dual wielding.
 
 #### Two handed weapon damage per skill level
 

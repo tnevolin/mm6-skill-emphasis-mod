@@ -1,3 +1,15 @@
+# version 20
+
+* [fix] Staff is now properly causes Shrunk based on Staff skill rank.
+* [fix] Staff skill now does not add damage bonus for two-handed weapon.
+
+# version 19
+
+* Staff causes Shrunk instead of Slowed. Effect strength is based on Staff skill rank.
+* Staff chance to cause an effect is 5% + 2% \* skill level.
+* Staff effect duration is 10 minutes.
+* Mace effect duration is 10 minutes.
+
 # version 18
 
 * Removed skill advancement cost modification. The vanilla version is good as is.
