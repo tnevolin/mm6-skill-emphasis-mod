@@ -348,3 +348,9 @@ These changes together make stat boosts weak but relevant to the end of the game
 * Expert quadruples bonus.
 * Mastre quintuples bonus.
 
+# Missiles auto aim in flight
+
+Missiles (arrows and spells) constantly 3D auto aim their initial target while in flight. Both party and monster cannot dodge missiles by moving sideways/up/down as long as there are no obstacles between missile and target. Running or flying past bunch of shooters in real-time mode is not safe anymore. Nor is flying up/down in turn based mode. It is still possible to avoid the missile by hiding behind an obstacle as before.
+
+This invalidate the strategy of running past shooting outdoor monsters to some important location. Now these previously largely ignored outdoor troops actually guard their territory. One need to kill them all to be able to pass safely.
+

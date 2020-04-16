@@ -1110,6 +1110,42 @@ function events.GameInitialized2()
 	end
 	--]]
 	
+	--[[
+	-- projectile speed
+	-- local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\projectiles.txt", "w")
+	-- io.output(file)
+	for objListItemIndex = 1,Game.ObjListBin.high do
+		local objListItem = Game.ObjListBin[objListItemIndex]
+		if objListItem.InterceptAction then
+			-- io.write(string.format("%4d %-20s %6d\n", objListItemIndex, objListItem.Name, objListItem.Speed))
+			objListItem.Speed = objListItem.Speed / 5
+		end
+	end
+	-- io.close(file)
+	--]]
+	
+	--[[
+	-- monster radius
+	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\radiuses.txt", "w")
+	io.output(file)
+	for monListItemIndex = 1,Game.MonListBin.high do
+		local monListItem = Game.MonListBin[monListItemIndex]
+		io.write(string.format("%-20s %6d %6d\n", monListItem.Name, monListItem.Radius, monListItem.Height))
+	end
+	io.close(file)
+	--]]
+	
+	--[[
+	-- monster fly
+	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\flyes.txt", "w")
+	io.output(file)
+	for monsterTxtIndex = 1,Game.MonstersTxt.high do
+		local monsterTxt = Game.MonstersTxt[monsterTxtIndex]
+		io.write(string.format("%-20s %8x\n", monsterTxt.Name, monsterTxt.Fly))
+	end
+	io.close(file)
+	--]]
+	
 end
 
 -- primary statistics effect
@@ -1204,4 +1240,72 @@ local function setLearningSkillBonusMultiplier(d, def)
 	d.ecx = d.ecx + 2
 end
 mem.autohook(0x004215E5, setLearningSkillBonusMultiplier, 5)
+
+-- navigateMissile
+local function navigateMissile(d)
+
+	-- object parameters
+	local objectIndex = d.ebp
+	local object = Map.Objects[objectIndex]
+	local ownerKind = bit.band(object.Owner, 7)
+	local ownerIndex = bit.rshift(object.Owner, 3)
+	local targetKind = bit.band(object.Target, 7)
+	local targetIndex = bit.rshift(object.Target, 3)
+	
+	-- current position
+	local currentPosition = {["X"] = object.X, ["Y"] = object.Y, ["Z"] = object.Z, }
+	
+	-- process only missiles from party to monster or vice versa
+	-- target position
+	local targetPosition
+	if ownerKind == const.ObjectRefKind.Party and targetKind == const.ObjectRefKind.Monster then
+		local mapMonster = Map.Monsters[targetIndex]
+		-- target only alive monster
+		if mapMonster.HitPoints > 0 then
+			targetPosition = {["X"] = mapMonster.X, ["Y"] = mapMonster.Y, ["Z"] = mapMonster.Z + mapMonster.BodyHeight * 0.75, }
+		else
+			return
+		end
+	elseif ownerKind == const.ObjectRefKind.Monster and targetKind == const.ObjectRefKind.Nothing  then
+		targetPosition = {["X"] = Party.X, ["Y"] = Party.Y, ["Z"] = Party.Z + 120, }
+	else
+		-- ignore other missiles targetting
+		return
+	end
+	
+	-- speed
+	local speed = math.sqrt(object.VelocityX * object.VelocityX + object.VelocityY * object.VelocityY + object.VelocityZ * object.VelocityZ)
+	
+	-- process only objects with non zero speed
+	if speed == 0 then
+		return
+	end
+	
+	-- direction
+	local direction = {["X"] = targetPosition.X - currentPosition.X, ["Y"] = targetPosition.Y - currentPosition.Y, ["Z"] = targetPosition.Z - currentPosition.Z, }
+	-- directionLength
+	local directionLength = math.sqrt(direction.X * direction.X + direction.Y * direction.Y + direction.Z * direction.Z)
+	
+	-- normalization koefficient
+	local koefficient = speed / directionLength
+	
+	-- new velocity
+	local newVelocity = {["X"] = koefficient * direction.X, ["Y"] = koefficient * direction.Y, ["Z"] = koefficient * direction.Z, }
+	
+	-- set new velocity
+	object.VelocityX = newVelocity.X
+	object.VelocityY = newVelocity.Y
+	object.VelocityZ = newVelocity.Z
+	
+	--[[
+	-- log
+	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\collision.txt", "a")
+	io.output(file)
+	io.write(string.format("% 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d\n", objectIndex, object.Owner, object.Target, object.X, object.Y, object.Z, object.VelocityX, object.VelocityY, object.VelocityZ, targetPosition.X, targetPosition.Y, targetPosition.Z, Map.Monsters[targetIndex].BodyRadius, Map.Monsters[targetIndex].BodyHeight, Party.Z))
+	io.close(file)
+	--]]
+	
+end
+mem.autohook(0x00463992, navigateMissile, 5)
+
 

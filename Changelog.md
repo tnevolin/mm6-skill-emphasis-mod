@@ -1,3 +1,7 @@
+# version 21
+
+* Missile in flight auto aim.
+
 # version 20
 
 * [fix] Staff is now properly causes Shrunk based on Staff skill rank.
