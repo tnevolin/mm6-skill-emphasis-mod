@@ -1110,7 +1110,7 @@ function events.GameInitialized2()
 	end
 	--]]
 	
-	--[[
+	---[[
 	-- projectile speed
 	-- local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\projectiles.txt", "w")
 	-- io.output(file)
@@ -1242,20 +1242,17 @@ end
 mem.autohook(0x004215E5, setLearningSkillBonusMultiplier, 5)
 
 -- navigateMissile
-local function navigateMissile(d)
+local function navigateMissile(object)
 
 	-- object parameters
-	local objectIndex = d.ebp
-	local object = Map.Objects[objectIndex]
 	local ownerKind = bit.band(object.Owner, 7)
-	local ownerIndex = bit.rshift(object.Owner, 3)
 	local targetKind = bit.band(object.Target, 7)
 	local targetIndex = bit.rshift(object.Target, 3)
 	
 	-- current position
 	local currentPosition = {["X"] = object.X, ["Y"] = object.Y, ["Z"] = object.Z, }
 	
-	-- process only missiles from party to monster or vice versa
+	-- process only missiles between party and monster
 	-- target position
 	local targetPosition
 	if ownerKind == const.ObjectRefKind.Party and targetKind == const.ObjectRefKind.Monster then
@@ -1297,15 +1294,25 @@ local function navigateMissile(d)
 	object.VelocityY = newVelocity.Y
 	object.VelocityZ = newVelocity.Z
 	
-	--[[
-	-- log
-	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\collision.txt", "a")
-	io.output(file)
-	io.write(string.format("% 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d % 6d\n", objectIndex, object.Owner, object.Target, object.X, object.Y, object.Z, object.VelocityX, object.VelocityY, object.VelocityZ, targetPosition.X, targetPosition.Y, targetPosition.Z, Map.Monsters[targetIndex].BodyRadius, Map.Monsters[targetIndex].BodyHeight, Party.Z))
-	io.close(file)
-	--]]
+end
+
+--[[
+local function navigateMissileHook(d)
+	local objectIndex = d.ebp
+	local object = Map.Objects[objectIndex]
+	navigateMissile(object)
+end
+mem.autohook(0x00463992, navigateMissileHook, 5)
+--]]
+
+function events.Tick()
+
+	-- navigateMissiles
+	for objectIndex = 1,Map.Objects.high do
+		local object =  Map.Objects[objectIndex]
+		navigateMissile(object)
+	end
 	
 end
-mem.autohook(0x00463992, navigateMissile, 5)
 
 
