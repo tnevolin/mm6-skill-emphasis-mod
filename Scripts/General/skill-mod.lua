@@ -1110,7 +1110,7 @@ function events.GameInitialized2()
 	end
 	--]]
 	
-	---[[
+	--[[
 	-- projectile speed
 	-- local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\projectiles.txt", "w")
 	-- io.output(file)
