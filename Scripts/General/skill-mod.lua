@@ -164,8 +164,8 @@ local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.M
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 2, [const.Master] = 2, }
 
 -- special weapon skill chances
-local staffEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 10, }
-local maceEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 10, }
+local staffEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 5, }
+local maceEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 5, }
 
 -- class weapon skill damage bonus
 local classMeleeWeaponSkillDamageBonus =
@@ -901,7 +901,7 @@ local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 				local level, rank = SplitSkill(player.Skills[const.Skills.Staff])
 				
 				local chance = staffEffect["base"] + staffEffect["multiplier"] * level
-				local duration = staffEffect["multiplier"]
+				local duration = staffEffect["duration"]
 				
 				-- roll dice
 				if math.random(1, 100) <= chance then
@@ -941,7 +941,7 @@ local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 				local level, rank = SplitSkill(player.Skills[const.Skills.Mace])
 				
 				local chance = maceEffect["base"] + maceEffect["multiplier"] * level
-				local duration = maceEffect["multiplier"]
+				local duration = maceEffect["duration"]
 				
 				-- roll dice
 				if math.random(1, 100) <= chance then
@@ -1315,4 +1315,15 @@ function events.Tick()
 	
 end
 
+-- Feeblemind fix
+local function disableFeeblemindedMonsterCasting(d)
+	local monsterAddress = d.esi
+	local monsterIndex = (monsterAddress - 0x0056F478) / 0x224
+	local monster = Map.Monsters[monsterIndex]
+	-- set cast chance to 0 for feebleminded monster
+	if monster.SpellBuffs[const.MonsterBuff.Feeblemind].ExpireTime ~= 0 then
+		d.al = 0
+	end
+end
+mem.autohook2(0x00421C51, disableFeeblemindedMonsterCasting, 7)
 

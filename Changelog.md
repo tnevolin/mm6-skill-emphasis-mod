@@ -1,3 +1,9 @@
+# version 22
+
+* Fixed Feeblemind so it actually works.
+* Staff special abilities duration is 5 minutes.
+* Mace special abilities duration is 5 minutes.
+
 # version 21
 
 * Missile in flight auto aim.

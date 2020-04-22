@@ -84,14 +84,14 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 Staff has a chance to slow and feeblemind opponent. These abilities are immediatelly available at normal skill rank.
 
 * Chance to cause an effect = 10% + 4% \* skill level.
-* Effect duration = 10 minutes.
+* Effect duration = 5 minutes.
 
 ### Mace special abilities
 
 Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
 
 * Chance to cause an effect = 5% + 2% \* skill level.
-* Effect duration = 10 minutes.
+* Effect duration = 5 minutes.
 
 ### Sword and dagger special abilities
 
