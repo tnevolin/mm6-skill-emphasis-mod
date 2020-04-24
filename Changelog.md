@@ -1,3 +1,7 @@
+# version 23
+
+* Removed homing from Fire Blast, Meteor Shower, Sparks, Starburst, Poison Spray
+
 # version 22
 
 * Fixed Feeblemind so it actually works.

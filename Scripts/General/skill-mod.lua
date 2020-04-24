@@ -1244,6 +1244,31 @@ mem.autohook(0x004215E5, setLearningSkillBonusMultiplier, 5)
 -- navigateMissile
 local function navigateMissile(object)
 
+	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\objectType.txt", "w")
+	io.output(file)
+	io.write(object.SpellType)
+	io.close(file)
+	
+	-- exclude some special non targetting spells
+	if
+		-- Fire Blast
+		object.SpellType == 8
+		or
+		-- Meteor Shower
+		object.SpellType == 9
+		or
+		-- Sparks
+		object.SpellType == 15
+		or
+		-- Starburst
+		object.SpellType == 22
+		or
+		-- Poison Spray
+		object.SpellType == 26
+	then
+		return
+	end
+	
 	-- object parameters
 	local ownerKind = bit.band(object.Owner, 7)
 	local targetKind = bit.band(object.Target, 7)
