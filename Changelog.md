@@ -1,6 +1,10 @@
+# version 24
+
+* Fixed homing algorithm. Sometimes object target index is out of monster map range and causes game crash.
+
 # version 23
 
-* Removed homing from Fire Blast, Meteor Shower, Sparks, Starburst, Poison Spray
+* Removed homing from Fire Blast, Meteor Shower, Sparks, Starburst, Poison Spray.
 
 # version 22
 

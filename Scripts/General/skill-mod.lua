@@ -1244,11 +1244,6 @@ mem.autohook(0x004215E5, setLearningSkillBonusMultiplier, 5)
 -- navigateMissile
 local function navigateMissile(object)
 
-	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\objectType.txt", "w")
-	io.output(file)
-	io.write(object.SpellType)
-	io.close(file)
-	
 	-- exclude some special non targetting spells
 	if
 		-- Fire Blast
@@ -1273,6 +1268,14 @@ local function navigateMissile(object)
 	local ownerKind = bit.band(object.Owner, 7)
 	local targetKind = bit.band(object.Target, 7)
 	local targetIndex = bit.rshift(object.Target, 3)
+	
+	if targetIndex > Map.Monsters.high then
+		local file = io.open("debug.txt", "w")
+		io.output(file)
+		io.write(string.format("navigateMissile: Object target index is out of monster list range. Map.Monsters.high = %d, targetIndex = %d\n", Map.Monsters.high, targetIndex))
+		io.close(file)
+		return
+	end
 	
 	-- current position
 	local currentPosition = {["X"] = object.X, ["Y"] = object.Y, ["Z"] = object.Z, }
