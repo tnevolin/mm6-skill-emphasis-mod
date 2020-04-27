@@ -1362,7 +1362,6 @@ local function bringMonsterToParty(monster)
 	monster.Z = Party.Z
 end
 local function setNPCProfession(npcId, profession)
-	MessageBox(mem.u4[0x006B74F0 + 0x3C * npcId + 0x08])
 	mem.u4[0x006B74F0 + 0x3C * npcId + 0x18] = profession
 end
 local function bringHirelingsToParty(professions)
