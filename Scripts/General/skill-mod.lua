@@ -1355,3 +1355,45 @@ local function disableFeeblemindedMonsterCasting(d)
 end
 mem.autohook2(0x00421C51, disableFeeblemindedMonsterCasting, 7)
 
+-- Summon hirelings
+local function bringMonsterToParty(monster)
+	monster.X = Party.X
+	monster.Y = Party.Y
+	monster.Z = Party.Z
+end
+local function setNPCProfession(npcId, profession)
+	MessageBox(mem.u4[0x006B74F0 + 0x3C * npcId + 0x08])
+	mem.u4[0x006B74F0 + 0x3C * npcId + 0x18] = profession
+end
+local function bringHirelingsToParty(professions)
+	if Map.IsIndoor() then
+		MessageBox("This feature works outdoor only.")
+		return
+	end
+	local professionIndex = 1
+	for monsterIndex = 0, Map.Monsters.high do
+		local monster = Map.Monsters[monsterIndex]
+		if monster.Room == 0 and monster.AIState ~= const.AIState.Removed then
+			local monsterTxt = Game.MonstersTxt[monster.Id]
+			if monsterTxt.HostileType == 0 and monster.NPC_ID >= 1 then
+				setNPCProfession(monster.NPC_ID - 1, professions[professionIndex])
+				bringMonsterToParty(monster)
+				professionIndex = professionIndex + 1
+				if professionIndex > #professions then
+					break
+				end
+			end
+		end
+	end
+end
+function events.KeyDown(t)
+	-- Hirelings
+	if t.Alt then
+		if t.Key == const.Keys["1"] then
+			bringHirelingsToParty({const.NPCProfession.Instructor, const.NPCProfession.Teacher, })
+		elseif t.Key == const.Keys["2"] then
+			bringHirelingsToParty({const.NPCProfession.Merchant, const.NPCProfession.Trader, })
+		end
+	end
+end
+

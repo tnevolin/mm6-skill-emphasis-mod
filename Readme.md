@@ -354,3 +354,15 @@ Missiles (arrows and spells) constantly 3D auto aim their initial target while i
 
 This invalidate the strategy of running past shooting outdoor monsters to some important location. Now these previously largely ignored outdoor troops actually guard their territory. One need to kill them all to be able to pass safely.
 
+# Bringing needed hirelings to party
+
+This is a convenience fix. I am tired to reload game hundreds times just to find needed hireling. Time waste. I have implemented a keyboard shortcut that brings available outside walking peasants to the party and set their professions. I've added just two now but can do more if people need more shortcuts.
+
+* Works outside only and brings outside peasants only if they are available.
+* Hiring peasant NPC removes them from the map so you may run out of them on a particular map.
+
+| Shorcut | Hirelings |
+|----:|----:|
+| Alt+1 | Instructor, Teacher |
+| Alt+2 | Merchant, Trader |
+

@@ -1,3 +1,7 @@
+# version 25
+
+* Keyboard shortcuts to bring desired professionals to the party.
+
 # version 24
 
 * Fixed homing algorithm. Sometimes object target index is out of monster map range and causes game crash.
