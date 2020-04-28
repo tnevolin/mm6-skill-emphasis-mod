@@ -1,3 +1,7 @@
+# version 26
+
+* Reprogrammed keyboard shortcuts to use MME functions.
+
 # version 25
 
 * Keyboard shortcuts to bring desired professionals to the party.

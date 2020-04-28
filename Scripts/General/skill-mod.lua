@@ -1362,7 +1362,8 @@ local function bringMonsterToParty(monster)
 	monster.Z = Party.Z
 end
 local function setNPCProfession(npcId, profession)
-	mem.u4[0x006B74F0 + 0x3C * npcId + 0x18] = profession
+	-- mem.u4[0x006B74F0 + 0x3C * npcId + 0x18] = profession
+	Game.StreetNPC[npcId].Profession = profession
 end
 local function bringHirelingsToParty(professions)
 	if Map.IsIndoor() then
@@ -1372,15 +1373,21 @@ local function bringHirelingsToParty(professions)
 	local professionIndex = 1
 	for monsterIndex = 0, Map.Monsters.high do
 		local monster = Map.Monsters[monsterIndex]
-		if monster.Room == 0 and monster.AIState ~= const.AIState.Removed then
-			local monsterTxt = Game.MonstersTxt[monster.Id]
-			if monsterTxt.HostileType == 0 and monster.NPC_ID >= 1 then
-				setNPCProfession(monster.NPC_ID - 1, professions[professionIndex])
-				bringMonsterToParty(monster)
-				professionIndex = professionIndex + 1
-				if professionIndex > #professions then
-					break
-				end
+		if
+			-- outdoor
+			monster.Room == 0
+			and
+			-- peasant
+			Game.MonstersTxt[monster.Id].HostileType == 0
+			and
+			-- not removed
+			monster.AIState ~= const.AIState.Removed
+		then
+			setNPCProfession(monster.NPC_ID - 1, professions[professionIndex])
+			bringMonsterToParty(monster)
+			professionIndex = professionIndex + 1
+			if professionIndex > #professions then
+				break
 			end
 		end
 	end
