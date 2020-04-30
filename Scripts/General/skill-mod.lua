@@ -1270,10 +1270,6 @@ local function navigateMissile(object)
 	local targetIndex = bit.rshift(object.Target, 3)
 	
 	if targetIndex > Map.Monsters.high then
-		local file = io.open("debug.txt", "w")
-		io.output(file)
-		io.write(string.format("navigateMissile: Object target index is out of monster list range. Map.Monsters.high = %d, targetIndex = %d\n", Map.Monsters.high, targetIndex))
-		io.close(file)
 		return
 	end
 	
@@ -1291,7 +1287,8 @@ local function navigateMissile(object)
 		else
 			return
 		end
-	elseif ownerKind == const.ObjectRefKind.Monster and targetKind == const.ObjectRefKind.Nothing  then
+	-- assume all objects without target going to party
+	elseif targetKind == const.ObjectRefKind.Nothing  then
 		targetPosition = {["X"] = Party.X, ["Y"] = Party.Y, ["Z"] = Party.Z + 120, }
 	else
 		-- ignore other missiles targetting
@@ -1323,15 +1320,6 @@ local function navigateMissile(object)
 	object.VelocityZ = newVelocity.Z
 	
 end
-
---[[
-local function navigateMissileHook(d)
-	local objectIndex = d.ebp
-	local object = Map.Objects[objectIndex]
-	navigateMissile(object)
-end
-mem.autohook(0x00463992, navigateMissileHook, 5)
---]]
 
 function events.Tick()
 

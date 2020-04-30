@@ -1,3 +1,7 @@
+# version 27
+
+* Dragon towers shoot homing fireballs.
+
 # version 26
 
 * Reprogrammed keyboard shortcuts to use MME functions.
