@@ -1287,8 +1287,8 @@ local function navigateMissile(object)
 		else
 			return
 		end
-	-- assume all objects without target going to party
-	elseif targetKind == const.ObjectRefKind.Nothing  then
+	-- assume all objects not owned by party and without target are targetting party
+	elseif ownerKind ~= const.ObjectRefKind.Party and targetKind == const.ObjectRefKind.Nothing  then
 		targetPosition = {["X"] = Party.X, ["Y"] = Party.Y, ["Z"] = Party.Z + 120, }
 	else
 		-- ignore other missiles targetting
