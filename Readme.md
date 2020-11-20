@@ -342,6 +342,10 @@ These changes together make stat boosts weak but relevant to the end of the game
 | 5 | 1 |
 | 0 | 0 |
 
+##### TODO
+
+Change this to 2 per 5.
+
 # Learning skill bonus multiplier
 
 * Novice triples bonus.
