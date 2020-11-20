@@ -35,11 +35,11 @@ Resulting attack rate = 100 + 95 = 195
 Converting back to resulting recovery = 100 * (100 / 195) = 51, cap is not reached
 </pre>
 
-## Weapon base speed
+## Weapon base attack rate
 
-Instead of base recovery each weapon gets base speed which roughly corresponds to vanilla base recovery.
+Instead of base recovery each weapon gets base attack rate which roughly corresponds to vanilla base recovery.
 
-|weapon|base speed|resuting recovery|
+|weapon|base attack rate|resulting base recovery|
 |----|----:|----:|
 |Staff,Axe|100|100|
 |Sword|120|83|
@@ -48,8 +48,8 @@ Instead of base recovery each weapon gets base speed which roughly corresponds t
 
 ##### TODO
 
-* Speed  50 (=200 recovery). That halves initial damage rate but gives more room for faster imrovement with skill.
-* Due to the above, 
+Weapon base Attack rate is reduced by 50. That halves initial damage rate but gives more room for faster imrovement with skill.
+Weapon skill attack rate bonus is 6,7,8 instead of current 4,5,6.
 
 # Chance to hit formulas
 
