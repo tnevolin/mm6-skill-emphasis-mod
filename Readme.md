@@ -48,8 +48,8 @@ Instead of base recovery each weapon gets base attack rate which roughly corresp
 
 ##### TODO
 
-Weapon base Attack rate is reduced by 50. That halves initial damage rate but gives more room for faster imrovement with skill.
-Weapon skill attack rate bonus is 6,7,8 instead of current 4,5,6.
+Reduce weapon base attack rate for those benefiting from attack rate skill increase. That decreases initial damage rate but gives more room for faster imrovement with skill.
+Increase weapon skill attack rate bonus to 6,7,8 instead of current 4,5,6.
 
 # Chance to hit formulas
 
