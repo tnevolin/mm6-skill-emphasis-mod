@@ -6,36 +6,36 @@ RPG character advancement should be mainly based on their skill progression with
 
 # Recovery mechanics
 
-Standard game stat mechanics is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics is an opposite which makes it a little difficult to grasp at first. Besides, due to this reverted scale it is pretty limited as cap is quite easily reacheable. From then on it is a complete waste to invest into recovery any more.
+Intuitive player assumption is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics uses an inverse scale which makes it a little difficult to grasp at first. This also creates inherent flaw when attack rate growths faster with skill progression and then suddenly stops at easily reachable cap. From then on it is a complete waste to invest into recovery any more. All speed increasing weapons suddenly become uneffective to develop any further.
 
-I propose to turn recovery time *reduction* bonus into attack speed *increase* bonus. Then it naturally grow same exactly way as any other game stat. Meaning adding 100 speed bonus on top of initial 100 speed value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. Thus we safely can stop worrying about the cap. See computation example below.
+This mod internally introduces a notion of attack rate which is a reciprocal to recovery time. All recovery time bonuses now increase the attack rate and it is computed same way as any other positive game stats. Meaning adding 100 attack rate bonus on top of initial 100 attack rate value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. Thus we safely can stop worrying about the cap. See computation example below.
 
-With all additional bonuses added melee cap is reached at the skill level 22 which is pretty high and rarely reacheable. Range cap is reached at the skill level 190 which is never. Regardless of caps recovery time in this model it is never negative.
+With all additional bonuses added melee cap is reached at the skill level 22 at the end of the game. Range cap is reached at the skill level 190 which is never. Regardless of caps recovery time in this model it is never negative.
 
-Keep in mind that even though computation mechanics changed the speed value is still converted to recovery. It is still called recovery all over the place. I don't want to change it everywhere in the texts.
+Keep in mind that even though computation mechanics changed the attack rate value is still converted to recovery for the purpose of UI display and in game text/help and combat computations.
 
-#### Computation example
+## Computation example
 
-##### Vanilla
+### Vanilla
 
 <pre>
-Dagger		=  60 base recovery (40 recovery reduction)
+Dagger		=  60 base recovery
 500 speed	= -30 recovery bonus
 haste		= -25 recovery bonus
 
-result		=   5 recovery which is capped at 30
+result		=   5 recovery which is actually capped at 30
 </pre>
 
-##### This mod
+### This mod
 
 <pre>
 Total recovery reduction bonus from above example = 100 - 5 = 95
-This mod treats it as attack speed increase bonus = 95
-Resulting attack speed = 100 + 95 = 195
-Resulting recovery = 100 \* (100 / 195) = 51, cap is not reached
+This mod treats it as attack rate increase bonus = +95
+Resulting attack rate = 100 + 95 = 195
+Converting back to resulting recovery = 100 * (100 / 195) = 51, cap is not reached
 </pre>
 
-# Weapon base speed
+## Weapon base speed
 
 Instead of base recovery each weapon gets base speed which roughly corresponds to vanilla base recovery.
 
@@ -45,6 +45,11 @@ Instead of base recovery each weapon gets base speed which roughly corresponds t
 |Sword|120|83|
 |Spear,Mace|140|71|
 |Dagger|180|55|
+
+##### TODO
+
+* Speed  50 (=200 recovery). That halves initial damage rate but gives more room for faster imrovement with skill.
+* Due to the above, 
 
 # Chance to hit formulas
 
