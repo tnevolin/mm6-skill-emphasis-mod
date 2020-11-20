@@ -308,7 +308,7 @@ Extremely non-lenear stat breakpoint/effect progression renders any stat boostin
 These changes together make stat boosts weak but relevant to the end of the game. At the same time it does not allow stat effect to overflow character secondary stats (attack, recovery, damage, AC, ...).
 
 
- Here is the modified table below. It is +2 effect per +5 stat increase along all scale. However, breakpoint intervals getting bigger and bigger at 50 and then at 200. Most likely you will never go above 200 so your Extreme Energy will always work and produce same predictable result.
+ Here is the modified table below. It is 1 effect per 5 stat increase along all scale. However, breakpoint intervals getting bigger at 50, 100, 200, 300. Most likely you will never go above 300 so your Extreme Energy will always work and produce same predictable result.
 
 | Statistic | Effect |
 |----:|----:|
