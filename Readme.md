@@ -128,6 +128,10 @@ Dual wielding is superior to two handed weapon in MM6 as it combines both weapon
 |----|----:|----:|----:|
 |damage|2|2|2|
 
+##### TODO
+
+Change this to 2,3,4.
+
 # Class speciality
 
 MM6 classes are kind of undistingushable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
