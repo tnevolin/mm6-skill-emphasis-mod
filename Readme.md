@@ -60,6 +60,10 @@ chance for player to hit monster = (5 + player attack) / (20 + player attack + m
 chance for monster to hit player = (15 + 2 \* monster level) / (20 + 2 \* monster level + player AC)
 </pre>
 
+##### TODO
+
+Change to simpler one with difference instead of ratio.
+
 # Combat skills
 
 ## Weapon skills
@@ -135,7 +139,7 @@ Dual wielding is superior to two handed weapon in MM6 as it combines both weapon
 
 ##### TODO
 
-Change this to 2,3,4.
+Make this 1.
 
 # Class speciality
 
@@ -153,25 +157,27 @@ This is similar to armsmaster bonus in MM7 but more class special. Knight become
 
 # Weapon usage preference analysis
 
-## Dual weild recovery
+## Dual weild attack rate
 
-Now when dual wield recovery is an average of **actual** both weapon recoveries it is beneficial to combine any weapon with any to get a recovery bonus from weapon in each hand.
+Now when dual wield attack rate is an average of **actual** both weapon attack rates it is beneficial to combine any weapon with any to get an attack rate bonus from weapon in each hand.
 
 #### Examples
 
-Spear + Dagger benefits from dagger speed and result in 160 speed.
+Spear + Dagger benefits from dagger higher base atack rate.
 
-Spear + Sword has initial speed of 120. It progresses about half as slow as in vanilla due to Sword contributing only half of its bonus with skill advancement.
+Spear + Sword progresses about half as slow as in vanilla due to Sword contributing only half of its bonus with skill advancement.
 
-Axe + Sword has initial recovery of 110. However, it progresses faster than any other combo due to both weapon skills contributing to recovery. It becomes fastest combo when both weapon skills contribute 70 speed to common pool.
+Axe + Sword is slower initially but progresses faster than any other combo due to both weapon skills contributing to attack rate.
 
-## Dual wield vs. two handed weapon
+## Dual wield vs. two-handed weapon
 
-Dual wield is very beneficial at low skill level as it combines base damage and attack of both weapons. Then it keeps combining attack from both weapons. However, attack is the least beneficial parameter. Its progression slows down tremendously at higher skill levels. On top of that it is capped at 100% hit chance. Will all huge attack bonuses in this mod it is impossible to improve hit chance more than twice comparing to vanilla. Damage, in turn, keeps growing lineraly and is not limited. Will all other conditions being equal two handed weapon will prevail toward the end of the game. This is true to non melee combat oriented classes (Archer, Cleric, Druid, Sourcerer).
+Dual wield combines initial attack and damage from both weapons. Therefore, it is more beneficial at lower skill levels. However, hit chance is capped at 100%. Whereas, damage is not. Therefore, non melee oriented classes benefit more from two-handed weapons as their skill level progresses. For such classes with all other conditions being equal two handed weapon will prevail toward the end of the game.
 
-It is different for melee combat oriented classes like Knight (and Paladin to lesser extent). With their inherent skill damage bonus it adds to **ALL** weapons including those normally not increasing damage with skill like Sword and Dagger. With dual wielding Knight keeps adding to damage of both weapons which eventually overruns two handed damage bonus.
+Melee oriented classes (Knight, Paladin) increase damage for each weapon in hand(s) which favor dual wielding more. Knight benfits from dual wielding absolutely and should use it always. Whereas Paladin is somewhere in the middle and is about equally good with dual and two-handed weapons. His preference is dictated by hit ratio against specific monster. Dual wielding helps tremendously with low hit ratio. Whereas, two-handed weapon delivers more damage when hit ratio is already good and doesn't need improvement.
 
-Knight should master Sword and switch to dual wielding as soon as possible. Paladin is about as good with dual weapon as with two handed one. For other classes two handed weapon produces more damage in long term. Still magic classes may opt for dual dagger for high initial speed.
+* Knight should learn Sword and switch to dual wielding as soon as possible.
+* Paladin is about as good with dual weapon as with two handed one. Prefer dual wielding if hit ratio is in dare need for improvement. Otherwise, stick to two-handed weapons.
+* Other classes are generally better off investing in two handed weapon produces more damage in long term. Still magic classes may opt for dual dagger for high initial speed.
 
 ## Class weapon usage suggestions
 
