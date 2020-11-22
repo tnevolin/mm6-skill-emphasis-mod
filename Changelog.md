@@ -1,3 +1,7 @@
+# version 28
+
+* Physical attack chance to hit formulas revamped completely to maintain attack and AC imortance throughout the whole game. See readme.
+
 # version 27
 
 * Dragon towers shoot homing fireballs.

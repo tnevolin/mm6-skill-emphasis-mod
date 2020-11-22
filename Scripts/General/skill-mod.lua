@@ -280,6 +280,21 @@ local spellBuffPowers =
 	},
 }
 
+-- Player hooks
+
+local function GetPlayer(p)
+	local i = (p - Party.PlayersArray["?ptr"]) / Party.PlayersArray[0]["?size"]
+	return i, Party.PlayersArray[i]
+end
+
+local function GetMonster(p)
+	if p == 0 then
+		return
+	end
+	local i = (p - Map.Monsters["?ptr"]) / Map.Monsters[0]["?size"]
+	return i, Map.Monsters[i]
+end
+
 -- collects relevant player weapon data
 local function getPlayerEquipmentData(player)
 
@@ -673,10 +688,134 @@ function events.GetAttackDelay(t)
 	
 end
 
--- character to hit chance formula
-mem.asmpatch(0x00421CDA, "lea     ecx, [esi+edi+14h]", 4)
--- monster to hit chance formula
-mem.asmpatch(0x00421D66, "lea     esi, [eax+ecx*2+14h]", 4)
+-- character hit or miss function
+local function Character_CalcHitOrMiss(d, def, characterPointer, monsterPointer, ranged, bonus)
+
+	-- get player
+	
+	local playerIndex, player = GetPlayer(characterPointer)
+	
+	-- get monster
+	
+	monsterIndex, monster = GetMonster(monsterPointer)
+	
+	-- get player attack
+	
+	local playerAttack
+	
+	if ranged == 0 then
+		playerAttack = player:GetMeleeAttack()
+	else
+		playerAttack = player:GetRangedAttack()
+	end
+	
+	-- get monster ArmorClass
+	
+	local monsterArmorClass = monster.ArmorClass
+	
+	-- calculate denominator
+	
+	local denominator = 15 + 2 * playerAttack + 15 + monsterArmorClass
+	
+	-- calculate to hit chance bonus
+	
+	local toHitChanceBonus = bonus / denominator
+	
+	-- calculate to hit chance penalty
+	
+	local toHitChancePenalty
+	
+	if ranged == 2 then
+		toHitChancePenalty = 0.5 * (15 + monsterArmorClass) / denominator
+	elseif ranged == 3 then
+		toHitChancePenalty = 1.0 * (15 + monsterArmorClass) / denominator
+	else
+		toHitChancePenalty = 0
+	end
+	
+	-- calculate to hit chance
+	
+	local toHitChance = math.max(0, math.min(1, 0.5 + (playerAttack - monsterArmorClass) / 200 + toHitChanceBonus - toHitChancePenalty))
+	
+	-- roll dice
+	
+	local roll = math.random()
+	
+	-- calculate hit or miss
+	
+	local hit
+	
+	if roll < toHitChance then
+		hit = 1
+	else
+		hit = 0
+	end
+	
+	--[[
+	-- debug
+	
+	MessageBox("ranged=" .. ranged .. "\n" .. "bonus=" .. bonus .. "\n" .. "playerAttack=" .. playerAttack .."\n" .. "monsterArmorClass=" .. monsterArmorClass .. "\n" .. "denominator=" .. denominator .. "\n" .. "toHitChanceBonus=" .. toHitChanceBonus .. "\n" .. "toHitChancePenalty=" .. toHitChancePenalty .. "\n" .. "toHitChance=" .. toHitChance .. "\n" .. "roll=" .. roll .. "\n" .. "hit=" .. hit)
+	--]]
+	
+	-- return result
+
+	return hit
+	
+end
+mem.hookcall(0x00430EEF, 0, 4, Character_CalcHitOrMiss)
+mem.hookcall(0x00431562, 0, 4, Character_CalcHitOrMiss)
+mem.hookcall(0x004318A3, 0, 4, Character_CalcHitOrMiss)
+
+-- monster hit or miss function
+local function Monster_HitOrMiss(d, def, monsterPointer, characterPointer)
+
+	-- get monster
+	
+	monsterIndex, monster = GetMonster(monsterPointer)
+	
+	-- get player
+	
+	local playerIndex, player = GetPlayer(characterPointer)
+	
+	-- get monster attack
+	
+	local monsterAttack = 2 * monster.Level
+	
+	-- get player ArmorClass
+	
+	local playerArmorClass = player:GetArmorClass()
+	
+	-- calculate to hit chance
+	
+	local toHitChance = math.max(0, math.min(1, 0.5 + (monsterAttack - playerArmorClass) / 400))
+	
+	-- roll dice
+	
+	local roll = math.random()
+	
+	-- calculate hit or miss
+	
+	local hit
+	
+	if roll < toHitChance then
+		hit = 1
+	else
+		hit = 0
+	end
+	
+	--[[
+	-- debug
+	
+	MessageBox("monsterAttack=" .. monsterAttack .."\n" .. "playerArmorClass=" .. playerArmorClass .. "\n" .. "toHitChance=" .. toHitChance .. "\n" .. "roll=" .. roll .. "\n" .. "hit=" .. hit)
+	--]]
+	
+	-- return result
+
+	return hit
+	
+end
+mem.hookcall(0x00431C65, 0, 2, Monster_HitOrMiss)
+mem.hookcall(0x00431F31, 0, 2, Monster_HitOrMiss)
 
 function events.CalcStatBonusBySkills(t)
 

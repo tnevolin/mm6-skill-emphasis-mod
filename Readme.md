@@ -53,16 +53,28 @@ Increase weapon skill attack rate bonus to 6,7,8 instead of current 4,5,6.
 
 # Chance to hit formulas
 
-Chance to hit is a most restricted combat parameter as it capped at 100%, obiously. In vanilla it floats somewhere in 50%-75% interval. With weapon attack bonus progressing faster with skill level it becomes quite ineffective at 80% somewhere. Same is true for monster to hit chance. This mod introduces modifed to hit chance formulas to make its interval more dynamic and to make attack and AC bonuses more important to develop.
+Vanilla chance to hit formulas have a common problem of diminishing returns. Investment into extra attack or AC benefits player greatly in early game. They further they grow the less impactuf incremental changes become to the extent that it is completely not worth spending skill points to improve attack only. This mod introduced new simplified and more linear formula that maintains attack investment importance throughout the whole game.
 
 <pre>
-chance for player to hit monster = (5 + player attack) / (20 + player attack + monster AC)
-chance for monster to hit player = (15 + 2 \* monster level) / (20 + 2 \* monster level + player AC)
+chance for player to hit monster = 0.5 + (player attack - monster AC) / 200
+chance for monster to hit player = 0.5 + (monster attack - player AC) / 400
+
+where monster attack = 2 * monster level
 </pre>
 
-##### TODO
+In words, base hit chance of any physical attack is 50%. Then it increases/decreases based on how much attack is higher/lower than victim AC. So AC works as an attack bonus counter which is more intuitive to understand and visualize for player.
 
-Change to simpler one with difference instead of ratio.
+The chance is obviously capped at 0% and 100%.
+
+Player always hits when their attack is equal or more than monster AC + 100. Player never hits when their attack is equal or less than monster AC - 100. Player chance to hit never reaches zero against vanilla monsters whose max AC is 100.
+
+Monster always hits when their attack is equal or more than player AC + 200. Monster never hits when their attack is equal or less than player AC - 200. Player chance to be hit by monster never reaches 100% against vanilla monster whose max attack is 200.
+
+## Skill advancement consequences
+
+Now when chance to hit dependency is more linear on player attack and AC it is useful to keep developing them especially when one is about to face the comparable level opponents.
+
+Yet attack is still the lowest impactful weapon statistics capable to double player damage rate at most with 50% -> 100% hit rate increase.
 
 # Combat skills
 
@@ -220,6 +232,10 @@ All stat boost spells affect whole party at novice level.
 |First Aid|5, 10, 25||
 |Cure Wounds||5|
 |Power Cure||5|
+
+##### TODO
+
+|All stat boosts|0|5, 5, 5|
 
 # Monsters toughness
 
