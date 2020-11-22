@@ -74,7 +74,7 @@ Monster always hits when their attack is equal or more than player AC + 200. Mon
 
 Now when chance to hit dependency is more linear on player attack and AC it is useful to keep developing them especially when one is about to face the comparable level opponents.
 
-Yet attack is still the lowest impactful weapon statistics capable to double player damage rate at most with 50% -> 100% hit rate increase.
+Yet attack is still the least important weapon statistics doubling player damage rate at its max.
 
 # Combat skills
 
