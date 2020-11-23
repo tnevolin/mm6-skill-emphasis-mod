@@ -95,9 +95,9 @@ local armorSkillNewBonusBySkillAndRank =
 {
 	[const.Skills.Shield] =
 	{
-		[const.Novice] = 6,
-		[const.Expert] = 9,
-		[const.Master] = 12,
+		[const.Novice] = 4,
+		[const.Expert] = 6,
+		[const.Master] = 8,
 	},
 	[const.Skills.Leather] =
 	{
@@ -160,7 +160,7 @@ local weaponSkillDamageBonuses =
 local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local recoveryBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
-local weaponACBonusByMastery = {[const.Novice] = 6, [const.Expert] = 9, [const.Master] = 12, }
+local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
 
 -- special weapon skill chances

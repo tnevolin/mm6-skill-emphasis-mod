@@ -10,7 +10,8 @@
 * Mace chance to cause a special effect = 5% + 1% \* skill level.
 * Staff now does not cause both special effects independently. It is either one or another exclusively.
 * Sword and dagger do not have special bonus when held in right hand anymore.
-* Shield skill AC by rank: 6,9,12.
+* Weapon skill AC by rank: 4,6,8.
+* Shield skill AC by rank: 4,6,8.
 * Leather skill AC by rank: 2,3,4.
 * Chain skill AC by rank: 4,6,8.
 * Plate skill AC by rank: 6,9,12.
