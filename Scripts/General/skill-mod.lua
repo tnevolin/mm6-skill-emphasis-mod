@@ -164,8 +164,8 @@ local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.M
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
 
 -- special weapon skill chances
-local staffEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 5, }
-local maceEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 5, }
+local staffEffect = {["base"] = 10, ["multiplier"] = 2, ["duration"] = 5, }
+local maceEffect = {["base"] = 5, ["multiplier"] = 1, ["duration"] = 5, }
 
 -- class weapon skill damage bonus
 local classMeleeWeaponSkillDamageBonus =
@@ -742,11 +742,14 @@ function events.CalcStatBonusBySkills(t)
 		
 		if main.weapon then
 			
-			-- double attack bonus for blade in main hand
 			local attackBonusMultiplier = 1
+			
+			--[[
+			-- double attack bonus for blade in main hand
 			if main.skill == const.Skills.Sword or main.skill == const.Skills.Dagger then
 				attackBonusMultiplier = 2
 			end
+			--]]
 			
 			-- single wield
 			if not equipmentData.dualWield then
@@ -943,26 +946,28 @@ local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 				-- roll dice
 				if math.random(1, 100) <= chance then
 				
-					-- apply buff
-					local spellBuff = monster.SpellBuffs[const.MonsterBuff.ShrinkingRay]
-					spellBuff:Set(Game.Time + const.Minute * duration, rank, rank + 1, 0, 0)
+					-- roll dice for an effect
+					if math.random() < 0.5 then
+						
+						-- apply buff
+						local spellBuff = monster.SpellBuffs[const.MonsterBuff.ShrinkingRay]
+						spellBuff:Set(Game.Time + const.Minute * duration, rank, rank + 1, 0, 0)
+						
+						-- append to message
+						Game.TextBuffer = Game.TextBuffer .. " /Shrunk"
+						
+					else
 					
-					-- append to message
-					Game.TextBuffer = Game.TextBuffer .. " /Shrunk"
-				
-				end
-				
-				-- roll dice
-				if math.random(1, 100) <= chance then
-				
-					-- apply buff
-					local spellBuff = monster.SpellBuffs[const.MonsterBuff.Feeblemind]
-					spellBuff:Set(Game.Time + const.Minute * duration, rank, 0, 0, 0)
+						-- apply buff
+						local spellBuff = monster.SpellBuffs[const.MonsterBuff.Feeblemind]
+						spellBuff:Set(Game.Time + const.Minute * duration, rank, 0, 0, 0)
+						
+						-- append to message
+						
+						Game.TextBuffer = Game.TextBuffer .. " /Feebleminded"
+						
+					end
 					
-					-- append to message
-					
-					Game.TextBuffer = Game.TextBuffer .. " /Feebleminded"
-				
 				end
 				
 			end

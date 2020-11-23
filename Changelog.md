@@ -6,6 +6,17 @@
 * Dual weapons contribute their full recovery bonus (both base and skill) toward resulting recovery.
 * Weapon base recovery bonuses are reverted to vanilla values.
 * Chance to hit formulas are reverted to vanilla algorithms.
+* Staff chance to cause a special effect = 10% + 2% \* skill level.
+* Mace chance to cause a special effect = 5% + 1% \* skill level.
+* Staff now does not cause both special effects independently. It is either one or another exclusively.
+* Sword and dagger do not have special bonus when held in right hand anymore.
+
+### Mace special abilities
+
+Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
+
+* Chance to cause an effect = 5% + 1% \* skill level.
+
 
 # version 28
 

@@ -46,7 +46,7 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
 |Attack|2|3|4|
-|Speed|4|5|6|
+|Speed|2|3|4|
 |Damage|2|3|4|
 |Dagger chance to cause triple damage|3|4|5|
 |Armor Class from weapon|4|6|8|
@@ -63,54 +63,39 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 Staff has a chance to slow and feeblemind opponent. These abilities are immediatelly available at normal skill rank.
 
-* Chance to cause an effect = 10% + 4% \* skill level.
+* Chance to cause an effect = 10% + 2% \* skill level.
 * Effect duration = 5 minutes.
 
 ### Mace special abilities
 
 Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
 
-* Chance to cause an effect = 5% + 2% \* skill level.
+* Chance to cause an effect = 5% + 1% \* skill level.
 * Effect duration = 5 minutes.
-
-### Sword and dagger special abilities
-
-Sword and dagger special ability to serve as a secondary weapon is a foundation of dual wielding. However, holding sword/dagger in right hand ignores this ability. As such sword in right hand sucks comparing to comparable strength weapons: axe and spear. I decided to compensate sword/dagger in right hand so people still can find incentive in using it.
-
-* Sword and dagger can be used in left hand immediatelly. No need to acheve special rank for that.
-* Sword and dagger in right hand double their skill attack bonus to compencate abandoned ability.
 
 ## Armor speed penalties
 
 |armor type|normal|expert|master|
 |----|----:|----:|----:|
-|leather|20|10|0|
-|chain|40|20|0|
-|plate|60|30|0|
+|leather|10|5|0|
+|chain|20|10|0|
+|plate|30|15|0|
 
 # Dual wielding
 
 Dual wielding rules are quite complicated in MM6. Player need to remember which weapon uses attack, speed, damage bonuses and which does not. Ugh. Moreover, some of the skill bonuses and enchantment effects may not work if you apply them to the weapon in wrong hand. Most of the time you are out of luck as you cannot possibly wield some weapons in off hand. This is certainly a waste of skills and enchantments. Why not make them all count? That makes it much easier to distribute skill points and fairer to both weapon skills.
 
-## Dual wield modification proposal
+## Dual wield mechanics modification
 
-* Weapon skill attack bonuses are combined. This makes them hit roughly 50% more often with both skills on master level 10.
-* Weapon skill damage bonuses are combined. This does not change anything since off hand weapons (dagger, sword) do not increase damage with skill. Unless character class is melee combat oriented (Knight, Paladin). Then it does a tremendous difference. (See "Weapon usage preference analysis" below)
-* Weapon skill speed bonuses are averaged. This allows both weapons to contribute their recovery bonuses if any. However, this also slows down speed progression for spear/mace-sword combo making it eventually slower comparing to axe-sword.
+All weapon bonuses are counted!!! Player can mix and match them as they see fit and get full benefit of weapon, skill, and enchantment bonuses from **each** weapon regardless of mix type. They do not shadow each other abilities anymore.
 
-# Two-handed weapon
+# Two-handed weapon double damage
 
-Dual wielding is superior to two handed weapon in MM6 as it combines both weapons base attack and damage. Heavy two handed weapon should naturally increase damage to compete with dual wielding. This excludes Staff as it can be used two-handed only and cannot be part of dual wielding.
+Two handed weapons confer double damage for their listed damage value. This gives party some damage boost at the beginning of the game when combat skills are yet undevelopped.
 
-#### Two handed weapon damage per skill level
+# Class specialty
 
-|bonus|normal|expert|master|
-|----|----:|----:|----:|
-|damage|2|2|2|
-
-# Class speciality
-
-MM6 classes are kind of undistingushable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
+MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
 
 ## Additional weapon skill damage/level for classes
 
@@ -120,47 +105,32 @@ MM6 classes are kind of undistingushable in weapon skills. That's why Paladin is
 |Paladin|all melee weapons|0|1|2|
 |Archer|all ranged weapons|2|3|4|
 
-This is similar to armsmaster bonus in MM7 but more class special. Knight become an ultimate weapon armsmaster with Paladin following. Archer specializes in ranged damage instead and now becomes quite powerful shooter.
-
-##### TODO
-
-Knight: 4,5,6
-Paladin: 2,3,4
+This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master with Paladin following. Archer specializes in ranged damage instead and now becomes quite powerful shooter.
 
 # Weapon usage preference analysis
 
-## Dual weild attack rate
+## Singe wield vs. Dual wield vs. two-handed
 
-Now when dual wield attack rate is an average of **actual** both weapon attack rates it is beneficial to combine any weapon with any to get an attack rate bonus from weapon in each hand.
+Single wield is inferior to any other wielding type as it was in vanilla. It is a waste to not use extra hand. If not for offense than for defense (shield) at least.
 
-#### Examples
+Dual wield in this mod combines attack and speed bonuses from both weapon giving dual wielding some boost. Not too big, though. Attack improves badly in long run. Speed progresses well at the beginning but then slows down and get capped. Damage is the only bonus that keeps progressing well beyond levels 20-30. Unfortunately, only weapons could be held in off hand (sword, dagger) do not confer damage bonus. So dual wielding does better in this mod comparing to vanilla but not enough to confidently outrun two-handed weapon progression.
 
-Spear + Dagger benefits from dagger higher base atack rate.
+The inherent problem with wielding two different items in both hands (weapon-weapon or weapon-shield) is that skill points are split between two skills slowing down their progression comparing to a single type two-handed weapon that doesn't share skill point pool with anything else. Therefore, two-handed axe generally progresses about 1.4 time faster than their one-handed counterparts. That is 1.4 accuracy \* 1.4 speed \* 1.4 damage. Two-handed weapon is always preferrable for Archer as a single non specialized melee fighter class that can hold them. Magic classes (Cleric, Druid, Sourcerer) are not capable of wielding any significantly offensive 2h or dual combo.
 
-Spear + Sword progresses about half as slow as in vanilla due to Sword contributing only half of its bonus with skill advancement.
+Specialized melee fighter classes (Paladin, Knight) are special case as they receive damage bonus for **every** weapon held. As such Knight should definitely prefer axe-sword dual wielding for max offense benefit. He does not need sacrifice weapon offensive power for additional protection as his plate and abundant HP protect him enough already. Paladin receives half of Knight damage bonus and, therefore, may opt for either dual or two-handed wielding - player's choice.
 
-Axe + Sword is slower initially but progresses faster than any other combo due to both weapon skills contributing to attack rate.
-
-## Dual wield vs. two-handed weapon
-
-Dual wield combines initial attack and damage from both weapons. Therefore, it is more beneficial at lower skill levels. However, hit chance is capped at 100%. Whereas, damage is not. Therefore, non melee oriented classes benefit more from two-handed weapons as their skill level progresses. For such classes with all other conditions being equal two handed weapon will prevail toward the end of the game.
-
-Melee oriented classes (Knight, Paladin) increase damage for each weapon in hand(s) which favor dual wielding more. Knight benfits from dual wielding absolutely and should use it always. Whereas Paladin is somewhere in the middle and is about equally good with dual and two-handed weapons. His preference is dictated by hit ratio against specific monster. Dual wielding helps tremendously with low hit ratio. Whereas, two-handed weapon delivers more damage when hit ratio is already good and doesn't need improvement.
-
-* Knight should learn Sword and switch to dual wielding as soon as possible.
-* Paladin is about as good with dual weapon as with two handed one. Prefer dual wielding if hit ratio is in dare need for improvement. Otherwise, stick to two-handed weapons.
-* Other classes are generally better off investing in two handed weapon produces more damage in long term. Still magic classes may opt for dual dagger for high initial speed.
+Sword-sword and dagger-dagger combos are special case as they progress as fast as two-handed weapon due to same weapon type in both hands. However, since they both lack damage bonus, these combos have mediocre offense and do not compete with axe-sword, spear-sword options.
 
 ## Class weapon usage suggestions
 
-|class|suggestions|
-|----|----|
-|Knight|Axe+Sword, invest all extra skill points in it.|
-|Paladin|Any dual wielding or two handed weapon is good to level 10. Put rest into magic. If you didn't plan to evolve magic at all choose Knight instead|
-|Archer|Two handed Spear for additional AC and damage. Invest the rest into ranged weapon!|
-|Cleric|Mace for paralization and shield for AC. Invest the rest to magic.|
-|Druic|Dual Daggers for speed or Dagger+Sheid for AC. Invest the rest to magic.|
-|Sourcerer|Staff for AC and slow/feeblemind. Invest the rest to magic.|
+|class|preferred wielding|comment|
+|----|----|----|
+|Knight|Axe-Sword|Best offensive combo for Knight.|
+|Paladin|Axe-Sword or 2h Axe|Both about same offensive in Paladin hands. 2h Axe is slightly better at the beginning due to their double damage. Dual wielding starts slowly overtaking it after level 20 or so. They are about same in the middle.|
+|Archer|2h Axe, 2h Spear|Most skill point effective offensive option. 2h Spear is good for extra protection but Archer is probably not the weakest one in your party. Unless you are playing without mages at all.|
+|Cleric|Mace-Shield|Mace definitely for paralyzing. Shield is for extra protection if you don't care about small recovery penalty.|
+|Druid|Mace/Dagger-Shield|Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still is not match to any other decent combo. Better protect the weakling.|
+|Sourcerer|Staff|Best option due to its special effects benefitting whole party greatly.|
 
 # Spells
 
