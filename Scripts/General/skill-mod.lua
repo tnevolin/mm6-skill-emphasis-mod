@@ -78,10 +78,10 @@ local weaponNewBaseSpeedBonuses =
 	[const.Skills.Bow] = 0,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = 0,
-	[const.Skills.Sword] = 20,
-	[const.Skills.Spear] = 40,
-	[const.Skills.Mace] = 40,
-	[const.Skills.Dagger] = 80,
+	[const.Skills.Sword] = 10,
+	[const.Skills.Spear] = 20,
+	[const.Skills.Mace] = 20,
+	[const.Skills.Dagger] = 40,
 }
 
 local armorAdditionalSpeedPenalties =
@@ -158,10 +158,10 @@ local weaponSkillDamageBonuses =
 
 -- skill effect multipliers
 local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
-local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
+local recoveryBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 2, [const.Master] = 2, }
+local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
 
 -- special weapon skill chances
 local staffEffect = {["base"] = 5, ["multiplier"] = 2, ["duration"] = 5, }
@@ -377,9 +377,9 @@ local function getPlayerEquipmentData(player)
 		equipmentData.main.equipped = true
 		
 		equipmentData.main.item = player.Items[player.ItemMainHand]
-		local itemMainHandTxt = Game.ItemsTxt[equipmentData.main.item.Number]
-		equipmentData.main.equipStat = itemMainHandTxt.EquipStat + 1
-		equipmentData.main.skill = itemMainHandTxt.Skill - 1
+		equipmentData.main.itemTxt = Game.ItemsTxt[equipmentData.main.item.Number]
+		equipmentData.main.equipStat = equipmentData.main.itemTxt.EquipStat + 1
+		equipmentData.main.skill = equipmentData.main.itemTxt.Skill - 1
 		
 		if
 			equipmentData.main.skill == const.Skills.Staff
@@ -409,9 +409,9 @@ local function getPlayerEquipmentData(player)
 		equipmentData.extra.equipped = true
 		
 		equipmentData.extra.item = player.Items[player.ItemExtraHand]
-		local itemExtraHandTxt = Game.ItemsTxt[equipmentData.extra.item.Number]
-		equipmentData.extra.equipStat = itemExtraHandTxt.EquipStat + 1
-		equipmentData.extra.skill = itemExtraHandTxt.Skill - 1
+		equipmentData.extra.itemTxt = Game.ItemsTxt[equipmentData.extra.item.Number]
+		equipmentData.extra.equipStat = equipmentData.extra.itemTxt.EquipStat + 1
+		equipmentData.extra.skill = equipmentData.extra.itemTxt.Skill - 1
 		
 		if
 			equipmentData.extra.skill == const.Skills.Staff
@@ -543,10 +543,10 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 	if equipmentData2 == nil then
 	
 		-- remove old base bonus
-		correction = correction + (weaponOldBaseRecoveryBonuses[equipmentData1.skill])
+		correction = correction + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
 		
 		-- add new base bonus
-		correction = correction - (weaponNewBaseSpeedBonuses[equipmentData1.skill])
+		correction = correction - weaponNewBaseSpeedBonuses[equipmentData1.skill]
 		
 		-- remove old skill bonus
 		if equipmentData1.rank >= const.Expert then
@@ -565,42 +565,44 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		-- weapon 1
 		
 		-- remove old base bonus
-		correction = correction + (weaponOldBaseRecoveryBonuses[equipmentData1.skill])
+		correction = correction + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
 		
-		-- add half of new base bonus
-		correction = correction - (weaponNewBaseSpeedBonuses[equipmentData1.skill]) / 2
+		-- add new base bonus
+		correction = correction - weaponNewBaseSpeedBonuses[equipmentData1.skill]
 		
+		--[[
 		-- remove half of old swiftness bonus
 		if equipmentData1.item.Bonus2 == 59 then
 			correction = correction + (20) / 2
 		end
+		--]]
 		
 		-- remove old skill bonus
 		if equipmentData1.rank >= const.Expert then
 			correction = correction + (weaponSkillRecoveryBonuses[equipmentData1.skill] * equipmentData1.level)
 		end
 		
-		-- add half of new skill bonus
+		-- add new skill bonus
 		correction =
 			correction
 			-
-			(weaponSkillRecoveryBonuses[equipmentData1.skill] * (recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level) / 2)
+			(weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
 			
 		-- weapon 2
 		
-		-- add half of new base bonus
-		correction = correction - (weaponNewBaseSpeedBonuses[equipmentData2.skill]) / 2
+		-- add new base bonus
+		correction = correction - weaponNewBaseSpeedBonuses[equipmentData2.skill]
 		
-		-- add half of new swiftness bonus
+		-- add new swiftness bonus
 		if equipmentData2.item.Bonus2 == 59 then
-			correction = correction - (20) / 2
+			correction = correction - 20
 		end
 				
-		-- add half of new skill bonus
+		-- add new skill bonus
 		correction =
 			correction
 			-
-			(weaponSkillRecoveryBonuses[equipmentData2.skill] * (recoveryBonusByMastery[equipmentData2.rank] * equipmentData2.level) / 2)
+			(weaponSkillRecoveryBonuses[equipmentData2.skill] * recoveryBonusByMastery[equipmentData2.rank] * equipmentData2.level)
 			
 	end
 	
@@ -688,134 +690,30 @@ function events.GetAttackDelay(t)
 	
 end
 
--- character hit or miss function
-local function Character_CalcHitOrMiss(d, def, characterPointer, monsterPointer, ranged, bonus)
+function events.CalcStatBonusByItems(t)
 
-	-- get player
+	local equipmentData = getPlayerEquipmentData(t.Player)
 	
-	local playerIndex, player = GetPlayer(characterPointer)
+	local main = equipmentData.main
+	local extra = equipmentData.extra
 	
-	-- get monster
+	-- calculate two handed weapon damage
 	
-	monsterIndex, monster = GetMonster(monsterPointer)
+	if main.weapon and equipmentData.twoHanded then
 	
-	-- get player attack
-	
-	local playerAttack
-	
-	if ranged == 0 then
-		playerAttack = player:GetMeleeAttack()
-	else
-		playerAttack = player:GetRangedAttack()
+		if t.Stat == const.Stats.MeleeDamageMin then
+			
+			t.Result = 2 * t.Result
+			
+		elseif t.Stat == const.Stats.MeleeDamageMax then
+			
+			t.Result = 2 * t.Result
+			
+		end
+		
 	end
-	
-	-- get monster ArmorClass
-	
-	local monsterArmorClass = monster.ArmorClass
-	
-	-- calculate denominator
-	
-	local denominator = 15 + 2 * playerAttack + 15 + monsterArmorClass
-	
-	-- calculate to hit chance bonus
-	
-	local toHitChanceBonus = bonus / denominator
-	
-	-- calculate to hit chance penalty
-	
-	local toHitChancePenalty
-	
-	if ranged == 2 then
-		toHitChancePenalty = 0.5 * (15 + monsterArmorClass) / denominator
-	elseif ranged == 3 then
-		toHitChancePenalty = 1.0 * (15 + monsterArmorClass) / denominator
-	else
-		toHitChancePenalty = 0
-	end
-	
-	-- calculate to hit chance
-	
-	local toHitChance = math.max(0, math.min(1, 0.5 + (playerAttack - monsterArmorClass) / 200 + toHitChanceBonus - toHitChancePenalty))
-	
-	-- roll dice
-	
-	local roll = math.random()
-	
-	-- calculate hit or miss
-	
-	local hit
-	
-	if roll < toHitChance then
-		hit = 1
-	else
-		hit = 0
-	end
-	
-	--[[
-	-- debug
-	
-	MessageBox("ranged=" .. ranged .. "\n" .. "bonus=" .. bonus .. "\n" .. "playerAttack=" .. playerAttack .."\n" .. "monsterArmorClass=" .. monsterArmorClass .. "\n" .. "denominator=" .. denominator .. "\n" .. "toHitChanceBonus=" .. toHitChanceBonus .. "\n" .. "toHitChancePenalty=" .. toHitChancePenalty .. "\n" .. "toHitChance=" .. toHitChance .. "\n" .. "roll=" .. roll .. "\n" .. "hit=" .. hit)
-	--]]
-	
-	-- return result
-
-	return hit
 	
 end
-mem.hookcall(0x00430EEF, 0, 4, Character_CalcHitOrMiss)
-mem.hookcall(0x00431562, 0, 4, Character_CalcHitOrMiss)
-mem.hookcall(0x004318A3, 0, 4, Character_CalcHitOrMiss)
-
--- monster hit or miss function
-local function Monster_HitOrMiss(d, def, monsterPointer, characterPointer)
-
-	-- get monster
-	
-	monsterIndex, monster = GetMonster(monsterPointer)
-	
-	-- get player
-	
-	local playerIndex, player = GetPlayer(characterPointer)
-	
-	-- get monster attack
-	
-	local monsterAttack = 2 * monster.Level
-	
-	-- get player ArmorClass
-	
-	local playerArmorClass = player:GetArmorClass()
-	
-	-- calculate to hit chance
-	
-	local toHitChance = math.max(0, math.min(1, 0.5 + (monsterAttack - playerArmorClass) / 400))
-	
-	-- roll dice
-	
-	local roll = math.random()
-	
-	-- calculate hit or miss
-	
-	local hit
-	
-	if roll < toHitChance then
-		hit = 1
-	else
-		hit = 0
-	end
-	
-	--[[
-	-- debug
-	
-	MessageBox("monsterAttack=" .. monsterAttack .."\n" .. "playerArmorClass=" .. playerArmorClass .. "\n" .. "toHitChance=" .. toHitChance .. "\n" .. "roll=" .. roll .. "\n" .. "hit=" .. hit)
-	--]]
-	
-	-- return result
-
-	return hit
-	
-end
-mem.hookcall(0x00431C65, 0, 2, Monster_HitOrMiss)
-mem.hookcall(0x00431F31, 0, 2, Monster_HitOrMiss)
 
 function events.CalcStatBonusBySkills(t)
 

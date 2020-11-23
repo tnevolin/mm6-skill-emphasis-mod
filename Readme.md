@@ -35,47 +35,6 @@ Resulting attack rate = 100 + 95 = 195
 Converting back to resulting recovery = 100 * (100 / 195) = 51, cap is not reached
 </pre>
 
-## Weapon base attack rate
-
-Instead of base recovery each weapon gets base attack rate which roughly corresponds to vanilla base recovery.
-
-|weapon|base attack rate|resulting base recovery|
-|----|----:|----:|
-|Staff,Axe|100|100|
-|Sword|120|83|
-|Spear,Mace|140|71|
-|Dagger|180|55|
-
-##### TODO
-
-Reduce weapon base attack rate for those benefiting from attack rate skill increase. That decreases initial damage rate but gives more room for faster imrovement with skill.
-Increase weapon skill attack rate bonus to 6,7,8 instead of current 4,5,6.
-
-# Chance to hit formulas
-
-Vanilla chance to hit formulas have a common problem of diminishing returns. Investment into extra attack or AC benefits player greatly in early game. They further they grow the less impactuf incremental changes become to the extent that it is completely not worth spending skill points to improve attack only. This mod introduced new simplified and more linear formula that maintains attack investment importance throughout the whole game.
-
-<pre>
-chance for player to hit monster = 0.5 + (player attack - monster AC) / 200
-chance for monster to hit player = 0.5 + (monster attack - player AC) / 400
-
-where monster attack = 2 * monster level
-</pre>
-
-In words, base hit chance of any physical attack is 50%. Then it increases/decreases based on how much attack is higher/lower than victim AC. So AC works as an attack bonus counter which is more intuitive to understand and visualize for player.
-
-The chance is obviously capped at 0% and 100%.
-
-Player always hits when their attack is equal or more than monster AC + 100. Player never hits when their attack is equal or less than monster AC - 100. Player chance to hit never reaches zero against vanilla monsters whose max AC is 100.
-
-Monster always hits when their attack is equal or more than player AC + 200. Monster never hits when their attack is equal or less than player AC - 200. Player chance to be hit by monster never reaches 100% against vanilla monster whose max attack is 200.
-
-## Skill advancement consequences
-
-Now when chance to hit dependency is more linear on player attack and AC it is useful to keep developing them especially when one is about to face the comparable level opponents.
-
-Yet attack is still the least important weapon statistics doubling player damage rate at its max.
-
 # Combat skills
 
 ## Weapon skills

@@ -1,6 +1,15 @@
+# version 29
+
+* 2h weapons do not get extra damage per skill level anymore.
+* 2h weapons confer double listed damage.
+* Recovery bonus by mastery: Novice = 2, Expert = 3, Master = 4.
+* Dual weapons contribute their full recovery bonus (both base and skill) toward resulting recovery.
+* Weapon base recovery bonuses are reverted to vanilla values.
+* Chance to hit formulas are reverted to vanilla algorithms.
+
 # version 28
 
-* Physical attack chance to hit formulas revamped completely to maintain attack and AC imortance throughout the whole game. See readme.
+* Physical attack chance to hit formulas revamped completely to maintain attack and AC importance throughout the whole game. See readme.
 
 # version 27
 
