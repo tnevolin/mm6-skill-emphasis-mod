@@ -95,42 +95,42 @@ local armorSkillNewBonusBySkillAndRank =
 {
 	[const.Skills.Shield] =
 	{
-		[const.Novice] = 10,
-		[const.Expert] = 15,
-		[const.Master] = 20,
+		[const.Novice] = 6,
+		[const.Expert] = 9,
+		[const.Master] = 12,
 	},
 	[const.Skills.Leather] =
 	{
-		[const.Novice] = 3,
-		[const.Expert] = 4,
-		[const.Master] = 5,
+		[const.Novice] = 2,
+		[const.Expert] = 3,
+		[const.Master] = 4,
 	},
 	[const.Skills.Chain] =
 	{
-		[const.Novice] = 6,
-		[const.Expert] = 8,
-		[const.Master] = 10,
+		[const.Novice] = 4,
+		[const.Expert] = 6,
+		[const.Master] = 8,
 	},
 	[const.Skills.Plate] =
 	{
-		[const.Novice] = 9,
-		[const.Expert] = 12,
-		[const.Master] = 15,
+		[const.Novice] = 6,
+		[const.Expert] = 9,
+		[const.Master] = 12,
 	},
 }
 local armorSkillResistanceBonusBySkillAndRank =
 {
 	[const.Skills.Leather] =
 	{
-		[const.Novice] = 6,
-		[const.Expert] = 8,
-		[const.Master] = 10,
+		[const.Novice] = 4,
+		[const.Expert] = 6,
+		[const.Master] = 8,
 	},
 	[const.Skills.Chain] =
 	{
-		[const.Novice] = 3,
-		[const.Expert] = 4,
-		[const.Master] = 5,
+		[const.Novice] = 2,
+		[const.Expert] = 3,
+		[const.Master] = 4,
 	},
 }
 
@@ -160,7 +160,7 @@ local weaponSkillDamageBonuses =
 local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local recoveryBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
-local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
+local weaponACBonusByMastery = {[const.Novice] = 6, [const.Expert] = 9, [const.Master] = 12, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
 
 -- special weapon skill chances
@@ -263,8 +263,8 @@ local spellBuffPowers =
 	-- StoneSkin
 	["StoneSkin"] =
 	{
-		["fixed"] = 5,
-		["proportional"] = 1,
+		["fixed"] = 20,
+		["proportional"] = 4,
 	},
 	-- Bless
 	["Bless"] =
@@ -277,6 +277,14 @@ local spellBuffPowers =
 	{
 		["fixed"] = 5,
 		["proportional"] = 1,
+	},
+}
+local spellStatsBuffPowers =
+{
+	["StatsBuff"] =
+	{
+		["fixed"] = 10,
+		["proportional"] = 2,
 	},
 }
 
@@ -1245,37 +1253,37 @@ mem.asmpatch(0x004220D5, "test   BYTE [eax+0x70],0xFF", 0x4)
 -- Lucky day affects whole party
 mem.asmpatch(0x004269CD, "cmp    esi,esi", 0x3)
 -- Lucky day multiplier = 5
-mem.asmpatch(0x004269B4, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x004269A6, "lea     edx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x0042699C, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004269B4, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x004269A6, "lea     edx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x0042699C, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 -- Meditation/Precision does not create pointer
 mem.asmpatch(0x004220E3, "test   BYTE [eax+0x71],0xFF", 0x4)
 -- Meditation affects whole party
 mem.asmpatch(0x00427399, "cmp    esi,esi", 0x3)
 -- Meditation multiplier = 5
-mem.asmpatch(0x00427380, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x00427372, "lea     edx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x00427368, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x00427380, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x00427372, "lea     edx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x00427368, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 -- Precision affects whole party
 mem.asmpatch(0x0042760D, "cmp    esi,esi", 0x3)
 -- Precision multiplier = 5
-mem.asmpatch(0x004275F4, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x004275E6, "lea     edx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x004275DC, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004275F4, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x004275E6, "lea     edx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x004275DC, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 -- Speed/Power does not create pointer
 mem.asmpatch(0x004220F6, "test   BYTE [eax+0x72],0xFF", 0x4)
 -- Speed affects whole party
 mem.asmpatch(0x00428154, "cmp    esi,esi", 0x3)
 -- Speed multiplier = 5
-mem.asmpatch(0x0042813B, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x0042812D, "lea     edx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x00428123, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x0042813B, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x0042812D, "lea     edx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x00428123, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 -- Power affects whole party
 mem.asmpatch(0x004283F8, "cmp    esi,esi", 0x3)
 -- Power multiplier = 5
-mem.asmpatch(0x004283DF, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x004283D1, "lea     edx, [eax+eax*4+0Ah]", 0x4)
-mem.asmpatch(0x004283C7, "lea     ecx, [eax+eax*4+0Ah]", 0x4)
+mem.asmpatch(0x004283DF, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x004283D1, "lea     edx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
+mem.asmpatch(0x004283C7, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 
 -- learning skill bonus multiplier
 local function setLearningSkillBonusMultiplier(d, def)

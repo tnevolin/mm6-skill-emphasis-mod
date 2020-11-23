@@ -16,12 +16,10 @@ Base speed = 120
 Skill improves Attack and Speed.
 
 Special ability: can be held in left hand as an auxilliary weapon.
-Special ability: Attack bonus from skill is doubled if NOT used as an auxilliary weapon.
-Special ability: Additional damage per skill level for two-handed weapon.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   Speed   2H Damage	|     _2 |     _4 |           _2 |	|     _3 |     _5 |           _2 |	|     _4 |     _6 |           _2 |
+           Attack   Speed	|     _2 |     _2 |	|     _3 |     _3 |	|     _4 |     _4 |
 Dagger	While daggers don’t do the kind of damage that a sword or an axe can deliver, they are very quick—sometimes letting you get two attacks for every one of your slower opponents.
 
 Base speed = 180

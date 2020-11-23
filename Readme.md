@@ -49,26 +49,26 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Speed|2|3|4|
 |Damage|2|3|4|
 |Dagger chance to cause triple damage|3|4|5|
-|Armor Class from weapon|4|6|8|
-|Armor Class from shield|10|15|20|
-|Armor Class from leather|3|4|5|
-|Armor Class from chain|6|8|10|
-|Armor Class from plate|9|12|15|
-|Resistances from leather|6|8|10|
-|Resistances from chain|3|4|5|
+|Armor Class from weapon|6|9|12|
+|Armor Class from shield|6|9|12|
+|Armor Class from leather|2|3|4|
+|Armor Class from chain|4|6|8|
+|Armor Class from plate|6|9|12|
+|Resistances from leather|4|6|8|
+|Resistances from chain|2|3|4|
 
 ## Special abilities
 
 ### Staff special abilities
 
-Staff has a chance to slow and feeblemind opponent. These abilities are immediatelly available at normal skill rank.
+Staff has a chance to shrink or feeblemind opponent. One of these effects is randomly chosen when Staff triggers the effect. These abilities are immediately available at normal skill rank.
 
 * Chance to cause an effect = 10% + 2% \* skill level.
 * Effect duration = 5 minutes.
 
 ### Mace special abilities
 
-Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
+Mace has a chance to paralyze opponent. This ability is immediately available at novice rank.
 
 * Chance to cause an effect = 5% + 1% \* skill level.
 * Effect duration = 5 minutes.
@@ -87,7 +87,7 @@ Dual wielding rules are quite complicated in MM6. Player need to remember which 
 
 ## Dual wield mechanics modification
 
-All weapon bonuses are counted!!! Player can mix and match them as they see fit and get full benefit of weapon, skill, and enchantment bonuses from **each** weapon regardless of mix type. They do not shadow each other abilities anymore.
+All weapon bonuses are counted!!! Player can mix and match them as they see fit and get full benefit of weapon, skill, and enchantment bonuses from **each** weapon regardless of mix type. Weapons do not shadow each other abilities anymore.
 
 # Two-handed weapon double damage
 
@@ -126,8 +126,8 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 |class|preferred wielding|comment|
 |----|----|----|
 |Knight|Axe-Sword|Best offensive combo for Knight.|
-|Paladin|Axe-Sword or 2h Axe|Both about same offensive in Paladin hands. 2h Axe is slightly better at the beginning due to their double damage. Dual wielding starts slowly overtaking it after level 20 or so. They are about same in the middle.|
-|Archer|2h Axe, 2h Spear|Most skill point effective offensive option. 2h Spear is good for extra protection but Archer is probably not the weakest one in your party. Unless you are playing without mages at all.|
+|Paladin|Axe-Sword or 2h Axe|Both are about equally offensive in Paladin hands. 2h Axe is slightly better at the beginning due to two-handed weapons double damage. Dual wielding starts slowly overtaking it after level 20 or so. They are about same in the middle.|
+|Archer|2h Axe, 2h Spear|2h Axe is the most effective skill point investment offensive option. 2h Spear is good for extra protection but Archer is probably not the weakest one in your party. Unless you are playing without casters at all.|
 |Cleric|Mace-Shield|Mace definitely for paralyzing. Shield is for extra protection if you don't care about small recovery penalty.|
 |Druid|Mace/Dagger-Shield|Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still is not match to any other decent combo. Better protect the weakling.|
 |Sourcerer|Staff|Best option due to its special effects benefitting whole party greatly.|
@@ -142,7 +142,7 @@ All stat boost spells affect whole party at novice level.
 
 |spell|fixed|per level|
 |----|----:|----:|
-|All stat boosts|10|5, 5, 5|
+|All stat boosts|10|2, 2, 2|
 |Protection from ...|0|3, 4, 5|
 |Ring Of Fire|3|1-3|
 |Meteor Shower|4|1-4|
@@ -154,17 +154,13 @@ All stat boost spells affect whole party at novice level.
 |Harm|5|1-5|
 |Flying Fist|14|1-14|
 |Prismatic Light|10|1-10|
-|Stone Skin|5|1|
+|Stone Skin|20|4|
 |Bless|5|1|
 |Heroism|5|1|
 |Healing Touch|3-7, 6-14, 15-35||
 |First Aid|5, 10, 25||
 |Cure Wounds||5|
 |Power Cure||5|
-
-##### TODO
-
-|All stat boosts|0|5, 5, 5|
 
 # Monsters toughness
 
@@ -303,15 +299,11 @@ These changes together make stat boosts weak but relevant to the end of the game
 | 5 | 1 |
 | 0 | 0 |
 
-##### TODO
-
-Change this to 2 per 5.
-
 # Learning skill bonus multiplier
 
 * Novice triples bonus.
 * Expert quadruples bonus.
-* Mastre quintuples bonus.
+* Master quintuples bonus.
 
 # Missiles auto aim in flight
 
