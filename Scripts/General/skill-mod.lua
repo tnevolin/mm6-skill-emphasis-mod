@@ -1439,6 +1439,8 @@ function events.KeyDown(t)
 			bringHirelingsToParty({const.NPCProfession.Merchant, const.NPCProfession.Trader, })
 		elseif t.Key == const.Keys["3"] then
 			bringHirelingsToParty({const.NPCProfession.Pathfinder, const.NPCProfession.Tracker, })
+		elseif t.Key == const.Keys["4"] then
+			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
 		end
 	end
 end

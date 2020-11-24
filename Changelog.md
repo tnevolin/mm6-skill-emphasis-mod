@@ -1,3 +1,7 @@
+# version 31
+
+* Added keyboard shortcut to bring WindMaster, WaterMaster.
+
 # version 30
 
 * Added keyboard shortcut to bring Pathfinder, Tracker.
