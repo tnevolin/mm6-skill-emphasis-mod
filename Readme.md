@@ -324,4 +324,5 @@ This is a convenience fix. I am tired to reload game hundreds times just to find
 |----:|----:|
 | Alt+1 | Instructor, Teacher |
 | Alt+2 | Merchant, Trader |
+| Alt+3 | Pathfinder, Tracker |
 

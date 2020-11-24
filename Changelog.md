@@ -1,3 +1,7 @@
+# version 30
+
+* Added keyboard shortcut to bring Pathfinder, Tracker.
+
 # version 29
 
 * 2h weapons do not get extra damage per skill level anymore.
