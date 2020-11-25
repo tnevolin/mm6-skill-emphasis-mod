@@ -1,3 +1,7 @@
+# version 32
+
+* Disabled primary stat fountains raising primary stats by 2 if below 15. They are real temptation to visit them **before** visiting altars. The strategy requiring quick maps traversal in front of yet strong monsters. That breaks the steady development and exploration plan.
+
 # version 31
 
 * Added keyboard shortcut to bring WindMaster, WaterMaster.

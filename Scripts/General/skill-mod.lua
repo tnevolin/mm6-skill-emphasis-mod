@@ -1149,53 +1149,6 @@ function events.GameInitialized2()
 		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
 	end
 	
-	--[[
-	-- weapon modifiers
-	for itemTxtIndex = 1,Game.ItemsTxt.high do
-		local itemTxt = Game.ItemsTxt[itemTxtIndex]
-		if itemTxt.EquipStat == const.ItemType.Weapon - 1 then
-			-- weapon modifier x2
-			Game.ItemsTxt[itemTxtIndex].Mod2 = Game.ItemsTxt[itemTxtIndex].Mod2 * 2
-		end
-	end
-	--]]
-	
-	--[[
-	-- projectile speed
-	-- local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\projectiles.txt", "w")
-	-- io.output(file)
-	for objListItemIndex = 1,Game.ObjListBin.high do
-		local objListItem = Game.ObjListBin[objListItemIndex]
-		if objListItem.InterceptAction then
-			-- io.write(string.format("%4d %-20s %6d\n", objListItemIndex, objListItem.Name, objListItem.Speed))
-			objListItem.Speed = objListItem.Speed / 5
-		end
-	end
-	-- io.close(file)
-	--]]
-	
-	--[[
-	-- monster radius
-	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\radiuses.txt", "w")
-	io.output(file)
-	for monListItemIndex = 1,Game.MonListBin.high do
-		local monListItem = Game.MonListBin[monListItemIndex]
-		io.write(string.format("%-20s %6d %6d\n", monListItem.Name, monListItem.Radius, monListItem.Height))
-	end
-	io.close(file)
-	--]]
-	
-	--[[
-	-- monster fly
-	local file = io.open("D:\\mine\\projects\\mine\\m&m\\mm6-skill-emphasis-mod\\flyes.txt", "w")
-	io.output(file)
-	for monsterTxtIndex = 1,Game.MonstersTxt.high do
-		local monsterTxt = Game.MonstersTxt[monsterTxtIndex]
-		io.write(string.format("%-20s %8x\n", monsterTxt.Name, monsterTxt.Fly))
-	end
-	io.close(file)
-	--]]
-	
 end
 
 -- primary statistics effect
@@ -1443,5 +1396,37 @@ function events.KeyDown(t)
 			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
 		end
 	end
+end
+
+-- disable stats fountains
+
+function events.LoadMap()
+	
+	-- Free Haven
+	if Game.Map.Name == "outc2.odm" then
+		-- Might fountain
+		Game.MapEvtLines:RemoveEvent(161)
+	-- Bootleg Bay
+	elseif Game.Map.Name == "outd2.odm" then
+		-- Intellect fountain
+		Game.MapEvtLines:RemoveEvent(102)
+		-- Personality fountain
+		Game.MapEvtLines:RemoveEvent(103)
+	-- Mire of the Damned
+	elseif Game.Map.Name == "outc3.odm" then
+		-- Endurance fountain
+		Game.MapEvtLines:RemoveEvent(100)
+	-- Silver Cove
+	elseif Game.Map.Name == "outd1.odm" then
+		-- Accuracy fountain
+		Game.MapEvtLines:RemoveEvent(164)
+		-- Speed fountain
+		Game.MapEvtLines:RemoveEvent(165)
+	-- New Sorpigal
+	elseif Game.Map.Name == "oute3.odm" then
+		-- Luck fountain
+		Game.MapEvtLines:RemoveEvent(110)
+	end
+	
 end
 
