@@ -1,3 +1,12 @@
+-- constants
+
+local engagingMonsterCountOffset = 0x004CA714
+local standardEngagementDistance = 0x1600
+local extraEngagementDistance = 0x800
+local extendedEngagementDistance = standardEngagementDistance + extraEngagementDistance
+
+-- attribute breakpoints
+
 local attributeBreakpoints =
 {
 500,
@@ -77,8 +86,8 @@ local weaponNewBaseSpeedBonuses =
 {
 	[const.Skills.Bow] = 0,
 	[const.Skills.Staff] = 0,
-	[const.Skills.Axe] = 0,
-	[const.Skills.Sword] = 10,
+	[const.Skills.Axe] = -20,
+	[const.Skills.Sword] = -10,
 	[const.Skills.Spear] = 20,
 	[const.Skills.Mace] = 20,
 	[const.Skills.Dagger] = 40,
@@ -157,8 +166,8 @@ local weaponSkillDamageBonuses =
 }
 
 -- skill effect multipliers
-local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
-local recoveryBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local attackBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
+local recoveryBonusByMastery = {[const.Novice] = 6, [const.Expert] = 7, [const.Master] = 8, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
@@ -1134,19 +1143,53 @@ imul   ecx, eax
 mov    DWORD [esp+0x14], ecx
 ]], 0x2D)
 
--- monster damage to player
-function events.CalcDamageToPlayer(t)
+-- game initialization
 
-	-- monster damage to player x2
-	t.Result = t.Result * 2
-	
-end
+local monsterHitPointsMultiplier = 2
+local monsterDamageMultiplier = 2
+local monsterArmorClassMultiplier = 2
+local monsterLevelMultiplier = 1
+local monsterExperienceMultiplier = 2
 function events.GameInitialized2()
 	
-	-- monster HP
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
-		-- monster HP x2
-		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * 2
+	
+		-- multiply monster hit points
+		
+		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * monsterHitPointsMultiplier
+		
+		-- multiply monster damage
+		
+		Game.MonstersTxt[monsterTxtIndex].Attack1.DamageDiceCount = Game.MonstersTxt[monsterTxtIndex].Attack1.DamageDiceCount * monsterDamageMultiplier
+		Game.MonstersTxt[monsterTxtIndex].Attack1.DamageAdd = Game.MonstersTxt[monsterTxtIndex].Attack1.DamageAdd * monsterDamageMultiplier
+		
+		Game.MonstersTxt[monsterTxtIndex].Attack2.DamageDiceCount = Game.MonstersTxt[monsterTxtIndex].Attack2.DamageDiceCount * monsterDamageMultiplier
+		Game.MonstersTxt[monsterTxtIndex].Attack2.DamageAdd = Game.MonstersTxt[monsterTxtIndex].Attack2.DamageAdd * monsterDamageMultiplier
+		
+		Game.MonstersTxt[monsterTxtIndex].SpellSkill = Game.MonstersTxt[monsterTxtIndex].SpellSkill * monsterDamageMultiplier
+		
+		-- modify multiply monster armor class
+		
+		local monsterArmorClass = Game.MonstersTxt[monsterTxtIndex].ArmorClass
+		monsterArmorClass = math.round(monsterArmorClass * (1 + (100 - monsterArmorClass) / 100)) * monsterArmorClassMultiplier
+		Game.MonstersTxt[monsterTxtIndex].ArmorClass = monsterArmorClass
+		
+		-- modify and multiply monster level
+		
+		local monsterLevel = Game.MonstersTxt[monsterTxtIndex].Level
+		monsterLevel = math.round(monsterLevel * (1 + (100 - monsterLevel) / 100)) * monsterLevelMultiplier
+		Game.MonstersTxt[monsterTxtIndex].Level = monsterLevel
+		
+		-- monster movement speed is increased
+		
+		local monsterMoveSpeed = Game.MonstersTxt[monsterTxtIndex].MoveSpeed
+		monsterMoveSpeed = monsterMoveSpeed + (400 - monsterMoveSpeed) / 2 + 150
+		Game.MonstersTxt[monsterTxtIndex].MoveSpeed = monsterMoveSpeed
+		
+		-- monster experience
+		
+		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * monsterExperienceMultiplier
+		
 	end
 	
 end
@@ -1429,4 +1472,28 @@ function events.LoadMap()
 	end
 	
 end
+
+-- modify monster engagement distance
+
+mem.asmpatch(0x0040126C, "cmp     ecx, 0x1600", 6)
+mem.asmpatch(0x004021A3, string.format("cmp     esi, %d", extendedEngagementDistance), 6)
+
+local function modifiedFastDistance(d, def, dx, dy, dz)
+
+	-- call original function
+	
+	local result = def(dx, dy, dz)
+	
+	-- increase distance value if there are no engaging monsters yet
+	
+	if mem.u4[engagingMonsterCountOffset] > 0 then
+		result = math.max(0, result - extraEngagementDistance)
+	end
+	
+	-- return result
+	
+	return result
+	
+end
+mem.hookcall(0x00401117, 2, 1, modifiedFastDistance)
 

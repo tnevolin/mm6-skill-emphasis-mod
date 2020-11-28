@@ -35,6 +35,12 @@ Resulting attack rate = 100 + 95 = 195
 Converting back to resulting recovery = 100 * (100 / 195) = 51, cap is not reached
 </pre>
 
+# Weapon base recovery bonuses
+
+Weapons not improving their speed with skill keep their recovery bonuses.
+
+Axe recovery bonus is -40. Sword recovery bonus is -20. Due to very fast recovery bonus per level progression they are catching up and overtake other weapons in speed pretty soon. Axe (the slowest weapon) will be as fast as dagger at level 10 and then will keep getting faster and faster.
+
 # Combat skills
 
 ## Weapon skills
@@ -45,8 +51,8 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
-|Attack|2|3|4|
-|Speed|2|3|4|
+|Attack|4|5|6|
+|Speed|6|7|8|
 |Damage|2|3|4|
 |Dagger chance to cause triple damage|3|4|5|
 |Armor Class from weapon|4|6|8|
@@ -123,14 +129,33 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ## Class weapon usage suggestions
 
-|class|preferred wielding|comment|
-|----|----|----|
-|Knight|Axe-Sword|Best offensive combo for Knight.|
-|Paladin|Axe-Sword or 2h Axe|Both are about equally offensive in Paladin hands. 2h Axe is slightly better at the beginning due to two-handed weapons double damage. Dual wielding starts slowly overtaking it after level 20 or so. They are about same in the middle.|
-|Archer|2h Axe, 2h Spear|2h Axe is the most effective skill point investment offensive option. 2h Spear is good for extra protection but Archer is probably not the weakest one in your party. Unless you are playing without casters at all.|
-|Cleric|Mace-Shield|Mace definitely for paralyzing. Shield is for extra protection if you don't care about small recovery penalty.|
-|Druid|Mace/Dagger-Shield|Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still is not match to any other decent combo. Better protect the weakling.|
-|Sourcerer|Staff|Best option due to its special effects benefitting whole party greatly.|
+### Knight
+
+This is the only class that decently plays sword-sword combo for quite a long time thanks to his hefty extra weapon damage bonus. Good for lazy players. It stops progresing satisfactory at about level 10 due to speed saturation and player needs to include more damage contributing weapon in a mix at this time: axe/spear/mace-sword. The 2h axe is close following. However, it is inconvenient to switch to it and abandon so many skill points invested in the sword.
+
+Between axe/spear/mace the last one is probably more interesting due to its paralyzing ability.
+
+### Paladin
+
+Paladin can follow two different paths of about same combat effectiveness. One is folling big brother footsteps with sword-sword => axe/spear-sword evolution. Alternatively, they can stick to 2h axe from very beginning. Simple yet powerful. In this regard it is a pretty flexible class. 
+
+Same is true for Paladin about mace paralyzing ability. It is probably even more suitable for Paladin as it doesn't lose too much damage with this replacement.
+
+### Archer
+
+Archer is the only not melee oriented class that is still capable of all powerful weapon combos. The 2h axe is a clear preference for him. The single weapon focus allows faster development. Since they cannot wear shield there is nothing else for them to do. Another possible option is spear-sword that is noticeably weaker but contributes to AC if this is so desired. Everything else is worse.
+
+### Cleric
+
+Mace definitely for paralyzing. Shield is for extra protection if you don't care about small recovery penalty.
+
+### Druid
+
+Mace/Dagger-Shield. Mace is probably better in long rung due to paralizing while dagger is fast at the beginning. Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still are not a match to any other decent combo. Better protect the weakling.
+
+### Sorcerer
+
+Staff. Best option due to its special effects benefiting whole party greatly.
 
 # Spells
 
@@ -162,9 +187,11 @@ All stat boost spells affect whole party at novice level.
 |Cure Wounds||5|
 |Power Cure||5|
 
-# Monsters toughness
+# Monsters improvement
 
-Increased weapon bonuses makes easy vanilla monster fighting even easier. We need to beef monsters up to compensate for this. Monster damage to player is doubled. Monster HP is doubled.
+Increased weapon bonuses makes easy vanilla monster fighting even easier. Monsters are beefed up to compensate for this. Monsters' damage to player is doubled. Monsters' HP is doubled. Monsters' AC is doubled and slightly adjusted to grow more steadily. Monsters' level is slightly adjusted to grow more steadily. Monsters' speed is significantly increased so they can catch up to player and reduce the "run bypass" tactics to the minimum. Also to let not shooting monsters to quicly close up to player for melee engagement.
+
+Increased monster toughness is compensated by doubling received experience as well as increasing learing multipliers.
 
 # Hirelings
 

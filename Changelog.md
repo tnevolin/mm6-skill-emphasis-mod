@@ -1,3 +1,21 @@
+# version 34
+
+* Monster engagement range is widened. They attack party immediately and in larger groups. No more sniping them one by one.
+
+# version 33
+
+* Monsters' hit points is doubled.
+* Monsters' physical attack dice rolls is doubled.
+* Monsters' spell attack level is doubled.
+* Monsters' armor class is doubled and smoothened up a little. A lot of vanilla monters had pretty low armor class even medium level creatures.
+* Monsters' level is smoothened up a little. A lot of vanilla monters had pretty low level even medium level creatures.
+* Monsters' movement speed is significantly increased. Party cannot outrun them anymore. Yet they still do stupid zigzag movement.
+* Monsters' experience is doubled.
+* Attack bonus by mastery: 4, 5, 6.
+* Recovery bonus by mastery: 6, 7, 8.
+* Axe recovery bonus is -20.
+* Sword recovery bonus is -10.
+
 # version 32
 
 * Disabled primary stat fountains raising primary stats by 2 if below 15. They are real temptation to visit them **before** visiting altars. The strategy requiring quick maps traversal in front of yet strong monsters. That breaks the steady development and exploration plan.
@@ -31,13 +49,6 @@
 * Leather skill resistance by rank: 4,6,8.
 * All stat boosts power changed to 10 + 2 * level.
 * Stone Skin power changed to 20 + 4 * level.
-
-### Mace special abilities
-
-Mace has a chance to paralize opponent. This ability is immediatelly available at novice rank.
-
-* Chance to cause an effect = 5% + 1% \* skill level.
-
 
 # version 28
 
