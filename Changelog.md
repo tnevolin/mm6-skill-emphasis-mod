@@ -1,3 +1,7 @@
+# version 35
+
+* Training prices are adjusted to match limit. This way all of them will be used eventually.
+
 # version 34
 
 * Monster engagement range is widened. They attack party immediately and in larger groups. No more sniping them one by one.

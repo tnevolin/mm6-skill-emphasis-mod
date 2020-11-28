@@ -1,10 +1,3 @@
--- constants
-
-local engagingMonsterCountOffset = 0x004CA714
-local standardEngagementDistance = 0x1600
-local extraEngagementDistance = 0x800
-local extendedEngagementDistance = standardEngagementDistance + extraEngagementDistance
-
 -- attribute breakpoints
 
 local attributeBreakpoints =
@@ -296,6 +289,35 @@ local spellStatsBuffPowers =
 		["proportional"] = 2,
 	},
 }
+
+-- monster engagement distance
+
+local engagingMonsterCountOffset = 0x004CA714
+local engagingMonstersOffset = 0x004C6340
+local standardEngagementDistance = 0x1600
+local extendedEngagementDistance = 0x1600
+--local extraEngagementDistance = 0x400
+--local extendedEngagementDistance = standardEngagementDistance + extraEngagementDistance
+
+-- training ground prices
+
+local trainingGroundPrices =
+{
+	["New Sorpigal Training Grounds"] = 5,
+	["Training-by-the-Sea"] = 10,
+	["Island Testing Center"] = 15,
+	["Abdul's Discount Training Center"] = 20,
+	["Riverside Academy"] = 25,
+	["Free Haven Academy"] = 30,
+	["Lone Tree Training"] = 40,
+	["Wolf's Den"] = 50,
+	["Royal Gymnasium"] = 100,
+	["The Sparring Ground"] = 150,
+}
+
+-- ======================================= --
+-- Helper functions --
+-- ======================================= --
 
 -- Player hooks
 
@@ -1192,6 +1214,16 @@ function events.GameInitialized2()
 		
 	end
 	
+	-- training ground prices
+
+	for houseIndex = 0, Game.Houses.high do
+
+		if trainingGroundPrices[Game.Houses[houseIndex].Name] ~= nil then
+			Game.Houses[houseIndex].Val = trainingGroundPrices[Game.Houses[houseIndex].Name]
+		end
+
+	end
+
 end
 
 -- primary statistics effect
@@ -1475,7 +1507,7 @@ end
 
 -- modify monster engagement distance
 
-mem.asmpatch(0x0040126C, "cmp     ecx, 0x1600", 6)
+mem.asmpatch(0x0040126C, string.format("cmp     ecx, %d", standardEngagementDistance), 6)
 mem.asmpatch(0x004021A3, string.format("cmp     esi, %d", extendedEngagementDistance), 6)
 
 local function modifiedFastDistance(d, def, dx, dy, dz)
@@ -1484,12 +1516,12 @@ local function modifiedFastDistance(d, def, dx, dy, dz)
 	
 	local result = def(dx, dy, dz)
 	
-	-- increase distance value if there are no engaging monsters yet
-	
-	if mem.u4[engagingMonsterCountOffset] > 0 then
-		result = math.max(0, result - extraEngagementDistance)
-	end
-	
+		-- decrease distance value if there are engaging monsters already
+		
+		if result >= standardEngagementDistance and result < extendedEngagementDistance then
+			result = standardEngagementDistance
+		end
+		
 	-- return result
 	
 	return result
