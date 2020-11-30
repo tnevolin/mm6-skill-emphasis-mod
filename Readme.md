@@ -51,8 +51,8 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
-|Attack|4|5|6|
-|Speed|6|7|8|
+|Attack|2|3|4|
+|Speed|4|5|6|
 |Damage|2|3|4|
 |Dagger chance to cause triple damage|3|4|5|
 |Armor Class from weapon|4|6|8|
@@ -62,6 +62,15 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Armor Class from plate|6|9|12|
 |Resistances from leather|4|6|8|
 |Resistances from chain|2|3|4|
+|Plate wearer chance to cover other team member|10|20|30|
+
+## Armor speed penalties
+
+|armor type|normal|expert|master|
+|----|----:|----:|----:|
+|leather|10|5|0|
+|chain|20|10|0|
+|plate|30|15|0|
 
 ## Special abilities
 
@@ -79,13 +88,9 @@ Mace has a chance to paralyze opponent. This ability is immediately available at
 * Chance to cause an effect = 5% + 1% \* skill level.
 * Effect duration = 5 minutes.
 
-## Armor speed penalties
+### Plate special abilities
 
-|armor type|normal|expert|master|
-|----|----:|----:|----:|
-|leather|10|5|0|
-|chain|20|10|0|
-|plate|30|15|0|
+Knight and Paladin are seen as team champions rushing forward and covering weaker team members. Plate wearer has a chance to cover other team member not wearing a plate by taking a hit for them. Such chance grows with Plate rank.
 
 # Dual wielding
 

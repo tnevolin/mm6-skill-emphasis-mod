@@ -75,7 +75,7 @@ local weaponOldBaseRecoveryBonuses =
 	[const.Skills.Mace] = 20,
 	[const.Skills.Dagger] = 40,
 }
-local weaponNewBaseSpeedBonuses =
+local weaponNewBaseRecoveryBonuses =
 {
 	[const.Skills.Bow] = 0,
 	[const.Skills.Staff] = 0,
@@ -86,11 +86,11 @@ local weaponNewBaseSpeedBonuses =
 	[const.Skills.Dagger] = 40,
 }
 
-local armorAdditionalSpeedPenalties =
+local armorAdditionalRecoveryPenalties =
 {
-	[const.Skills.Leather] = 10,
-	[const.Skills.Chain] = 20,
-	[const.Skills.Plate] = 30,
+	[const.Skills.Leather] = 0,
+	[const.Skills.Chain] = 0,
+	[const.Skills.Plate] = 0,
 }
 
 local armorSkillNewBonusBySkillAndRank =
@@ -159,8 +159,8 @@ local weaponSkillDamageBonuses =
 }
 
 -- skill effect multipliers
-local attackBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
-local recoveryBonusByMastery = {[const.Novice] = 6, [const.Expert] = 7, [const.Master] = 8, }
+local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
@@ -185,6 +185,9 @@ local classRangedWeaponSkillDamageBonus =
 	[const.Class.BattleMage] = 3,
 	[const.Class.WarriorMage] = 4,
 }
+
+-- plate wearer attack attraction chances by mastery
+local plateWearerAttackAttractionChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
 
 -- spell powers
 local spellPowers =
@@ -292,17 +295,16 @@ local spellStatsBuffPowers =
 
 -- monster engagement distance
 
-local engagingMonsterCountOffset = 0x004CA714
-local engagingMonstersOffset = 0x004C6340
 local standardEngagementDistance = 0x1600
-local extendedEngagementDistance = 0x1600
---local extraEngagementDistance = 0x400
---local extendedEngagementDistance = standardEngagementDistance + extraEngagementDistance
+local extendedEngagementDistance = 0x1E00
 
--- training ground prices
+-- house prices
 
-local trainingGroundPrices =
+local templeHealingPrice = 20
+local innPrice = 10
+local housePrices =
 {
+	-- training grounds
 	["New Sorpigal Training Grounds"] = 5,
 	["Training-by-the-Sea"] = 10,
 	["Island Testing Center"] = 15,
@@ -313,6 +315,39 @@ local trainingGroundPrices =
 	["Wolf's Den"] = 50,
 	["Royal Gymnasium"] = 100,
 	["The Sparring Ground"] = 150,
+	-- temples
+	["Abdul's Discount House of Worship"] = templeHealingPrice,
+	["Blackshire Temple"] = templeHealingPrice,
+	["House of Healing"] = templeHealingPrice,
+	["King's Temple"] = templeHealingPrice,
+	["Mist Island Temple"] = templeHealingPrice,
+	["New Sorpigal Temple"] = templeHealingPrice,
+	["Silver Cove Temple"] = templeHealingPrice,
+	["Temple Stone"] = templeHealingPrice,
+	["White Cap Temple"] = templeHealingPrice,
+	["Temple Baa"] = templeHealingPrice,
+	-- inns
+	["A Lonely Knight"] = innPrice,
+	["The Imp Slapper"] = innPrice,
+	["An Arrow's Flight"] = innPrice,
+	["A Stone's Throw"] = innPrice,
+	["The King's Crown"] = innPrice,
+	["The Will o' Wisp"] = innPrice,
+	["The Goblin's Tooth"] = innPrice,
+	["The Broken Cutlass"] = innPrice,
+	["Anchors Away"] = innPrice,
+	["The Grove"] = innPrice,
+	["The Haunt"] = innPrice,
+	["The Rusted Shield"] = innPrice,
+	["Viktor's Hall"] = innPrice,
+	["The Echoing Whisper"] = innPrice,
+	["Rockham's Pride"] = innPrice,
+	["Rime and Reason"] = innPrice,
+	["The Frosty Tankard"] = innPrice,
+	["The Oasis"] = innPrice,
+	["The Howling Moon"] = innPrice,
+	["The Broken Promise"] = innPrice,
+	["The Last Chance"] = innPrice,
 }
 
 -- ======================================= --
@@ -585,7 +620,7 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		correction = correction + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
 		
 		-- add new base bonus
-		correction = correction - weaponNewBaseSpeedBonuses[equipmentData1.skill]
+		correction = correction - weaponNewBaseRecoveryBonuses[equipmentData1.skill]
 		
 		-- remove old skill bonus
 		if equipmentData1.rank >= const.Expert then
@@ -593,10 +628,7 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		end
 		
 		-- add new skill bonus
-		correction =
-			correction
-			-
-			(weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
+		correction = correction - (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
 		
 	-- dual wield
 	else
@@ -607,7 +639,7 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		correction = correction + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
 		
 		-- add new base bonus
-		correction = correction - weaponNewBaseSpeedBonuses[equipmentData1.skill]
+		correction = correction - weaponNewBaseRecoveryBonuses[equipmentData1.skill]
 		
 		--[[
 		-- remove half of old swiftness bonus
@@ -630,7 +662,7 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		-- weapon 2
 		
 		-- add new base bonus
-		correction = correction - weaponNewBaseSpeedBonuses[equipmentData2.skill]
+		correction = correction - weaponNewBaseRecoveryBonuses[equipmentData2.skill]
 		
 		-- add new swiftness bonus
 		if equipmentData2.item.Bonus2 == 59 then
@@ -709,16 +741,16 @@ function events.GetAttackDelay(t)
 		local itemArmor = t.Player.Items[itemArmorNumber]
 		local itemArmorTxt = Game.ItemsTxt[itemArmor.Number]
 		local itemArmorSkill = itemArmorTxt.Skill - 1
-		local armorSpeedPenalty = armorAdditionalSpeedPenalties[itemArmorSkill]
+		local armorRecivertPenalty = armorAdditionalRecoveryPenalties[itemArmorSkill]
 		local level, rank = SplitSkill(t.Player.Skills[itemArmorSkill])
 		
 		if rank == const.Expert then
-			armorSpeedPenalty = armorSpeedPenalty / 2
+			armorRecivertPenalty = armorRecivertPenalty / 2
 		elseif rank == const.Master then
-			armorSpeedPenalty = 0
+			armorRecivertPenalty = 0
 		end
 		
-		t.Result = t.Result + armorSpeedPenalty
+		t.Result = t.Result + armorRecivertPenalty
 		
 	end
 	
@@ -728,6 +760,42 @@ function events.GetAttackDelay(t)
 	t.Result = correctedRecoveryTime
 	
 end
+
+-- fast flat distance from party to monster
+
+local function fastDistance(monsterX, monsterY)
+
+	local dx = Party.X - monsterX
+	local dy = Party.Y - monsterY
+
+	local a = math.max(dx, dy)
+	local b = math.min(dx, dy)
+	
+	return a + 11 / 32 * b
+	
+end
+
+-- get party experience level
+
+local function getPartyExperienceLevel()
+
+	local partyExperience = 0
+	
+	for i = 0, 3 do
+		partyExperience = partyExperience + Party.Players[i].Experience
+	end
+	
+	local averagePlayerExperience = partyExperience / 4
+	
+	local partyExperienceLevel = math.floor((1 + math.sqrt(1 + (4 * averagePlayerExperience / 500))) / 2)
+	
+	return partyExperienceLevel
+
+end
+
+-- ======================================= --
+-- Modifications --
+-- ======================================= --
 
 function events.CalcStatBonusByItems(t)
 
@@ -1173,6 +1241,8 @@ local monsterArmorClassMultiplier = 2
 local monsterLevelMultiplier = 1
 local monsterExperienceMultiplier = 2
 function events.GameInitialized2()
+
+	-- modify monster statistics
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 	
@@ -1214,14 +1284,17 @@ function events.GameInitialized2()
 		
 	end
 	
-	-- training ground prices
+	-- house prices
 
 	for houseIndex = 0, Game.Houses.high do
+	
+		house = Game.Houses[houseIndex]
 
-		if trainingGroundPrices[Game.Houses[houseIndex].Name] ~= nil then
-			Game.Houses[houseIndex].Val = trainingGroundPrices[Game.Houses[houseIndex].Name]
+		local housePrice = housePrices[house.Name]
+		if housePrice ~= nil then
+			house.Val = housePrice
 		end
-
+		
 	end
 
 end
@@ -1399,9 +1472,12 @@ local function navigateMissile(object)
 	
 end
 
+-- game tick related functionality
+
 function events.Tick()
 
 	-- navigateMissiles
+	
 	for objectIndex = 1,Map.Objects.high do
 		local object =  Map.Objects[objectIndex]
 		navigateMissile(object)
@@ -1470,13 +1546,18 @@ function events.KeyDown(t)
 		elseif t.Key == const.Keys["4"] then
 			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
 		end
+	-- debug
+	elseif t.Key == const.Keys.DIVIDE then
+		MessageBox(Party.QBits)
 	end
 end
 
--- disable stats fountains
+-- on load map
 
 function events.LoadMap()
 	
+	-- disable stats fountains
+
 	-- Free Haven
 	if Game.Map.Name == "outc2.odm" then
 		-- Might fountain
@@ -1507,7 +1588,6 @@ end
 
 -- modify monster engagement distance
 
-mem.asmpatch(0x0040126C, string.format("cmp     ecx, %d", standardEngagementDistance), 6)
 mem.asmpatch(0x004021A3, string.format("cmp     esi, %d", extendedEngagementDistance), 6)
 
 local function modifiedFastDistance(d, def, dx, dy, dz)
@@ -1516,11 +1596,15 @@ local function modifiedFastDistance(d, def, dx, dy, dz)
 	
 	local result = def(dx, dy, dz)
 	
-		-- decrease distance value if there are engaging monsters already
-		
+	-- pretend that distance to the monster is shorter if if party is already engaged
+	
+	if bit.band(Party.StateBits, 0x20) ~= 0 then
+	
 		if result >= standardEngagementDistance and result < extendedEngagementDistance then
 			result = standardEngagementDistance
 		end
+		
+	end
 		
 	-- return result
 	
@@ -1528,4 +1612,274 @@ local function modifiedFastDistance(d, def, dx, dy, dz)
 	
 end
 mem.hookcall(0x00401117, 2, 1, modifiedFastDistance)
+
+-- scale healing price with party experience level
+
+local function modifiedHealingPrice(d, def, playerPointer, cost)
+
+	-- call original function
+	
+	local result = def(playerPointer, cost)
+	
+	-- get party experience level
+	
+	local partyExperienceLevel = getPartyExperienceLevel()
+	
+	-- scale price with party experience level
+	
+	result = math.round(result * partyExperienceLevel)
+	
+	-- return result
+	
+	return result
+	
+end
+mem.hookcall(0x0049DD76, 1, 1, modifiedHealingPrice)
+
+-- scale inn room price with party experience level
+
+local function modifiedInnRoomPrice(d, def)
+
+	-- call original function
+	
+	local result = def()
+	
+	-- calculate base price
+	
+	result = innPrice * innPrice / 10
+	
+	-- get party experience level
+	
+	local partyExperienceLevel = getPartyExperienceLevel()
+	
+	-- scale price with party experience level
+	
+	result = result * partyExperienceLevel
+	
+	-- return result
+	
+	return result
+	
+end
+mem.hookcall(0x0049ED16, 0, 0, modifiedInnRoomPrice)
+
+local function modifiedInnFoodPrice(d, def)
+
+	-- call original function
+	
+	local result = def()
+	
+	-- calculate base price
+	
+	result = innPrice * innPrice * innPrice / 100
+	
+	-- get party experience level
+	
+	local partyExperienceLevel = getPartyExperienceLevel()
+	
+	-- scale price with party experience level
+	
+	result = result * partyExperienceLevel
+	
+	-- return result
+	
+	return result
+	
+end
+mem.hookcall(0x0049ED69, 0, 0, modifiedInnFoodPrice)
+
+-- plate wearer attracts attaks
+
+local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
+
+	-- execute original code
+	
+	targetPlayerIndex = def(monsterPointer)
+	
+	-- get target player
+	
+	targetPlayer = Party.Players[targetPlayerIndex]
+	
+	-- set default substitute player = target player
+	
+	local substitutePlayerIndex = targetPlayerIndex
+	
+	-- get target player equipment data
+	
+	targetPlayerEquipmentData = getPlayerEquipmentData(targetPlayer)
+	
+	-- switch target player only if they do not wear plate
+	
+	if targetPlayerEquipmentData.armor.skill ~= const.Skills.Plate then
+		
+		local roll = math.random()
+		local usedSubstituteProbablity = 0
+		
+		for playerIndex = 0,3 do
+		
+			player = Party.Players[playerIndex]
+		
+			if playerIndex ~= targetPlayerIndex and substitutePlayerIndex == targetPlayerIndex then
+			
+				-- get substitute player equipment data
+				
+				playerEquipmentData = getPlayerEquipmentData(player)
+				
+				-- switch to substitute player only if they wear plate
+				
+				if playerEquipmentData.armor.skill == const.Skills.Plate then
+				
+					local substituteProbability = usedSubstituteProbablity + plateWearerAttackAttractionChanceByMastery[playerEquipmentData.armor.rank]
+					
+					if roll < substituteProbability then
+						substitutePlayerIndex = playerIndex
+						Game.ShowStatusText(string.format("%s took a hit for %s", player.Name, targetPlayer.Name), 10)
+					end
+					
+					usedSubstituteProbablity = substituteProbability
+					
+				end
+				
+			end
+			
+		end
+		
+	end
+	
+	-- return substitute player index
+	
+	return substitutePlayerIndex
+
+end
+mem.hookfunction(0x004219B0, 0, 1, modifiedMonsterChooseTargetMember)
+
+-- display damage rate
+
+-- shift positions in character stats display
+mem.bytecodepatch(0x004BD3FB, "\048\056\048", 3)
+mem.bytecodepatch(0x004BD3EF, "\048\056\048", 3)
+mem.bytecodepatch(0x004BD3E3, "\048\056\048", 3)
+local function getAverageDamageRate(player, ranged)
+
+	-- get combat parameters
+	
+	local attack = (ranged and player:GetRangedAttack() or player:GetMeleeAttack())
+	local recovery = player:GetAttackDelay(ranged)
+	local damageRangeText = (ranged and player:GetRangedDamageRangeText() or player:GetMeleeDamageRangeText())
+	
+	-- error
+	
+	if attack == nil or type(attack) ~= "number" or recovery == nil  or type(recovery) ~= "number" or damageRangeText == nil or type(damageRangeText) ~= "string" then
+		return nil
+	end
+	
+	local damageMinText, damageMaxText = string.match(damageRangeText, "(-?%d+)%s*-%s(-?%d+)")
+	local damageMin = tonumber(damageMinText)
+	local damageMax = tonumber(damageMaxText)
+	
+	-- error
+	
+	if damageMin == nil or type(damageMin) ~= "number" or damageMax == nil or type(damageMax) ~= "number" then
+		return nil
+	end
+	
+	-- calculate average damage rate against monster with AC = 100 and no physical resistance
+	
+	local chanceToHit = (15 + 2 * attack) / (15 + 2 * attack + 15 + 100)
+	
+	local averageDamageRate = math.round((damageMax + damageMin) / 2 * chanceToHit * (100 / recovery))
+	
+	-- return value
+	
+	return averageDamageRate
+	
+end
+local function modifiedDisplayMeleeAttackReference(d, def, dlg, font, x, y, color, text, arg_10, arg_14)
+
+	-- get player
+	
+	local playerIndex, player = GetPlayer(d.ebp)
+	
+	-- get average damage rate
+	
+	local averageDamageRate = getAverageDamageRate(player, false)
+	
+	-- append to text buffer
+	
+	if averageDamageRate ~= nil then
+		Game.TextBuffer = Game.TextBuffer .. string.format(" [%d]", averageDamageRate)
+	end
+	
+	-- execute original code
+	
+	def(dlg, font, x, y, color, text, arg_10, arg_14)
+	
+end
+mem.hookcall(0x00416F51, 2, 6, modifiedDisplayMeleeAttackReference)
+local function modifiedDisplayRangedAttackReference(d, def, dlg, font, x, y, color, text, arg_10, arg_14)
+
+	-- get player
+	
+	local playerIndex, player = GetPlayer(d.ebp)
+	
+	-- get average damage rate
+	
+	local averageDamageRate = getAverageDamageRate(player, true)
+	
+	-- append to text buffer
+	
+	if averageDamageRate ~= nil then
+		Game.TextBuffer = Game.TextBuffer .. string.format(" [%d]", averageDamageRate)
+	end
+	
+	-- execute original code
+	
+	def(dlg, font, x, y, color, text, arg_10, arg_14)
+	
+end
+mem.hookcall(0x00416FF8, 2, 6, modifiedDisplayRangedAttackReference)
+local function modifiedDisplayMeleeAttackStats(d, def, dlg, font, x, y, color, str)
+
+	-- get player
+	
+	local player = Party.Players[Game.CurrentPlayer]
+	
+	-- get average damage rate
+	
+	local averageDamageRate = getAverageDamageRate(player, false)
+
+	-- append to text buffer
+
+	if averageDamageRate ~= nil then
+		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format("[%d]", averageDamageRate) .. "\n"
+	end
+	
+	-- execute original code
+	
+	def(dlg, font, x, y, color, str)
+	
+end
+mem.hookcall(0x00414A3B, 2, 4, modifiedDisplayMeleeAttackStats)
+local function modifiedDisplayRangedAttackStats(d, def, dlg, font, x, y, color, str)
+
+	-- get player
+	
+	local player = Party.Players[Game.CurrentPlayer]
+	
+	-- get average damage rate
+	
+	local averageDamageRate = getAverageDamageRate(player, true)
+
+	-- append to text buffer
+
+	if averageDamageRate ~= nil then
+		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format("[%d]", averageDamageRate) .. "\n"
+	end
+	
+	-- execute original code
+	
+	def(dlg, font, x, y, color, str)
+	
+end
+mem.hookcall(0x00414AD5, 2, 4, modifiedDisplayRangedAttackStats)
 

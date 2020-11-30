@@ -1,6 +1,23 @@
+# version 38
+
+* Damage rate against enemy with AC = 100 is displayed in character states screen and quick reference screen next to corresponding attack number.
+
+# version 37
+
+* Plate wearer sometimes takes a hit for other team member shielding them with their body.
+* Weapon attack bonus per skill: 2,3,4.
+* Weapon speed bonus per skill: 4,5,6.
+
+# version 36
+
+* Enhanced engagement algorithm so it don't trigger when party gem is green.
+* Temple healing prices are equalized across all temples and are scaled with party experience.
+* Inn room prices are equalized across all temples and are scaled with party experience.
+* Inn food prices are equalized across all temples and are scaled with party experience.
+
 # version 35
 
-* Training prices are adjusted to match limit. This way all of them will be used eventually.
+* Training ground prices are adjusted to match limit. This way all of them will be used eventually.
 
 # version 34
 

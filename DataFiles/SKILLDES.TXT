@@ -23,7 +23,7 @@ Holding by two hands doubles weapon own damage.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   Speed	|     _2 |     _2 |	|     _3 |     _3 |	|     _4 |     _4 |
+           Attack   Speed	|     _2 |     _4 |	|     _3 |     _5 |	|     _4 |     _6 |
 Dagger	While daggers don’t do the kind of damage that a sword or an axe can deliver, they are very quick—sometimes letting you get two attacks for every one of your slower opponents.
 
 Base recovery = 60
@@ -46,7 +46,7 @@ Holding by two hands doubles weapon own damage.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   Speed   Damage	|     _2 |     _2 |       _2 |	|     _3 |     _3 |       _3 |	|     _4 |     _4 |       _4 |
+           Attack   Speed   Damage	|     _2 |     _4 |       _2 |	|     _3 |     _5 |       _3 |	|     _4 |     _6 |       _4 |
 Spear	Spear covers all kinds of pole weapons with blades attached to the business end. Spears are versatile and can be used one or two handed (they work better with two hands). They do not become faster but they add protection from physical attacks.
 
 Base recovery = 80
@@ -81,30 +81,27 @@ Bonus increment/level
 Blaster	"A weapon from before the Silence, their making has long since been lost.  Expert and Master Blasters gain double and triple accuracy with these awesome weapons."	Skill added to Attack Bonus	Skill added to Attack Bonus (double effect)	Skill added to Attack Bonus (triple effect)
 Shield	Shield skill directly improves a character’s armor class while a shield is employed.  Expert and master ranking in the shield increase this defensive bonus.
 
-Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
-           Recovery penalty  AC	|                 10 | _4 |	|                 10 | _6 |	|                 10 | _8 |
+          AC / lv   Recovery penalty	      _4 |                  10	      _6 |                  10	      _8 |                  10
 Leather	Leather armor is the lightest armor a character can wear.  While leather provides less protection than chain or plate armor, it also slows your character down the least.  Leather armor skill increases the protection offered by leather armor.  As with all armors, Expert and Master ranking reduce the amount the armor slows you down.
 
 Leather armor is the weakest but it strongly protects from spell damage.
 
-Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
-           Recovery penalty  AC   Resistances	|                 10 | _2 |           _4 |	|                 _5 | _3 |           _6 |	|                 _0 | _4 |           _8 |
+          AC / lv   Recovery penalty   Resist. / lv	      _2 |                  10 |            4	      _3 |                  _5 |            6	      _4 |                  _0 |            8
 Chain	Chain armor is the medium armor type.  It provides more protection than leather and less than plate, but it also slows your character down more than leather.  Chain armor skill increases the protection offered by chain armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
 
 Chain armor is the medium and it mildly protects from spell damage.
 
-Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
-           Recovery penalty  AC   Resistances	|                 20 | _4 |           _2 |	|                 10 | _6 |           _3 |	|                 _0 | _8 |           _4 |
+          AC / lv   Recovery penalty   Resist. / lv	      _4 |                  20 |            2	      _6 |                  10 |            3	      _8 |                  _0 |            4
 Plate	Plate armor is the heaviest armor type.  It provides the most protection, but it slows your character down more than leather or chain.  Plate armor skill increases the protection offered by plate armor.  As with all armors, Expert and master ranking both reduce the amount the armor slows you down.
 
 Plate armor is the strongest one.
+Plate wearer has a chance to cover another team member not wearing a plate by taking a hit for them.
 
-Recovery penalty and bonuses increment/level
 ------------------------------------------------------------
-           Recovery penalty  AC	|                 30 | _6 |	|                 15 | _9 |	|                 _0 | 12 |
+          AC / lv   Recovery penalty   Cover chance	      _6 |                  30 |             10	      _9 |                  15 |             20	      12 |                  _0 |             30
 Fire	Fire magic is a good source of offensive spells and includes spells having to do with speed.  Expert and master ranking permit access to greater versions of fire spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell
 Air	Air magic tends to be defensive and informational in nature and includes spells having to do with flight.  Expert and master ranking permit access to greater versions of air spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell
 Water	Water magic is equally defensive and offensive and concentrates on spells that move or change things.  Expert and master ranking permit access to greater versions of water spells.	Effects vary per spell	Effects vary per spell	Effects vary per spell
