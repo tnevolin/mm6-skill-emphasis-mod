@@ -1,3 +1,7 @@
+# version 39
+
+* Staff adds small amount of all resistances to all party members.
+
 # version 38
 
 * Damage rate against enemy with AC = 100 is displayed in character states screen and quick reference screen next to corresponding attack number.

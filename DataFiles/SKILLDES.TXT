@@ -2,16 +2,16 @@ Skill	Description	Normal	Expert	Master
 Staff	A staff is a two-handed pole equally good on offense and defense.
 
 Base recovery = 100
-Skill improves Attack, AC, and chance to cause an effect.
+Level improves attack, armor class, party resistances, and chance to cause special effect.
 
-Special effects: Shrunk and Feebleminded. Shrunk effect is based on Staff skill rank.
+Special effects: Shrunk and Feebleminded.
 Chance = 10% + 2% per skill level. Duration = 5 minutes.
 
 Holding by two hands doubles weapon own damage.
 
 Bonus increment/level
 ------------------------------------------------------------
-           Attack   AC	|     _2 | _4 |	|     _3 | _6 |	|     _4 | _8 |
+          attack   AC   party resistances	     _2 | _4 |                  _0	     _3 | _6 |                  _1	     _4 | _8 |                  _2
 Sword	The sword skill covers most types of blades longer than a knife.
 
 Base recovery = 90

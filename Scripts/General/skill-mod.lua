@@ -158,12 +158,24 @@ local weaponSkillDamageBonuses =
 	[const.Skills.Dagger] = 0,
 }
 
+local weaponSkillResistanceBonuses =
+{
+	[const.Skills.Bow] = 0,
+	[const.Skills.Staff] = 1,
+	[const.Skills.Axe] = 0,
+	[const.Skills.Sword] = 0,
+	[const.Skills.Spear] = 0,
+	[const.Skills.Mace] = 0,
+	[const.Skills.Dagger] = 0,
+}
+
 -- skill effect multipliers
 local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
+local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 
 -- special weapon skill chances
 local staffEffect = {["base"] = 10, ["multiplier"] = 2, ["duration"] = 5, }
@@ -300,8 +312,10 @@ local extendedEngagementDistance = 0x1E00
 
 -- house prices
 
-local templeHealingPrice = 20
-local innPrice = 10
+local templeHealingPrice = 10
+local innRoomPrice = 10
+local innFoodQuantity = 10
+local innFoodPrice = 100
 local housePrices =
 {
 	-- training grounds
@@ -315,39 +329,6 @@ local housePrices =
 	["Wolf's Den"] = 50,
 	["Royal Gymnasium"] = 100,
 	["The Sparring Ground"] = 150,
-	-- temples
-	["Abdul's Discount House of Worship"] = templeHealingPrice,
-	["Blackshire Temple"] = templeHealingPrice,
-	["House of Healing"] = templeHealingPrice,
-	["King's Temple"] = templeHealingPrice,
-	["Mist Island Temple"] = templeHealingPrice,
-	["New Sorpigal Temple"] = templeHealingPrice,
-	["Silver Cove Temple"] = templeHealingPrice,
-	["Temple Stone"] = templeHealingPrice,
-	["White Cap Temple"] = templeHealingPrice,
-	["Temple Baa"] = templeHealingPrice,
-	-- inns
-	["A Lonely Knight"] = innPrice,
-	["The Imp Slapper"] = innPrice,
-	["An Arrow's Flight"] = innPrice,
-	["A Stone's Throw"] = innPrice,
-	["The King's Crown"] = innPrice,
-	["The Will o' Wisp"] = innPrice,
-	["The Goblin's Tooth"] = innPrice,
-	["The Broken Cutlass"] = innPrice,
-	["Anchors Away"] = innPrice,
-	["The Grove"] = innPrice,
-	["The Haunt"] = innPrice,
-	["The Rusted Shield"] = innPrice,
-	["Viktor's Hall"] = innPrice,
-	["The Echoing Whisper"] = innPrice,
-	["Rockham's Pride"] = innPrice,
-	["Rime and Reason"] = innPrice,
-	["The Frosty Tankard"] = innPrice,
-	["The Oasis"] = innPrice,
-	["The Howling Moon"] = innPrice,
-	["The Broken Promise"] = innPrice,
-	["The Last Chance"] = innPrice,
 }
 
 -- ======================================= --
@@ -803,6 +784,7 @@ function events.CalcStatBonusByItems(t)
 	
 	local main = equipmentData.main
 	local extra = equipmentData.extra
+	local armor = equipmentData.armor
 	
 	-- calculate two handed weapon damage
 	
@@ -815,6 +797,59 @@ function events.CalcStatBonusByItems(t)
 		elseif t.Stat == const.Stats.MeleeDamageMax then
 			
 			t.Result = 2 * t.Result
+			
+		end
+		
+	end
+	
+	-- calculate resistance
+	
+	if
+		t.Stat == const.Stats.FireResistance
+		or
+		t.Stat == const.Stats.ElecResistance
+		or
+		t.Stat == const.Stats.ColdResistance
+		or
+		t.Stat == const.Stats.PoisonResistance
+		or
+		t.Stat == const.Stats.MagicResistance
+	then
+	
+		-- resistance bonus from weapon
+		
+		for playerIndex = 0,3 do
+		
+			local weaponResistancePlayer = Party.Players[playerIndex]
+			local weaponResistancePlayerEquipmentData = getPlayerEquipmentData(weaponResistancePlayer)
+			local weaponResistancePlayerMain = weaponResistancePlayerEquipmentData.main
+			local weaponResistancePlayerExtra = weaponResistancePlayerEquipmentData.extra
+		
+			if weaponResistancePlayerMain.equipped and weaponResistancePlayerMain.weapon then
+			
+				if weaponSkillResistanceBonuses[weaponResistancePlayerMain.skill] ~= 0 then
+					t.Result = t.Result + (weaponResistanceBonusByMastery[weaponResistancePlayerMain.rank] * weaponResistancePlayerMain.level)
+				end
+				
+			end
+			
+			if weaponResistancePlayerExtra.equipped and weaponResistancePlayerExtra.weapon then
+			
+				if weaponSkillResistanceBonuses[weaponResistancePlayerExtra.skill] ~= 0 then
+					t.Result = t.Result + (weaponResistanceBonusByMastery[weaponResistancePlayerExtra.rank] * weaponResistancePlayerExtra.level)
+				end
+				
+			end
+			
+		end
+		
+		-- resistance bonus from armor
+		
+		if armor.equipped then
+		
+			if armorSkillResistanceBonusBySkillAndRank[armor.skill] ~= nil then
+				t.Result = t.Result + (armorSkillResistanceBonusBySkillAndRank[armor.skill][armor.rank] * armor.level)
+			end
 			
 		end
 		
@@ -996,36 +1031,6 @@ function events.CalcStatBonusBySkills(t)
 			
 		end
 		
-	end
-	
-end
-
-function events.CalcStatBonusByMagic(t)
-
-	local equipmentData = getPlayerEquipmentData(t.Player)
-	
-	if
-		t.Stat == const.Stats.FireResistance
-		or
-		t.Stat == const.Stats.ElecResistance
-		or
-		t.Stat == const.Stats.ColdResistance
-		or
-		t.Stat == const.Stats.PoisonResistance
-		or
-		t.Stat == const.Stats.MagicResistance
-	then
-	
-		-- resistance bonus from armor
-		local armor = equipmentData.armor
-		if armor.equipped then
-		
-			if armorSkillResistanceBonusBySkillAndRank[armor.skill] ~= nil then
-				t.Result = t.Result + (armorSkillResistanceBonusBySkillAndRank[armor.skill][armor.rank] * armor.level)
-			end
-			
-		end
-
 	end
 	
 end
@@ -1613,13 +1618,19 @@ local function modifiedFastDistance(d, def, dx, dy, dz)
 end
 mem.hookcall(0x00401117, 2, 1, modifiedFastDistance)
 
--- scale healing price with party experience level
+----------------------------------------------------------------------------------------------------
+-- temple healing price is scaled with party experience level
+----------------------------------------------------------------------------------------------------
 
-local function modifiedHealingPrice(d, def, playerPointer, cost)
+local function modifiedTempleHealingPrice(d, def, playerPointer, cost)
 
 	-- call original function
 	
 	local result = def(playerPointer, cost)
+	
+	-- overwrite value
+	
+	result = templeHealingPrice
 	
 	-- get party experience level
 	
@@ -1634,9 +1645,11 @@ local function modifiedHealingPrice(d, def, playerPointer, cost)
 	return result
 	
 end
-mem.hookcall(0x0049DD76, 1, 1, modifiedHealingPrice)
+mem.hookcall(0x0049DD76, 1, 1, modifiedTempleHealingPrice)
 
--- scale inn room price with party experience level
+----------------------------------------------------------------------------------------------------
+-- inn room price is scaled with party experience level
+----------------------------------------------------------------------------------------------------
 
 local function modifiedInnRoomPrice(d, def)
 
@@ -1644,9 +1657,9 @@ local function modifiedInnRoomPrice(d, def)
 	
 	local result = def()
 	
-	-- calculate base price
+	-- overwrite value
 	
-	result = innPrice * innPrice / 10
+	result = innRoomPrice
 	
 	-- get party experience level
 	
@@ -1663,15 +1676,40 @@ local function modifiedInnRoomPrice(d, def)
 end
 mem.hookcall(0x0049ED16, 0, 0, modifiedInnRoomPrice)
 
+----------------------------------------------------------------------------------------------------
+-- inn food quantity is constant
+----------------------------------------------------------------------------------------------------
+
+local function modifiedInnFoodQuantity(d, def)
+
+	-- call original function
+	
+	local result = def()
+	
+	-- overwrite value
+	
+	result = innFoodQuantity
+	
+	-- return result
+	
+	return result
+	
+end
+mem.hookcall(0x0049EEF9, 0, 0, modifiedInnFoodQuantity)
+
+----------------------------------------------------------------------------------------------------
+-- inn food price is scaled with party experience level
+----------------------------------------------------------------------------------------------------
+
 local function modifiedInnFoodPrice(d, def)
 
 	-- call original function
 	
 	local result = def()
 	
-	-- calculate base price
+	-- overwrite value
 	
-	result = innPrice * innPrice * innPrice / 100
+	result = innFoodPrice
 	
 	-- get party experience level
 	
@@ -1688,7 +1726,9 @@ local function modifiedInnFoodPrice(d, def)
 end
 mem.hookcall(0x0049ED69, 0, 0, modifiedInnFoodPrice)
 
+----------------------------------------------------------------------------------------------------
 -- plate wearer attracts attaks
+----------------------------------------------------------------------------------------------------
 
 local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 
@@ -1753,7 +1793,9 @@ local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 end
 mem.hookfunction(0x004219B0, 0, 1, modifiedMonsterChooseTargetMember)
 
+----------------------------------------------------------------------------------------------------
 -- display damage rate
+----------------------------------------------------------------------------------------------------
 
 -- shift positions in character stats display
 mem.bytecodepatch(0x004BD3FB, "\048\056\048", 3)

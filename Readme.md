@@ -45,7 +45,15 @@ Axe recovery bonus is -40. Sword recovery bonus is -20. Due to very fast recover
 
 ## Weapon skills
 
-All skills provide same bonuses as they do in vanilla. However, these bonuses are available immediatelly at Normal rank. Rank now controls how fast these bonuses progress with level instead of triggering them. Bonuses increment per level is much higher than in vanilla and varies based on their combat impact.
+### Standard bonuses
+
+All skills provide same bonuses as they do in vanilla. However, these bonuses are available immediately at Normal rank. Rank now controls how fast these bonuses progress with level instead of triggering them. Bonuses increment per level is much higher than in vanilla and varies based on their combat impact.
+
+### Additional bonuses
+
+* Staff adds small amount to all resistances for all party members. Bonus increases with rank and level.
+* Leather and Chain armor add to all resistance for wearer. Bonus increases with rank and level.
+* Plate wearer has a chance to cover other team member not wearing plate. Bonus increases with rank.
 
 ## Bonus increment per level based on rank
 
@@ -60,9 +68,9 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Armor Class from leather|2|3|4|
 |Armor Class from chain|4|6|8|
 |Armor Class from plate|6|9|12|
+|Resistances from staff|0|1|2|
 |Resistances from leather|4|6|8|
 |Resistances from chain|2|3|4|
-|Plate wearer chance to cover other team member|10|20|30|
 
 ## Armor speed penalties
 
@@ -91,6 +99,10 @@ Mace has a chance to paralyze opponent. This ability is immediately available at
 ### Plate special abilities
 
 Knight and Paladin are seen as team champions rushing forward and covering weaker team members. Plate wearer has a chance to cover other team member not wearing a plate by taking a hit for them. Such chance grows with Plate rank.
+
+|bonus|normal|expert|master|
+|----|----:|----:|----:|
+|Plate wearer chance to cover other team member|10%|20%|30%|
 
 # Dual wielding
 
