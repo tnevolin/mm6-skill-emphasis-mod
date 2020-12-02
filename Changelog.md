@@ -1,3 +1,7 @@
+# version 40
+
+* Changed book price progression to make more steep. Cheapest book is now 4 times cheaper. Most expensive one is 10 times more expensive.
+
 # version 39
 
 * Staff adds small amount of all resistances to all party members.

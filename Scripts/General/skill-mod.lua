@@ -331,6 +331,23 @@ local housePrices =
 	["The Sparring Ground"] = 150,
 }
 
+-- modified book values
+
+local modifiedBookValues =
+{
+	[100] = 25,
+	[200] = 50,
+	[300] = 100,
+	[400] = 250,
+	[500] = 500,
+	[750] = 1000,
+	[1000] = 2500,
+	[1500] = 5000,
+	[2000] = 10000,
+	[3000] = 25000,
+	[5000] = 50000,
+}
+
 -- ======================================= --
 -- Helper functions --
 -- ======================================= --
@@ -1302,6 +1319,22 @@ function events.GameInitialized2()
 		
 	end
 
+	----------------------------------------------------------------------------------------------------
+	-- book values
+	----------------------------------------------------------------------------------------------------
+
+	for itemTxtIndex = 0, Game.ItemsTxt.high do
+
+		local itemTxt = Game.ItemsTxt[itemTxtIndex]
+		
+		if itemTxt.EquipStat == const.ItemType.Book - 1 then
+			if modifiedBookValues[itemTxt.Value] ~= nil then
+				itemTxt.Value = modifiedBookValues[itemTxt.Value]
+			end
+		end
+			
+	end
+
 end
 
 -- primary statistics effect
@@ -1550,6 +1583,8 @@ function events.KeyDown(t)
 			bringHirelingsToParty({const.NPCProfession.Pathfinder, const.NPCProfession.Tracker, })
 		elseif t.Key == const.Keys["4"] then
 			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
+		elseif t.Key == const.Keys["5"] then
+			bringHirelingsToParty({const.NPCProfession.Enchanter, })
 		end
 	-- debug
 	elseif t.Key == const.Keys.DIVIDE then
