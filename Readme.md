@@ -148,7 +148,7 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ### Knight
 
-![Knight](weapon_knight.png)
+![Knight damage rate progression by skill level](weapon_knight.png)
 
 This is the only class that decently plays sword-sword combo for quite a long time thanks to its hefty extra weapon damage bonus. Good for lazy players. After about skill level 15-20 axe-sword start overtaking it a little.
 
@@ -156,7 +156,7 @@ Knight can opt to mace-sword combo for paralization losing 20% in damage rate.
 
 ### Paladin
 
-[[/weapon_paladin.png]]
+![Paladin damage rate progression by skill level](weapon_paladin.png)
 
 Paladin can use 2h axe or axe-sword combo with about same combat effectiveness. Player's choice.
 
@@ -164,7 +164,7 @@ Same is true for Paladin about mace paralyzing ability. Get it for 20% loss in d
 
 ### Archer
 
-[[/weapon_nonmelee.png]]
+![Other classes damage rate progression by skill level](weapon_nonmelee.png)
 
 Archer is the only non melee oriented class who still can use all weapons. Therefore, 2h axe is a clear preference for them. The single weapon focus allows faster development. Since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is noticeably weaker but contributes to AC if this is so desired. Everything else is worse.
 
