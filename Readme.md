@@ -148,7 +148,7 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ### Knight
 
-!(weapon_knight.png "[Knight damage rate progression by skill level]")
+![Knight damage rate progression by skill level](weapon_knight.png "Knight damage rate progression by skill level")
 
 This is the only class that decently plays sword-sword combo for quite a long time thanks to its hefty extra weapon damage bonus. Good for lazy players. After about skill level 15-20 axe-sword start overtaking it a little.
 
