@@ -136,11 +136,11 @@ This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master 
 
 Single wield is inferior to any other wielding type as it was in vanilla. It is a waste to not use extra hand. If not for offense than for defense (shield) at least.
 
-Dual wield in this mod combines attack and speed bonuses from both weapon giving dual wielding some boost. Not too big, though. Attack improves badly in long run. Speed progresses well at the beginning but then slows down and get capped. Damage is the only bonus that keeps progressing well beyond levels 20-30. Unfortunately, only weapons could be held in off hand (sword, dagger) do not confer damage bonus. So dual wielding does better in this mod comparing to vanilla but not enough to confidently outrun two-handed weapon progression.
+Dual wield in this mod combines attack and speed bonuses from both weapon giving dual wielding some boost. Not too big, though. Attack improves badly in long run. Speed progresses well at the beginning but then slows down and get capped. Damage is the only bonus that keeps progressing well beyond levels 20-30. Unfortunately, only weapons that could be held in off hand (sword, dagger) do not confer damage bonus. So dual wielding does better in this mod comparing to vanilla but not enough to confidently outrun two-handed weapon progression.
 
-The inherent problem with wielding two different items in both hands (weapon-weapon or weapon-shield) is that skill points are split between two skills slowing down their progression comparing to a single type two-handed weapon that doesn't share skill point pool with anything else. Therefore, two-handed axe generally progresses about 1.4 time faster than their one-handed counterparts. That is 1.4 accuracy \* 1.4 speed \* 1.4 damage. Two-handed weapon is always preferrable for Archer as a single non specialized melee fighter class that can hold them. Magic classes (Cleric, Druid, Sourcerer) are not capable of wielding any significantly offensive 2h or dual combo.
+The inherent problem with wielding two different items in both hands (weapon-weapon or weapon-shield) is that skill points are split between two skills slowing down their progression comparing to a single type two-handed weapon that doesn't share skill point pool with anything else. Therefore, two-handed axe generally progresses about 1.4 time faster than any *different* type dual combo. That is 1.4 more accuracy \* 1.4 more speed \* 1.4 more damage. Two-handed weapon is always preferrable for Archer as a single non specialized melee fighter class that can hold them. Magic classes (Cleric, Druid, Sourcerer) are not capable of wielding any significantly offensive 2h or dual combo.
 
-Specialized melee fighter classes (Paladin, Knight) are special case as they receive damage bonus for **every** weapon held. As such Knight should definitely prefer axe-sword dual wielding for max offense benefit. He does not need sacrifice weapon offensive power for additional protection as his plate and abundant HP protect him enough already. Paladin receives half of Knight damage bonus and, therefore, may opt for either dual or two-handed wielding - player's choice.
+Specialized melee fighter classes (Paladin, Knight) are special cases as they receive damage bonus for **every** weapon held. As such Knight should definitely prefer axe-sword dual wielding for max offense benefit. He does not need to sacrifice weapon offensive power for additional protection as his plate and abundant HP protect him enough already. Paladin receives half of Knight damage bonus and, therefore, may opt for either dual or two-handed wielding - player's choice.
 
 Sword-sword and dagger-dagger combos are special case as they progress as fast as two-handed weapon due to same weapon type in both hands. However, since they both lack damage bonus, these combos have mediocre offense and do not compete with axe-sword, spear-sword options.
 
@@ -148,23 +148,29 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ### Knight
 
-This is the only class that decently plays sword-sword combo for quite a long time thanks to his hefty extra weapon damage bonus. Good for lazy players. It stops progresing satisfactory at about level 10 due to speed saturation and player needs to include more damage contributing weapon in a mix at this time: axe/spear/mace-sword. The 2h axe is close following. However, it is inconvenient to switch to it and abandon so many skill points invested in the sword.
+[[/weapon_knight.png]]
 
-Between axe/spear/mace the last one is probably more interesting due to its paralyzing ability.
+This is the only class that decently plays sword-sword combo for quite a long time thanks to its hefty extra weapon damage bonus. Good for lazy players. After about skill level 15-20 axe-sword start overtaking it a little.
+
+Knight can opt to mace-sword combo for paralization losing 20% in damage rate.
 
 ### Paladin
 
-Paladin can follow two different paths of about same combat effectiveness. One is folling big brother footsteps with sword-sword => axe/spear-sword evolution. Alternatively, they can stick to 2h axe from very beginning. Simple yet powerful. In this regard it is a pretty flexible class. 
+[[/weapon_paladin.png]]
 
-Same is true for Paladin about mace paralyzing ability. It is probably even more suitable for Paladin as it doesn't lose too much damage with this replacement.
+Paladin can use 2h axe or axe-sword combo with about same combat effectiveness. Player's choice.
+
+Same is true for Paladin about mace paralyzing ability. Get it for 20% loss in damage rate. If you have both Knight and Paladin the latter is more suitable for mace as weaker class.
 
 ### Archer
 
-Archer is the only not melee oriented class that is still capable of all powerful weapon combos. The 2h axe is a clear preference for him. The single weapon focus allows faster development. Since they cannot wear shield there is nothing else for them to do. Another possible option is spear-sword that is noticeably weaker but contributes to AC if this is so desired. Everything else is worse.
+[[/weapon_nonmelee.png]]
+
+Archer is the only non melee oriented class who still can use all weapons. Therefore, 2h axe is a clear preference for them. The single weapon focus allows faster development. Since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is noticeably weaker but contributes to AC if this is so desired. Everything else is worse.
 
 ### Cleric
 
-Mace definitely for paralyzing. Shield is for extra protection if you don't care about small recovery penalty.
+Mace for paralyzing. Shield for extra protection if you don't care about small recovery penalty.
 
 ### Druid
 
@@ -172,7 +178,7 @@ Mace/Dagger-Shield. Mace is probably better in long rung due to paralizing while
 
 ### Sorcerer
 
-Staff. Best option due to its special effects benefiting whole party greatly.
+Staff. Best option due to its special effects benefiting whole party greatly. It may be wise to give staff to other magic class if there is no sourcerer in the party.
 
 # Spells
 
@@ -220,7 +226,7 @@ Some useless professions should not appear at all. Some profession cost are adju
 |----|----:|----:|
 | Smith | 10 | 100 |
 | Armorer | 10 | 100 |
-| Alchemist | 10 | 100 |
+| Alchemist | 0 | 100 |
 | Scholar | 10 | 500 |
 | Guide | 0 | 100 |
 | Tracker | 10 | 200 |

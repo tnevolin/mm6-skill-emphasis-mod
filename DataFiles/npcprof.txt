@@ -2,9 +2,9 @@
 	NPC	Random	Join					
 #	Professions	Chance	Cost/w	Personality	Action Text	In Party Benefit	Join Text	
 								
-1	Smith	10	100	Merchant		Unlimited weapon repair.  %01 takes %17 percent of all gold you find.	I'll happily join you for 200 gold and %17 percent of all the gold we find.  I'll fix any weapon you ask me to while I work for you.	
-2	Armorer	10	100	Merchant		Unlimited armor repair.  %01 takes %17 percent of all gold you find.	I'm looking for work fixing armor.  All I charge is 200 gold to start and %17 percent of all the gold we find.  You won't regret hiring me!	
-3	Alchemist	10	100	Sorcerer		Unlimited magic item repair.  %01 takes %17 percent of all gold you find.	"I can mend any broken magic item you have, unless it's a piece of armor or a weapon.  My rate is 400 gold to start plus %17 percent of all the gold we find."	
+1	Smith	0	100	Merchant		Unlimited weapon repair.  %01 takes %17 percent of all gold you find.	I'll happily join you for 200 gold and %17 percent of all the gold we find.  I'll fix any weapon you ask me to while I work for you.	
+2	Armorer	0	100	Merchant		Unlimited armor repair.  %01 takes %17 percent of all gold you find.	I'm looking for work fixing armor.  All I charge is 200 gold to start and %17 percent of all the gold we find.  You won't regret hiring me!	
+3	Alchemist	0	100	Sorcerer		Unlimited magic item repair.  %01 takes %17 percent of all gold you find.	"I can mend any broken magic item you have, unless it's a piece of armor or a weapon.  My rate is 400 gold to start plus %17 percent of all the gold we find."	
 4	Scholar	10	500	Scholar		Unlimited item Identification and a 5 percent bonus on all experience gained.  %01 takes %17 percent of all gold you find.	"I studied under Lord Newton in Mist for eight years to learn to tell one magic item from another.  I'll work for you for 500 gold to start, plus a %17 percent share of all the gold we find. "	
 5	Guide	0	100	Adventurer		All map crossings one day faster (minimum one day).  %01 takes %17 percent of all gold you find.	I know shortcuts and back roads throughout Enroth.  I'll be your guide for a mere 100 gold to start and a %17 percent share of all the gold we find.	
 6	Tracker	10	200	Adventurer		All map crossings two days faster (minimum one day).  %01 takes %17 percent of all gold you find.	"I know shortcuts and back roads throughout Enroth.  I'll be your guide for 200 gold to start, plus a %17 percent share of the gold we find."	
@@ -64,8 +64,8 @@
 60	Cobbler	0	3	Merchant			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 61	Ditch Digger	0	1	Peasant			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 62	Miller	0	2	Peasant			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
-63	Carpenter	10	5	Merchant			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
-64	Stone Cutter	10	4	Fanatic			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
+63	Carpenter	0	5	Merchant			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
+64	Stone Cutter	0	4	Fanatic			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 65	Jester	0	10	Fanatic			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 66	Trapper	0	5	Adventurer			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 67	Beggar	0	1	Fanatic			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
@@ -79,5 +79,5 @@
 75	Noble	0	100	Noble			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 76	Gambler	0	10	Thief			"Well, I have no skills to offer, but I'm good company!  Just feed me and throw me a few gold pieces and I'll be happy to accompany you!"	
 77	Child	??	1	Peasant			"I don't have any skills to offer you, but if this will get me out of school and away from my chores, I'd love to follow you around!"	
-	Random Total	470						
+	Random Total	420						
 			

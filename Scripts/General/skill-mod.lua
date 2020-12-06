@@ -170,9 +170,9 @@ local weaponSkillResistanceBonuses =
 }
 
 -- skill effect multipliers
-local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local attackBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
-local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local damageBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
@@ -753,8 +753,11 @@ function events.GetAttackDelay(t)
 	end
 	
 	-- turn recovery time into a multiplier rather than divisor
+	
+	local recoveryCap = t.Ranged and 5 or 30
 	local recoveryBonus = 100 - t.Result
-	local correctedRecoveryTime = math.floor(100 * 100 / (100 + recoveryBonus))
+	local correctedRecoveryTime = recoveryCap + math.floor((100 - recoveryCap) * (100 / (100 + recoveryBonus)))
+	
 	t.Result = correctedRecoveryTime
 	
 end

@@ -1,3 +1,14 @@
+# version 42
+
+* Changed formula for recovery to never reach cap.
+* Attack bonus/level by mastery: 4, 5, 6.
+* Recovery bonus/level by mastery: 4, 5, 6.
+* Damage bonus/level by mastery: 4, 5, 6.
+
+# version 41
+
+* Further removed some useless NPCs.
+
 # version 40
 
 * Changed book price progression to make more steep. Cheapest book is now 4 times cheaper. Most expensive one is 10 times more expensive.
