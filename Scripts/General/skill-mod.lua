@@ -772,7 +772,6 @@ function events.GetAttackDelay(t)
 	local correctedRecoveryTime = math.floor(100 / (1 + recoveryBonus / 100))
 	
 	t.Result = correctedRecoveryTime
-	t.Result = 20
 	
 	-- cap melee recovery
 	
