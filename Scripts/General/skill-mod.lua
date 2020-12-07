@@ -1,3 +1,7 @@
+-- melee recovery cap
+
+local meleeRecoveryCap = 10
+
 -- attribute breakpoints
 
 local attributeBreakpoints =
@@ -80,7 +84,7 @@ local weaponNewBaseRecoveryBonuses =
 	[const.Skills.Bow] = 0,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = -20,
-	[const.Skills.Sword] = -10,
+	[const.Skills.Sword] = 0,
 	[const.Skills.Spear] = 20,
 	[const.Skills.Mace] = 20,
 	[const.Skills.Dagger] = 40,
@@ -170,11 +174,11 @@ local weaponSkillResistanceBonuses =
 }
 
 -- skill effect multipliers
-local attackBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
+local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
-local damageBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
+local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 0, [const.Master] = 0, }
+local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 2, [const.Master] = 2, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 
 -- special weapon skill chances
@@ -687,7 +691,17 @@ local function randomSpellPower(spellPower, level)
 	return r
 end
 
+-- set melee recovery cap
+
+mem.asmpatch(0x0042A237, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
+mem.asmpatch(0x0042A240, string.format("mov    DWORD [esp+0x28],%d", meleeRecoveryCap), 8)
+mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
+mem.asmpatch(0x03322D6A, string.format("mov    eax,%d", meleeRecoveryCap), 5)
+mem.asmpatch(0x03322951, string.format("cmp    edi,%d", meleeRecoveryCap), 3)
+mem.asmpatch(0x03322960, string.format("mov    edi,%d", meleeRecoveryCap), 5)
+
 -- corrects attack delay
+
 function events.GetAttackDelay(t)
 
 	local equipmentData = getPlayerEquipmentData(t.Player)
@@ -754,11 +768,17 @@ function events.GetAttackDelay(t)
 	
 	-- turn recovery time into a multiplier rather than divisor
 	
-	local recoveryCap = t.Ranged and 5 or 30
 	local recoveryBonus = 100 - t.Result
-	local correctedRecoveryTime = recoveryCap + math.floor((100 - recoveryCap) * (100 / (100 + recoveryBonus)))
+	local correctedRecoveryTime = math.floor(100 / (1 + recoveryBonus / 100))
 	
 	t.Result = correctedRecoveryTime
+	t.Result = 20
+	
+	-- cap melee recovery
+	
+	if not t.Ranged then
+		t.Result = math.max(meleeRecoveryCap, t.Result)
+	end
 	
 end
 
@@ -906,13 +926,6 @@ function events.CalcStatBonusBySkills(t)
 			
 			local attackBonusMultiplier = 1
 			
-			--[[
-			-- double attack bonus for blade in main hand
-			if main.skill == const.Skills.Sword or main.skill == const.Skills.Dagger then
-				attackBonusMultiplier = 2
-			end
-			--]]
-			
 			-- single wield
 			if not equipmentData.dualWield then
 				
@@ -984,8 +997,8 @@ function events.CalcStatBonusBySkills(t)
 				t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * main.level)
 			end
 			
-			-- add class bonus for extra hand weapon if any
-			if extra.weapon then
+			-- add class bonus for extra hand weapon if any and different from main weapon
+			if extra.weapon and extra.skill ~= main.skillthen
 				if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
 					t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * extra.level)
 				end
@@ -1261,10 +1274,10 @@ mov    DWORD [esp+0x14], ecx
 -- game initialization
 
 local monsterHitPointsMultiplier = 2
-local monsterDamageMultiplier = 2
+local monsterDamageMultiplier = 1
 local monsterArmorClassMultiplier = 2
 local monsterLevelMultiplier = 1
-local monsterExperienceMultiplier = 2
+local monsterExperienceMultiplier = 1
 function events.GameInitialized2()
 
 	-- modify monster statistics

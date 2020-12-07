@@ -20,6 +20,7 @@ Skill improves Attack and Speed.
 Special ability: can be held in left hand as an auxilliary weapon.
 
 Holding by two hands doubles weapon own damage.
+Holding by two hands adds 2 damage per skill level.
 
 Bonus increment/level
 ------------------------------------------------------------
@@ -43,6 +44,8 @@ Base recovery = 100
 Skill improves Attack, Speed, and Damage.
 
 Holding by two hands doubles weapon own damage.
+Holding by two hands adds 2 damage per skill level.
+
 
 Bonus increment/level
 ------------------------------------------------------------
@@ -53,6 +56,7 @@ Base recovery = 80
 Skill improves Attack, AC, and Damage.
 
 Holding by two hands doubles weapon own damage.
+Holding by two hands adds 2 damage per skill level.
 
 Bonus increment/level
 ------------------------------------------------------------

@@ -1,7 +1,7 @@
 Class	Descriptions
 Knight	The Knight class is the workhorse fighting class.  Knights start with the largest selection of weapons and armor, and may ultimately use any type of weapon or armor.  Being the toughest warriors of the classes, Knights begin with the greatest number of hit points and get the most number of hit points when they advance in level.  Knights can be promoted to Cavalier status with a two hit point per level gain, and then to Champion status with another two hit point per level gain.  Knights may never learn spells, nor may they ever learn (or need) the Meditation skill.
 
-Knight/Cavalier/Champion adds 2/3/4 damage/level to all melee weapons.
+Knight/Cavalier/Champion adds 2/3/4 damage per skill level for each distinct weapon type in hands.
 
 Cavalier	The Cavalier class is the first promotion of the Knight.  Cavaliers may use any type of weapon or armor, but they may not learn spells.  Cavaliers enjoy the benefit of an extra two hit points per level, and can be promoted once more to Champion status with another two hit point per level gain.
 

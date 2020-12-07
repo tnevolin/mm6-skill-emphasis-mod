@@ -4,13 +4,19 @@
 
 RPG character advancement should be mainly based on their skill progression with some small non skill based effects here and there from equipment, barrels, quests, etc. Putting it simply high skill should be a primary source of every property character has. That what R in RPG is. You build a role by pumping skill points into certain area. Like if you are focusing on axe skill only then you expect this character to be an outstanding axeman but appaling swordman. This is **NOT** like that in M&M engine. Mastering the skill is undoubtedly more difficult endeavour than aquiring an expensive item. Yet those expensive items give about same bonus in attack and damage as mastering the skill. I would love to turn this around and give skills their well deserved attention. Usually one could raise their selected skills somewhere to level 10 on average by the end of the game. Since there are so few of them we should make player to cherish each skill point and use every possibility to invest more in primary weapon skills.
 
-# Recovery mechanics
+# Recovery
 
-Intuitive player assumption is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics uses an inverse scale which makes it a little difficult to grasp at first. This also creates inherent flaw when attack rate growths faster with skill progression and then suddenly stops at easily reachable cap. From then on it is a complete waste to invest into recovery any more. All speed increasing weapons suddenly become uneffective to develop any further.
+## Recovery caps
 
-This mod internally introduces a notion of attack rate which is a reciprocal to recovery time. All recovery time bonuses now increase the attack rate and it is computed same way as any other positive game stats. Meaning adding 100 attack rate bonus on top of initial 100 attack rate value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. Thus we safely can stop worrying about the cap. See computation example below.
+Melee recovery cap is reduced to 10. This still seem to be reasonable cap for end game. Yet it is almost never reachable anyway.
 
-With all additional bonuses added melee cap is reached at the skill level 22 at the end of the game. Range cap is reached at the skill level 190 which is never. Regardless of caps recovery time in this model it is never negative.
+I didn't change ranged recovery cap but it seems that is does not exist!
+
+## Computation mechanics
+
+Intuitive player assumption is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics uses an inverse scale which makes it a little difficult to grasp at first. This also creates inherent flaw when attack rate growths faster with skill progression and then suddenly stops at easily reachable cap. From then on it is a complete waste to invest into recovery any more. All speed increasing weapons suddenly become ineffective to develop any further.
+
+This mod internally introduces a notion of attack rate which is a reciprocal to recovery time. All recovery time bonuses now increase the attack rate and it is computed same way as any other positive game stats. Meaning adding 100 attack rate bonus on top of initial 100 attack rate value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. See computation example below.
 
 Keep in mind that even though computation mechanics changed the attack rate value is still converted to recovery for the purpose of UI display and in game text/help and combat computations.
 
@@ -19,9 +25,9 @@ Keep in mind that even though computation mechanics changed the attack rate valu
 ### Vanilla
 
 <pre>
-Dagger		=  60 base recovery
-500 speed	= -30 recovery bonus
-haste		= -25 recovery bonus
+Dagger    =  60 base recovery
+500 speed =  30 recovery bonus
+haste     =  25 recovery bonus
 
 result		=   5 recovery which is actually capped at 30
 </pre>
@@ -29,17 +35,16 @@ result		=   5 recovery which is actually capped at 30
 ### This mod
 
 <pre>
-Total recovery reduction bonus from above example = 100 - 5 = 95
-This mod treats it as attack rate increase bonus = +95
-Resulting attack rate = 100 + 95 = 195
-Converting back to resulting recovery = 100 * (100 / 195) = 51, cap is not reached
+Total recovery bonus from above example: 40 (dagger) + 30 (speed) + 25 (haste) = 95
+Resulting attack rate:                   100 + 95 = 195
+Converting back to recovery:             100 * (100 / 195) = 51, cap is not reached
 </pre>
 
 # Weapon base recovery bonuses
 
 Weapons not improving their speed with skill keep their recovery bonuses.
 
-Axe recovery bonus is -40. Sword recovery bonus is -20. Due to very fast recovery bonus per level progression they are catching up and overtake other weapons in speed pretty soon. Axe (the slowest weapon) will be as fast as dagger at level 10 and then will keep getting faster and faster.
+Axe recovery bonus is -20. Sword recovery bonus is 0. Due to very fast recovery bonus per level progression they still catch up and overtake other weapons pretty soon. Axe (the slowest weapon) will be as fast as dagger at level 10 and then will keep getting faster and faster.
 
 # Combat skills
 
@@ -62,9 +67,10 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Attack|2|3|4|
 |Speed|4|5|6|
 |Damage|2|3|4|
+|2h weapon Damage|2|2|2|
 |Dagger chance to cause triple damage|3|4|5|
-|Armor Class from weapon|4|6|8|
-|Armor Class from shield|4|6|8|
+|Armor Class from weapon|2|3|4|
+|Armor Class from shield|2|3|4|
 |Armor Class from leather|2|3|4|
 |Armor Class from chain|4|6|8|
 |Armor Class from plate|6|9|12|
@@ -112,9 +118,17 @@ Dual wielding rules are quite complicated in MM6. Player need to remember which 
 
 All weapon bonuses are counted!!! Player can mix and match them as they see fit and get full benefit of weapon, skill, and enchantment bonuses from **each** weapon regardless of mix type. Weapons do not shadow each other abilities anymore.
 
-# Two-handed weapon double damage
+# Two-handed weapon specials
+
+## Double weapon damage
 
 Two handed weapons confer double damage for their listed damage value. This gives party some damage boost at the beginning of the game when combat skills are yet undevelopped.
+
+I didn't change actual item descriptions as spears can be used both with one and two hands. The bonus is calculated correctly in character stats screen. Consider this a two hand holding special bonus.
+
+## Extra damage per skill level
+
+Two handed weapon receives extra 2 damage per skill level regardless or rank. This also adds some boost to two handed weapons those suck otherwise except maybe 2h axe which is about as good as axe-sword combo without this bonus. With this bonus it becomes a best offensive weapon in hands of non specialized melee fighter.
 
 # Class specialty
 
@@ -148,11 +162,11 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ### Knight
 
-![Knight damage rate progression by skill level](weapon_knight.png "Knight damage rate progression by skill level")
+![Knight damage rate progression by skill level](weapon_knight.png)
 
-This is the only class that decently plays sword-sword combo for quite a long time thanks to its hefty extra weapon damage bonus. Good for lazy players. After about skill level 15-20 axe-sword start overtaking it a little.
+Knight plays almost all combos pretty well thanks to their hefty extra damage bonus. That also includes a famous sword-sword combo which is good for lazy players not interested in developing multiple weapon skills for Knight at the beginning of the game. The most offensive axe-sword combo overtakes spear-sword at about skill level 10 and continues improving at slightly higher rate than any other combo.
 
-Knight can opt to mace-sword combo for paralization losing 20% in damage rate.
+Knight can opt to mace-sword combo for paralizing losing 20% in damage rate at level 20.
 
 ### Paladin
 
@@ -174,11 +188,11 @@ Mace for paralyzing. Shield for extra protection if you don't care about small r
 
 ### Druid
 
-Mace/Dagger-Shield. Mace is probably better in long rung due to paralizing while dagger is fast at the beginning. Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still are not a match to any other decent combo. Better protect the weakling.
+Mace/Dagger-Shield. Mace is probably better in long rung due to paralyzing while dagger is fast at the beginning. Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still are not a match to any other decent combo. Better protect the weakling.
 
 ### Sorcerer
 
-Staff. Best option due to its special effects benefiting whole party greatly. It may be wise to give staff to other magic class if there is no sourcerer in the party.
+Staff. Best option due to its special effects benefiting whole party greatly. It may be wise to give staff to other magic class if there is no sorcerer in the party.
 
 # Spells
 

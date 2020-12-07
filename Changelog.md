@@ -1,3 +1,17 @@
+# version 43
+
+* Reverted recovery formula to pre version 42.
+* Set melee recovery cap to 10. It is almost never reachable now.
+* Attack bonus/level by mastery: 2, 3, 4.
+* Recovery bonus/level by mastery: 4, 5, 6.
+* Damage bonus/level by mastery: 2, 3, 4.
+* Two handed weapon adds 2 bonus damage per skill regardless of rank.
+* Axe base recovery is 120.
+* Sword base recovery is 100.
+* Paladin and Knight damage bonus is added to extra hand weapon only if it is differnt type from main hand weapon (not sword-sword or dagger-dagger).
+* Monster damage is no longer doubled.
+* Monster experience is no longer doubled.
+
 # version 42
 
 * Changed formula for recovery to never reach cap.
