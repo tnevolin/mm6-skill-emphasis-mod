@@ -65,8 +65,8 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
 |Attack|2|3|4|
-|Speed|4|5|6|
-|Damage|2|3|4|
+|Speed|3|4|5|
+|Damage|1|2|3|
 |2h weapon Damage|2|2|2|
 |Dagger chance to cause triple damage|3|4|5|
 |Armor Class from weapon|2|3|4|
@@ -214,7 +214,7 @@ Restricted and difficult to aim/use spells get extra damage due to inconvenience
 
 |spell|fixed|per level|
 |----|----:|----:|
-|Protection from ...|0|3, 4, 5|
+|Protection from ...||3, 4, 5|
 |All stat boosts|10|5, 5, 5|
 |Stone Skin|20|4|
 |Bless|5|1|
@@ -226,27 +226,27 @@ Restricted and difficult to aim/use spells get extra damage due to inconvenience
 |Fire Bolt|10|1-4|
 |Ring Of Fire|10|1-4|
 |Fire Blast|4|1-4|
-|Meteor Shower|0|1-4|
-|Inferno|0|1-5|
-|Incinerate|0|1-20|
+|Meteor Shower||1-4|
+|Inferno||1-5|
+|Incinerate||1-20|
 |Sparks|5|1-1|
 |Lightning Bolt|10|1-8|
 |Implosion|10|1-12|
-|Starburst|0|1-8|
+|Starburst||1-8|
 |Poison Spray|7|1-2|
 |Ice Bolt|10|1-7|
 |Acid Burst|10|1-10|
 |Ice Blast|10|1-10|
 |Deadly Swarm|15|1-3|
 |Blades|10|1-5|
-|Death Blossom|0|1-15|
+|Death Blossom||1-15|
 |Mind Blast|15|1-2|
 |Psychic Shock|20|1-15|
 |Harm|20|1-2|
 |Flying Fist|30|1-10|
-|Destroy Undead|0|1-25|
-|Prismatic Light|0|1-8|
-|Sun Ray|0|1-30|
+|Destroy Undead||1-25|
+|Prismatic Light||1-8|
+|Sun Ray||1-30|
 |Shrapmetal|8|1-8|
 
 # Monsters improvement
