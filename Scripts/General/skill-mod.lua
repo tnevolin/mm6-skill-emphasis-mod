@@ -2,6 +2,7 @@
 
 local meleeRecoveryCap = 10
 
+--[[
 -- attribute breakpoints
 
 local attributeBreakpoints =
@@ -68,6 +69,7 @@ local attributeEffects =
 1,
 0,
 }
+--]]
 
 local weaponOldBaseRecoveryBonuses =
 {
@@ -175,11 +177,15 @@ local weaponSkillResistanceBonuses =
 
 -- skill effect multipliers
 local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
-local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
-local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local recoveryBonusByMastery = {[const.Novice] = 3, [const.Expert] = 4, [const.Master] = 5, }
+local damageBonusByMastery = {[const.Novice] = 1, [const.Expert] = 2, [const.Master] = 3, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 2, [const.Master] = 2, }
+local daggerTrippleDamageBonusByMastery = {[const.Novice] = 3, [const.Expert] = 4, [const.Master] = 5, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
+local twoHandedWeaponDamageBonus = 2
+local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
+local learningSkillExtraMultiplier = 2
+local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
 
 -- special weapon skill chances
 local staffEffect = {["base"] = 10, ["multiplier"] = 2, ["duration"] = 5, }
@@ -206,35 +212,94 @@ local classRangedWeaponSkillDamageBonus =
 local plateWearerAttackAttractionChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
 
 -- spell powers
+
+local protectionSpellExtraMultiplier = 2
+
 local spellPowers =
 {
+	-- Fire Bolt
+	[4] =
+	{
+		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+	},
 	-- Ring of Fire
 	[7] =
 	{
-		[const.Novice] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
-		[const.Expert] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
-		[const.Master] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
+		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
 	},
-	-- Meteor Shower
-	[9] =
+	-- Fire Blast
+	[8] =
 	{
 		[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 		[const.Expert] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 		[const.Master] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
 	},
+	-- Meteor Shower
+	[9] =
+	{
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
+	},
 	-- Inferno
 	[10] =
 	{
-		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
-		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
-		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+	},
+	-- Incinerate
+	[11] =
+	{
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 20, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 20, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 20, },
+	},
+	-- Sparks
+	[15] =
+	{
+		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 1, },
+		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 1, },
+		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 1, },
+	},
+	-- Lightning Bolt
+	[18] =
+	{
+		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 8, },
+		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 8, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 8, },
+	},
+	-- Implosion
+	[20] =
+	{
+		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 12, },
+		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 12, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 12, },
 	},
 	-- Starburst
 	[22] =
 	{
-		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
-		[const.Expert] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
-		[const.Master] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+	},
+	-- Poison Spray
+	[26] =
+	{
+		[const.Novice] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 2, },
+		[const.Expert] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 2, },
+		[const.Master] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 2, },
+	},
+	-- Ice Bolt
+	[28] =
+	{
+		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 7, },
+		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 7, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 7, },
 	},
 	-- Ice Blast
 	[32] =
@@ -243,45 +308,87 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 	},
+	-- Deadly Swarm
+	[37] =
+	{
+		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 3, },
+		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 3, },
+		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 3, },
+	},
+	-- Blades
+	[39] =
+	{
+		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 5, },
+		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 5, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 5, },
+	},
 	-- Death Blossom
 	[43] =
+	{
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 15, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 15, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 15, },
+	},
+	-- Mind Blast
+	[58] =
+	{
+		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
+		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
+		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
+	},
+	-- Psychic Shock
+	[65] =
+	{
+		[const.Novice] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 15, },
+		[const.Expert] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 15, },
+		[const.Master] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 15, },
+	},
+	-- Harm
+	[70] =
+	{
+		[const.Novice] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 2, },
+		[const.Expert] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 2, },
+		[const.Master] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 2, },
+	},
+	-- Flying Fist
+	[76] =
+	{
+		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 10, },
+		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 10, },
+		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 10, },
+	},
+	-- Destroy Undead
+	[82] =
+	{
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 25, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 25, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 25, },
+	},
+	-- Prismatic Light
+	[84] =
+	{
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+	},
+	-- Sun Ray
+	[87] =
+	{
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 30, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 30, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 30, },
+	},
+	-- Shrapmetal
+	[92] =
 	{
 		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 		[const.Expert] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 		[const.Master] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 8, },
 	},
-	-- Mind Blast
-	[58] =
-	{
-		[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
-		[const.Expert] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
-		[const.Master] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
-	},
-	-- Harm
-	[70] =
-	{
-		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
-		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
-		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 5, },
-	},
-	-- Flying Fist
-	[76] =
-	{
-		[const.Novice] = {fixedMin = 14, fixedMax = 14, variableMin = 1, variableMax = 14, },
-		[const.Expert] = {fixedMin = 14, fixedMax = 14, variableMin = 1, variableMax = 14, },
-		[const.Master] = {fixedMin = 14, fixedMax = 14, variableMin = 1, variableMax = 14, },
-	},
-	-- Prismatic Light
-	[84] =
-	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-	},
 }
 local spellBuffPowers =
 {
-	-- StoneSkin
+	-- Stone Skin
 	["StoneSkin"] =
 	{
 		["fixed"] = 20,
@@ -305,7 +412,7 @@ local spellStatsBuffPowers =
 	["StatsBuff"] =
 	{
 		["fixed"] = 10,
-		["proportional"] = 2,
+		["proportional"] = 5,
 	},
 }
 
@@ -353,8 +460,32 @@ local modifiedBookValues =
 }
 
 -- ======================================= --
+-- Additional structures
+-- ======================================= --
+
+function structs.f.GameExtraStructure(define)
+	define
+	[0x0056B76C].array(31).EditPChar  'SkillDescriptionsNormal'
+	[0x0056F29C].array(31).EditPChar  'SkillDescriptionsExpert'
+	[0x0056F318].array(31).EditPChar  'SkillDescriptionsMaster'
+end
+GameExtra = structs.GameExtraStructure:new(0)
+local SkillDescriptionsRanks =
+{
+	[const.Novice] = GameExtra.SkillDescriptionsNormal,
+	[const.Expert] = GameExtra.SkillDescriptionsExpert,
+	[const.Master] = GameExtra.SkillDescriptionsMaster,
+}
+
+-- ======================================= --
 -- Helper functions --
 -- ======================================= --
+
+-- formats number for skill rank description
+local function formatSkillRankNumber(number)
+	local numberString = string.format("%s", number)
+	return string.rep("_", math.max(0, 2 - string.len(numberString))) .. numberString
+end
 
 -- Player hooks
 
@@ -693,10 +824,15 @@ end
 
 -- set melee recovery cap
 
+mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
+-- originally 0x0040688B then moved to MM6patch.dll
+-- .text:00406889     call    near ptr address + 2
+mem.asmpatch(0x03322D6A, string.format("mov    eax,%d", meleeRecoveryCap), 5)
+
 mem.asmpatch(0x0042A237, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
 mem.asmpatch(0x0042A240, string.format("mov    DWORD [esp+0x28],%d", meleeRecoveryCap), 8)
-mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
-mem.asmpatch(0x03322D6A, string.format("mov    eax,%d", meleeRecoveryCap), 5)
+
+-- buried in the MM6patch.dll
 mem.asmpatch(0x03322951, string.format("cmp    edi,%d", meleeRecoveryCap), 3)
 mem.asmpatch(0x03322960, string.format("mov    edi,%d", meleeRecoveryCap), 5)
 
@@ -811,6 +947,59 @@ local function getPartyExperienceLevel()
 	
 	return partyExperienceLevel
 
+end
+
+-- profession functions
+
+local professionsRandomTotalAddress = 0x006BA538
+local professionStructureSize = 0x4C
+local professionChanceAddress = 0x006B5DC8
+local professionCostAddress = 0x006B5DCC
+local professionJoinTextAddress = 0x006B5DD8
+
+local function setProfessionChance(professionIndex, chance)
+
+	local oldChance = mem.u4[professionChanceAddress + professionStructureSize * professionIndex]
+	mem.u4[professionChanceAddress + professionStructureSize * professionIndex] = chance
+	mem.u4[professionsRandomTotalAddress] = mem.u4[professionsRandomTotalAddress] - oldChance + chance
+	
+end
+
+local function setProfessionCost(professionIndex, cost)
+
+	-- get join text byte array address
+	
+	local joinTextPointer = mem.u4[professionJoinTextAddress + professionStructureSize * professionIndex]
+	
+	-- read bytes to string
+	
+	local joinText = ""
+	
+	local memoryBytePointer = joinTextPointer
+	while mem.u1[memoryBytePointer] ~= 0 do
+		joinText = joinText .. string.char(mem.u1[memoryBytePointer])
+		memoryBytePointer = memoryBytePointer + 1
+	end
+	
+	-- get old cost
+	
+	local oldCost = mem.u4[professionCostAddress + professionStructureSize * professionIndex]
+	
+	-- replace cost text
+	
+	joinText = string.gsub(joinText, string.format("%d", oldCost), string.format("%d", cost))
+	
+	-- write bytes to memory
+	
+	for i = 1, string.len(joinText) do
+		mem.u1[joinTextPointer + (i - 1)] = string.byte(joinText, i)
+	end
+	mem.u1[joinTextPointer + string.len(joinText)] = 0
+	
+	-- modify numeric cost value
+	
+	mem.u4[professionCostAddress + professionStructureSize * professionIndex] = cost
+	
 end
 
 -- ======================================= --
@@ -1221,54 +1410,60 @@ mem.asmpatch(0x00427F86, "lea     ecx, [eax+eax*4]", 4)
 mem.asmpatch(0x00428596, "lea     ecx, [eax+eax*4]", 4)
 
 -- Protection from Fire
-mem.asmpatch(0x004236E3, [[
-mov    eax, DWORD [esp+0x10]
-mov    ecx, esi
-inc    ecx
-inc    ecx
-imul   ecx, eax
-mov    DWORD [esp+0x14], ecx
-]], 0x2D)
+mem.asmpatch(
+	0x004236E3,
+	"mov    eax, DWORD [esp+0x10]\n" ..
+	"mov    ecx, esi\n" ..
+	string.format("add    ecx,%d\n", protectionSpellExtraMultiplier) ..
+	"imul   ecx, eax\n" ..
+	"mov    DWORD [esp+0x14], ecx\n",
+	0x2D
+)
 
 -- Protection from Electricity
-mem.asmpatch(0x0042439D, [[
-mov    eax, DWORD[esp+0x10]
-mov    ecx, esi
-inc    ecx
-inc    ecx
-imul   ecx, eax
-mov    DWORD [esp+0x14], ecx
-]], 0x2D)
+mem.asmpatch(
+	0x0042439D,
+	"mov    eax, DWORD[esp+0x10]\n" ..
+	"mov    ecx, esi\n" ..
+	"inc    ecx\n" ..
+	"inc    ecx\n" ..
+	"imul   ecx, eax\n" ..
+	"mov    DWORD [esp+0x14], ecx\n",
+	0x2D
+)
 
 -- Protection from Cold
-mem.asmpatch(0x00424F99, [[
-mov    eax, DWORD[esp+0x10]
-mov    ecx, esi
-inc    ecx
-inc    ecx
-imul   ecx, eax
-mov    DWORD [esp+0x14], ecx
-]], 0x2D)
+mem.asmpatch(
+	0x00424F99,
+	"mov    eax, DWORD[esp+0x10]\n" ..
+	"mov    ecx, esi\n" ..
+	string.format("add    ecx,%d\n", protectionSpellExtraMultiplier) ..
+	"imul   ecx, eax\n" ..
+	"mov    DWORD [esp+0x14], ecx\n",
+	0x2D
+)
 
 -- Protection from Magic
-mem.asmpatch(0x00426087, [[
-mov    eax, DWORD[esp+0x10]
-mov    ecx, esi
-inc    ecx
-inc    ecx
-imul   ecx, eax
-mov    DWORD [esp+0x14], ecx
-]], 0x2D)
+mem.asmpatch(
+	0x00426087,
+	"mov    eax, DWORD[esp+0x10]\n" ..
+	"mov    ecx, esi\n" ..
+	string.format("add    ecx,%d\n", protectionSpellExtraMultiplier) ..
+	"imul   ecx, eax\n" ..
+	"mov    DWORD [esp+0x14], ecx\n",
+	0x2D
+)
 
 -- Protection from Poison
-mem.asmpatch(0x00427EBB, [[
-mov    eax, DWORD[esp+0x10]
-mov    ecx, esi
-inc    ecx
-inc    ecx
-imul   ecx, eax
-mov    DWORD [esp+0x14], ecx
-]], 0x2D)
+mem.asmpatch(
+	0x00427EBB,
+	"mov    eax, DWORD[esp+0x10]\n" ..
+	"mov    ecx, esi\n" ..
+	string.format("add    ecx,%d\n", protectionSpellExtraMultiplier) ..
+	"imul   ecx, eax\n" ..
+	"mov    DWORD [esp+0x14], ecx\n",
+	0x2D
+)
 
 -- game initialization
 
@@ -1350,15 +1545,385 @@ function events.GameInitialized2()
 			
 	end
 
+	----------------------------------------------------------------------------------------------------
+	-- class descriptions
+	----------------------------------------------------------------------------------------------------
+	
+	-- melee damage bonus
+
+	for classIndex, value in pairs(classMeleeWeaponSkillDamageBonus) do
+	
+		Game.ClassDescriptions[classIndex] = Game.ClassDescriptions[classIndex] ..
+			string.format(
+				"\n\n%s - %s - %s adds %d - %d - %d additional damage per skill level to each distinct melee weapon type in hands.",
+				Game.ClassNames[math.floor(classIndex / 3) * 3 + 0],
+				Game.ClassNames[math.floor(classIndex / 3) * 3 + 1],
+				Game.ClassNames[math.floor(classIndex / 3) * 3 + 2],
+				classMeleeWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 0],
+				classMeleeWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 1],
+				classMeleeWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 2]
+			)
+			
+	end
+	
+	-- ranged damage bonus
+
+	for classIndex, value in pairs(classRangedWeaponSkillDamageBonus) do
+	
+		Game.ClassDescriptions[classIndex] = Game.ClassDescriptions[classIndex] ..
+			string.format(
+				"\n\n%s - %s - %s adds %d - %d - %d damage per skill level to ranged weapon.",
+				Game.ClassNames[math.floor(classIndex / 3) * 3 + 0],
+				Game.ClassNames[math.floor(classIndex / 3) * 3 + 1],
+				Game.ClassNames[math.floor(classIndex / 3) * 3 + 2],
+				classRangedWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 0],
+				classRangedWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 1],
+				classRangedWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 2]
+			)
+			
+	end
+
+	----------------------------------------------------------------------------------------------------
+	-- skill descriptions
+	----------------------------------------------------------------------------------------------------
+	
+	Game.SkillDescriptions[const.Skills.Staff] = Game.SkillDescriptions[const.Skills.Staff] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nSpecial effects: Shrink and Feeblemind\nchance = %d%% + %d%% * level, duration = %d minutes\n\nHolding by two hands doubles weapon own damage.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   AC   party resistances",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Staff],
+			staffEffect["base"],
+			staffEffect["multiplier"],
+			staffEffect["duration"]
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Staff] =
+			string.format(
+				"     %s | %s |                  %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(weaponACBonusByMastery[rank]),
+				formatSkillRankNumber(weaponResistanceBonusByMastery[rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Sword] = Game.SkillDescriptions[const.Skills.Sword] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   speed",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Sword],
+			twoHandedWeaponDamageBonus
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Sword] =
+			string.format(
+				"     %s |     %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(recoveryBonusByMastery[rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nNote: Modified tripple damage chance is currently not implemented. It still works as in vanilla.\n\nBonus increment / level and x3 damage chance\n------------------------------------------------------------\n          attack   x3 damage chance",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Dagger]
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Dagger] =
+			string.format(
+				"     %s |                   %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(daggerTrippleDamageBonusByMastery[rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Axe] = Game.SkillDescriptions[const.Skills.Axe] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   speed   damage",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Axe],
+			twoHandedWeaponDamageBonus
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Axe] =
+			string.format(
+				"     %s |     %s |       %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(recoveryBonusByMastery[rank]),
+				formatSkillRankNumber(damageBonusByMastery[rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Spear] = Game.SkillDescriptions[const.Skills.Spear] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   AC   damage",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Spear],
+			twoHandedWeaponDamageBonus
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Spear] =
+			string.format(
+				"     %s | %s |       %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(weaponACBonusByMastery[rank]),
+				formatSkillRankNumber(damageBonusByMastery[rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Bow] = Game.SkillDescriptions[const.Skills.Bow] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nMasters fire two arrows per shot.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   speed",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Bow]
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Bow] =
+			string.format(
+				"     %s |     %s | %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(recoveryBonusByMastery[rank]),
+				(rank == const.Master and "Two arrows per shot" or "")
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Mace] = Game.SkillDescriptions[const.Skills.Mace] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nSpecial effects: Paralize\nchance = %d%% + %d%% * level, duration = %d minutes\n\nBonus increment / level\n------------------------------------------------------------\n          attack   damage",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Mace],
+			maceEffect["base"],
+			maceEffect["multiplier"],
+			maceEffect["duration"]
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Mace] =
+			string.format(
+				"     %s |       %s",
+				formatSkillRankNumber(attackBonusByMastery[rank]),
+				formatSkillRankNumber(damageBonusByMastery[rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Shield] = Game.SkillDescriptions[const.Skills.Shield] ..
+		string.format(
+			"\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty"
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Shield] =
+			string.format(
+				" %s |                 %s",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Shield][rank]),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Leather] = Game.SkillDescriptions[const.Skills.Leather] ..
+		string.format(
+			"\n\nLeather armor is the weakest but grants best resistance.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty   resistance"
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Leather] =
+			string.format(
+				" %s |                 %s |          %s",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Leather][rank]),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Leather + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
+				formatSkillRankNumber(armorSkillResistanceBonusBySkillAndRank[const.Skills.Leather][rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Chain] = Game.SkillDescriptions[const.Skills.Chain] ..
+		string.format(
+			"\n\nChain armor grants medium protection and mild resistance.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty   resistance"
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Chain] =
+			string.format(
+				" %s |                 %s |          %s",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Chain][rank]),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Chain + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
+				formatSkillRankNumber(armorSkillResistanceBonusBySkillAndRank[const.Skills.Chain][rank])
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Plate] = Game.SkillDescriptions[const.Skills.Plate] ..
+		string.format(
+			"\n\nPlate armor is the strongest one.\n\nPlate wearer has a chance to cover another team member not wearing a plate by taking a hit for them.\n\nBonus increment / level and recovery penalty and cover chance\n------------------------------------------------------------\n          AC   recovery penalty   cover chance"
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Plate] =
+			string.format(
+				" %s |                 %s |              %s",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Plate][rank]),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Plate + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
+				formatSkillRankNumber(plateWearerAttackAttractionChanceByMastery[rank] * 100)
+			)
+	end
+	
+	Game.SkillDescriptions[const.Skills.Learning] =
+		string.format(
+			"Learning skill directly increases the experience your character receives from killed monsters with 9%% starting bonus."
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Learning] =
+			string.format(
+				"Experience increase = %d * level",
+				learningSkillMultiplierByMastery[rank]
+			)
+	end
+	
+	----------------------------------------------------------------------------------------------------
+	-- spell descriptions
+	----------------------------------------------------------------------------------------------------
+	
+	-- protections
+
+	Game.SpellsTxt[3].Description = "Increases all your characters' resistance to Fire. Lasts one hour per point of skill in Fire Magic."
+	Game.SpellsTxt[3].Normal = string.format("resistance = %d * level", (const.Novice + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[3].Expert = string.format("resistance = %d * level", (const.Expert + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[3].Master = string.format("resistance = %d * level", (const.Master + protectionSpellExtraMultiplier))
+	
+	Game.SpellsTxt[14].Description = "Increases all your characters' resistance to Electricity. Lasts one hour per point of skill in Air Magic."
+	Game.SpellsTxt[14].Normal = string.format("resistance = %d * level", (const.Novice + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[14].Expert = string.format("resistance = %d * level", (const.Expert + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[14].Master = string.format("resistance = %d * level", (const.Master + protectionSpellExtraMultiplier))
+	
+	Game.SpellsTxt[25].Description = "Increases all your characters' resistance to Cold. Lasts one hour per point of skill in Water Magic."
+	Game.SpellsTxt[25].Normal = string.format("resistance = %d * level", (const.Novice + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[25].Expert = string.format("resistance = %d * level", (const.Expert + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[25].Master = string.format("resistance = %d * level", (const.Master + protectionSpellExtraMultiplier))
+	
+	Game.SpellsTxt[36].Description = "Increases all your characters' resistance to Magic. Lasts one hour per point of skill in Earth Magic."
+	Game.SpellsTxt[36].Normal = string.format("resistance = %d * level", (const.Novice + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[36].Expert = string.format("resistance = %d * level", (const.Expert + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[36].Master = string.format("resistance = %d * level", (const.Master + protectionSpellExtraMultiplier))
+	
+	Game.SpellsTxt[69].Description = "Increases all your characters' resistance to Poison. Lasts one hour per point of skill in Body Magic."
+	Game.SpellsTxt[69].Normal = string.format("resistance = %d * level", (const.Novice + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[69].Expert = string.format("resistance = %d * level", (const.Expert + protectionSpellExtraMultiplier))
+	Game.SpellsTxt[69].Master = string.format("resistance = %d * level", (const.Master + protectionSpellExtraMultiplier))
+	
+	-- stats buffs
+	
+	-- Lucky day
+	Game.SpellsTxt[48].Description = string.format("Temporarily increases all party characters' Luck statistic by 10 points plus %d per point of skill in Spirit Magic.", spellStatsBuffPowers["StatsBuff"]["proportional"])
+	Game.SpellsTxt[48].Normal = "same"
+	Game.SpellsTxt[48].Expert = "same"
+	Game.SpellsTxt[48].Master = "same"
+	
+	-- Meditation
+	Game.SpellsTxt[56].Description = string.format("Temporarily increases all party characters' Intellect and Personality statistics by 10 points plus %d per point of skill in Mind Magic.", spellStatsBuffPowers["StatsBuff"]["proportional"])
+	Game.SpellsTxt[56].Normal = "same"
+	Game.SpellsTxt[56].Expert = "same"
+	Game.SpellsTxt[56].Master = "same"
+	
+	-- Precision
+	Game.SpellsTxt[59].Description = string.format("Temporarily increases all party characters' Accuracy statistic by 10 points plus %d per point of skill in Mind Magic.", spellStatsBuffPowers["StatsBuff"]["proportional"])
+	Game.SpellsTxt[59].Normal = "same"
+	Game.SpellsTxt[59].Expert = "same"
+	Game.SpellsTxt[59].Master = "same"
+	
+	-- Speed
+	Game.SpellsTxt[73].Description = string.format("Temporarily increases all party characters' Speed statistic by 10 points plus %d per point of skill in Body Magic.", spellStatsBuffPowers["StatsBuff"]["proportional"])
+	Game.SpellsTxt[73].Normal = "same"
+	Game.SpellsTxt[73].Expert = "same"
+	Game.SpellsTxt[73].Master = "same"
+	
+	-- Power day
+	Game.SpellsTxt[75].Description = string.format("Temporarily increases all party characters' Might and Endurance by 10 points plus %d per point of skill in Body Magic.", spellStatsBuffPowers["StatsBuff"]["proportional"])
+	Game.SpellsTxt[75].Normal = "same"
+	Game.SpellsTxt[75].Expert = "same"
+	Game.SpellsTxt[75].Master = "same"
+	
+	-- direct buffs
+	
+	-- Stone Skin
+	Game.SpellsTxt[38].Description = string.format("Increases the armor class of a character by %d + %d point per point of skill in Earth Magic.", spellBuffPowers["StoneSkin"]["fixed"], spellBuffPowers["StoneSkin"]["proportional"])
+	
+	-- Bless
+	Game.SpellsTxt[46].Description = string.format("Increases the attack/shoot of a character by %d + %d per point of skill in Spirit Magic.", spellBuffPowers["Bless"]["fixed"], spellBuffPowers["Bless"]["proportional"])
+	
+	-- Heroism
+	Game.SpellsTxt[51].Description = string.format("Increases the damage a character does on a successful attack by %d + %d point per point of skill in Spirit Magic.", spellBuffPowers["Heroism"]["fixed"], spellBuffPowers["Heroism"]["proportional"])
+	
+	-- healing spells
+	
+	-- Healing Touch
+	Game.SpellsTxt[47].Description = string.format("Cheaply heals a single character. Skill increases the recovery rate of this spell.")
+	Game.SpellsTxt[47].Normal = string.format("Heals 3-7 points of damage")
+	Game.SpellsTxt[47].Expert = string.format("Heals 6-14 points of damage")
+	Game.SpellsTxt[47].Master = string.format("Heals 15-35 points of damage")
+
+	-- First Aid
+	Game.SpellsTxt[68].Description = string.format("Cures single character. Recovery is reduced by an amount equal to the caster's skill in Body Magic.")
+	Game.SpellsTxt[68].Normal = string.format("Cures 5 hit points")
+	Game.SpellsTxt[68].Expert = string.format("Cures 10 hit points")
+	Game.SpellsTxt[68].Master = string.format("Cures 25 hit points")
+
+	-- Cure Wounds
+	Game.SpellsTxt[71].Description = string.format("Cures hit points on a single target when cast. The number cured is equal to 5 per point of skill in Body Magic.")
+
+	-- Power Cure
+	Game.SpellsTxt[77].Description = string.format("Cures hit points of all characters in your party at once. The number cured is equal to 5 per point of skill in Body Magic.")
+
+	-- direct damage spells
+	
+	for spellIndex, spellPower in pairs(spellPowers) do
+		Game.SpellsTxt[spellIndex].Description = Game.SpellsTxt[spellIndex].Description .. string.format("\n\nmodified damage = %d + %d-%d per point of skill", spellPowers[spellIndex][const.Novice].fixedMin, spellPowers[spellIndex][const.Novice].variableMin, spellPowers[spellIndex][const.Novice].variableMax)
+	end
+	
+	----------------------------------------------------------------------------------------------------
+	-- professions
+	----------------------------------------------------------------------------------------------------
+	
+	setProfessionChance(const.NPCProfession.Smith, 0)
+	setProfessionChance(const.NPCProfession.Armorer, 0)
+	setProfessionChance(const.NPCProfession.Alchemist, 0)
+	setProfessionChance(const.NPCProfession.Guide, 0)
+	setProfessionChance(const.NPCProfession.Counselor, 0)
+	setProfessionChance(const.NPCProfession.Barrister, 0)
+	setProfessionChance(const.NPCProfession.QuarterMaster, 0)
+	setProfessionChance(const.NPCProfession.Cook, 0)
+	setProfessionChance(const.NPCProfession.Negotiator, 0)
+	setProfessionChance(const.NPCProfession.Peasant, 0)
+	setProfessionChance(const.NPCProfession.Serf, 0)
+	setProfessionChance(const.NPCProfession.Tailor, 0)
+	setProfessionChance(const.NPCProfession.Laborer, 0)
+	setProfessionChance(const.NPCProfession.Farmer, 0)
+	setProfessionChance(const.NPCProfession.Cooper, 0)
+	setProfessionChance(const.NPCProfession.Potter, 0)
+	setProfessionChance(const.NPCProfession.Weaver, 0)
+	setProfessionChance(const.NPCProfession.Cobbler, 0)
+	setProfessionChance(const.NPCProfession.DitchDigger, 0)
+	setProfessionChance(const.NPCProfession.Miller, 0)
+	setProfessionChance(const.NPCProfession.Carpenter, 0)
+	setProfessionChance(const.NPCProfession.StoneCutter, 0)
+	setProfessionChance(const.NPCProfession.Jester, 0)
+	setProfessionChance(const.NPCProfession.Trapper, 0)
+	setProfessionChance(const.NPCProfession.Beggar, 0)
+	setProfessionChance(const.NPCProfession.Rustler, 0)
+	setProfessionChance(const.NPCProfession.Hunter, 0)
+	setProfessionChance(const.NPCProfession.Scribe, 0)
+	setProfessionChance(const.NPCProfession.Missionary, 0)
+	setProfessionChance(const.NPCProfession.Clerk, 0)
+	setProfessionChance(const.NPCProfession.Guard, 0)
+	setProfessionChance(const.NPCProfession.FollowerofBaa, 0)
+	setProfessionChance(const.NPCProfession.Noble, 0)
+	setProfessionChance(const.NPCProfession.Gambler, 0)
+	
+	setProfessionCost(const.NPCProfession.ArmsMaster, 1000)
+	setProfessionCost(const.NPCProfession.WeaponsMaster, 1500)
+	setProfessionCost(const.NPCProfession.Apprentice, 200)
+	setProfessionCost(const.NPCProfession.Squire, 2000)
+	setProfessionCost(const.NPCProfession.Burglar, 500)
+	
 end
 
+--[[
+----------------------------------------------------------------------------------------------------
 -- primary statistics effect
+----------------------------------------------------------------------------------------------------
+
 for index,value in ipairs(attributeBreakpoints) do
 	mem.bytecodepatch(0x004C2860 + 2 * (index - 1), string.char(bit.band(value, 0xFF), bit.band(bit.rshift(value, 8), 0xFF)), 2)
 end
 for index,value in ipairs(attributeEffects) do
 	mem.bytecodepatch(0x004C289C + 1 * (index - 1), string.char(bit.band(value, 0xFF)), 1)
 end
+--]]
 
 --[[
 -- skill advancement
@@ -1441,14 +2006,14 @@ mem.asmpatch(0x004283C7, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["Stat
 
 -- learning skill bonus multiplier
 local function setLearningSkillBonusMultiplier(d, def)
-	d.ecx = d.ecx + 2
+	d.ecx = d.ecx + learningSkillExtraMultiplier
 end
 mem.autohook(0x004215E5, setLearningSkillBonusMultiplier, 5)
 
 -- navigateMissile
 local function navigateMissile(object)
 
-	-- exclude some special non targetting spells
+	-- exclude some special non targeting spells
 	if
 		-- Fire Blast
 		object.SpellType == 8
@@ -1600,6 +2165,8 @@ function events.KeyDown(t)
 			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
 		elseif t.Key == const.Keys["5"] then
 			bringHirelingsToParty({const.NPCProfession.Enchanter, })
+		elseif t.Key == const.Keys["6"] then
+			bringHirelingsToParty({const.NPCProfession.WeaponsMaster, const.NPCProfession.Squire, })
 		end
 	-- debug
 	elseif t.Key == const.Keys.DIVIDE then

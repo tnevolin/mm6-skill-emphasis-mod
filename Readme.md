@@ -164,9 +164,9 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ![Knight damage rate progression by skill level](weapon_knight.png)
 
-Knight plays almost all combos pretty well thanks to their hefty extra damage bonus. That also includes a famous sword-sword combo which is good for lazy players not interested in developing multiple weapon skills for Knight at the beginning of the game. The most offensive axe-sword combo overtakes spear-sword at about skill level 10 and continues improving at slightly higher rate than any other combo.
+Knight plays almost all combos pretty well until level 10 thanks to their hefty extra damage bonus. That also includes a famous sword-sword combo which is good for lazy players not interested in developing multiple weapon skills for Knight at the beginning of the game. The most offensive axe-sword combo overtakes all others past skill level 10 and continues improving at slightly higher rate from then on.
 
-Knight can opt to mace-sword combo for paralizing losing 20% in damage rate at level 20.
+Knight can opt to mace-sword combo sacrificing 20% damage rate for paralyzing ability.
 
 ### Paladin
 
@@ -180,7 +180,7 @@ Same is true for Paladin about mace paralyzing ability. Get it for 20% loss in d
 
 ![Other classes damage rate progression by skill level](weapon_nonmelee.png)
 
-Archer is the only non melee oriented class who still can use all weapons. Therefore, 2h axe is a clear preference for them. The single weapon focus allows faster development. Since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is noticeably weaker but contributes to AC if this is so desired. Everything else is worse.
+Archer does not possess close combat bonuses yet it is still capable of using all weapons. Two-handed axe is a clear preference for them due to 2h damage bonus. Besides, since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is somewhate weaker on offense but beefs up AC. Everything else is worse.
 
 ### Cleric
 
@@ -196,26 +196,26 @@ Staff. Best option due to its special effects benefiting whole party greatly. It
 
 # Spells
 
-All spells always hit. Making just a few spells to hit depending on skill level is too fine grained and hard to visualize mechanics that is absolutely not needed.
-
-Most spells generally progress well with skill level. This is an adjustment for those that do not. I've reshuffled their fixed and per level values so that they have more standard strength formula: X + 1-X / level. At the same time I tried to make old and new versions about equally strong at level 4.
+## Buffs and healing spells
 
 All stat boost spells affect whole party at novice level.
 
+## Damaging spells
+
+All spells always hit. Making just a few spells to hit depending on skill level is too fine grained and hard to visualize mechanics that is absolutely not needed.
+
+Low level spells fixed damage is increased by about 10. That allows them to be immediately useful at the time of purchase. Also gives player incentive to actually hunt for them in the stores. They naturally will be replaced by more powerful spells as player acquire them. More powerful spells are less mana effective, though. That may be an important consideration in this mod where healing is not that cheap.
+
+Higher level spells fixed damage value is mostly reduced to zero. Their per level damage is somewhat increased to keep up with weapon progression.
+
+Restricted and difficult to aim/use spells get extra damage due to inconvenience. That may give an incentive to use them when conditions are right. These are spells like: Destroy Undead (only against undead), Death Blossom (very difficult to aim), etc.
+
+## Modified spell values
+
 |spell|fixed|per level|
 |----|----:|----:|
-|All stat boosts|10|2, 2, 2|
 |Protection from ...|0|3, 4, 5|
-|Ring Of Fire|3|1-3|
-|Meteor Shower|4|1-4|
-|Inferno|5|1-5|
-|Starburst|8|1-8|
-|Ice Blast|10|1-10|
-|Death Blossom|8|1-8|
-|Mind Blast|4|1-4|
-|Harm|5|1-5|
-|Flying Fist|14|1-14|
-|Prismatic Light|10|1-10|
+|All stat boosts|10|5, 5, 5|
 |Stone Skin|20|4|
 |Bless|5|1|
 |Heroism|5|1|
@@ -223,6 +223,31 @@ All stat boost spells affect whole party at novice level.
 |First Aid|5, 10, 25||
 |Cure Wounds||5|
 |Power Cure||5|
+|Fire Bolt|10|1-4|
+|Ring Of Fire|10|1-4|
+|Fire Blast|4|1-4|
+|Meteor Shower|0|1-4|
+|Inferno|0|1-5|
+|Incinerate|0|1-20|
+|Sparks|5|1-1|
+|Lightning Bolt|10|1-8|
+|Implosion|10|1-12|
+|Starburst|0|1-8|
+|Poison Spray|7|1-2|
+|Ice Bolt|10|1-7|
+|Acid Burst|10|1-10|
+|Ice Blast|10|1-10|
+|Deadly Swarm|15|1-3|
+|Blades|10|1-5|
+|Death Blossom|0|1-15|
+|Mind Blast|15|1-2|
+|Psychic Shock|20|1-15|
+|Harm|20|1-2|
+|Flying Fist|30|1-10|
+|Destroy Undead|0|1-25|
+|Prismatic Light|0|1-8|
+|Sun Ray|0|1-30|
+|Shrapmetal|8|1-8|
 
 # Monsters improvement
 
@@ -390,4 +415,6 @@ This is a convenience fix. I am tired to reload game hundreds times just to find
 | Alt+2 | Merchant, Trader |
 | Alt+3 | Pathfinder, Tracker |
 | Alt+4 | WindMaster, WaterMaster |
+| Alt+5 | Enchanter |
+| Alt+4 | Weapons Master, Squire |
 

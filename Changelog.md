@@ -1,3 +1,15 @@
+# version 45
+
+Further tune up of might vs. magic balance.
+
+* Reverted attribute effects back to vanilla. Linear scale requires more attribute balance thinking which I despise. Better leave it as it was.
+* Slightly decreased weapon speed and damage bonuses. https://github.com/tnevolin/mm6-skill-emphasis-mod#bonus-increment-per-level-based-on-rank
+* Slightly increased spell damage here and there. https://github.com/tnevolin/mm6-skill-emphasis-mod#spells
+
+# version 44
+
+* New hirelings hot key: Alt-6 = Weapons Master, Squire
+
 # version 43
 
 * Reverted recovery formula to pre version 42.
@@ -25,7 +37,7 @@
 
 # version 40
 
-* Changed book price progression to make more steep. Cheapest book is now 4 times cheaper. Most expensive one is 10 times more expensive.
+* Changed book price progression to make it more steep. Cheapest book is now 4 times cheaper. Most expensive one is 10 times more expensive.
 
 # version 39
 
