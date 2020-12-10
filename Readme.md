@@ -409,12 +409,14 @@ This is a convenience fix. I am tired to reload game hundreds times just to find
 * Works outside only and brings outside peasants only if they are available.
 * Hiring peasant NPC removes them from the map so you may run out of them on a particular map.
 
-| Shorcut | Hirelings |
-|----:|----:|
-| Alt+1 | Instructor, Teacher |
-| Alt+2 | Merchant, Trader |
-| Alt+3 | Pathfinder, Tracker |
-| Alt+4 | WindMaster, WaterMaster |
-| Alt+5 | Enchanter |
-| Alt+4 | Weapons Master, Squire |
+| shorcut | hirelings | comment |
+|----|----|----|
+| Alt+1 | Weapons Master, Squire | physical offense and defense
+| Alt+2 | Spell Master, Mystic | magical offense and buffs
+| Alt+3 | Enchanter | magical defense
+| Alt+4 | Instructor, Teacher | experience
+| Alt+5 | Banker, Factor | money collected
+| Alt+6 | Merchant, Trader | trading selling/buying
+| Alt+7 | Pathfinder, Tracker | travel speed = food reduction in transit
+| Alt+8 | WindMaster, WaterMaster | reaching to places
 

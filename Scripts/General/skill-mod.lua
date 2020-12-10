@@ -1909,6 +1909,8 @@ function events.GameInitialized2()
 	setProfessionCost(const.NPCProfession.Apprentice, 200)
 	setProfessionCost(const.NPCProfession.Squire, 2000)
 	setProfessionCost(const.NPCProfession.Burglar, 500)
+	setProfessionCost(const.NPCProfession.Factor, 100)
+	setProfessionCost(const.NPCProfession.Banker, 200)
 	
 end
 
@@ -2156,17 +2158,21 @@ function events.KeyDown(t)
 	-- Hirelings
 	if t.Alt then
 		if t.Key == const.Keys["1"] then
-			bringHirelingsToParty({const.NPCProfession.Instructor, const.NPCProfession.Teacher, })
-		elseif t.Key == const.Keys["2"] then
-			bringHirelingsToParty({const.NPCProfession.Merchant, const.NPCProfession.Trader, })
-		elseif t.Key == const.Keys["3"] then
-			bringHirelingsToParty({const.NPCProfession.Pathfinder, const.NPCProfession.Tracker, })
-		elseif t.Key == const.Keys["4"] then
-			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
-		elseif t.Key == const.Keys["5"] then
-			bringHirelingsToParty({const.NPCProfession.Enchanter, })
-		elseif t.Key == const.Keys["6"] then
 			bringHirelingsToParty({const.NPCProfession.WeaponsMaster, const.NPCProfession.Squire, })
+		elseif t.Key == const.Keys["2"] then
+			bringHirelingsToParty({const.NPCProfession.SpellMaster, const.NPCProfession.Mystic, })
+		elseif t.Key == const.Keys["3"] then
+			bringHirelingsToParty({const.NPCProfession.Enchanter, })
+		elseif t.Key == const.Keys["4"] then
+			bringHirelingsToParty({const.NPCProfession.Instructor, const.NPCProfession.Teacher, })
+		elseif t.Key == const.Keys["5"] then
+			bringHirelingsToParty({const.NPCProfession.Banker, const.NPCProfession.Factor, })
+		elseif t.Key == const.Keys["6"] then
+			bringHirelingsToParty({const.NPCProfession.Merchant, const.NPCProfession.Trader, })
+		elseif t.Key == const.Keys["7"] then
+			bringHirelingsToParty({const.NPCProfession.Pathfinder, const.NPCProfession.Tracker, })
+		elseif t.Key == const.Keys["8"] then
+			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
 		end
 	-- debug
 	elseif t.Key == const.Keys.DIVIDE then

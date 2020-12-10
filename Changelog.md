@@ -1,3 +1,8 @@
+# version 46
+
+* Reduced Factor and Banker cost 5 times. They are now more useful and pay for themselves after ~1k gold found, not after ~10k as in vanilla.
+* Added more NPC shortcuts.
+
 # version 45
 
 Further tune up of might vs. magic balance.
