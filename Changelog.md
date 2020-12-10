@@ -3,8 +3,8 @@
 Further tune up of might vs. magic balance.
 
 * Reverted attribute effects back to vanilla. Linear scale requires more attribute balance thinking which I despise. Better leave it as it was.
-* Slightly decreased weapon speed and damage bonuses. https://github.com/tnevolin/mm6-skill-emphasis-mod#bonus-increment-per-level-based-on-rank
-* Slightly increased spell damage here and there. https://github.com/tnevolin/mm6-skill-emphasis-mod#modified-spell-values
+* [Slightly decreased weapon speed and damage bonuses](https://github.com/tnevolin/mm6-skill-emphasis-mod#bonus-increment-per-level-based-on-rank).
+* [Slightly increased spell damage here and there](https://github.com/tnevolin/mm6-skill-emphasis-mod#modified-spell-values).
 
 # version 44
 
