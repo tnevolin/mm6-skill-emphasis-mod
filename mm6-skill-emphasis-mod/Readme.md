@@ -120,7 +120,7 @@ All weapon bonuses are counted!!! Player can mix and match them as they see fit 
 
 # Two-handed weapon specials
 
-## Double weapon damage
+## Double own damage
 
 Two handed weapons confer double damage for their listed damage value. This gives party some damage boost at the beginning of the game when combat skills are yet undevelopped.
 
@@ -193,6 +193,14 @@ Mace/Dagger-Shield. Mace is probably better in long rung due to paralyzing while
 ### Sorcerer
 
 Staff. Best option due to its special effects benefiting whole party greatly. It may be wise to give staff to other magic class if there is no sorcerer in the party.
+
+# Shared group skill advancement
+
+Role playing assumes selecting character buid at start and develop it for greater specialization. It seems that both classes and various melee weapon and armor skills were introduced for that purpose. Classes play their role pretty well due to their distinctive difference in weapon/armor/magic combinations. Whereas, weapons and armor skills do not that much. Picking spear vs. mace, for example, does not differentiate character too much: fighter stays fighter and caster stays caster. Same for armors - they provide only quantitative difference but do not turn character into somebody else. These restrictions are more of annoyance when player finds a nice piece of a weapon/armor but cannot try it out because there are no character skillful enough to use it. This is especially highlighted by bow vs. blaster dilemma when finding blasters at the end of the game completely invalidates and wastes bow skill.
+
+Not anymore in this mod. All skills within each weapon type group (melee weapons, ranged weapons, armors) are advanced simultaneously whenever any one in the group is. That allows swapping items within the group without regret of wasting skill points player worked so hard for.
+
+A small correction to wielding two different weapons is needed due to this change. In vanilla different dual weapons progress about 1.4 times slower as they both require skill point investment. Therefore, this mod does similar correction reducing displayed weapon skill levels to simulate natural vanilla progression. This is for *different* dual weapons only. A little bit not visual for player but I hope this will be a minor inconvenience.
 
 # Spells
 
@@ -340,59 +348,13 @@ Some useless professions should not appear at all. Some profession cost are adju
 | Noble | 0 | 100 |
 | Gambler | 0 | 10 |
 
-# Stat effect
-
-## Problem
-
-Extremely non-lenear stat breakpoint/effect progression renders any stat boosting effects useless toward the end of the game.
-
-## Solution
-
-* Make stat effect either exactly linear or close to linear.
-* Reduce initial stat effect to stat value ratio from vanilla 1:2 down to 1:5.
-
-These changes together make stat boosts weak but relevant to the end of the game. At the same time it does not allow stat effect to overflow character secondary stats (attack, recovery, damage, AC, ...).
-
-
- Here is the modified table below. It is 1 effect per 5 stat increase along all scale. However, breakpoint intervals getting bigger at 50, 100, 200, 300. Most likely you will never go above 300 so your Extreme Energy will always work and produce same predictable result.
-
-| Statistic | Effect |
-|----:|----:|
-| 500 | 100 |
-| 400 | 80 |
-| 350 | 70 |
-| 300 | 60 |
-| 280 | 56 |
-| 260 | 52 |
-| 240 | 48 |
-| 220 | 44 |
-| 200 | 40 |
-| 180 | 36 |
-| 160 | 32 |
-| 140 | 28 |
-| 120 | 24 |
-| 100 | 20 |
-| 90 | 18 |
-| 80 | 16 |
-| 70 | 14 |
-| 60 | 12 |
-| 50 | 10 |
-| 45 | 9 |
-| 40 | 8 |
-| 35 | 7 |
-| 30 | 6 |
-| 25 | 5 |
-| 20 | 4 |
-| 15 | 3 |
-| 10 | 2 |
-| 5 | 1 |
-| 0 | 0 |
-
 # Learning skill bonus multiplier
 
 * Novice triples bonus.
 * Expert quadruples bonus.
 * Master quintuples bonus.
+
+As a result, learning skill is more valuable now and is worth to upgrading to master level 10-12. Anything above that is a waste of skill points.
 
 # Missiles auto aim in flight
 

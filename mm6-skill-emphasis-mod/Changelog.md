@@ -1,3 +1,8 @@
+# version 47
+
+* All learned melee weapon, ranged weapon, and armor skills are advanced at the same level when any one is advanced withing a group. This unlocks melee/ranged weapon and armor switching along the game without losing past skill point investments.
+* Dual weapon skill levels are adjusted to simulate two weapons skill point investment split. They are divided by sqrt(2) for the purpose of skill contribution if different weapon types.
+
 # version 46
 
 * Reduced Factor and Banker cost 5 times. They are now more useful and pay for themselves after ~1k gold found, not after ~10k as in vanilla.

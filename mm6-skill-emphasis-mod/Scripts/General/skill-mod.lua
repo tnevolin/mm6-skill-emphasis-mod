@@ -1,3 +1,12 @@
+-- simultaneously advanceable skill sets
+
+local simultaneouslyAdvanceableSkillSets =
+{
+	["melee"] = {[const.Skills.Staff] = true, [const.Skills.Sword] = true, [const.Skills.Dagger] = true, [const.Skills.Axe] = true, [const.Skills.Spear] = true, [const.Skills.Mace] = true, },
+	["ranged"] = {[const.Skills.Bow] = true, [const.Skills.Blaster] = true, },
+	["armor"] = {[const.Skills.Leather] = true, [const.Skills.Chain] = true, [const.Skills.Plate] = true, },
+}
+
 -- melee recovery cap
 
 local meleeRecoveryCap = 10
@@ -446,17 +455,23 @@ local housePrices =
 
 local modifiedBookValues =
 {
-	[100] = 25,
-	[200] = 50,
-	[300] = 100,
-	[400] = 250,
+	[100] = 50,
+	[200] = 100,
+	[300] = 200,
+	[400] = 300,
 	[500] = 500,
 	[750] = 1000,
-	[1000] = 2500,
+	[1000] = 2000,
 	[1500] = 5000,
 	[2000] = 10000,
-	[3000] = 25000,
+	[2500] = 15000,
+	[3000] = 20000,
+	[3500] = 25000,
+	[4000] = 30000,
 	[5000] = 50000,
+	[6000] = 70000,
+	[7500] = 100000,
+	[10000] = 200000,
 }
 
 -- ======================================= --
@@ -749,65 +764,83 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 	-- single wield
 	if equipmentData2 == nil then
 	
-		-- remove old base bonus
-		correction = correction + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
+		-- calculate old and new recovery bonuses
+	
+		local oldRecoveryBonus = 0
+		local newRecoveryBonus = 0
+	
+		-- base bonuses
 		
-		-- add new base bonus
-		correction = correction - weaponNewBaseRecoveryBonuses[equipmentData1.skill]
+		oldRecoveryBonus = oldRecoveryBonus + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
+		newRecoveryBonus = newRecoveryBonus + weaponNewBaseRecoveryBonuses[equipmentData1.skill]
 		
-		-- remove old skill bonus
+		-- skill bonuses
+		
 		if equipmentData1.rank >= const.Expert then
-			correction = correction + (weaponSkillRecoveryBonuses[equipmentData1.skill] * equipmentData1.level)
+			oldRecoveryBonus = oldRecoveryBonus + (weaponSkillRecoveryBonuses[equipmentData1.skill] * equipmentData1.level)
 		end
+		newRecoveryBonus = newRecoveryBonus + (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
 		
-		-- add new skill bonus
-		correction = correction - (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
+		-- replace old with new bonus
+
+		correction = correction 
+			+ oldRecoveryBonus
+			- newRecoveryBonus
 		
 	-- dual wield
 	else
 	
+		-- calculate effective skill levels
+		
+		local meleeWeapon1EffectiveSkillLevel
+		local meleeWeapon2EffectiveSkillLevel
+		
+		if equipmentData1.skill == equipmentData2.skill then
+			meleeWeapon1EffectiveSkillLevel = equipmentData1.level
+			meleeWeapon2EffectiveSkillLevel = equipmentData2.level
+		else
+			meleeWeapon1EffectiveSkillLevel = math.round(equipmentData1.level / math.sqrt(2))
+			meleeWeapon2EffectiveSkillLevel = math.round(equipmentData2.level / math.sqrt(2))
+		end
+	
+		-- calculate old and new recovery bonuses
+	
+		local oldRecoveryBonus1 = 0
+		local newRecoveryBonus1 = 0
+		local newRecoveryBonus2 = 0
+	
 		-- weapon 1
 		
-		-- remove old base bonus
-		correction = correction + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
+		-- base bonuses
 		
-		-- add new base bonus
-		correction = correction - weaponNewBaseRecoveryBonuses[equipmentData1.skill]
+		oldRecoveryBonus1 = oldRecoveryBonus1 + weaponOldBaseRecoveryBonuses[equipmentData1.skill]
+		newRecoveryBonus1 = newRecoveryBonus1 + weaponNewBaseRecoveryBonuses[equipmentData1.skill]
+		newRecoveryBonus2 = newRecoveryBonus2 + weaponNewBaseRecoveryBonuses[equipmentData2.skill]
 		
-		--[[
-		-- remove half of old swiftness bonus
+		-- swiftness
+		
 		if equipmentData1.item.Bonus2 == 59 then
-			correction = correction + (20) / 2
+			oldRecoveryBonus1 = oldRecoveryBonus1 + 20
+			newRecoveryBonus1 = newRecoveryBonus1 + 20
 		end
-		--]]
-		
-		-- remove old skill bonus
-		if equipmentData1.rank >= const.Expert then
-			correction = correction + (weaponSkillRecoveryBonuses[equipmentData1.skill] * equipmentData1.level)
-		end
-		
-		-- add new skill bonus
-		correction =
-			correction
-			-
-			(weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
-			
-		-- weapon 2
-		
-		-- add new base bonus
-		correction = correction - weaponNewBaseRecoveryBonuses[equipmentData2.skill]
-		
-		-- add new swiftness bonus
 		if equipmentData2.item.Bonus2 == 59 then
-			correction = correction - 20
+			newRecoveryBonus2 = newRecoveryBonus2 + 20
 		end
-				
-		-- add new skill bonus
-		correction =
-			correction
-			-
-			(weaponSkillRecoveryBonuses[equipmentData2.skill] * recoveryBonusByMastery[equipmentData2.rank] * equipmentData2.level)
-			
+		
+		-- skill bonuses
+		
+		if equipmentData1.rank >= const.Expert then
+			oldRecoveryBonus1 = oldRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill] * equipmentData1.level)
+		end
+		newRecoveryBonus1 = newRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * meleeWeapon1EffectiveSkillLevel)
+		newRecoveryBonus2 = newRecoveryBonus2 + (weaponSkillRecoveryBonuses[equipmentData2.skill] * recoveryBonusByMastery[equipmentData2.rank] * meleeWeapon2EffectiveSkillLevel)
+		
+		-- replace old with new bonus
+		
+		correction = correction
+			+ oldRecoveryBonus1
+			- (newRecoveryBonus1 + newRecoveryBonus2)
+		
 	end
 	
 	return correction
@@ -868,7 +901,7 @@ function events.GetAttackDelay(t)
 			-- dual wield
 			else
 			
-				-- no axe and no sword in main hand and sword in extra hand = extra hand skill defines recover
+				-- no axe and no sword in main hand and sword in extra hand = extra hand skill defines recovery
 				if main.skill ~= const.Skills.Axe and main.skill ~= const.Skills.Sword and extra.skill == const.Skills.Sword then
 					t.Result = t.Result + getWeaponRecoveryCorrection(extra, main)
 				-- everything else = main hand skill defines recovery
@@ -1112,8 +1145,6 @@ function events.CalcStatBonusBySkills(t)
 		
 		if main.weapon then
 			
-			local attackBonusMultiplier = 1
-			
 			-- single wield
 			if not equipmentData.dualWield then
 				
@@ -1121,19 +1152,32 @@ function events.CalcStatBonusBySkills(t)
 				t.Result = t.Result - main.level
 				
 				-- add new bonus from main hand
-				t.Result = t.Result + attackBonusMultiplier * (attackBonusByMastery[main.rank] * main.level)
+				t.Result = t.Result + (attackBonusByMastery[main.rank] * main.level)
 			
 			-- dual wield
 			else
 						
+				-- calculate effective skill levels
+				
+				local mainEffectiveSkillLevel
+				local extraEffectiveSkillLevel
+				
+				if main.skill == extra.skill then
+					mainEffectiveSkillLevel = main.level
+					extraEffectiveSkillLevel = extra.level
+				else
+					mainEffectiveSkillLevel = math.round(main.level / math.sqrt(2))
+					extraEffectiveSkillLevel = math.round(extra.level / math.sqrt(2))
+				end
+			
 				-- subtract old bonus
 				t.Result = t.Result - extra.level
 				
 				-- add new bonus from main hand
-				t.Result = t.Result + attackBonusMultiplier * (attackBonusByMastery[main.rank] * main.level)
+				t.Result = t.Result + (attackBonusByMastery[main.rank] * mainEffectiveSkillLevel)
 			
 				-- add new bonus from extra hand
-				t.Result = t.Result + (attackBonusByMastery[extra.rank] * extra.level)
+				t.Result = t.Result + (attackBonusByMastery[extra.rank] * extraEffectiveSkillLevel)
 			
 			end
 			
@@ -1161,42 +1205,82 @@ function events.CalcStatBonusBySkills(t)
 		
 		if main.weapon then
 			
-			-- subtract old bonus
-			if
-				(main.skill == const.Skills.Axe and main.rank >= const.Master)
-				or
-				(main.skill == const.Skills.Spear and main.rank >= const.Master)
-				or
-				(main.skill == const.Skills.Mace and main.rank >= const.Expert)
-			then
-				t.Result = t.Result - main.level
-			end
-			
-			-- add new bonus for main weapon
-			t.Result = t.Result + weaponSkillDamageBonuses[main.skill] * (damageBonusByMastery[main.rank] * main.level)
-			
-			-- add new bonus for extra weapon if any
-			if extra.weapon then
-				t.Result = t.Result + weaponSkillDamageBonuses[extra.skill] * (damageBonusByMastery[extra.rank] * extra.level)
-			end
-			
-			-- add class bonus for main hand weapon
-			if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
-				t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * main.level)
-			end
-			
-			-- add class bonus for extra hand weapon if any and different from main weapon
-			if extra.weapon and extra.skill ~= main.skill then
-				if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
-					t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * extra.level)
+			-- single wield
+			if not equipmentData.dualWield then
+				
+				-- subtract old bonus
+				if
+					(main.skill == const.Skills.Axe and main.rank >= const.Master)
+					or
+					(main.skill == const.Skills.Spear and main.rank >= const.Master)
+					or
+					(main.skill == const.Skills.Mace and main.rank >= const.Expert)
+				then
+					t.Result = t.Result - main.level
 				end
-			end
+				
+				-- add new bonus for main weapon
+				t.Result = t.Result + weaponSkillDamageBonuses[main.skill] * (damageBonusByMastery[main.rank] * main.level)
+				
+				-- add class bonus for main hand weapon
+				if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
+					t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * main.level)
+				end
+				
+				-- add bonus for two handed weapon
+				if equipmentData.twoHanded and equipmentData.main.skill ~= const.Skills.Staff then
+					t.Result = t.Result + twoHandedWeaponDamageBonusByMastery[main.rank] * main.level
+				end
+				
+			-- dual wield
+			else
+				
+				-- calculate effective skill levels
+				
+				local mainEffectiveSkillLevel
+				local extraEffectiveSkillLevel
+				
+				if main.skill == extra.skill then
+					mainEffectiveSkillLevel = main.level
+					extraEffectiveSkillLevel = extra.level
+				else
+					mainEffectiveSkillLevel = math.round(main.level / math.sqrt(2))
+					extraEffectiveSkillLevel = math.round(extra.level / math.sqrt(2))
+				end
 			
-			-- add bonus for two handed weapon
-			if equipmentData.twoHanded and equipmentData.main.skill ~= const.Skills.Staff then
-				t.Result = t.Result + twoHandedWeaponDamageBonusByMastery[main.rank] * main.level
+				-- subtract old bonus
+				if
+					(main.skill == const.Skills.Axe and main.rank >= const.Master)
+					or
+					(main.skill == const.Skills.Spear and main.rank >= const.Master)
+					or
+					(main.skill == const.Skills.Mace and main.rank >= const.Expert)
+				then
+					t.Result = t.Result - main.level
+				end
+				
+				-- add new bonus for main weapon
+				t.Result = t.Result + weaponSkillDamageBonuses[main.skill] * (damageBonusByMastery[main.rank] * mainEffectiveSkillLevel)
+				
+				-- add new bonus for extra weapon if any
+				if extra.weapon then
+					t.Result = t.Result + weaponSkillDamageBonuses[extra.skill] * (damageBonusByMastery[extra.rank] * extraEffectiveSkillLevel)
+				end
+				
+				-- add class bonus for main hand weapon
+				if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
+					t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * mainEffectiveSkillLevel)
+				end
+				
+				-- add class bonus for extra hand weapon if any and different from main weapon
+				if extra.weapon and extra.skill ~= main.skill then
+					if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
+						t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * extraEffectiveSkillLevel)
+					end
+				end
+				
 			end
-			
+				
 		end
 		
 	-- calculate AC bonus by skill
@@ -2416,6 +2500,7 @@ local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 end
 mem.hookfunction(0x004219B0, 0, 1, modifiedMonsterChooseTargetMember)
 
+--[[
 ----------------------------------------------------------------------------------------------------
 -- display damage rate
 ----------------------------------------------------------------------------------------------------
@@ -2547,4 +2632,62 @@ local function modifiedDisplayRangedAttackStats(d, def, dlg, font, x, y, color, 
 	
 end
 mem.hookcall(0x00414AD5, 2, 4, modifiedDisplayRangedAttackStats)
+--]]
+
+----------------------------------------------------------------------------------------------------
+-- handle game actions
+----------------------------------------------------------------------------------------------------
+
+function events.Action(t)
+	
+	-- clicked on skill in skill screen
+	
+	if t.Action == 121 then
+	
+		-- get current player
+		
+		local currentPlayer = Party.Players[Party.CurrentPlayer]
+		
+		-- get skill
+		
+		local skill = t.Param
+	
+		-- check if skill is advanceable
+		
+		local skillLevel, skillMastery = SplitSkill(currentPlayer.Skills[skill])
+		local skillAdvanceable = (currentPlayer.SkillPoints >= skillLevel + 1)
+	
+		if skillAdvanceable then
+		
+			-- simultaneously advanceable skills
+			
+			for key, simultaneouslyAdvanceableSkills in pairs(simultaneouslyAdvanceableSkillSets) do
+			
+				if simultaneouslyAdvanceableSkills[skill] ~= nil then
+			
+					-- advance all other skills to at least same level
+					
+					for simultaneouslyAdvanceableSkill, value in pairs(simultaneouslyAdvanceableSkills) do
+					
+						if simultaneouslyAdvanceableSkill ~= skill then
+						
+							local simultaneouslyAdvanceableSkillLevel, simultaneouslyAdvanceableSkillMastery = SplitSkill(currentPlayer.Skills[simultaneouslyAdvanceableSkill])
+						
+							if simultaneouslyAdvanceableSkillMastery ~= 0 and simultaneouslyAdvanceableSkillLevel <= skillLevel then
+									currentPlayer.Skills[simultaneouslyAdvanceableSkill] = JoinSkill(skillLevel + 1, simultaneouslyAdvanceableSkillMastery)
+							end
+							
+						end
+						
+					end
+					
+				end
+				
+			end
+			
+		end
+		
+	end
+		
+end
 
