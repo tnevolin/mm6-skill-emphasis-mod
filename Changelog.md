@@ -1,3 +1,10 @@
+# version 48
+
+Further reduced weapon skill progression and magic to make magic more aligned with might.
+
+* Recovery bonus by mastery: 2, 3, 4.
+* Damage bonus by mastery: 0, 1, 2.
+
 # version 47
 
 * All learned melee weapon, ranged weapon, and armor skills are advanced at the same level when any one is advanced withing a group. This unlocks melee/ranged weapon and armor switching along the game without losing past skill point investments.
