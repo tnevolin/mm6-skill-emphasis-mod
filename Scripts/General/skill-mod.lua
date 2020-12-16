@@ -305,7 +305,7 @@ local spellPowers =
 		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
 	},
 	-- Poison Spray
-	[1515] =
+	[26] =
 	{
 		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
 		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
