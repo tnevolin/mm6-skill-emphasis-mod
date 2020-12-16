@@ -1,7 +1,12 @@
+# version 49
+
+* Close range spell damages are increased to compete with knight melee damage.
+
 # version 48
 
 Further reduced weapon skill progression and magic to make magic more aligned with might.
 
+* Monsters HP reverted to their vanilla value. They are no more double tough.
 * Recovery bonus by mastery: 2, 3, 4.
 * Damage bonus by mastery: 0, 1, 2.
 * Reverted some spell damage to original values.
