@@ -4,6 +4,7 @@ Further reduced weapon skill progression and magic to make magic more aligned wi
 
 * Recovery bonus by mastery: 2, 3, 4.
 * Damage bonus by mastery: 0, 1, 2.
+* Reverted some spell damage to original values.
 
 # version 47
 

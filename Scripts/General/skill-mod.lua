@@ -226,6 +226,7 @@ local protectionSpellExtraMultiplier = 2
 
 local spellPowers =
 {
+	--[[
 	-- Fire Bolt
 	[4] =
 	{
@@ -233,6 +234,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 7, },
 		[const.Master] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 7, },
 	},
+	--]]
 	-- Ring of Fire
 	[7] =
 	{
@@ -240,6 +242,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 4, },
 		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 4, },
 	},
+	--[[
 	-- Fire Blast
 	[8] =
 	{
@@ -247,6 +250,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
 		[const.Master] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 3, },
 	},
+	--]]
 	-- Meteor Shower
 	[9] =
 	{
@@ -261,6 +265,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
 		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
 	},
+	--[[
 	-- Incinerate
 	[11] =
 	{
@@ -268,6 +273,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 21, fixedMax = 21, variableMin = 1, variableMax = 21, },
 		[const.Master] = {fixedMin = 21, fixedMax = 21, variableMin = 1, variableMax = 21, },
 	},
+	--]]
+	--[[
 	-- Sparks
 	[15] =
 	{
@@ -275,6 +282,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 2, fixedMax = 2, variableMin = 1, variableMax = 1, },
 		[const.Master] = {fixedMin = 2, fixedMax = 2, variableMin = 1, variableMax = 1, },
 	},
+	--]]
+	--[[
 	-- Lightning Bolt
 	[18] =
 	{
@@ -282,6 +291,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 12, },
 		[const.Master] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 12, },
 	},
+	--]]
+	--[[
 	-- Implosion
 	[20] =
 	{
@@ -289,6 +300,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 17, },
 		[const.Master] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 17, },
 	},
+	--]]
 	-- Starburst
 	[22] =
 	{
@@ -296,6 +308,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
 		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
 	},
+	--[[
 	-- Poison Spray
 	[22] =
 	{
@@ -303,6 +316,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 2, fixedMax = 2, variableMin = 1, variableMax = 2, },
 		[const.Master] = {fixedMin = 2, fixedMax = 2, variableMin = 1, variableMax = 2, },
 	},
+	--]]
+	--[[
 	-- Ice Bolt
 	[28] =
 	{
@@ -310,6 +325,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
 	},
+	--]]
+	--[[
 	-- Acid Burst
 	[30] =
 	{
@@ -317,13 +334,15 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 15, },
 		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 15, },
 	},
+	--]]
 	-- Ice Blast
 	[32] =
 	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
+		[const.Novice] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+		[const.Expert] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+		[const.Master] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
 	},
+	--[[
 	-- Deadly Swarm
 	[37] =
 	{
@@ -331,12 +350,13 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 6, },
 		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 6, },
 	},
+	--]]
 	-- Blades
 	[39] =
 	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
+		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
+		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
+		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
 	},
 	-- Death Blossom
 	[43] =
@@ -345,13 +365,16 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
 		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
 	},
+	--[[
 	-- Mind Blast
 	[58] =
 	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
+		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
+		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
 	},
+	--]]
+	--[[
 	-- Psychic Shock
 	[65] =
 	{
@@ -359,6 +382,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
 		[const.Master] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
 	},
+	--]]
+	--[[
 	-- Harm
 	[70] =
 	{
@@ -366,6 +391,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 4, },
 		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 4, },
 	},
+	--]]
+	--[[
 	-- Flying Fist
 	[76] =
 	{
@@ -373,12 +400,13 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
 		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
 	},
+	--]]
 	-- Destroy Undead
 	[82] =
 	{
-		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
-		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
-		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
+		[const.Novice] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
+		[const.Expert] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
+		[const.Master] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
 	},
 	-- Prismatic Light
 	[84] =
@@ -387,6 +415,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
 		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
 	},
+	--[[
 	-- Sun Ray
 	[87] =
 	{
@@ -394,6 +423,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
 		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
 	},
+	--]]
+	--[[
 	-- Toxic Cloud
 	[90] =
 	{
@@ -401,6 +432,8 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
 		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
 	},
+	--]]
+	--[[
 	-- Shrapmetal
 	[92] =
 	{
@@ -408,6 +441,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
 		[const.Master] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
 	},
+	--]]
 }
 local spellBuffPowers =
 {
@@ -1582,7 +1616,7 @@ mem.asmpatch(
 
 -- game initialization
 
-local monsterHitPointsMultiplier = 2
+local monsterHitPointsMultiplier = 1
 local monsterDamageMultiplier = 1
 local monsterArmorClassMultiplier = 2
 local monsterLevelMultiplier = 1
