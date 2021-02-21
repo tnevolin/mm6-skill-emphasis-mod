@@ -1,10 +1,38 @@
--- simultaneously advanceable skill sets
+-- skill set groups advancing together within a group for a single character
 
-local simultaneouslyAdvanceableSkillSets =
+local characterLinkedSkillGroups =
 {
-	["melee"] = {[const.Skills.Staff] = true, [const.Skills.Sword] = true, [const.Skills.Dagger] = true, [const.Skills.Axe] = true, [const.Skills.Spear] = true, [const.Skills.Mace] = true, },
-	["ranged"] = {[const.Skills.Bow] = true, [const.Skills.Blaster] = true, },
-	["armor"] = {[const.Skills.Leather] = true, [const.Skills.Chain] = true, [const.Skills.Plate] = true, },
+	["melee"] =
+		{
+			[const.Skills.Staff] = true,
+			[const.Skills.Sword] = true,
+			[const.Skills.Dagger] = true,
+			[const.Skills.Axe] = true,
+			[const.Skills.Spear] = true,
+			[const.Skills.Mace] = true,
+		},
+	["ranged"] =
+		{
+			[const.Skills.Bow] = true,
+			[const.Skills.Blaster] = true,
+		},
+	["armor"] =
+		{
+			[const.Skills.Leather] = true,
+			[const.Skills.Chain] = true,
+			[const.Skills.Plate] = true,
+		},
+}
+
+-- skills advancing together across whole party
+
+local partyLinkedSkills =
+{
+	[const.Skills.IdentifyItem] = true,
+	[const.Skills.Merchant] = true,
+	[const.Skills.Repair] = true,
+	[const.Skills.Perception] = true,
+	[const.Skills.DisarmTraps] = true,
 }
 
 -- melee recovery cap
@@ -2711,24 +2739,48 @@ function events.Action(t)
 	
 		if skillAdvanceable then
 		
-			-- simultaneously advanceable skills
+			-- character linked skills
 			
-			for key, simultaneouslyAdvanceableSkills in pairs(simultaneouslyAdvanceableSkillSets) do
+			for key, characterLinkedSkills in pairs(characterLinkedSkillGroups) do
 			
-				if simultaneouslyAdvanceableSkills[skill] ~= nil then
+				if characterLinkedSkills[skill] ~= nil then
 			
 					-- advance all other skills to at least same level
 					
-					for simultaneouslyAdvanceableSkill, value in pairs(simultaneouslyAdvanceableSkills) do
+					for characterLinkedSkill, value in pairs(characterLinkedSkills) do
 					
-						if simultaneouslyAdvanceableSkill ~= skill then
+						if characterLinkedSkill ~= skill then
 						
-							local simultaneouslyAdvanceableSkillLevel, simultaneouslyAdvanceableSkillMastery = SplitSkill(currentPlayer.Skills[simultaneouslyAdvanceableSkill])
+							local characterLinkedSkillLevel, characterLinkedSkillMastery = SplitSkill(currentPlayer.Skills[characterLinkedSkill])
 						
-							if simultaneouslyAdvanceableSkillMastery ~= 0 and simultaneouslyAdvanceableSkillLevel <= skillLevel then
-									currentPlayer.Skills[simultaneouslyAdvanceableSkill] = JoinSkill(skillLevel + 1, simultaneouslyAdvanceableSkillMastery)
+							if characterLinkedSkillMastery ~= 0 and characterLinkedSkillLevel <= skillLevel then
+									currentPlayer.Skills[characterLinkedSkill] = JoinSkill(skillLevel + 1, characterLinkedSkillMastery)
 							end
 							
+						end
+						
+					end
+					
+				end
+				
+			end
+			
+			-- party linked skills
+			
+			if partyLinkedSkills[skill] ~= nil then
+		
+				-- advance same skill for other party members to at least same level
+				
+				for i = 0, 3 do
+				
+					if i ~= Party.CurrentPlayer then
+					
+						local player = Party.Players[i]
+					
+						local partyLinkedSkillLevel, partyLinkedSkillMastery = SplitSkill(player.Skills[skill])
+					
+						if partyLinkedSkillMastery ~= 0 and partyLinkedSkillLevel <= skillLevel then
+								player.Skills[skill] = JoinSkill(skillLevel + 1, partyLinkedSkillMastery)
 						end
 						
 					end

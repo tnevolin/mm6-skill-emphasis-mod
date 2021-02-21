@@ -1,3 +1,12 @@
+# version 50
+
+* Party beneficial miscelaneous skills are now advanced simultaneously for all party members.
+	* Identify Item
+	* Merchant
+	* Repair
+	* Perception
+	* DisarmTraps
+
 # version 49
 
 * Close range spell damages are increased to compete with knight melee damage.
