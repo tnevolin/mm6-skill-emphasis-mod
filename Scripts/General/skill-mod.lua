@@ -245,8 +245,14 @@ local classRangedWeaponSkillDamageBonus =
 	[const.Class.WarriorMage] = 4,
 }
 
--- plate wearer attack attraction chances by mastery
-local plateWearerAttackAttractionChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
+-- special damage modifiers
+local spearVersusFlyerDamageMultiplier = 2.0
+
+-- plate cover chances by mastery
+local plateCoverChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
+
+-- shield projectile damage multiplier by mastery
+local shieldProjectileDamageReductionPerLevel = 0.02
 
 -- spell powers
 
@@ -668,11 +674,12 @@ local function getPlayerEquipmentData(player)
 		equipmentData.bow.equipStat = itemBowTxt.EquipStat + 1
 		equipmentData.bow.skill = itemBowTxt.Skill - 1
 		
-		if equipmentData.bow.skill == const.Skills.Bow then
-		
-			equipmentData.bow.weapon = true
+		if equipmentData.bow.skill >= 0 then
 			equipmentData.bow.level, equipmentData.bow.rank = SplitSkill(player.Skills[equipmentData.bow.skill])
-			
+		end
+		
+		if equipmentData.bow.skill >= 0 and equipmentData.bow.skill <= 7 then
+			equipmentData.bow.weapon = true
 		end
 		
 	end
@@ -688,23 +695,12 @@ local function getPlayerEquipmentData(player)
 		equipmentData.main.equipStat = equipmentData.main.itemTxt.EquipStat + 1
 		equipmentData.main.skill = equipmentData.main.itemTxt.Skill - 1
 		
-		if
-			equipmentData.main.skill == const.Skills.Staff
-			or
-			equipmentData.main.skill == const.Skills.Axe
-			or
-			equipmentData.main.skill == const.Skills.Sword
-			or
-			equipmentData.main.skill == const.Skills.Spear
-			or
-			equipmentData.main.skill == const.Skills.Mace
-			or
-			equipmentData.main.skill == const.Skills.Dagger
-		then
-		
-			equipmentData.main.weapon = true
+		if equipmentData.main.skill >= 0 then
 			equipmentData.main.level, equipmentData.main.rank = SplitSkill(player.Skills[equipmentData.main.skill])
-			
+		end
+		
+		if equipmentData.main.skill >= 0 and equipmentData.main.skill <= 7 then
+			equipmentData.main.weapon = true
 		end
 		
 	end
@@ -720,23 +716,12 @@ local function getPlayerEquipmentData(player)
 		equipmentData.extra.equipStat = equipmentData.extra.itemTxt.EquipStat + 1
 		equipmentData.extra.skill = equipmentData.extra.itemTxt.Skill - 1
 		
-		if
-			equipmentData.extra.skill == const.Skills.Staff
-			or
-			equipmentData.extra.skill == const.Skills.Axe
-			or
-			equipmentData.extra.skill == const.Skills.Sword
-			or
-			equipmentData.extra.skill == const.Skills.Spear
-			or
-			equipmentData.extra.skill == const.Skills.Mace
-			or
-			equipmentData.extra.skill == const.Skills.Dagger
-		then
-		
-			equipmentData.extra.weapon = true
+		if equipmentData.extra.skill >= 0 then
 			equipmentData.extra.level, equipmentData.extra.rank = SplitSkill(player.Skills[equipmentData.extra.skill])
-			
+		end
+		
+		if equipmentData.extra.skill >= 0 and equipmentData.extra.skill <= 7 then
+			equipmentData.extra.weapon = true
 		end
 		
 	end
@@ -764,7 +749,6 @@ local function getPlayerEquipmentData(player)
 			equipmentData.shield.equipped = true
 			equipmentData.shield.skill = equipmentData.extra.skill
 			equipmentData.shield.level, equipmentData.shield.rank = SplitSkill(player.Skills[equipmentData.shield.skill])
-			
 		end
 		
 	end
@@ -1425,6 +1409,17 @@ function events.CalcStatBonusBySkills(t)
 	
 end
 
+-- special damage modifiers
+
+function events.CalcDamageToMonster(t)
+	
+	local equipmentData = getPlayerEquipmentData(t.Player)
+	local main = equipmentData.main
+	
+	-- player with spear in main hand does extra damage to flying creatures
+	
+end
+
 -- applySpecialWeaponSkill
 local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 
@@ -1869,7 +1864,8 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Shield] = Game.SkillDescriptions[const.Skills.Shield] ..
 		string.format(
-			"\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty"
+			"\n\nExperienced shield users can effectivelly cover the team from all kind of physical and magical projectiles reducing their impact damage. Each shield wearer in the party reduces damage by =%d%%= per each skill level multiplicatively.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty",
+			math.round(shieldProjectileDamageReductionPerLevel * 100)
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Shield] =
@@ -1910,7 +1906,7 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Plate] = Game.SkillDescriptions[const.Skills.Plate] ..
 		string.format(
-			"\n\nPlate armor is the strongest one.\n\nPlate wearer has a chance to cover another team member not wearing a plate by taking a hit for them.\n\nBonus increment / level and recovery penalty and cover chance\n------------------------------------------------------------\n          AC   recovery penalty   cover chance"
+			"\n\nPlate armor is the strongest one.\n\nPlate wearer is percieved as a true battle hero who can learn swift maneuvering on a battlefield shielding the rest of the team from melee attackers.\n\nBonus increment / level and recovery penalty and cover chance\n------------------------------------------------------------\n          AC   recovery penalty   cover chance"
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Plate] =
@@ -1918,7 +1914,7 @@ function events.GameInitialized2()
 				" %s |                 %s |              %s",
 				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Plate][rank]),
 				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Plate + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
-				formatSkillRankNumber(plateWearerAttackAttractionChanceByMastery[rank] * 100)
+				formatSkillRankNumber(plateCoverChanceByMastery[rank] * 100)
 			)
 	end
 	
@@ -2523,49 +2519,42 @@ local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 
 	-- execute original code
 	
-	targetPlayerIndex = def(monsterPointer)
+	local targetPlayerIndex = def(monsterPointer)
 	
 	-- get target player
 	
-	targetPlayer = Party.Players[targetPlayerIndex]
+	local targetPlayer = Party.Players[targetPlayerIndex]
+	local targetPlayerEquipmentData = getPlayerEquipmentData(targetPlayer)
 	
 	-- set default substitute player = target player
 	
 	local substitutePlayerIndex = targetPlayerIndex
-	
-	-- get target player equipment data
-	
-	targetPlayerEquipmentData = getPlayerEquipmentData(targetPlayer)
 	
 	-- switch target player only if they do not wear plate
 	
 	if targetPlayerEquipmentData.armor.skill ~= const.Skills.Plate then
 		
 		local roll = math.random()
-		local usedSubstituteProbablity = 0
+		local substituteProbability = 0
 		
 		for playerIndex = 0,3 do
 		
-			player = Party.Players[playerIndex]
+			local player = Party.Players[playerIndex]
+			local playerEquipmentData = getPlayerEquipmentData(player)
 		
-			if playerIndex ~= targetPlayerIndex and substitutePlayerIndex == targetPlayerIndex then
+			if playerIndex ~= targetPlayerIndex then
 			
-				-- get substitute player equipment data
-				
-				playerEquipmentData = getPlayerEquipmentData(player)
-				
 				-- switch to substitute player only if they wear plate
 				
 				if playerEquipmentData.armor.skill == const.Skills.Plate then
 				
-					local substituteProbability = usedSubstituteProbablity + plateWearerAttackAttractionChanceByMastery[playerEquipmentData.armor.rank]
+					local substituteProbability = substituteProbability + plateCoverChanceByMastery[playerEquipmentData.armor.rank]
 					
 					if roll < substituteProbability then
 						substitutePlayerIndex = playerIndex
-						Game.ShowStatusText(string.format("%s took a hit for %s", player.Name, targetPlayer.Name), 10)
+						Game.ShowStatusText(string.format("%s covered %s", player.Name, targetPlayer.Name), 10)
+						break
 					end
-					
-					usedSubstituteProbablity = substituteProbability
 					
 				end
 				
@@ -2580,7 +2569,37 @@ local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 	return substitutePlayerIndex
 
 end
-mem.hookfunction(0x004219B0, 0, 1, modifiedMonsterChooseTargetMember)
+mem.hookcall(0x00430C4B, 0, 1, modifiedMonsterChooseTargetMember)
+
+----------------------------------------------------------------------------------------------------
+-- shield holder protects from projectiles
+----------------------------------------------------------------------------------------------------
+
+local function modifiedCharacterStrikeWithDamageProjectile(d, def, playerPointer, damage, damageKind)
+
+	-- compute damage reduction
+	
+	local damageMultiplier = 1.0
+	
+	for playerIndex = 0, 3 do
+	
+		local player = Party.Players[playerIndex]
+		local playerEquipmentData = getPlayerEquipmentData(player)
+		
+		if playerEquipmentData.shield.equipped then
+			damageMultiplier = damageMultiplier * math.pow(1 - shieldProjectileDamageReductionPerLevel, playerEquipmentData.extra.level)
+		end
+		
+	end
+	
+	damage = math.ceil(damage * damageMultiplier)
+
+	-- execute original code
+	
+	def(playerPointer, damage, damageKind)
+	
+end
+mem.hookcall(0x0043203C, 1, 2, modifiedCharacterStrikeWithDamageProjectile)
 
 ----------------------------------------------------------------------------------------------------
 -- display damage rate

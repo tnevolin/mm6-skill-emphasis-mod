@@ -1,6 +1,11 @@
+# version 51
+
+* Plate wearers now cover party members from physical melee attacks only. It doesn't suit plate skill to work anti-magic.
+* Shield wearers reduces damage of all kind of physical and magical projectiles damage.
+
 # version 50
 
-* Party beneficial miscelaneous skills are now advanced simultaneously for all party members.
+* Party beneficial miscellaneous skills are now advanced simultaneously for all party members.
 	* Identify Item
 	* Merchant
 	* Repair
