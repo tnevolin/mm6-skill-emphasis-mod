@@ -1,3 +1,25 @@
+-- attack types
+
+local attackTypes =
+{
+	[const.Damage.Phys] = "Phys",
+	[const.Damage.Magic] = "Magic",
+	[const.Damage.Fire] = "Fire",
+	[const.Damage.Elec] = "Elec",
+	[const.Damage.Cold] = "Cold",
+	[const.Damage.Poison] = "Poison",
+	[const.Damage.Energy] = "Energy",
+}
+
+-- masteries
+
+local masteries =
+{
+	[const.Novice] = "n",
+	[const.Expert] = "e",
+	[const.Master] = "m",
+}
+
 -- skill set groups advancing together within a group for a single character
 
 local characterLinkedSkillGroups =
@@ -606,6 +628,14 @@ local function GetMonster(p)
 	end
 	local i = (p - Map.Monsters["?ptr"]) / Map.Monsters[0]["?size"]
 	return i, Map.Monsters[i]
+end
+
+local function GetMonsterTxt(p)
+	if p == 0 then
+		return
+	end
+	local i = (p - Game.MonstersTxt["?ptr"]) / Game.MonstersTxt[0]["?size"]
+	return i, Game.MonstersTxt[i]
 end
 
 -- collects relevant player weapon data
@@ -1864,7 +1894,7 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Shield] = Game.SkillDescriptions[const.Skills.Shield] ..
 		string.format(
-			"\n\nExperienced shield users can effectivelly cover the team from all kind of physical and magical projectiles reducing their impact damage. Each shield wearer in the party reduces damage by =%d%%= per each skill level multiplicatively.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty",
+			"\n\nExperienced shield users can effectively cover the team from all kind of physical and magical projectiles reducing their impact damage. Each shield wearer in the party reduces damage by =%d%%= per each skill level multiplicatively.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty",
 			math.round(shieldProjectileDamageReductionPerLevel * 100)
 		)
 	for rank = const.Novice, const.Master do
@@ -2605,10 +2635,10 @@ mem.hookcall(0x0043203C, 1, 2, modifiedCharacterStrikeWithDamageProjectile)
 -- display damage rate
 ----------------------------------------------------------------------------------------------------
 
--- shift positions in character stats display
-mem.bytecodepatch(0x004BD3FB, "\048\056\048", 3)
-mem.bytecodepatch(0x004BD3EF, "\048\056\048", 3)
-mem.bytecodepatch(0x004BD3E3, "\048\056\048", 3)
+-- shift positions in character stats display and remove mandatory + in attack
+mem.bytecodepatch(0x004BD3FB, "\048\056\048\032\037", 5)
+mem.bytecodepatch(0x004BD3EF, "\048\056\048\032\037", 5)
+mem.bytecodepatch(0x004BD3E3, "\048\056\048\032\037", 5)
 local function getAverageDamageRate(player, ranged)
 
 	-- get combat parameters
@@ -2644,7 +2674,7 @@ local function getAverageDamageRate(player, ranged)
 	return averageDamageRate
 	
 end
-local function modifiedDisplayMeleeAttackReference(d, def, dlg, font, x, y, color, text, arg_10, arg_14)
+local function modifiedDisplayReferenceMeleeAttack(d, def, dlg, font, x, y, color, text, arg_10, arg_14)
 
 	-- get player
 	
@@ -2654,10 +2684,12 @@ local function modifiedDisplayMeleeAttackReference(d, def, dlg, font, x, y, colo
 	
 	local averageDamageRate = getAverageDamageRate(player, false)
 	
-	-- append to text buffer
+	-- modify text buffer
 	
 	if averageDamageRate ~= nil then
-		Game.TextBuffer = Game.TextBuffer .. string.format(" (%d)", averageDamageRate)
+		local averageDamageRateText = string.format("%d", averageDamageRate)
+		Game.TextBuffer = string.gsub(Game.TextBuffer, "^+", "")
+		Game.TextBuffer = Game.TextBuffer .. " /" .. averageDamageRateText
 	end
 	
 	-- execute original code
@@ -2665,8 +2697,8 @@ local function modifiedDisplayMeleeAttackReference(d, def, dlg, font, x, y, colo
 	def(dlg, font, x, y, color, text, arg_10, arg_14)
 	
 end
-mem.hookcall(0x00416F51, 2, 6, modifiedDisplayMeleeAttackReference)
-local function modifiedDisplayRangedAttackReference(d, def, dlg, font, x, y, color, text, arg_10, arg_14)
+mem.hookcall(0x00416F51, 2, 6, modifiedDisplayReferenceMeleeAttack)
+local function modifiedDisplayReferenceRangedAttack(d, def, dlg, font, x, y, color, text, arg_10, arg_14)
 
 	-- get player
 	
@@ -2679,7 +2711,9 @@ local function modifiedDisplayRangedAttackReference(d, def, dlg, font, x, y, col
 	-- append to text buffer
 	
 	if averageDamageRate ~= nil then
-		Game.TextBuffer = Game.TextBuffer .. string.format(" (%d)", averageDamageRate)
+		local averageDamageRateText = string.format("%d", averageDamageRate)
+		Game.TextBuffer = string.gsub(Game.TextBuffer, "^+", "")
+		Game.TextBuffer = Game.TextBuffer .. " /" .. averageDamageRateText
 	end
 	
 	-- execute original code
@@ -2687,8 +2721,8 @@ local function modifiedDisplayRangedAttackReference(d, def, dlg, font, x, y, col
 	def(dlg, font, x, y, color, text, arg_10, arg_14)
 	
 end
-mem.hookcall(0x00416FF8, 2, 6, modifiedDisplayRangedAttackReference)
-local function modifiedDisplayMeleeAttackStats(d, def, dlg, font, x, y, color, str)
+mem.hookcall(0x00416FF8, 2, 6, modifiedDisplayReferenceRangedAttack)
+local function modifiedDisplayStatistictsMeleeAttack(d, def, dlg, font, x, y, color, str)
 
 	-- get player
 	
@@ -2701,7 +2735,7 @@ local function modifiedDisplayMeleeAttackStats(d, def, dlg, font, x, y, color, s
 	-- append to text buffer
 
 	if averageDamageRate ~= nil then
-		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format(" (%d)", averageDamageRate) .. "\n"
+		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format("/%d", averageDamageRate) .. "\n"
 	end
 	
 	-- execute original code
@@ -2709,8 +2743,8 @@ local function modifiedDisplayMeleeAttackStats(d, def, dlg, font, x, y, color, s
 	def(dlg, font, x, y, color, str)
 	
 end
-mem.hookcall(0x00414A3B, 2, 4, modifiedDisplayMeleeAttackStats)
-local function modifiedDisplayRangedAttackStats(d, def, dlg, font, x, y, color, str)
+mem.hookcall(0x00414A3B, 2, 4, modifiedDisplayStatistictsMeleeAttack)
+local function modifiedDisplayStatisticsRangedAttack(d, def, dlg, font, x, y, color, str)
 
 	-- get player
 	
@@ -2723,7 +2757,7 @@ local function modifiedDisplayRangedAttackStats(d, def, dlg, font, x, y, color, 
 	-- append to text buffer
 
 	if averageDamageRate ~= nil then
-		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format(" (%d)", averageDamageRate) .. "\n"
+		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format("/%d", averageDamageRate) .. "\n"
 	end
 	
 	-- execute original code
@@ -2731,7 +2765,7 @@ local function modifiedDisplayRangedAttackStats(d, def, dlg, font, x, y, color, 
 	def(dlg, font, x, y, color, str)
 	
 end
-mem.hookcall(0x00414AD5, 2, 4, modifiedDisplayRangedAttackStats)
+mem.hookcall(0x00414AD5, 2, 4, modifiedDisplayStatisticsRangedAttack)
 
 ----------------------------------------------------------------------------------------------------
 -- handle game actions
@@ -2813,4 +2847,77 @@ function events.Action(t)
 	end
 		
 end
+
+----------------------------------------------------------------------------------------------------
+-- draw monster info
+----------------------------------------------------------------------------------------------------
+
+function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str, a6)
+
+	-- get monster
+	
+	local monsterIndex, monster = GetMonster(d.edi)
+	local monsterTxt = Game.MonstersTxt[monster.Id]
+	
+	-- invoke original function
+	
+	def(dialog, font, left, top, color, str, a6)
+	
+	-- display monster txt statistics
+	
+	local textLines = {}
+	table.insert(textLines, {["key"] = "Full Hit Points", ["value"] = string.format("%d", monsterTxt.FullHitPoints)})
+	table.insert(textLines, {["key"] = "Armor Class", ["value"] = string.format("%d", monsterTxt.ArmorClass)})
+	table.insert(textLines, {["key"] = "Level", ["value"] = string.format("%d", monsterTxt.Level)})
+	table.insert(textLines, {["key"] = "Recovery", ["value"] = string.format("%d", monsterTxt.AttackRecovery)})
+	table.insert(textLines, {["key"] = string.format("Attack 1: %s %s", attackTypes[monsterTxt.Attack1.Type], (monsterTxt.Attack1.Missile == 0) and "melee" or "ranged"), ["value"] = string.format("%d-%d", monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount, monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount * monsterTxt.Attack1.DamageDiceSides)})
+	if monsterTxt.Attack2Chance == 0 then
+		table.insert(textLines, {["key"] = "Attack 2:", ["value"] = ""})
+	else
+		table.insert(textLines, {["key"] = string.format("Attack 2: %s %s [%s%%]", attackTypes[monsterTxt.Attack2.Type], (monsterTxt.Attack2.Missile == 1) and "ranged" or "melee", monsterTxt.Attack2Chance), ["value"] = string.format("%d-%d", monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount, monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount * monsterTxt.Attack2.DamageDiceSides)})
+	end
+	if monsterTxt.SpellChance == 0 then
+		table.insert(textLines, {["key"] = "Spell:", ["value"] = ""})
+	else
+		local spellLevel, spellMastery = SplitSkill(monsterTxt.SpellSkill)
+		table.insert(textLines, {["key"] = string.format("Spell: %s (%s.%d)", string.replace(Game.SpellsTxt[monsterTxt.Spell].ShortName, "\"", ""), masteries[spellMastery], spellLevel), ["value"] = ""})
+	end
+	table.insert(textLines, {["key"] = "Resistance to Fire", ["value"] = string.format("%d", monsterTxt.FireResistance)})
+	table.insert(textLines, {["key"] = "Resistance to Elec", ["value"] = string.format("%d", monsterTxt.ElecResistance)})
+	table.insert(textLines, {["key"] = "Resistance to Cold", ["value"] = string.format("%d", monsterTxt.ColdResistance)})
+	table.insert(textLines, {["key"] = "Resistance to Poison", ["value"] = string.format("%d", monsterTxt.PoisonResistance)})
+	table.insert(textLines, {["key"] = "Resistance to Magic", ["value"] = string.format("%d", monsterTxt.MagicResistance)})
+	table.insert(textLines, {["key"] = "Resistance to Phys", ["value"] = string.format("%d", monsterTxt.PhysResistance)})
+	
+	font = Game.Smallnum_fnt
+	local top = 36
+	local lineHeight = 11
+	local keyMargin = 20
+	local keyColor = 0xFFFF
+	local valueRightMargin = 230
+	local valueNumberShift = 8
+	local valueColor = 0x0FFF
+	
+	for index, tuple in pairs(textLines) do
+	
+		Game.TextBuffer = tuple.key .. string.rep(" ", 100)
+		def(dialog, font, keyMargin, top + lineHeight * index, keyColor, str, 0)
+		
+		local valueMargin = valueRightMargin - valueNumberShift * string.len(tuple.value)
+		for c in string.gmatch(tuple.value, ".") do
+			valueMargin = valueMargin + valueNumberShift
+			Game.TextBuffer = c .. string.rep(" ", 100)
+			def(dialog, font, valueMargin, top + lineHeight * index, valueColor, str, 0)
+		end
+		
+	end
+	
+end
+mem.hookcall(0x0041D18D, 2, 5, modifiedDrawMonsterInfoName)
+
+----------------------------------------------------------------------------------------------------
+-- raise immunity threshold
+----------------------------------------------------------------------------------------------------
+
+mem.asmpatch(0x00421DD9, string.format("cmp     eax, %d", 1000), 5)
 

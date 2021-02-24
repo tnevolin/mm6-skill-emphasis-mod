@@ -1,3 +1,8 @@
+# version 52
+
+* Displayed more info on monster information dialog.
+* Magic immunity threshold lifted to 1000. Now all immunities are just 200 resistances.
+
 # version 51
 
 * Plate wearers now cover party members from physical melee attacks only. It doesn't suit plate skill to work anti-magic.
