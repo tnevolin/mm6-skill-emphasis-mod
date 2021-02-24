@@ -2870,11 +2870,11 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 	table.insert(textLines, {["key"] = "Armor Class", ["value"] = string.format("%d", monsterTxt.ArmorClass)})
 	table.insert(textLines, {["key"] = "Level", ["value"] = string.format("%d", monsterTxt.Level)})
 	table.insert(textLines, {["key"] = "Recovery", ["value"] = string.format("%d", monsterTxt.AttackRecovery)})
-	table.insert(textLines, {["key"] = string.format("Attack 1: %s %s", attackTypes[monsterTxt.Attack1.Type], (monsterTxt.Attack1.Missile == 0) and "melee" or "ranged"), ["value"] = string.format("%d-%d", monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount, monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount * monsterTxt.Attack1.DamageDiceSides)})
+	table.insert(textLines, {["key"] = string.format("Att 1: %s %s", attackTypes[monsterTxt.Attack1.Type], (monsterTxt.Attack1.Missile == 0) and "melee" or "ranged"), ["value"] = string.format("%d-%d", monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount, monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount * monsterTxt.Attack1.DamageDiceSides)})
 	if monsterTxt.Attack2Chance == 0 then
 		table.insert(textLines, {["key"] = "Attack 2:", ["value"] = ""})
 	else
-		table.insert(textLines, {["key"] = string.format("Attack 2: %s %s [%s%%]", attackTypes[monsterTxt.Attack2.Type], (monsterTxt.Attack2.Missile == 1) and "ranged" or "melee", monsterTxt.Attack2Chance), ["value"] = string.format("%d-%d", monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount, monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount * monsterTxt.Attack2.DamageDiceSides)})
+		table.insert(textLines, {["key"] = string.format("Att 2: %s %s", attackTypes[monsterTxt.Attack2.Type], (monsterTxt.Attack2.Missile == 0) and "melee" or "ranged"), ["value"] = string.format("%d-%d", monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount, monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount * monsterTxt.Attack2.DamageDiceSides)})
 	end
 	if monsterTxt.SpellChance == 0 then
 		table.insert(textLines, {["key"] = "Spell:", ["value"] = ""})
@@ -2882,26 +2882,34 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 		local spellLevel, spellMastery = SplitSkill(monsterTxt.SpellSkill)
 		table.insert(textLines, {["key"] = string.format("Spell: %s (%s.%d)", string.replace(Game.SpellsTxt[monsterTxt.Spell].ShortName, "\"", ""), masteries[spellMastery], spellLevel), ["value"] = ""})
 	end
-	table.insert(textLines, {["key"] = "Resistance to Fire", ["value"] = string.format("%d", monsterTxt.FireResistance)})
-	table.insert(textLines, {["key"] = "Resistance to Elec", ["value"] = string.format("%d", monsterTxt.ElecResistance)})
-	table.insert(textLines, {["key"] = "Resistance to Cold", ["value"] = string.format("%d", monsterTxt.ColdResistance)})
-	table.insert(textLines, {["key"] = "Resistance to Poison", ["value"] = string.format("%d", monsterTxt.PoisonResistance)})
-	table.insert(textLines, {["key"] = "Resistance to Magic", ["value"] = string.format("%d", monsterTxt.MagicResistance)})
-	table.insert(textLines, {["key"] = "Resistance to Phys", ["value"] = string.format("%d", monsterTxt.PhysResistance)})
+	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Fire", ["value"] = string.format("%d", monsterTxt.FireResistance)})
+	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Elec", ["value"] = string.format("%d", monsterTxt.ElecResistance)})
+	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Cold", ["value"] = string.format("%d", monsterTxt.ColdResistance)})
+	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Poison", ["value"] = string.format("%d", monsterTxt.PoisonResistance)})
+	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Magic", ["value"] = string.format("%d", monsterTxt.MagicResistance)})
+	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Phys", ["value"] = string.format("%d", monsterTxt.PhysResistance)})
 	
 	font = Game.Smallnum_fnt
 	local top = 36
 	local lineHeight = 11
 	local keyMargin = 20
 	local keyColor = 0xFFFF
+	local resistanceLineIndex = 8
+	local resistanceColor = 0xFFA0
 	local valueRightMargin = 230
 	local valueNumberShift = 8
 	local valueColor = 0x0FFF
 	
 	for index, tuple in pairs(textLines) do
 	
+		if index >= resistanceLineIndex then
+			color = resistanceColor
+		else
+			color = keyColor
+		end
+		
 		Game.TextBuffer = tuple.key .. string.rep(" ", 100)
-		def(dialog, font, keyMargin, top + lineHeight * index, keyColor, str, 0)
+		def(dialog, font, keyMargin, top + lineHeight * index, color, str, 0)
 		
 		local valueMargin = valueRightMargin - valueNumberShift * string.len(tuple.value)
 		for c in string.gmatch(tuple.value, ".") do
