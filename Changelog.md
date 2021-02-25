@@ -1,7 +1,8 @@
 # version 54
 
-* Spear attack bonus grows tuned down a litte on higher ranks. It is now: 4-5-6 and the same is reflected in spear skill description.
+* Spear attack bonus grows tuned down a little on higher ranks. It is now: 4-5-6 and the same is reflected in spear skill description.
 * Spear does not grant AC bonus anymore and it is also reflected in description.
+* Monster HP is doubled to match the corresponding early dagger and 2h weapons damage increase. Even with this buff I believe they are still easy to beat but let's adjust slowly.
 
 # version 53
 

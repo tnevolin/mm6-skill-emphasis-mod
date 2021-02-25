@@ -251,7 +251,7 @@ local shieldProjectileDamageReductionPerLevel = 0.02
 
 -- monster settings
 
-local monsterHitPointsMultiplier = 1
+local monsterHitPointsMultiplier = 2
 local monsterDamageMultiplier = 1
 local monsterArmorClassMultiplier = 2
 local monsterLevelMultiplier = 1
