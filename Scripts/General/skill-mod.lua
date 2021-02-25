@@ -1264,7 +1264,7 @@ function events.CalcStatBonusBySkills(t)
 			t.Result = t.Result - bow.level
 			
 			-- add new bonus
-			t.Result = t.Result + (attackBonusMultiplier[main.skill] * attackBonusByMastery[bow.rank] * bow.level)
+			t.Result = t.Result + (attackBonusMultiplier[bow.skill] * attackBonusByMastery[bow.rank] * bow.level)
 			
 		end
 		
@@ -1273,7 +1273,6 @@ function events.CalcStatBonusBySkills(t)
 	
 		local main = equipmentData.main
 		local extra = equipmentData.extra
-		
 		if main.weapon then
 			
 			-- single wield
