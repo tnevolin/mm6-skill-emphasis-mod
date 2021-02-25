@@ -1,3 +1,9 @@
+# version 53
+
+* Dagger does not have modified tripled damage chance. Nor that was ever implemented.
+* Instead dagger damage bonus is tripled. That makes it very desirable early game weapon.
+* Spear attack grows twice as fast with skill. That emulates spear to be long reach armor piercing weapon improving hit chance against heavy armored targets.
+
 # version 52
 
 * Displayed more info on monster information dialog.

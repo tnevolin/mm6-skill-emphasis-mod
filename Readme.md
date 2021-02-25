@@ -69,7 +69,6 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Speed|3|4|5|
 |Damage|1|2|3|
 |2h weapon Damage|2|2|2|
-|Dagger chance to cause triple damage|3|4|5|
 |Armor Class from weapon|2|3|4|
 |Armor Class from shield|2|3|4|
 |Armor Class from leather|2|3|4|

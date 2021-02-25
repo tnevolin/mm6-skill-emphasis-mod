@@ -1,4 +1,4 @@
--- attack types
+-- attack types text
 
 local attackTypes =
 {
@@ -11,7 +11,7 @@ local attackTypes =
 	[const.Damage.Energy] = "Energy",
 }
 
--- masteries
+-- masteries text
 
 local masteries =
 {
@@ -19,6 +19,14 @@ local masteries =
 	[const.Expert] = "e",
 	[const.Master] = "m",
 }
+
+-- monster settings
+
+local monsterHitPointsMultiplier = 1
+local monsterDamageMultiplier = 1
+local monsterArmorClassMultiplier = 2
+local monsterLevelMultiplier = 1
+local monsterExperienceMultiplier = 1
 
 -- skill set groups advancing together within a group for a single character
 
@@ -236,10 +244,20 @@ local weaponSkillResistanceBonuses =
 
 -- skill effect multipliers
 local attackBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local attackBonusMultiplier =
+{
+	[const.Skills.Staff] = 1,
+	[const.Skills.Sword] = 1,
+	[const.Skills.Dagger] = 1,
+	[const.Skills.Axe] = 1,
+	[const.Skills.Spear] = 2,
+	[const.Skills.Bow] = 1,
+	[const.Skills.Mace] = 1,
+	[const.Skills.Blaster] = 1,
+}
 local recoveryBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local damageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local daggerTrippleDamageBonusByMastery = {[const.Novice] = 3, [const.Expert] = 4, [const.Master] = 5, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 local twoHandedWeaponDamageBonus = 2
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
@@ -269,6 +287,7 @@ local classRangedWeaponSkillDamageBonus =
 
 -- special damage modifiers
 local spearVersusFlyerDamageMultiplier = 2.0
+local daggerExtraBonusMultiplier = 2
 
 -- plate cover chances by mastery
 local plateCoverChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
@@ -1146,17 +1165,30 @@ function events.CalcStatBonusByItems(t)
 	local extra = equipmentData.extra
 	local armor = equipmentData.armor
 	
-	-- calculate two handed weapon damage
+	-- damage
 	
-	if main.weapon and equipmentData.twoHanded then
+	if t.Stat == const.Stats.MeleeDamageMin or t.Stat == const.Stats.MeleeDamageMax  then
 	
-		if t.Stat == const.Stats.MeleeDamageMin then
-			
+		-- calculate two handed weapon damage
+	
+		if main.weapon and equipmentData.twoHanded then
 			t.Result = 2 * t.Result
+		end
+		
+		-- calculate dagger extra bonus damage
+	
+		if main.weapon and main.skill == const.Skills.Dagger then
+		
+			mainItemTxt = Game.ItemsTxt[main.item.Number]
 			
-		elseif t.Stat == const.Stats.MeleeDamageMax then
+			t.Result = t.Result + daggerExtraBonusMultiplier * mainItemTxt.Mod2
 			
-			t.Result = 2 * t.Result
+		end
+		if extra.weapon and extra.skill == const.Skills.Dagger then
+		
+			mainItemTxt = Game.ItemsTxt[extra.item.Number]
+			
+			t.Result = t.Result + daggerExtraBonusMultiplier * mainItemTxt.Mod2
 			
 		end
 		
@@ -1232,7 +1264,7 @@ function events.CalcStatBonusBySkills(t)
 			t.Result = t.Result - bow.level
 			
 			-- add new bonus
-			t.Result = t.Result + (attackBonusByMastery[bow.rank] * bow.level)
+			t.Result = t.Result + (attackBonusMultiplier[main.skill] * attackBonusByMastery[bow.rank] * bow.level)
 			
 		end
 		
@@ -1251,7 +1283,7 @@ function events.CalcStatBonusBySkills(t)
 				t.Result = t.Result - main.level
 				
 				-- add new bonus from main hand
-				t.Result = t.Result + (attackBonusByMastery[main.rank] * main.level)
+				t.Result = t.Result + (attackBonusMultiplier[main.skill] * attackBonusByMastery[main.rank] * main.level)
 			
 			-- dual wield
 			else
@@ -1273,10 +1305,10 @@ function events.CalcStatBonusBySkills(t)
 				t.Result = t.Result - extra.level
 				
 				-- add new bonus from main hand
-				t.Result = t.Result + (attackBonusByMastery[main.rank] * mainEffectiveSkillLevel)
+				t.Result = t.Result + (attackBonusMultiplier[main.skill] * attackBonusByMastery[main.rank] * mainEffectiveSkillLevel)
 			
 				-- add new bonus from extra hand
-				t.Result = t.Result + (attackBonusByMastery[extra.rank] * extraEffectiveSkillLevel)
+				t.Result = t.Result + (attackBonusMultiplier[main.skill] * attackBonusByMastery[extra.rank] * extraEffectiveSkillLevel)
 			
 			end
 			
@@ -1661,11 +1693,6 @@ mem.asmpatch(
 
 -- game initialization
 
-local monsterHitPointsMultiplier = 1
-local monsterDamageMultiplier = 1
-local monsterArmorClassMultiplier = 2
-local monsterLevelMultiplier = 1
-local monsterExperienceMultiplier = 1
 function events.GameInitialized2()
 
 	-- modify monster statistics
@@ -1816,15 +1843,14 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nNote: Modified tripple damage chance is currently not implemented. It still works as in vanilla.\n\nBonus increment / level and x3 damage chance\n------------------------------------------------------------\n          attack   x3 damage chance",
+			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nBonus increment / level\n------------------------------------------------------------\n          attack",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Dagger]
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Dagger] =
 			string.format(
-				"     %s |                   %s",
-				formatSkillRankNumber(attackBonusByMastery[rank]),
-				formatSkillRankNumber(daggerTrippleDamageBonusByMastery[rank])
+				"     %s",
+				formatSkillRankNumber(attackBonusByMastery[rank])
 			)
 	end
 	
@@ -2914,8 +2940,14 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 		local valueMargin = valueRightMargin - valueNumberShift * string.len(tuple.value)
 		for c in string.gmatch(tuple.value, ".") do
 			valueMargin = valueMargin + valueNumberShift
+			local adjustedValueMargin = valueMargin
+			if c == "-" then
+				adjustedValueMargin = adjustedValueMargin + 1
+			elseif c == "4" then
+				adjustedValueMargin = adjustedValueMargin - 1
+			end
 			Game.TextBuffer = c .. string.rep(" ", 100)
-			def(dialog, font, valueMargin, top + lineHeight * index, valueColor, str, 0)
+			def(dialog, font, adjustedValueMargin, top + lineHeight * index, valueColor, str, 0)
 		end
 		
 	end
