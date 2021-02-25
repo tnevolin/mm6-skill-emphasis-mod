@@ -1,3 +1,8 @@
+# version 54
+
+* Spear attack bonus grows tuned down a litte on higher ranks. It is now: 4-5-6 and the same is reflected in spear skill description.
+* Spear does not grant AC bonus anymore and it is also reflected in description.
+
 # version 53
 
 * Dagger does not have modified tripled damage chance. Nor that was ever implemented.
