@@ -1,3 +1,7 @@
+# version 56
+
+* Monster damage is doubled. I think it still should be fair enough with additional buffs but let me know if it is too much.
+
 # version 55
 
 ## Shrine behavior changed
