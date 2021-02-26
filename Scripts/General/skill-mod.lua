@@ -1475,17 +1475,6 @@ function events.CalcStatBonusBySkills(t)
 	
 end
 
--- special damage modifiers
-
-function events.CalcDamageToMonster(t)
-	
-	local equipmentData = getPlayerEquipmentData(t.Player)
-	local main = equipmentData.main
-	
-	-- player with spear in main hand does extra damage to flying creatures
-	
-end
-
 -- applySpecialWeaponSkill
 local function applySpecialWeaponSkill(d, def, TextBuffer, delay)
 
@@ -2135,6 +2124,43 @@ function events.GameInitialized2()
 	setProfessionCost(const.NPCProfession.Burglar, 500)
 	setProfessionCost(const.NPCProfession.Factor, 100)
 	setProfessionCost(const.NPCProfession.Banker, 200)
+	
+	----------------------------------------------------------------------------------------------------
+	-- class starting skills
+	----------------------------------------------------------------------------------------------------
+	
+	-- knight
+	Game.ClassKinds.StartingSkills[0][const.Skills.Axe] = 1
+	Game.ClassKinds.StartingSkills[0][const.Skills.Plate] = 1
+	Game.ClassKinds.StartingSkills[0][const.Skills.Sword] = 2
+	Game.ClassKinds.StartingSkills[0][const.Skills.Leather] = 3
+	-- cleric
+	-- sorcerer
+	-- paladin
+	Game.ClassKinds.StartingSkills[3][const.Skills.Plate] = 1
+	Game.ClassKinds.StartingSkills[3][const.Skills.Spirit] = 2
+	Game.ClassKinds.StartingSkills[3][const.Skills.Mind] = 2
+	Game.ClassKinds.StartingSkills[3][const.Skills.Body] = 2
+	Game.ClassKinds.StartingSkills[3][const.Skills.Leather] = 3
+	Game.ClassKinds.StartingSkills[3][const.Skills.Diplomacy] = 3
+	-- archer
+	Game.ClassKinds.StartingSkills[4][const.Skills.Spear] = 1
+	Game.ClassKinds.StartingSkills[4][const.Skills.Chain] = 1
+	Game.ClassKinds.StartingSkills[4][const.Skills.Bow] = 2
+	Game.ClassKinds.StartingSkills[4][const.Skills.Air] = 2
+	Game.ClassKinds.StartingSkills[4][const.Skills.Water] = 2
+	Game.ClassKinds.StartingSkills[4][const.Skills.Earth] = 2
+	Game.ClassKinds.StartingSkills[4][const.Skills.Axe] = 3
+	Game.ClassKinds.StartingSkills[4][const.Skills.Dagger] = 3
+	Game.ClassKinds.StartingSkills[4][const.Skills.Diplomacy] = 3
+	Game.ClassKinds.StartingSkills[4][const.Skills.IdentifyItem] = 3
+	-- druid
+	Game.ClassKinds.StartingSkills[5][const.Skills.Fire] = 2
+	Game.ClassKinds.StartingSkills[5][const.Skills.Air] = 2
+	Game.ClassKinds.StartingSkills[5][const.Skills.Mind] = 2
+	Game.ClassKinds.StartingSkills[5][const.Skills.Repair] = 3
+	Game.ClassKinds.StartingSkills[5][const.Skills.Learning] = 3
+	Game.ClassKinds.StartingSkills[5][const.Skills.Meditation] = 3
 	
 end
 

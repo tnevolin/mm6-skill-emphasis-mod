@@ -1,3 +1,8 @@
+# version 57
+
+* Modified classes starting skills. Gave them mostly their preferable weapon and best armor. Removed magic from starting skills to allow better magic distribution across party. Archer is no longer bound to stuck with air magic. Also archer no longer has bow skill by default but it can be chosen. I guess one shooter doesn't really save the party in early game.
+* Fixed bug with magic attack.
+
 # version 56
 
 * Monster damage is doubled. I think it still should be fair enough with additional buffs but let me know if it is too much.
