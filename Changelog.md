@@ -1,3 +1,15 @@
+# version 55
+
+## Shrine behavior changed
+
+Shrines provide one blessing per calendar year and these blessing are accumulated and never lost and can be claimed any time regardless of month. Seer still tells you which shrine to visit but this has no effect.
+
+For example, if player never visited shrine of might first year and then visited it second year they are entitled for two blessings for two passed years right away (i.e. +10 and +3 might). This way blessings opportunity is never lost even when player unable to reach the shrine in its corresponding month.
+
+This feature makes this version incompatible with older saves due to newly introduced counter variables.
+
+I have pretty limitedly tested it on few shrines and few months. It seems to work properly but bugs still may be lurking around. Let me know if you see any inconsistencies or installation problems.
+
 # version 54
 
 * Spear attack bonus grows tuned down a little on higher ranks. It is now: 4-5-6 and the same is reflected in spear skill description.

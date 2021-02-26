@@ -2964,3 +2964,47 @@ mem.hookcall(0x0041D18D, 2, 5, modifiedDrawMonsterInfoName)
 
 mem.asmpatch(0x00421DD9, string.format("cmp     eax, %d", 1000), 5)
 
+----------------------------------------------------------------------------------------------------
+-- shrine events
+----------------------------------------------------------------------------------------------------
+
+function configureShrineEvent(eventId, shrineIndex, statisticsName, hintStringIndex, statusTextNothingIndex, statusText10Index, statusText3Index)
+
+	-- initialize shrine blessings table and value
+
+	if vars.shrineBlessings == nil then
+		vars.shrineBlessings = {}
+	end
+	if vars.shrineBlessings[shrineIndex] == nil then
+		vars.shrineBlessings[shrineIndex] = 0
+	end
+
+	-- calculate number of blessings available
+
+	local availableBlessings = Game.Year - Game.BaseYear + 1
+
+	-- rewrite event
+
+	Game.MapEvtLines:RemoveEvent(eventId)
+	evt.hint[eventId] = evt.str[hintStringIndex]
+	evt.map[eventId] = function()
+		if availableBlessings > vars.shrineBlessings[shrineIndex] then
+			if evt.Cmp("QBits", 207 + shrineIndex) then
+				evt.ForPlayer("All")
+				evt.Add(statisticsName, 3)
+				evt.StatusText(statusText3Index)
+			else
+				evt.Set("QBits", 207 + shrineIndex)
+				evt.ForPlayer("All")
+				evt.Add(statisticsName, 10)
+				evt.StatusText(statusText10Index)
+			end
+			vars.shrineBlessings[shrineIndex] = vars.shrineBlessings[shrineIndex] + 1
+		else
+			--evt.StatusText(statusTextNothingIndex)
+			Game.ShowStatusText("Return next year")
+		end
+	end
+
+end
+
