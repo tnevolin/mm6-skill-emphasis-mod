@@ -114,12 +114,14 @@ local weaponNewBaseRecoveryBonuses =
 	[const.Skills.Dagger] = 40,
 }
 
+--[[
 local armorAdditionalRecoveryPenalties =
 {
 	[const.Skills.Leather] = 0,
 	[const.Skills.Chain] = 0,
 	[const.Skills.Plate] = 0,
 }
+--]]
 
 local armorSkillNewBonusBySkillAndRank =
 {
@@ -542,7 +544,7 @@ local spellStatsBuffPowers =
 -- monster engagement distance
 
 local standardEngagementDistance = 0x1600
-local extendedEngagementDistance = 0x1E00
+local extendedEngagementDistance = 0x2C00
 
 -- house prices
 
@@ -1033,24 +1035,26 @@ function events.GetAttackDelay(t)
 	end
 	
 	-- armor
+	--[[
 	local itemArmorNumber = t.Player.ItemArmor
 	if itemArmorNumber ~= 0 then
 	
 		local itemArmor = t.Player.Items[itemArmorNumber]
 		local itemArmorTxt = Game.ItemsTxt[itemArmor.Number]
 		local itemArmorSkill = itemArmorTxt.Skill - 1
-		local armorRecivertPenalty = armorAdditionalRecoveryPenalties[itemArmorSkill]
+		local armorRecoveryPenalty = armorAdditionalRecoveryPenalties[itemArmorSkill]
 		local level, rank = SplitSkill(t.Player.Skills[itemArmorSkill])
 		
 		if rank == const.Expert then
-			armorRecivertPenalty = armorRecivertPenalty / 2
+			armorRecoveryPenalty = armorRecoveryPenalty / 2
 		elseif rank == const.Master then
-			armorRecivertPenalty = 0
+			armorRecoveryPenalty = 0
 		end
 		
-		t.Result = t.Result + armorRecivertPenalty
+		t.Result = t.Result + armorRecoveryPenalty
 		
 	end
+	--]]
 	
 	-- turn recovery time into a multiplier rather than divisor
 	
@@ -1168,9 +1172,9 @@ function events.CalcStatBonusByItems(t)
 	
 	if t.Stat == const.Stats.MeleeDamageMin or t.Stat == const.Stats.MeleeDamageMax  then
 	
-		-- calculate two handed weapon damage
+		-- two handed sword
 	
-		if main.weapon and equipmentData.twoHanded then
+		if main.weapon and main.skill == const.Skills.Sword and equipmentData.twoHanded then
 			t.Result = 2 * t.Result
 		end
 		
@@ -2130,22 +2134,22 @@ function events.GameInitialized2()
 	----------------------------------------------------------------------------------------------------
 	
 	-- knight
-	Game.ClassKinds.StartingSkills[0][const.Skills.Axe] = 1
-	Game.ClassKinds.StartingSkills[0][const.Skills.Plate] = 1
+	Game.ClassKinds.StartingSkills[0][const.Skills.Spear] = 1
 	Game.ClassKinds.StartingSkills[0][const.Skills.Sword] = 2
-	Game.ClassKinds.StartingSkills[0][const.Skills.Leather] = 3
 	-- cleric
 	-- sorcerer
 	-- paladin
-	Game.ClassKinds.StartingSkills[3][const.Skills.Plate] = 1
+	Game.ClassKinds.StartingSkills[3][const.Skills.Spear] = 1
+	Game.ClassKinds.StartingSkills[3][const.Skills.Sword] = 2
+	Game.ClassKinds.StartingSkills[3][const.Skills.Leather] = 1
 	Game.ClassKinds.StartingSkills[3][const.Skills.Spirit] = 2
 	Game.ClassKinds.StartingSkills[3][const.Skills.Mind] = 2
 	Game.ClassKinds.StartingSkills[3][const.Skills.Body] = 2
-	Game.ClassKinds.StartingSkills[3][const.Skills.Leather] = 3
+	Game.ClassKinds.StartingSkills[3][const.Skills.Chain] = 3
 	Game.ClassKinds.StartingSkills[3][const.Skills.Diplomacy] = 3
 	-- archer
 	Game.ClassKinds.StartingSkills[4][const.Skills.Spear] = 1
-	Game.ClassKinds.StartingSkills[4][const.Skills.Chain] = 1
+	Game.ClassKinds.StartingSkills[4][const.Skills.Leather] = 1
 	Game.ClassKinds.StartingSkills[4][const.Skills.Bow] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Air] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Water] = 2
@@ -2471,7 +2475,7 @@ local function modifiedFastDistance(d, def, dx, dy, dz)
 	
 	local result = def(dx, dy, dz)
 	
-	-- pretend that distance to the monster is shorter if if party is already engaged
+	-- pretend that distance to the monster is shorter if party is already engaged
 	
 	if bit.band(Party.StateBits, 0x20) ~= 0 then
 	
@@ -2487,6 +2491,11 @@ local function modifiedFastDistance(d, def, dx, dy, dz)
 	
 end
 mem.hookcall(0x00401117, 2, 1, modifiedFastDistance)
+
+-- disable monster zig-zag movement
+
+mem.asmpatch(0x00402CF6, string.format("add     edx, 0h"), 6)
+mem.asmpatch(0x00402D09, string.format("add     eax, 0h"), 5)
 
 ----------------------------------------------------------------------------------------------------
 -- temple healing price is scaled with party experience level
@@ -2691,18 +2700,24 @@ mem.hookcall(0x0043203C, 1, 2, modifiedCharacterStrikeWithDamageProjectile)
 ----------------------------------------------------------------------------------------------------
 
 -- shift positions in character stats display and remove mandatory + in attack
+
 mem.bytecodepatch(0x004BD3FB, "\048\056\048\032\037", 5)
 mem.bytecodepatch(0x004BD3EF, "\048\056\048\032\037", 5)
 mem.bytecodepatch(0x004BD3E3, "\048\056\048\032\037", 5)
-local function getAverageDamageRate(player, ranged)
+
+local function getAverageDamageRate(player, ranged, monsterArmorClass)
+
+	-- set default armor class
+	
+	if monsterArmorClass == nil then
+		monsterArmorClass = 100
+	end
 
 	-- get combat parameters
 	
 	local attack = (ranged and player:GetRangedAttack() or player:GetMeleeAttack())
 	local recovery = player:GetAttackDelay(ranged)
 	local damageRangeText = (ranged and player:GetRangedDamageRangeText() or player:GetMeleeDamageRangeText())
-	
-	-- error
 	
 	if attack == nil or type(attack) ~= "number" or recovery == nil  or type(recovery) ~= "number" or damageRangeText == nil or type(damageRangeText) ~= "string" then
 		return nil
@@ -2712,17 +2727,16 @@ local function getAverageDamageRate(player, ranged)
 	local damageMin = tonumber(damageMinText)
 	local damageMax = tonumber(damageMaxText)
 	
-	-- error
-	
 	if damageMin == nil or type(damageMin) ~= "number" or damageMax == nil or type(damageMax) ~= "number" then
 		return nil
 	end
 	
-	-- calculate average damage rate against monster with AC = 100 and no physical resistance
+	local averageDamage = (damageMax + damageMin) / 2
 	
-	local chanceToHit = (15 + 2 * attack) / (15 + 2 * attack + 15 + 100)
+	-- calculate average damage rate against monster and no physical resistance
 	
-	local averageDamageRate = math.round((damageMax + damageMin) / 2 * chanceToHit * (100 / recovery))
+	local chanceToHit = (15 + 2 * attack) / (15 + 2 * attack + 15 + monsterArmorClass)
+	local averageDamageRate = math.round(averageDamage * chanceToHit * (100 / recovery))
 	
 	-- return value
 	
@@ -2921,13 +2935,19 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 	-- display monster txt statistics
 	
 	local textLines = {}
+	
+	local player = Party.Players[Game.CurrentPlayer]
+	table.insert(textLines, {["key"] = "Damage Rate melee", ["value"] = string.format("%d", getAverageDamageRate(player, false, monsterTxt.ArmorClass)), ["type"] = "damageRate", })
+	table.insert(textLines, {["key"] = "Damage Rate ranged", ["value"] = string.format("%d", getAverageDamageRate(player, true, monsterTxt.ArmorClass)), ["type"] = "damageRate", })
+	table.insert(textLines, {["key"] = "", ["value"] = "", })
+	
 	table.insert(textLines, {["key"] = "Full Hit Points", ["value"] = string.format("%d", monsterTxt.FullHitPoints)})
 	table.insert(textLines, {["key"] = "Armor Class", ["value"] = string.format("%d", monsterTxt.ArmorClass)})
 	table.insert(textLines, {["key"] = "Level", ["value"] = string.format("%d", monsterTxt.Level)})
 	table.insert(textLines, {["key"] = "Recovery", ["value"] = string.format("%d", monsterTxt.AttackRecovery)})
 	table.insert(textLines, {["key"] = string.format("Att 1: %s %s", attackTypes[monsterTxt.Attack1.Type], (monsterTxt.Attack1.Missile == 0) and "melee" or "ranged"), ["value"] = string.format("%d-%d", monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount, monsterTxt.Attack1.DamageAdd + monsterTxt.Attack1.DamageDiceCount * monsterTxt.Attack1.DamageDiceSides)})
 	if monsterTxt.Attack2Chance == 0 then
-		table.insert(textLines, {["key"] = "Attack 2:", ["value"] = ""})
+		table.insert(textLines, {["key"] = "Att 2:", ["value"] = ""})
 	else
 		table.insert(textLines, {["key"] = string.format("Att 2: %s %s", attackTypes[monsterTxt.Attack2.Type], (monsterTxt.Attack2.Missile == 0) and "melee" or "ranged"), ["value"] = string.format("%d-%d", monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount, monsterTxt.Attack2.DamageAdd + monsterTxt.Attack2.DamageDiceCount * monsterTxt.Attack2.DamageDiceSides)})
 	end
@@ -2937,34 +2957,59 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 		local spellLevel, spellMastery = SplitSkill(monsterTxt.SpellSkill)
 		table.insert(textLines, {["key"] = string.format("Spell: %s (%s.%d)", string.replace(Game.SpellsTxt[monsterTxt.Spell].ShortName, "\"", ""), masteries[spellMastery], spellLevel), ["value"] = ""})
 	end
-	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Fire", ["value"] = string.format("%d", monsterTxt.FireResistance)})
-	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Elec", ["value"] = string.format("%d", monsterTxt.ElecResistance)})
-	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Cold", ["value"] = string.format("%d", monsterTxt.ColdResistance)})
-	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Poison", ["value"] = string.format("%d", monsterTxt.PoisonResistance)})
-	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Magic", ["value"] = string.format("%d", monsterTxt.MagicResistance)})
-	table.insert(textLines, {["key"] = string.rep(" ", 25) .. "Phys", ["value"] = string.format("%d", monsterTxt.PhysResistance)})
+	table.insert(textLines, {["key"] = "Fire", ["value"] = string.format("%d", monsterTxt.FireResistance), ["type"] = "resistance", })
+	table.insert(textLines, {["key"] = "Elec", ["value"] = string.format("%d", monsterTxt.ElecResistance), ["type"] = "resistance", })
+	table.insert(textLines, {["key"] = "Cold", ["value"] = string.format("%d", monsterTxt.ColdResistance), ["type"] = "resistance", })
+	table.insert(textLines, {["key"] = "Poison", ["value"] = string.format("%d", monsterTxt.PoisonResistance), ["type"] = "resistance", })
+	table.insert(textLines, {["key"] = "Magic", ["value"] = string.format("%d", monsterTxt.MagicResistance), ["type"] = "resistance", })
+	table.insert(textLines, {["key"] = "Phys", ["value"] = string.format("%d", monsterTxt.PhysResistance), ["type"] = "resistance", })
+	
+	-- draw info
 	
 	font = Game.Smallnum_fnt
 	local top = 36
 	local lineHeight = 11
-	local keyMargin = 20
-	local keyColor = 0xFFFF
-	local resistanceLineIndex = 8
-	local resistanceColor = 0xFFA0
+	local normalKeyMargin = 20
+	local normalKeyColor = 0x0000					-- white
+	local resistanceKeyMargin = 180
+	local resistanceKeyColor = 0xFFC0			-- yellow
+	local damageRateKeyMargin = normalKeyMargin
+	local damageRateKeyColor = 0x07C0
 	local valueRightMargin = 230
 	local valueNumberShift = 8
-	local valueColor = 0x0FFF
+	local normalValueColor = 0x07FE				-- cyan
+	local damageRateValueColor = 0xF8C6		-- reddish
 	
 	for index, tuple in pairs(textLines) do
 	
-		if index >= resistanceLineIndex then
-			color = resistanceColor
+		-- draw key
+	
+		local keyMargin;
+		local keyColor;
+	
+		if tuple.type == "resistance" then
+			keyMargin = resistanceKeyMargin
+			keyColor = resistanceKeyColor
+		elseif tuple.type == "damageRate" then
+			keyMargin = damageRateKeyMargin
+			keyColor = damageRateKeyColor
 		else
-			color = keyColor
+			keyMargin = normalKeyMargin
+			keyColor = normalKeyColor
 		end
 		
 		Game.TextBuffer = tuple.key .. string.rep(" ", 100)
-		def(dialog, font, keyMargin, top + lineHeight * index, color, str, 0)
+		def(dialog, font, keyMargin, top + lineHeight * index, keyColor, str, 0)
+		
+		-- draw value
+		
+		local valueColor;
+	
+		if tuple.type == "damageRate" then
+			valueColor = damageRateValueColor
+		else
+			valueColor = normalValueColor
+		end
 		
 		local valueMargin = valueRightMargin - valueNumberShift * string.len(tuple.value)
 		for c in string.gmatch(tuple.value, ".") do
@@ -3032,5 +3077,13 @@ function configureShrineEvent(eventId, shrineIndex, statisticsName, hintStringIn
 		end
 	end
 
+end
+
+----------------------------------------------------------------------------------------------------
+-- modify item damage
+----------------------------------------------------------------------------------------------------
+
+function events.ModifyItemDamage(t)
+	MessageBox(dump(t.Damage))
 end
 

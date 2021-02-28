@@ -371,7 +371,7 @@ This is a convenience fix. I am tired to reload game hundreds times just to find
 * Works outside only and brings outside peasants only if they are available.
 * Hiring peasant NPC removes them from the map so you may run out of them on a particular map.
 
-| shorcut | hirelings | comment |
+| shortcut | hirelings | comment |
 |----|----|----|
 | Alt+1 | Weapons Master, Squire | physical offense and defense
 | Alt+2 | Spell Master, Mystic | magical offense and buffs

@@ -1,3 +1,11 @@
+# version 58
+
+* Double own damage is applied to two handed swords only and not to other two handed weapons. Otherwise, two handed spear becomes an extremely powerful in early game.
+* All combat classes get spear and leather as initial skills. It seems to be a most powerful and fast combination in early game. If so then why seeking anything else?
+* Added damage rate for current player against given monster in moster info. That shows more precise damage rate than the one in player screen against generic 100 AC monster.
+* Disabled monster anti-sub zigzagging and let them go straight to the party to catch up quicker. This maneuver is no good against homing missiles anymore.
+* Monster engagement area is increased. Now more monsters jump at you when you disturb at least one.
+
 # version 57
 
 * Modified classes starting skills. Gave them mostly their preferable weapon and best armor. Removed magic from starting skills to allow better magic distribution across party. Archer is no longer bound to stuck with air magic. Also archer no longer has bow skill by default but it can be chosen. I guess one shooter doesn't really save the party in early game.
