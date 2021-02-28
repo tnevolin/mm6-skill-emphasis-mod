@@ -3083,7 +3083,9 @@ end
 -- modify item damage
 ----------------------------------------------------------------------------------------------------
 
+--[[
 function events.ModifyItemDamage(t)
 	MessageBox(dump(t.Damage))
 end
+--]]
 
