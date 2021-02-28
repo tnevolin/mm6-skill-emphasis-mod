@@ -2715,12 +2715,22 @@ local function getAverageDamageRate(player, ranged, monsterArmorClass)
 
 	-- get combat parameters
 	
-	local attack = (ranged and player:GetRangedAttack() or player:GetMeleeAttack())
 	local recovery = player:GetAttackDelay(ranged)
-	local damageRangeText = (ranged and player:GetRangedDamageRangeText() or player:GetMeleeDamageRangeText())
+	local attack
+	local damageRangeText
+	if ranged then
+		attack = player:GetRangedAttack()
+	else
+		attack = player:GetMeleeAttack()
+	end
+	if ranged then
+		damageRangeText = player:GetRangedDamageRangeText()
+	else
+		damageRangeText = player:GetMeleeDamageRangeText()
+	end
 	
 	if attack == nil or type(attack) ~= "number" or recovery == nil  or type(recovery) ~= "number" or damageRangeText == nil or type(damageRangeText) ~= "string" then
-		return nil
+		return 0
 	end
 	
 	local damageMinText, damageMaxText = string.match(damageRangeText, "(-?%d+)%s*-%s(-?%d+)")
@@ -2728,7 +2738,7 @@ local function getAverageDamageRate(player, ranged, monsterArmorClass)
 	local damageMax = tonumber(damageMaxText)
 	
 	if damageMin == nil or type(damageMin) ~= "number" or damageMax == nil or type(damageMax) ~= "number" then
-		return nil
+		return 0
 	end
 	
 	local averageDamage = (damageMax + damageMin) / 2
@@ -2937,8 +2947,10 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 	local textLines = {}
 	
 	local player = Party.Players[Game.CurrentPlayer]
-	table.insert(textLines, {["key"] = "Damage Rate melee", ["value"] = string.format("%d", getAverageDamageRate(player, false, monsterTxt.ArmorClass)), ["type"] = "damageRate", })
-	table.insert(textLines, {["key"] = "Damage Rate ranged", ["value"] = string.format("%d", getAverageDamageRate(player, true, monsterTxt.ArmorClass)), ["type"] = "damageRate", })
+	local meleeDamageRate = getAverageDamageRate(player, false, monsterTxt.ArmorClass)
+	local rangedDamageRate = getAverageDamageRate(player, true, monsterTxt.ArmorClass)
+	table.insert(textLines, {["key"] = "Damage Rate melee", ["value"] = string.format("%d", meleeDamageRate), ["type"] = "damageRate", })
+	table.insert(textLines, {["key"] = "Damage Rate ranged", ["value"] = string.format("%d", rangedDamageRate), ["type"] = "damageRate", })
 	table.insert(textLines, {["key"] = "", ["value"] = "", })
 	
 	table.insert(textLines, {["key"] = "Full Hit Points", ["value"] = string.format("%d", monsterTxt.FullHitPoints)})
