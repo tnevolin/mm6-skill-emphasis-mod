@@ -1,8 +1,15 @@
+# version 59
+
+* Reverted spear attack bonus to 2x of normal. I have analyzed it and it really doesn't add much on average but may be slightly useful against heavily armored monster that party encounter early. Like gold dragon in the temple of the snake.
+* Set damage progression to 2-3-4, recovery progression to 4-5-6. This should not be too much against doubled monster health. Anything below that was too indistinguishable from vanilla progression.
+* Restored double weapon damage for two-handed sword, spear, and axe. They need to match damage of their dual versions. That makes two-handed spear quite a strong early game weapon but this benefit wear down quickly with skill advancement.
+* Dagger is redesigned as crowd fighting weapon giving it extra damage per each enemy in melee range per level of skill. It overtakes best combos with 10+ enemies in close combat.
+
 # version 58
 
 * Double own damage is applied to two handed swords only and not to other two handed weapons. Otherwise, two handed spear becomes an extremely powerful in early game.
 * All combat classes get spear and leather as initial skills. It seems to be a most powerful and fast combination in early game. If so then why seeking anything else?
-* Added damage rate for current player against given monster in moster info. That shows more precise damage rate than the one in player screen against generic 100 AC monster.
+* Added damage rate for current player against given monster in monster info. That shows more precise damage rate than the one in player screen against generic 100 AC monster.
 * Disabled monster anti-sub zigzagging and let them go straight to the party to catch up quicker. This maneuver is no good against homing missiles anymore.
 * Monster engagement area is increased. Now more monsters jump at you when you disturb at least one.
 

@@ -20,6 +20,10 @@ local masteries =
 	[const.Master] = "m",
 }
 
+-- red distance
+
+local meleeRangeDistance = 307.2
+
 -- melee recovery cap
 
 local meleeRecoveryCap = 10
@@ -206,12 +210,12 @@ local attackBonusByMastery =
 	[const.Skills.Sword] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Dagger] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Axe] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Spear] = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, },
+	[const.Skills.Spear] = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, },
 	[const.Skills.Bow] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Mace] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Blaster] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 }
-local recoveryBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
+local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local damageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
@@ -219,6 +223,9 @@ local twoHandedWeaponDamageBonus = 2
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
 local learningSkillExtraMultiplier = 2
 local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
+
+-- special modifiers
+local daggerCrowdDamageMultiplier = 0.5
 
 -- special weapon skill chances
 local staffEffect = {["base"] = 10, ["multiplier"] = 2, ["duration"] = 5, }
@@ -240,10 +247,6 @@ local classRangedWeaponSkillDamageBonus =
 	[const.Class.BattleMage] = 3,
 	[const.Class.WarriorMage] = 4,
 }
-
--- special damage modifiers
-local spearVersusFlyerDamageMultiplier = 2.0
-local daggerExtraBonusMultiplier = 2
 
 -- plate cover chances by mastery
 local plateCoverChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
@@ -966,12 +969,18 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 	
 end
 
+-- generate random spell power
 local function randomSpellPower(spellPower, level)
 	local r = math.random(spellPower.fixedMin, spellPower.fixedMax)
 	for i = 1, level do
 		r = r + math.random(spellPower.variableMin, spellPower.variableMax)
 	end
 	return r
+end
+
+-- calculate distance from party to monster side
+local function getDistanceToMonster(monster)
+	return math.sqrt((Party.X - monster.X) * (Party.X - monster.X) + (Party.Y - monster.Y) * (Party.Y - monster.Y)) - monster.BodyRadius
 end
 
 -- set melee recovery cap
@@ -1172,27 +1181,10 @@ function events.CalcStatBonusByItems(t)
 	
 	if t.Stat == const.Stats.MeleeDamageMin or t.Stat == const.Stats.MeleeDamageMax  then
 	
-		-- two handed sword
+		-- two handed sword, spear, axe
 	
-		if main.weapon and main.skill == const.Skills.Sword and equipmentData.twoHanded then
+		if main.weapon and (main.skill == const.Skills.Sword or main.skill == const.Skills.Spear or main.skill == const.Skills.Axe) and equipmentData.twoHanded then
 			t.Result = 2 * t.Result
-		end
-		
-		-- calculate dagger extra bonus damage
-	
-		if main.weapon and main.skill == const.Skills.Dagger then
-		
-			mainItemTxt = Game.ItemsTxt[main.item.Number]
-			
-			t.Result = t.Result + daggerExtraBonusMultiplier * mainItemTxt.Mod2
-			
-		end
-		if extra.weapon and extra.skill == const.Skills.Dagger then
-		
-			mainItemTxt = Game.ItemsTxt[extra.item.Number]
-			
-			t.Result = t.Result + daggerExtraBonusMultiplier * mainItemTxt.Mod2
-			
 		end
 		
 	end
@@ -1413,7 +1405,30 @@ function events.CalcStatBonusBySkills(t)
 				end
 				
 			end
+			
+			-- dagger crowd damage
+			
+			if main.skill == const.Skills.Dagger or extra.skill == const.Skills.Dagger then
+			
+				local meleeRangeMonsterCount = 0
 				
+				for monsterIndex = 0, Map.Monsters.high do
+					local monster = Map.Monsters[monsterIndex]
+					local distanceToMonster = getDistanceToMonster(monster)
+					if distanceToMonster < meleeRangeDistance then
+						meleeRangeMonsterCount = meleeRangeMonsterCount + 1
+					end
+				end
+				
+				if main.skill == const.Skills.Dagger then
+					t.Result = t.Result + math.floor(daggerCrowdDamageMultiplier * meleeRangeMonsterCount * main.level)
+				end
+				if extra.skill == const.Skills.Dagger then
+					t.Result = t.Result + math.floor(daggerCrowdDamageMultiplier * meleeRangeMonsterCount * extra.level)
+				end
+				
+			end
+			
 		end
 		
 	-- calculate AC bonus by skill
@@ -1840,8 +1855,9 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nBonus increment / level\n------------------------------------------------------------\n          attack",
-			100 - weaponNewBaseRecoveryBonuses[const.Skills.Dagger]
+			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nDagger is the weak weapon choice for one-to-one fight due to its short reach and mediocre armor penetration. However, it really shines in crowd fighting which limits operational room and blocks vision for large conventional weapon owner. Dagger owner turns such conditions to their advantage attacking enemy weak spots with swift and frequent blows those difficult to anticipate and block with heavy and slow conventional weapons in such congested space. Skill increases damage by %f per each enemy in melee range per level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Dagger],
+			daggerCrowdDamageMultiplier
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Dagger] =
@@ -3100,4 +3116,33 @@ function events.ModifyItemDamage(t)
 	MessageBox(dump(t.Damage))
 end
 --]]
+
+----------------------------------------------------------------------------------------------------
+-- melee damage monster from party hook
+----------------------------------------------------------------------------------------------------
+
+local function meleeAttackMonster(d, def, attackStructure, monsterIndex, knockbackParameter)
+
+	local attackType = bit.band(attackStructure, 7)
+	local playerIndex = bit.rshift(attackStructure, 2)
+	
+	-- execute original function
+	
+	def(attackStructure, monsterIndex, knockbackParameter)
+	
+	-- non melee attack
+	
+	if attackType ~= 2 then
+		return
+	end
+	
+	-- process extra hits
+	
+		local attackType = bit.band(attackStructure, 7)
+	local playerIndex = bit.rshift(attackStructure, 2)
+	
+
+	
+end
+mem.hookcall(0x0042A228, 2, 1, meleeAttackMonster)
 
