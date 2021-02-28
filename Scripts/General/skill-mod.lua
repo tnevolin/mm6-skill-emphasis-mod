@@ -1853,9 +1853,12 @@ function events.GameInitialized2()
 			)
 	end
 	
+	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "slower opponents'.", "slower opponents'. The dagger can also do more damage when you're fighting multiple enemies at once.")
+	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "Expert dagger fighters can wield a dagger in their left hand while using another weapon in their right.", "\nCan be held in left hand as an auxilliary weapon.")
+	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "Master dagger fighters have a chance of doing a triple damage attack.", "\nChance to deliver triple damage per attack.")
 	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nDagger is the weak weapon choice for one-to-one fight due to its short reach and mediocre armor penetration. However, it really shines in crowd fighting which limits operational room and blocks vision for large conventional weapon owner. Dagger owner turns such conditions to their advantage attacking enemy weak spots with swift and frequent blows those difficult to anticipate and block with heavy and slow conventional weapons in such congested space. Skill increases damage by %f per each enemy in melee range per level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack",
+			"\n\nBase recovery: %d\n\n+ %2.1f damage per enemy in melee range per level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Dagger],
 			daggerCrowdDamageMultiplier
 		)
