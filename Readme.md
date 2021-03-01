@@ -40,12 +40,6 @@ Resulting attack rate:                   100 + 95 = 195
 Converting back to recovery:             100 * (100 / 195) = 51, cap is not reached
 </pre>
 
-# Weapon base recovery bonuses
-
-Weapons not improving their speed with skill keep their recovery bonuses.
-
-Axe recovery bonus is -20. Sword recovery bonus is 0. Due to very fast recovery bonus per level progression they still catch up and overtake other weapons pretty soon. Axe (the slowest weapon) will be as fast as dagger at level 10 and then will keep getting faster and faster.
-
 # Combat skills
 
 ## Weapon skills
@@ -66,8 +60,8 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
 |Attack|2|3|4|
-|Speed|3|4|5|
-|Damage|1|2|3|
+|Speed|4|5|6|
+|Damage|2|3|4|
 |2h weapon Damage|2|2|2|
 |Armor Class from weapon|2|3|4|
 |Armor Class from shield|2|3|4|
@@ -104,7 +98,7 @@ Mace has a chance to paralyze opponent. This ability is immediately available at
 
 ### Plate special abilities
 
-Knight and Paladin are seen as team champions rushing forward and covering weaker team members. Plate wearer has a chance to cover other team member not wearing a plate by taking a hit for them. Such chance grows with Plate rank.
+Knight and Paladin are seen as team champions rushing forward and covering weaker team members. Plate wearer has a chance to cover other team member not wearing a plate from physical melee attack by taking a hit for them. Such chance grows with Plate skill rank.
 
 |bonus|normal|expert|master|
 |----|----:|----:|----:|
@@ -162,7 +156,7 @@ Sword-sword and dagger-dagger combos are special case as they progress as fast a
 
 ### Knight
 
-![Knight damage rate progression by skill level](weapon_knight.png)
+![Knight damage rate progression by skill level](_images/weapon_knight.png)
 
 Knight plays almost all combos pretty well until level 10 thanks to their hefty extra damage bonus. That also includes a famous sword-sword combo which is good for lazy players not interested in developing multiple weapon skills for Knight at the beginning of the game. The most offensive axe-sword combo overtakes all others past skill level 10 and continues improving at slightly higher rate from then on.
 
@@ -170,7 +164,7 @@ Knight can opt to mace-sword combo sacrificing 20% damage rate for paralyzing ab
 
 ### Paladin
 
-![Paladin damage rate progression by skill level](weapon_paladin.png)
+![Paladin damage rate progression by skill level](_images/weapon_paladin.png)
 
 Paladin can use 2h axe or axe-sword combo with about same combat effectiveness. Player's choice.
 
@@ -178,7 +172,7 @@ Same is true for Paladin about mace paralyzing ability. Get it for 20% loss in d
 
 ### Archer
 
-![Other classes damage rate progression by skill level](weapon_nonmelee.png)
+![Other classes damage rate progression by skill level](_images/weapon_nonmelee.png)
 
 Archer does not possess close combat bonuses yet it is still capable of using all weapons. Two-handed axe is a clear preference for them due to 2h damage bonus. Besides, since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is somewhate weaker on offense but beefs up AC. Everything else is worse.
 
