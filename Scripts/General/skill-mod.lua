@@ -216,7 +216,7 @@ local attackBonusByMastery =
 	[const.Skills.Blaster] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 }
 local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
-local damageBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
+local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 local twoHandedWeaponDamageBonus = 2
@@ -633,9 +633,31 @@ local function convertIntToFloat(x)
 end
 
 -- formats number for skill rank description
-local function formatSkillRankNumber(number)
-	local numberString = string.format("%s", number)
-	return string.rep("_", math.max(0, 2 - string.len(numberString))) .. numberString
+local function formatSkillRankNumber(number, rightPosition)
+
+	if rightPosition == nil then
+		return "--"
+	end
+
+	local formattedString = ""
+
+	local numberString = string.format("%d", number)
+	local valueNumberShift = 8
+	local position = rightPosition - valueNumberShift * string.len(numberString)
+
+	for c in string.gmatch(numberString, ".") do
+		local adjustedPosition = position
+		--[[
+		if c == "4" then
+			adjustedPosition = adjustedPosition + 1
+		end
+		--]]
+		formattedString = formattedString .. string.format("\t%03d%s", adjustedPosition, c)
+		position = position + valueNumberShift
+	end
+	
+	return formattedString
+	
 end
 
 -- Player hooks
@@ -1822,7 +1844,7 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Staff] = Game.SkillDescriptions[const.Skills.Staff] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nSpecial effects: Shrink and Feeblemind\nchance = %d%% + %d%% * level, duration = %d minutes\n\nHolding by two hands doubles weapon own damage.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   AC   party resistances",
+			"\n\nBase recovery: %d\n\nSpecial effects: Shrink and Feeblemind\nchance = %d%% + %d%% * level, duration = %d minutes\n\nHolding by two hands doubles weapon own damage.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | AC | resistance to all |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Staff],
 			staffEffect["base"],
 			staffEffect["multiplier"],
@@ -1831,94 +1853,94 @@ function events.GameInitialized2()
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Staff] =
 			string.format(
-				"     %s | %s |                  %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Staff][rank]),
-				formatSkillRankNumber(weaponACBonusByMastery[rank]),
-				formatSkillRankNumber(weaponResistanceBonusByMastery[rank])
+				"     %s | %s |                  %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Staff][rank], 101),
+				formatSkillRankNumber(weaponACBonusByMastery[rank], 136),
+				formatSkillRankNumber(weaponResistanceBonusByMastery[rank], 263)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Sword] = Game.SkillDescriptions[const.Skills.Sword] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxilliary weapon.\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   speed",
+			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxiliary weapon.\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Sword],
 			twoHandedWeaponDamageBonus
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Sword] =
 			string.format(
-				"     %s |     %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Sword][rank]),
-				formatSkillRankNumber(recoveryBonusByMastery[rank])
+				"     %s |     %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Sword][rank], 101),
+				formatSkillRankNumber(recoveryBonusByMastery[rank], 158)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "slower opponents'.", "slower opponents'. The dagger can also do more damage when you're fighting multiple enemies at once.")
-	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "Expert dagger fighters can wield a dagger in their left hand while using another weapon in their right.", "\nCan be held in left hand as an auxilliary weapon.")
+	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "Expert dagger fighters can wield a dagger in their left hand while using another weapon in their right.", "\nCan be held in left hand as an auxiliary weapon.")
 	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger]:gsub( "Master dagger fighters have a chance of doing a triple damage attack.", "\nChance to deliver triple damage per attack.")
 	Game.SkillDescriptions[const.Skills.Dagger] = Game.SkillDescriptions[const.Skills.Dagger] ..
 		string.format(
-			"\n\nBase recovery: %d\n\n+ %2.1f damage per enemy in melee range per level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack",
+			"\n\nBase recovery: %d\n\n+ %2.1f damage per close enemy per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Dagger],
 			daggerCrowdDamageMultiplier
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Dagger] =
 			string.format(
-				"     %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Dagger][rank])
+				"     %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Dagger][rank], 101)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Axe] = Game.SkillDescriptions[const.Skills.Axe] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   speed   damage",
+			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed | damage |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Axe],
 			twoHandedWeaponDamageBonus
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Axe] =
 			string.format(
-				"     %s |     %s |       %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Axe][rank]),
-				formatSkillRankNumber(recoveryBonusByMastery[rank]),
-				formatSkillRankNumber(damageBonusByMastery[rank])
+				"     %s |     %s |       %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Axe][rank], 101),
+				formatSkillRankNumber(recoveryBonusByMastery[rank], 158),
+				formatSkillRankNumber(damageBonusByMastery[rank], 228)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Spear] = Game.SkillDescriptions[const.Skills.Spear] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   damage",
+			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | damage |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Spear],
 			twoHandedWeaponDamageBonus
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Spear] =
 			string.format(
-				"     %s |       %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Spear][rank]),
-				formatSkillRankNumber(damageBonusByMastery[rank])
+				"     %s |       %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Spear][rank], 101),
+				formatSkillRankNumber(damageBonusByMastery[rank], 171)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Bow] = Game.SkillDescriptions[const.Skills.Bow] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nMasters fire two arrows per shot.\n\nBonus increment / level\n------------------------------------------------------------\n          attack   speed",
+			"\n\nBase recovery: %d\n\nMasters fire two arrows per shot.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Bow]
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Bow] =
 			string.format(
 				"     %s |     %s | %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Bow][rank]),
-				formatSkillRankNumber(recoveryBonusByMastery[rank]),
-				(rank == const.Master and "Two arrows per shot" or "")
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Bow][rank], 101),
+				formatSkillRankNumber(recoveryBonusByMastery[rank], 158),
+				(rank == const.Master and "two arrows per shot" or "")
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Mace] = Game.SkillDescriptions[const.Skills.Mace] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nSpecial effects: Paralyze\nchance = %d%% + %d%% * level, duration = %d minutes\n\nBonus increment / level\n------------------------------------------------------------\n          attack   damage",
+			"\n\nBase recovery: %d\n\nSpecial effects: Paralyze\nchance = %d%% + %d%% * level, duration = %d minutes\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | damage |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Mace],
 			maceEffect["base"],
 			maceEffect["multiplier"],
@@ -1927,65 +1949,65 @@ function events.GameInitialized2()
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Mace] =
 			string.format(
-				"     %s |       %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Mace][rank]),
-				formatSkillRankNumber(damageBonusByMastery[rank])
+				"     %s |       %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Mace][rank], 101),
+				formatSkillRankNumber(damageBonusByMastery[rank], 171)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Shield] = Game.SkillDescriptions[const.Skills.Shield] ..
 		string.format(
-			"\n\nExperienced shield users can effectively cover the team from all kind of physical and magical projectiles reducing their impact damage. Each shield wearer in the party reduces damage by =%d%%= per each skill level multiplicatively.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty",
+			"\n\nExperienced shield users can effectively cover the team from all kind of physical and magical projectiles reducing their impact damage. Each shield wearer in the party reduces damage by =%d%%= per each skill level multiplicatively.\n\nBonus increment per skill level and recovery penalty\n------------------------------------------------------------\n          AC | recovery penalty |",
 			math.round(shieldProjectileDamageReductionPerLevel * 100)
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Shield] =
 			string.format(
-				" %s |                 %s",
-				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Shield][rank]),
-				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1])
+				" %s |                 %s |",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Shield][rank], 77),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1], 209)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Leather] = Game.SkillDescriptions[const.Skills.Leather] ..
 		string.format(
-			"\n\nLeather armor is the weakest but grants best resistance.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty   resistance"
+			"\n\nLeather armor is the weakest but grants best resistance.\n\nBonus increment per skill level and recovery penalty\n------------------------------------------------------------\n          AC | recovery penalty | resistance |"
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Leather] =
 			string.format(
-				" %s |                 %s |          %s",
-				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Leather][rank]),
-				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Leather + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
-				formatSkillRankNumber(armorSkillResistanceBonusBySkillAndRank[const.Skills.Leather][rank])
+				" %s |                 %s |          %s |",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Leather][rank], 77),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Leather + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0)), 209),
+				formatSkillRankNumber(armorSkillResistanceBonusBySkillAndRank[const.Skills.Leather][rank], 295)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Chain] = Game.SkillDescriptions[const.Skills.Chain] ..
 		string.format(
-			"\n\nChain armor grants medium protection and mild resistance.\n\nBonus increment / level and recovery penalty\n------------------------------------------------------------\n          AC   recovery penalty   resistance"
+			"\n\nChain armor grants medium protection and mild resistance.\n\nBonus increment per skill level and recovery penalty\n------------------------------------------------------------\n          AC | recovery penalty | resistance |"
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Chain] =
 			string.format(
-				" %s |                 %s |          %s",
-				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Chain][rank]),
-				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Chain + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
-				formatSkillRankNumber(armorSkillResistanceBonusBySkillAndRank[const.Skills.Chain][rank])
+				" %s |                 %s |          %s |",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Chain][rank], 77),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Chain + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0)), 209),
+				formatSkillRankNumber(armorSkillResistanceBonusBySkillAndRank[const.Skills.Chain][rank], 295)
 			)
 	end
 	
 	Game.SkillDescriptions[const.Skills.Plate] = Game.SkillDescriptions[const.Skills.Plate] ..
 		string.format(
-			"\n\nPlate armor is the strongest one.\n\nPlate wearer is percieved as a true battle hero who can learn swift maneuvering on a battlefield shielding the rest of the team from melee attackers.\n\nBonus increment / level and recovery penalty and cover chance\n------------------------------------------------------------\n          AC   recovery penalty   cover chance"
+			"\n\nPlate armor is the strongest one.\n\nPlate wearer is percieved as a true battle hero who can learn swift maneuvering on a battlefield shielding the rest of the team from melee attackers.\n\nBonus increment per skill level and recovery penalty and cover chance\n------------------------------------------------------------\n          AC | recovery penalty | cover chance |"
 		)
 	for rank = const.Novice, const.Master do
 		SkillDescriptionsRanks[rank][const.Skills.Plate] =
 			string.format(
-				" %s |                 %s |              %s",
-				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Plate][rank]),
-				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Plate + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0))),
-				formatSkillRankNumber(plateCoverChanceByMastery[rank] * 100)
+				" %s |                 %s |              %s |",
+				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Plate][rank], 77),
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Plate + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0)), 209),
+				formatSkillRankNumber(plateCoverChanceByMastery[rank] * 100, 316)
 			)
 	end
 	
