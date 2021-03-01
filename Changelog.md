@@ -1,3 +1,7 @@
+# version 60
+
+* Reverted sword and axe base recovery to vanilla values. I didn't see much use making axe exceptionally bad and unusable in early game. Eeach weapon should have its merits.
+
 # version 59
 
 * Reverted spear attack bonus to 2x of normal. I have analyzed it and it really doesn't add much on average but may be slightly useful against heavily armored monster that party encounter early. Like gold dragon in the temple of the snake.

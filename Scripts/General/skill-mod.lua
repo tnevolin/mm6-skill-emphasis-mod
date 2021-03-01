@@ -111,8 +111,8 @@ local weaponNewBaseRecoveryBonuses =
 {
 	[const.Skills.Bow] = 0,
 	[const.Skills.Staff] = 0,
-	[const.Skills.Axe] = -20,
-	[const.Skills.Sword] = 0,
+	[const.Skills.Axe] = 0,
+	[const.Skills.Sword] = 10,
 	[const.Skills.Spear] = 20,
 	[const.Skills.Mace] = 20,
 	[const.Skills.Dagger] = 40,
@@ -2808,8 +2808,9 @@ local function modifiedDisplayReferenceMeleeAttack(d, def, dlg, font, x, y, colo
 	
 	if averageDamageRate ~= nil then
 		local averageDamageRateText = string.format("%d", averageDamageRate)
+		averageDamageRateText = StrColor(0x00,0xFF,0x00) .. StrLeft(40) .. "/" .. StrLeft(84 - 12 * string.len(averageDamageRateText)) .. averageDamageRateText .. StrColor(0,0,0)
 		Game.TextBuffer = string.gsub(Game.TextBuffer, "^+", "")
-		Game.TextBuffer = Game.TextBuffer .. " /" .. averageDamageRateText
+		Game.TextBuffer = Game.TextBuffer .. averageDamageRateText
 	end
 	
 	-- execute original code
@@ -2832,8 +2833,9 @@ local function modifiedDisplayReferenceRangedAttack(d, def, dlg, font, x, y, col
 	
 	if averageDamageRate ~= nil then
 		local averageDamageRateText = string.format("%d", averageDamageRate)
+		averageDamageRateText = StrColor(0x00,0xFF,0x00) .. StrLeft(40) .. "/" .. StrLeft(84 - 12 * string.len(averageDamageRateText)) .. averageDamageRateText .. StrColor(0,0,0)
 		Game.TextBuffer = string.gsub(Game.TextBuffer, "^+", "")
-		Game.TextBuffer = Game.TextBuffer .. " /" .. averageDamageRateText
+		Game.TextBuffer = Game.TextBuffer .. averageDamageRateText
 	end
 	
 	-- execute original code
@@ -2855,7 +2857,9 @@ local function modifiedDisplayStatistictsMeleeAttack(d, def, dlg, font, x, y, co
 	-- append to text buffer
 
 	if averageDamageRate ~= nil then
-		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format("/%d", averageDamageRate) .. "\n"
+		local averageDamageRateText = string.format("%d", averageDamageRate)
+		averageDamageRateText = StrColor(0x00,0xFF,0x00) .. StrLeft(140) .. "/" .. StrLeft(184 - 12 * string.len(averageDamageRateText)) .. averageDamageRateText .. StrColor(0,0,0)
+		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. averageDamageRateText .. "\n"
 	end
 	
 	-- execute original code
@@ -2877,7 +2881,9 @@ local function modifiedDisplayStatisticsRangedAttack(d, def, dlg, font, x, y, co
 	-- append to text buffer
 
 	if averageDamageRate ~= nil then
-		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. "\t130" .. string.format("/%d", averageDamageRate) .. "\n"
+		local averageDamageRateText = string.format("%d", averageDamageRate)
+		averageDamageRateText = StrColor(0x00,0xFF,0x00) .. StrLeft(140) .. "/" .. StrLeft(184 - 12 * string.len(averageDamageRateText)) .. averageDamageRateText .. StrColor(0,0,0)
+		Game.TextBuffer = string.sub(Game.TextBuffer, 1, string.len(Game.TextBuffer) - 1) .. averageDamageRateText .. "\n"
 	end
 	
 	-- execute original code
