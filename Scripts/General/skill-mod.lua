@@ -219,7 +219,7 @@ local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.M
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
-local twoHandedWeaponDamageBonus = 2
+local twoHandedWeaponDamageBonus = 3
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
 local learningSkillExtraMultiplier = 2
 local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
@@ -1199,18 +1199,6 @@ function events.CalcStatBonusByItems(t)
 	local extra = equipmentData.extra
 	local armor = equipmentData.armor
 	
-	-- damage
-	
-	if t.Stat == const.Stats.MeleeDamageMin or t.Stat == const.Stats.MeleeDamageMax  then
-	
-		-- two handed sword, spear, axe
-	
-		if main.weapon and (main.skill == const.Skills.Sword or main.skill == const.Skills.Spear or main.skill == const.Skills.Axe) and equipmentData.twoHanded then
-			t.Result = 2 * t.Result
-		end
-		
-	end
-	
 	-- calculate resistance
 	
 	if
@@ -1729,7 +1717,9 @@ mem.asmpatch(
 
 function events.GameInitialized2()
 
+	----------------------------------------------------------------------------------------------------
 	-- modify monster statistics
+	----------------------------------------------------------------------------------------------------
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 	
@@ -1771,7 +1761,9 @@ function events.GameInitialized2()
 		
 	end
 	
+	----------------------------------------------------------------------------------------------------
 	-- house prices
+	----------------------------------------------------------------------------------------------------
 
 	for houseIndex = 0, Game.Houses.high do
 	
@@ -2206,6 +2198,45 @@ function events.GameInitialized2()
 	Game.ClassKinds.StartingSkills[5][const.Skills.Repair] = 3
 	Game.ClassKinds.StartingSkills[5][const.Skills.Learning] = 3
 	Game.ClassKinds.StartingSkills[5][const.Skills.Meditation] = 3
+	
+	----------------------------------------------------------------------------------------------------
+	-- item stats
+	----------------------------------------------------------------------------------------------------
+	
+	for itemId = 1, Game.ItemsTxt.high do
+	
+		local itemTxt = Game.ItemsTxt[itemId]
+
+		if itemTxt.Skill - 1 == const.Skills.Staff and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 4 and itemTxt.Mod2 == 3 then
+			itemTxt.Mod2 = 5
+		elseif itemTxt.Skill - 1 == const.Skills.Staff and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 4 and itemTxt.Mod2 == 7 then
+			itemTxt.Mod2 = 10
+		elseif itemTxt.Skill - 1 == const.Skills.Sword and itemTxt.Mod1DiceCount == 4 and itemTxt.Mod1DiceSides == 5 and itemTxt.Mod2 == 2 then
+			itemTxt.Mod2 = 12
+		elseif itemTxt.Skill - 1 == const.Skills.Sword and itemTxt.Mod1DiceCount == 4 and itemTxt.Mod1DiceSides == 5 and itemTxt.Mod2 == 8 then
+			itemTxt.Mod2 = 24
+		elseif itemTxt.Skill - 1 == const.Skills.Axe and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 7 and itemTxt.Mod2 == 3 then
+			itemTxt.Mod2 = 12
+		elseif itemTxt.Skill - 1 == const.Skills.Axe and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 7 and itemTxt.Mod2 == 9 then
+			itemTxt.Mod2 = 24
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 and itemTxt.Mod2 == 1 then
+			itemTxt.Mod2 = 2
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 6 and itemTxt.Mod2 == 4 then
+			itemTxt.Mod2 = 6
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 6 and itemTxt.Mod2 == 4 then
+			itemTxt.Mod2 = 5
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 then
+			itemTxt.Mod1DiceSides = 10
+			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D9", "+ extra dice roll")
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 6 then
+			itemTxt.Mod1DiceSides = 4
+			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "+ extra dice roll")
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 6 then
+			itemTxt.Mod1DiceSides = 4
+			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "+ extra dice roll")
+		end
+		
+	end
 	
 end
 

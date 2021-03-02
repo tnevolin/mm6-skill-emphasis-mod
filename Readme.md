@@ -62,7 +62,7 @@ All skills provide same bonuses as they do in vanilla. However, these bonuses ar
 |Attack|2|3|4|
 |Speed|4|5|6|
 |Damage|2|3|4|
-|2h weapon Damage|2|2|2|
+|Two-handed weapon Damage|3|3|3|
 |Armor Class from weapon|2|3|4|
 |Armor Class from shield|2|3|4|
 |Armor Class from leather|2|3|4|
@@ -96,6 +96,10 @@ Mace has a chance to paralyze opponent. This ability is immediately available at
 * Chance to cause an effect = 5% + 1% \* skill level.
 * Effect duration = 5 minutes.
 
+### Dagger special abilities
+
+Dagger increases damage in close combat proportional to number of monsters attacking the party. This bonus grows with skill. The increment for a single additional monster is not big but when party is ambushed by 10 of them double daggers become as strong as the most powerful combo.
+
 ### Plate special abilities
 
 Knight and Paladin are seen as team champions rushing forward and covering weaker team members. Plate wearer has a chance to cover other team member not wearing a plate from physical melee attack by taking a hit for them. Such chance grows with Plate skill rank.
@@ -122,7 +126,7 @@ I didn't change actual item descriptions as spears can be used both with one and
 
 ## Extra damage per skill level
 
-Two handed weapon receives extra 2 damage per skill level regardless or rank. This also adds some boost to two handed weapons those suck otherwise except maybe 2h axe which is about as good as axe-sword combo without this bonus. With this bonus it becomes a best offensive weapon in hands of non specialized melee fighter.
+Two handed weapon receives extra damage per skill level regardless or rank. This also adds some boost to two handed weapons those suck otherwise except maybe 2h axe which is about as good as axe-sword combo without this bonus. With this bonus it becomes a best offensive weapon in hands of non specialized melee fighter.
 
 # Class specialty
 
@@ -195,6 +199,10 @@ Role playing assumes selecting character buid at start and develop it for greate
 Not anymore in this mod. All skills within each weapon type group (melee weapons, ranged weapons, armors) are advanced simultaneously whenever any one in the group is. That allows swapping items within the group without regret of wasting skill points player worked so hard for.
 
 A small correction to wielding two different weapons is needed due to this change. In vanilla different dual weapons progress about 1.4 times slower as they both require skill point investment. Therefore, this mod does similar correction reducing displayed weapon skill levels to simulate natural vanilla progression. This is for *different* dual weapons only. A little bit not visual for player but I hope this will be a minor inconvenience.
+
+## Shared miscelaneous skills advancement
+
+Some "singe master benefits whole party" miscelaneous skills are also shared now. That means that anyone can contribute to them but they will advance simultaneously for all party members. It reduces infinite passing broken itesm back and forth for repair or identification or selecting right disarm character, etc.
 
 # Spells
 

@@ -1,6 +1,14 @@
+# version 61
+
+* Two handed weapon does not double own damage. Each weapon stats are now modified accordingly instead. It is cleaner this way.
+	* Max bonus for two-handed swords and axes is increased to match dual wielding option.
+	* Base damage for all spears, tridents, halberds is modified to even them out a little. Spear is slightly stronger two-handed and halberd is slightly stronger one-handed with trident in between.
+	* Some weapon bonuses are spread more evenly according to their price.
+* Two-handed weapon damage increment by skill is increased to 3 to match improved general weapon stat progression.
+
 # version 60
 
-* Reverted sword and axe base recovery to vanilla values. I didn't see much use making axe exceptionally bad and unusable in early game. Eeach weapon should have its merits.
+* Reverted sword and axe base recovery to vanilla values. I didn't see much use making axe exceptionally bad and unusable in early game. Each weapon should have its merits.
 
 # version 59
 
