@@ -1,3 +1,7 @@
+# version 62
+
+* Added blaster entries everywhere bow goes. I completely forgot blaster is a weapon. :(
+
 # version 61
 
 * Two handed weapon does not double own damage. Each weapon stats are now modified accordingly instead. It is cleaner this way.

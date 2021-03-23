@@ -100,6 +100,7 @@ local attributeEffects =
 local weaponOldBaseRecoveryBonuses =
 {
 	[const.Skills.Bow] = 0,
+	[const.Skills.Blaster] = 70,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = 0,
 	[const.Skills.Sword] = 10,
@@ -110,6 +111,7 @@ local weaponOldBaseRecoveryBonuses =
 local weaponNewBaseRecoveryBonuses =
 {
 	[const.Skills.Bow] = 0,
+	[const.Skills.Blaster] = 70,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = 0,
 	[const.Skills.Sword] = 10,
@@ -173,6 +175,7 @@ local armorSkillResistanceBonusBySkillAndRank =
 local weaponSkillRecoveryBonuses =
 {
 	[const.Skills.Bow] = 1,
+	[const.Skills.Blaster] = 0,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = 1,
 	[const.Skills.Sword] = 1,
@@ -184,6 +187,7 @@ local weaponSkillRecoveryBonuses =
 local weaponSkillDamageBonuses =
 {
 	[const.Skills.Bow] = 0,
+	[const.Skills.Blaster] = 0,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = 1,
 	[const.Skills.Sword] = 0,
@@ -195,6 +199,7 @@ local weaponSkillDamageBonuses =
 local weaponSkillResistanceBonuses =
 {
 	[const.Skills.Bow] = 0,
+	[const.Skills.Blaster] = 0,
 	[const.Skills.Staff] = 1,
 	[const.Skills.Axe] = 0,
 	[const.Skills.Sword] = 0,
@@ -206,14 +211,14 @@ local weaponSkillResistanceBonuses =
 -- skill effect multipliers
 local attackBonusByMastery =
 {
+	[const.Skills.Bow] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Blaster] = {[const.Novice] = 4, [const.Expert] = 8, [const.Master] = 12, },
 	[const.Skills.Staff] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Sword] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Dagger] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Axe] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Spear] = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, },
-	[const.Skills.Bow] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Mace] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Blaster] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 }
 local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
@@ -1834,9 +1839,37 @@ function events.GameInitialized2()
 	-- skill descriptions
 	----------------------------------------------------------------------------------------------------
 	
+	Game.SkillDescriptions[const.Skills.Bow] = Game.SkillDescriptions[const.Skills.Bow] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed |",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Bow]
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Bow] =
+			string.format(
+				"     %s |     %s | %s",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Bow][rank], 101),
+				formatSkillRankNumber(recoveryBonusByMastery[rank], 158),
+				(rank == const.Master and "two arrows per shot" or "")
+			)
+	end
+
+	Game.SkillDescriptions[const.Skills.Blaster] = Game.SkillDescriptions[const.Skills.Blaster] ..
+		string.format(
+			"\n\nBase recovery: %d\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack |",
+			100 - weaponNewBaseRecoveryBonuses[const.Skills.Blaster]
+		)
+	for rank = const.Novice, const.Master do
+		SkillDescriptionsRanks[rank][const.Skills.Blaster] =
+			string.format(
+				"     %s |",
+				formatSkillRankNumber(attackBonusByMastery[const.Skills.Blaster][rank], 101)
+			)
+	end
+	
 	Game.SkillDescriptions[const.Skills.Staff] = Game.SkillDescriptions[const.Skills.Staff] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nSpecial effects: Shrink and Feeblemind\nchance = %d%% + %d%% * level, duration = %d minutes\n\nHolding by two hands doubles weapon own damage.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | AC | resistance to all |",
+			"\n\nBase recovery: %d\n\nSpecial effects: Shrink and Feeblemind\nchance = %d%% + %d%% * level, duration = %d minutes\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | AC | resistance to all |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Staff],
 			staffEffect["base"],
 			staffEffect["multiplier"],
@@ -1854,7 +1887,7 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Sword] = Game.SkillDescriptions[const.Skills.Sword] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxiliary weapon.\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed |",
+			"\n\nBase recovery: %d\n\nCan be held in left hand as an auxiliary weapon.\n\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Sword],
 			twoHandedWeaponDamageBonus
 		)
@@ -1886,7 +1919,7 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Axe] = Game.SkillDescriptions[const.Skills.Axe] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed | damage |",
+			"\n\nBase recovery: %d\n\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed | damage |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Axe],
 			twoHandedWeaponDamageBonus
 		)
@@ -1902,7 +1935,7 @@ function events.GameInitialized2()
 	
 	Game.SkillDescriptions[const.Skills.Spear] = Game.SkillDescriptions[const.Skills.Spear] ..
 		string.format(
-			"\n\nBase recovery: %d\n\nHolding by two hands doubles weapon own damage.\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | damage |",
+			"\n\nBase recovery: %d\n\nHolding by two hands adds %d damage per skill level.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | damage |",
 			100 - weaponNewBaseRecoveryBonuses[const.Skills.Spear],
 			twoHandedWeaponDamageBonus
 		)
@@ -1912,21 +1945,6 @@ function events.GameInitialized2()
 				"     %s |       %s |",
 				formatSkillRankNumber(attackBonusByMastery[const.Skills.Spear][rank], 101),
 				formatSkillRankNumber(damageBonusByMastery[rank], 171)
-			)
-	end
-	
-	Game.SkillDescriptions[const.Skills.Bow] = Game.SkillDescriptions[const.Skills.Bow] ..
-		string.format(
-			"\n\nBase recovery: %d\n\nMasters fire two arrows per shot.\n\nBonus increment per skill level\n------------------------------------------------------------\n          attack | speed |",
-			100 - weaponNewBaseRecoveryBonuses[const.Skills.Bow]
-		)
-	for rank = const.Novice, const.Master do
-		SkillDescriptionsRanks[rank][const.Skills.Bow] =
-			string.format(
-				"     %s |     %s | %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Bow][rank], 101),
-				formatSkillRankNumber(recoveryBonusByMastery[rank], 158),
-				(rank == const.Master and "two arrows per shot" or "")
 			)
 	end
 	
