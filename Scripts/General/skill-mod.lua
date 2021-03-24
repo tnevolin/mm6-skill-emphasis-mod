@@ -111,13 +111,13 @@ local weaponOldBaseRecoveryBonuses =
 local weaponNewBaseRecoveryBonuses =
 {
 	[const.Skills.Bow] = 0,
-	[const.Skills.Blaster] = 70,
+	[const.Skills.Blaster] = 100,
 	[const.Skills.Staff] = 0,
 	[const.Skills.Axe] = 0,
 	[const.Skills.Sword] = 10,
 	[const.Skills.Spear] = 20,
 	[const.Skills.Mace] = 20,
-	[const.Skills.Dagger] = 40,
+	[const.Skills.Dagger] = 60,
 }
 
 --[[
@@ -209,10 +209,21 @@ local weaponSkillResistanceBonuses =
 }
 
 -- skill effect multipliers
-local attackBonusByMastery =
+local weaponOldAttackBonusByMastery =
+{
+	[const.Skills.Bow] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Blaster] = {[const.Novice] = 1, [const.Expert] = 2, [const.Master] = 3, },
+	[const.Skills.Staff] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Sword] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Dagger] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Axe] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Spear] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Mace] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+}
+local weaponNewAttackBonusByMastery =
 {
 	[const.Skills.Bow] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Blaster] = {[const.Novice] = 4, [const.Expert] = 8, [const.Master] = 12, },
+	[const.Skills.Blaster] = {[const.Novice] = 2, [const.Expert] = 4, [const.Master] = 6, },
 	[const.Skills.Staff] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Sword] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 	[const.Skills.Dagger] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
@@ -246,11 +257,17 @@ local classMeleeWeaponSkillDamageBonus =
 	[const.Class.Crusader] = 1,
 	[const.Class.Hero] = 2,
 }
-local classRangedWeaponSkillDamageBonus =
+local classRangedWeaponSkillAttackBonusMultiplier =
 {
 	[const.Class.Archer] = 2,
-	[const.Class.BattleMage] = 3,
-	[const.Class.WarriorMage] = 4,
+	[const.Class.BattleMage] = 2,
+	[const.Class.WarriorMage] = 2,
+}
+local classRangedWeaponSkillSpeedBonusMultiplier =
+{
+	[const.Class.Archer] = 2,
+	[const.Class.BattleMage] = 2,
+	[const.Class.WarriorMage] = 2,
 }
 
 -- plate cover chances by mastery
@@ -785,9 +802,9 @@ local function getPlayerEquipmentData(player)
 		
 	end
 	
-	-- get extra hand weapon data
+	-- get extra hand weapon data only if not holding blaster in main hand
 			
-	if player.ItemExtraHand ~= 0 then
+	if (player.ItemMainHand == 0 or equipmentData.main.skill ~= const.Skills.Blaster) and player.ItemExtraHand ~= 0 then
 		
 		equipmentData.extra.equipped = true
 		
@@ -930,6 +947,15 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		end
 		newRecoveryBonus = newRecoveryBonus + (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * equipmentData1.level)
 		
+		-- class bonus
+		
+		if equipmentData1.Skill == const.Skills.Bow or equipmentData1.Skill == const.Skills.Blaster then
+			local rangedWeaponSkillAttackBonusMultiplier = classRangedWeaponSkillAttackBonusMultiplier[t.Player.Class]
+			if rangedWeaponSkillAttackBonusMultiplier ~= nil then
+				newRecoveryBonus = newRecoveryBonus * rangedWeaponSkillAttackBonusMultiplier
+			end
+		end
+		
 		-- replace old with new bonus
 
 		correction = correction 
@@ -1031,6 +1057,7 @@ function events.GetAttackDelay(t)
 	local equipmentData = getPlayerEquipmentData(t.Player)
 	
 	-- weapon
+	
 	if t.Ranged then
 	
 		local bow = equipmentData.bow
@@ -1069,28 +1096,6 @@ function events.GetAttackDelay(t)
 		end
 		
 	end
-	
-	-- armor
-	--[[
-	local itemArmorNumber = t.Player.ItemArmor
-	if itemArmorNumber ~= 0 then
-	
-		local itemArmor = t.Player.Items[itemArmorNumber]
-		local itemArmorTxt = Game.ItemsTxt[itemArmor.Number]
-		local itemArmorSkill = itemArmorTxt.Skill - 1
-		local armorRecoveryPenalty = armorAdditionalRecoveryPenalties[itemArmorSkill]
-		local level, rank = SplitSkill(t.Player.Skills[itemArmorSkill])
-		
-		if rank == const.Expert then
-			armorRecoveryPenalty = armorRecoveryPenalty / 2
-		elseif rank == const.Master then
-			armorRecoveryPenalty = 0
-		end
-		
-		t.Result = t.Result + armorRecoveryPenalty
-		
-	end
-	--]]
 	
 	-- turn recovery time into a multiplier rather than divisor
 	
@@ -1270,11 +1275,24 @@ function events.CalcStatBonusBySkills(t)
 	
 		if bow.weapon then
 		
-			-- subtract old bonus
-			t.Result = t.Result - bow.level
+			-- calculate old bonus
 			
-			-- add new bonus
-			t.Result = t.Result + (attackBonusByMastery[bow.skill][bow.rank] * bow.level)
+			local oldBonus = (weaponOldAttackBonusByMastery[bow.skill][bow.rank] * bow.level)
+			
+			-- calculate new bonus
+			
+			local newBonus = (weaponNewAttackBonusByMastery[bow.skill][bow.rank] * bow.level)
+			
+			if bow.skill == const.Skills.Bow then
+				local rangedWeaponSkillAttackBonusMultiplier = classRangedWeaponSkillAttackBonusMultiplier[t.Player.Class]
+				if rangedWeaponSkillAttackBonusMultiplier ~= nil then
+					newBonus = newBonus * rangedWeaponSkillAttackBonusMultiplier
+				end
+			end
+			
+			-- recalculate bonus
+			
+			t.Result = t.Result - oldBonus + newBonus
 			
 		end
 		
@@ -1288,12 +1306,27 @@ function events.CalcStatBonusBySkills(t)
 			-- single wield
 			if not equipmentData.dualWield then
 				
-				-- subtract old bonus
-				t.Result = t.Result - main.level
+				-- calculate old bonus
 				
-				-- add new bonus from main hand
-				t.Result = t.Result + (attackBonusByMastery[main.skill][main.rank] * main.level)
+				local oldBonus = (weaponOldAttackBonusByMastery[main.skill][main.rank] * main.level)
+				
+				-- calculate new bonus
+				
+				local newBonus = (weaponNewAttackBonusByMastery[main.skill][main.rank] * main.level)
+				
+			-- class bonus
 			
+				if main.skill == const.Skills.Blaster then
+					local rangedWeaponSkillAttackBonusMultiplier = classRangedWeaponSkillAttackBonusMultiplier[t.Player.Class]
+					if rangedWeaponSkillAttackBonusMultiplier ~= nil then
+						newBonus = newBonus * rangedWeaponSkillAttackBonusMultiplier
+					end
+				end
+				
+				-- recalculate bonus
+				
+				t.Result = t.Result - oldBonus + newBonus
+				
 			-- dual wield
 			else
 						
@@ -1310,29 +1343,21 @@ function events.CalcStatBonusBySkills(t)
 					extraEffectiveSkillLevel = math.round(extra.level / math.sqrt(2))
 				end
 			
-				-- subtract old bonus
-				t.Result = t.Result - extra.level
+				-- calculate old bonus
 				
-				-- add new bonus from main hand
-				t.Result = t.Result + (attackBonusByMastery[main.skill][main.rank] * mainEffectiveSkillLevel)
+				local oldBonus = (weaponOldAttackBonusByMastery[extra.skill][extra.rank] * main.level)
+				
+				-- calculate new bonus
+				
+				local newBonus =
+					(weaponNewAttackBonusByMastery[main.skill][main.rank] * mainEffectiveSkillLevel)
+					+
+					(weaponNewAttackBonusByMastery[extra.skill][extra.rank] * extraEffectiveSkillLevel)
 			
-				-- add new bonus from extra hand
-				t.Result = t.Result + (attackBonusByMastery[extra.skill][extra.rank] * extraEffectiveSkillLevel)
-			
-			end
-			
-		end
-		
-	-- calculate ranged damage bonus by skill
-	elseif t.Stat == const.Stats.RangedDamageBase then
-	
-		local bow = equipmentData.bow
-	
-		if bow.weapon then
-		
-			-- add class bonus
-			if classRangedWeaponSkillDamageBonus[t.Player.Class] ~= nil then
-				t.Result = t.Result + classRangedWeaponSkillDamageBonus[t.Player.Class] * bow.level
+				-- recalculate bonus
+				
+				t.Result = t.Result - oldBonus + newBonus
+				
 			end
 			
 		end
@@ -1818,23 +1843,6 @@ function events.GameInitialized2()
 			
 	end
 	
-	-- ranged damage bonus
-
-	for classIndex, value in pairs(classRangedWeaponSkillDamageBonus) do
-	
-		Game.ClassDescriptions[classIndex] = Game.ClassDescriptions[classIndex] ..
-			string.format(
-				"\n\n%s - %s - %s adds %d - %d - %d damage per skill level to ranged weapon.",
-				Game.ClassNames[math.floor(classIndex / 3) * 3 + 0],
-				Game.ClassNames[math.floor(classIndex / 3) * 3 + 1],
-				Game.ClassNames[math.floor(classIndex / 3) * 3 + 2],
-				classRangedWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 0],
-				classRangedWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 1],
-				classRangedWeaponSkillDamageBonus[math.floor(classIndex / 3) * 3 + 2]
-			)
-			
-	end
-
 	----------------------------------------------------------------------------------------------------
 	-- skill descriptions
 	----------------------------------------------------------------------------------------------------
@@ -1848,7 +1856,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Bow] =
 			string.format(
 				"     %s |     %s | %s",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Bow][rank], 101),
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Bow][rank], 101),
 				formatSkillRankNumber(recoveryBonusByMastery[rank], 158),
 				(rank == const.Master and "two arrows per shot" or "")
 			)
@@ -1863,7 +1871,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Blaster] =
 			string.format(
 				"     %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Blaster][rank], 101)
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Blaster][rank], 101)
 			)
 	end
 	
@@ -1879,7 +1887,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Staff] =
 			string.format(
 				"     %s | %s |                  %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Staff][rank], 101),
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Staff][rank], 101),
 				formatSkillRankNumber(weaponACBonusByMastery[rank], 136),
 				formatSkillRankNumber(weaponResistanceBonusByMastery[rank], 263)
 			)
@@ -1895,7 +1903,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Sword] =
 			string.format(
 				"     %s |     %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Sword][rank], 101),
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Sword][rank], 101),
 				formatSkillRankNumber(recoveryBonusByMastery[rank], 158)
 			)
 	end
@@ -1913,7 +1921,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Dagger] =
 			string.format(
 				"     %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Dagger][rank], 101)
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Dagger][rank], 101)
 			)
 	end
 	
@@ -1927,7 +1935,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Axe] =
 			string.format(
 				"     %s |     %s |       %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Axe][rank], 101),
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Axe][rank], 101),
 				formatSkillRankNumber(recoveryBonusByMastery[rank], 158),
 				formatSkillRankNumber(damageBonusByMastery[rank], 228)
 			)
@@ -1943,7 +1951,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Spear] =
 			string.format(
 				"     %s |       %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Spear][rank], 101),
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Spear][rank], 101),
 				formatSkillRankNumber(damageBonusByMastery[rank], 171)
 			)
 	end
@@ -1960,7 +1968,7 @@ function events.GameInitialized2()
 		SkillDescriptionsRanks[rank][const.Skills.Mace] =
 			string.format(
 				"     %s |       %s |",
-				formatSkillRankNumber(attackBonusByMastery[const.Skills.Mace][rank], 101),
+				formatSkillRankNumber(weaponNewAttackBonusByMastery[const.Skills.Mace][rank], 101),
 				formatSkillRankNumber(damageBonusByMastery[rank], 171)
 			)
 	end
@@ -2224,34 +2232,60 @@ function events.GameInitialized2()
 	for itemId = 1, Game.ItemsTxt.high do
 	
 		local itemTxt = Game.ItemsTxt[itemId]
-
+		
+		-- 2h staffs
 		if itemTxt.Skill - 1 == const.Skills.Staff and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 4 and itemTxt.Mod2 == 3 then
 			itemTxt.Mod2 = 5
 		elseif itemTxt.Skill - 1 == const.Skills.Staff and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 4 and itemTxt.Mod2 == 7 then
 			itemTxt.Mod2 = 10
+		-- 2h swords
 		elseif itemTxt.Skill - 1 == const.Skills.Sword and itemTxt.Mod1DiceCount == 4 and itemTxt.Mod1DiceSides == 5 and itemTxt.Mod2 == 2 then
 			itemTxt.Mod2 = 12
 		elseif itemTxt.Skill - 1 == const.Skills.Sword and itemTxt.Mod1DiceCount == 4 and itemTxt.Mod1DiceSides == 5 and itemTxt.Mod2 == 8 then
 			itemTxt.Mod2 = 24
+		-- 2h axes
 		elseif itemTxt.Skill - 1 == const.Skills.Axe and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 7 and itemTxt.Mod2 == 3 then
 			itemTxt.Mod2 = 12
 		elseif itemTxt.Skill - 1 == const.Skills.Axe and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 7 and itemTxt.Mod2 == 9 then
 			itemTxt.Mod2 = 24
+		-- 1h/2h spears
 		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 and itemTxt.Mod2 == 1 then
-			itemTxt.Mod2 = 2
+			itemTxt.Mod2 = 3
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 and itemTxt.Mod2 == 5 then
+			itemTxt.Mod2 = 6
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 and itemTxt.Mod2 == 9 then
+			itemTxt.Mod2 = 9
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 and itemTxt.Mod2 == 13 then
+			itemTxt.Mod2 = 12
 		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 6 and itemTxt.Mod2 == 4 then
 			itemTxt.Mod2 = 6
 		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 6 and itemTxt.Mod2 == 4 then
-			itemTxt.Mod2 = 5
-		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 then
-			itemTxt.Mod1DiceSides = 10
-			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D9", "+ extra dice roll")
+			itemTxt.Mod2 = 6
+		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 6 and itemTxt.Mod2 == 10 then
+			itemTxt.Mod2 = 12
+		end
+			
+	end
+	
+	for itemId = 1, Game.ItemsTxt.high do
+
+		local itemTxt = Game.ItemsTxt[itemId]
+		
+		-- spear base damage
+		if itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 1 and itemTxt.Mod1DiceSides == 9 then
+			itemTxt.Mod1DiceCount = 1
+			itemTxt.Mod1DiceSides = 11
+			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D9", "extra dice roll")
+		-- trident base damage
 		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 2 and itemTxt.Mod1DiceSides == 6 then
-			itemTxt.Mod1DiceSides = 4
-			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "+ extra dice roll")
+			itemTxt.Mod1DiceCount = 2
+			itemTxt.Mod1DiceSides = 6
+			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "extra dice roll")
+		-- halberd base damage
 		elseif itemTxt.Skill - 1 == const.Skills.Spear and itemTxt.Mod1DiceCount == 3 and itemTxt.Mod1DiceSides == 6 then
-			itemTxt.Mod1DiceSides = 4
-			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "+ extra dice roll")
+			itemTxt.Mod1DiceCount = 4
+			itemTxt.Mod1DiceSides = 3
+			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "extra dice roll")
 		end
 		
 	end
@@ -3186,16 +3220,6 @@ function configureShrineEvent(eventId, shrineIndex, statisticsName, hintStringIn
 	end
 
 end
-
-----------------------------------------------------------------------------------------------------
--- modify item damage
-----------------------------------------------------------------------------------------------------
-
---[[
-function events.ModifyItemDamage(t)
-	MessageBox(dump(t.Damage))
-end
---]]
 
 ----------------------------------------------------------------------------------------------------
 -- melee damage monster from party hook

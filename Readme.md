@@ -132,15 +132,22 @@ Two handed weapon receives extra damage per skill level regardless or rank. This
 
 MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
 
-## Additional weapon skill damage/level for classes
+## Additional melee weapon damage bonus per level for classes
 
-|initial class|weapon type affected|initial|1st promotion|2nd promotion|
-|----|----|----:|----:|----:|
-|Knight|all melee weapons|2|3|4|
-|Paladin|all melee weapons|0|1|2|
-|Archer|all ranged weapons|2|3|4|
+|class|bonus|
+|----|----:|
+|Knight|2|
+|Cavalier|3|
+|Champion|4|
+|Paladin|0|
+|Crusader|1|
+|Hero|2|
 
 This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master with Paladin following. Archer specializes in ranged damage instead and now becomes quite powerful shooter.
+
+## Additional reanged weapon attack and speed bonus per level for classes
+
+Archer and all its promotions doubles skill based attack and speed bonuses to all ranged weapons (bow and blaster).
 
 # Weapon usage preference analysis
 

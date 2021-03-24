@@ -1,6 +1,14 @@
 # version 62
 
 * Added blaster entries everywhere bow goes. I completely forgot blaster is a weapon. :(
+* Slight modification to spear type base damages to keep their 1H (spear < trident < halberd) and 2H (spear > trident > halberd) values. Nothing too drastic, though. Evened out their bonuses too.
+  * Spear: 1d11
+  * Trident: 2d6
+  * Halberd: 4d3
+* Also fixed parameters not being changed for some spear type items.
+* Archer does not give more damage to ranged weapons (bow, blaster) with skill. Instead they double attack and recovery bonuses for them.
+* Slightly increased initial recovery bonus for dagger and blaster to bring them closer to their vanilla values. Their recovery does not progress with skill anyway.
+* Corrected blaster attack. Previous canlculation didn't account for vanilla skill rank attack multiplier.
 
 # version 61
 
