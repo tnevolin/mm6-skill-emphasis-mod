@@ -143,11 +143,11 @@ MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin i
 |Crusader|1|
 |Hero|2|
 
-This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master with Paladin following. Archer specializes in ranged damage instead and now becomes quite powerful shooter.
+This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master with Paladin following.
 
 ## Additional reanged weapon attack and speed bonus per level for classes
 
-Archer and all its promotions doubles skill based attack and speed bonuses to all ranged weapons (bow and blaster).
+Archer and all its promotions doubles skill based attack and speed bonuses to all ranged weapons (bow and blaster). This increases archer ranged damage rate by 2-4 times comparing to non archer classes. 
 
 # Weapon usage preference analysis
 

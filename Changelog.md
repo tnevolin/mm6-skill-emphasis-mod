@@ -8,7 +8,7 @@
 * Also fixed parameters not being changed for some spear type items.
 * Archer does not give more damage to ranged weapons (bow, blaster) with skill. Instead they double attack and recovery bonuses for them.
 * Slightly increased initial recovery bonus for dagger and blaster to bring them closer to their vanilla values. Their recovery does not progress with skill anyway.
-* Corrected blaster attack. Previous canlculation didn't account for vanilla skill rank attack multiplier.
+* Corrected blaster attack. Previous calculations didn't account for vanilla skill rank attack multiplier.
 
 # version 61
 
