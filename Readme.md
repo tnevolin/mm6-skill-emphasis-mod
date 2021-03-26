@@ -139,7 +139,7 @@ MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin i
 
 This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master with Paladin following.
 
-## Additional reanged weapon attack and speed bonus per level for classes
+## Additional ranged weapon attack and speed bonus per level for classes
 
 Archer and all its promotions doubles skill based attack and speed bonuses to all ranged weapons (bow and blaster). This increases archer ranged damage rate by 2-4 times comparing to non archer classes. 
 
@@ -205,7 +205,7 @@ A small correction to wielding two different weapons is needed due to this chang
 
 ## Shared miscelaneous skills advancement
 
-Some "singe master benefits whole party" miscelaneous skills are also shared now. That means that anyone can contribute to them but they will advance simultaneously for all party members. It reduces infinite passing broken itesm back and forth for repair or identification or selecting right disarm character, etc.
+Some "singe master benefits whole party" miscelaneous skills are also shared now. That means that anyone can contribute to them but they will advance simultaneously for all party members. It reduces infinite passing broken items back and forth for repair or identification or selecting right disarm character, etc.
 
 # Spells
 
