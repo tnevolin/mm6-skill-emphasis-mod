@@ -1,3 +1,20 @@
+----------------------------------------------------------------------------------------------------
+-- global constants and lists
+----------------------------------------------------------------------------------------------------
+
+-- red distance
+
+local meleeRangeDistance = 307.2
+
+-- masteries text
+
+local masteries =
+{
+	[const.Novice] = "n",
+	[const.Expert] = "e",
+	[const.Master] = "m",
+}
+
 -- attack types text
 
 local attackTypes =
@@ -11,18 +28,28 @@ local attackTypes =
 	[const.Damage.Energy] = "Energy",
 }
 
--- masteries text
+-- missiles
 
-local masteries =
+local missiles =
 {
-	[const.Novice] = "n",
-	[const.Expert] = "e",
-	[const.Master] = "m",
+	["Arrow"] = 1,
+	["FireArrow"] = 2,
+	["Fire"] = 3,
+	["Elec"] = 4,
+	["Cold"] = 5,
+	["Poison"] = 6,
+	["Energy"] = 7,
+	["Magic"] = 8,
+	["Rock"] = 9,
 }
 
--- red distance
+-- spellTxt id resolver
 
-local meleeRangeDistance = 307.2
+local spellTxtIds = {}
+
+----------------------------------------------------------------------------------------------------
+-- configuration
+----------------------------------------------------------------------------------------------------
 
 -- melee recovery cap
 
@@ -613,6 +640,66 @@ local modifiedBookValues =
 	[6000] = 70000,
 	[7500] = 100000,
 	[10000] = 200000,
+}
+
+-- monster ranged attacks
+
+local monsterRangedAttacks =
+{
+	-- Follower of Baa
+	[139] = {["SpellChance"] = 10, ["SpellName"] = "Mind Blast", ["SpellSkill"] = JoinSkill(1, const.Novice), },
+	-- Mystic of Baa
+	[140] = {["SpellChance"] = 30, ["SpellName"] = "Mind Blast", ["SpellSkill"] = JoinSkill(2, const.Novice), },
+	-- Fanatic of Baa
+	[141] = {["SpellChance"] = 50, ["SpellName"] = "Mind Blast", ["SpellSkill"] = JoinSkill(3, const.Novice), },
+	-- Cutpurse
+	[127] = {["Attack2Chance"] = 10, ["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 6, ["DamageAdd"] = 0, ["Missile"] = missiles["Arrow"], }, },
+	-- Bounty Hunter
+	[128] = {["Attack2Chance"] = 20, ["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 6, ["DamageAdd"] = 2, ["Missile"] = missiles["Arrow"], }, },
+	-- Assassin
+	[129] = {["Attack2Chance"] = 30, ["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 6, ["DamageAdd"] = 4, ["Missile"] = missiles["Arrow"], }, },
+	-- Cannibal (female)
+	[130] = {["SpellChance"] = 10, ["SpellName"] = "Deadly Swarm", ["SpellSkill"] = JoinSkill(1, const.Novice), },
+	-- Head Hunter (female)
+	[131] = {["SpellChance"] = 20, ["SpellName"] = "Deadly Swarm", ["SpellSkill"] = JoinSkill(2, const.Novice), },
+	-- Witch Doctor (female)
+	[132] = {["SpellChance"] = 30, ["SpellName"] = "Deadly Swarm", ["SpellSkill"] = JoinSkill(3, const.Novice), },
+	-- Cannibal (male)
+	[142] = {["SpellChance"] = 10, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(1, const.Novice), },
+	-- Head Hunter (male)
+	[143] = {["SpellChance"] = 20, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(2, const.Novice), },
+	-- Witch Doctor (male)
+	[144] = {["SpellChance"] = 30, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(3, const.Novice), },
+	-- Magyar
+	[  4] = {["Attack2Chance"] = 10, ["Attack2"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 3, ["DamageDiceSides"] = 8, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], }, },
+	-- Magyar Soldier
+	[  5] = {["Attack2Chance"] = 20, ["Attack2"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 5, ["DamageDiceSides"] = 8, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], }, },
+	-- Magyar Matron
+	[  6] = {["Attack2Chance"] = 30, ["Attack2"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 7, ["DamageDiceSides"] = 8, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], }, },
+	-- Goblin
+	[ 76] = {["SpellChance"] = 10, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(1, const.Novice), },
+	-- Goblin Shaman
+	[ 77] = {["SpellChance"] = 20, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(2, const.Novice), },
+	-- Goblin King
+	[ 78] = {["SpellChance"] = 30, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(3, const.Novice), },
+	-- Skeleton
+	[154] = {["Attack2Chance"] = 10, ["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 6, ["DamageAdd"] = 0, ["Missile"] = missiles["Arrow"], }, },
+	-- Skeleton Knight
+	[155] = {["Attack2Chance"] = 20, ["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 6, ["DamageAdd"] = 2, ["Missile"] = missiles["Arrow"], }, },
+	-- Skeleton Lord
+	[156] = {["Attack2Chance"] = 30, ["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 6, ["DamageAdd"] = 6, ["Missile"] = missiles["Arrow"], }, },
+	-- Ghost
+	[ 73] = {["SpellChance"] = 10, ["SpellName"] = "Spirit Arrow", ["SpellSkill"] = JoinSkill(1, const.Novice), },
+	-- Evil Spirit
+	[ 74] = {["SpellChance"] = 20, ["SpellName"] = "Spirit Arrow", ["SpellSkill"] = JoinSkill(2, const.Novice), },
+	-- Specter
+	[ 75] = {["SpellChance"] = 30, ["SpellName"] = "Spirit Arrow", ["SpellSkill"] = JoinSkill(3, const.Novice), },
+	-- Hydra
+	[ 85] = {["Attack2Chance"] = 30, ["Attack2"] = {["Type"] = const.Damage.Fire, ["DamageDiceCount"] = 8, ["DamageDiceSides"] = 5, ["DamageAdd"] = 0, ["Missile"] = missiles["Fire"], }, },
+	-- Venomous Hydra
+	[ 86] = {["Attack2Chance"] = 35, ["Attack2"] = {["Type"] = const.Damage.Cold, ["DamageDiceCount"] = 9, ["DamageDiceSides"] = 5, ["DamageAdd"] = 0, ["Missile"] = missiles["Cold"], }, },
+	-- Colossal Hydra
+	[ 87] = {["Attack2Chance"] = 40, ["Attack2"] = {["Type"] = const.Damage.Energy, ["DamageDiceCount"] = 10, ["DamageDiceSides"] = 5, ["DamageAdd"] = 0, ["Missile"] = missiles["Energy"], }, },
 }
 
 -- ======================================= --
@@ -1748,6 +1835,16 @@ mem.asmpatch(
 function events.GameInitialized2()
 
 	----------------------------------------------------------------------------------------------------
+	-- populate global references
+	----------------------------------------------------------------------------------------------------
+	
+	-- spellTxt id resolver
+	
+	for spellTxtId = 1, Game.SpellsTxt.high do
+		spellTxtIds[Game.SpellsTxt[spellTxtId].Name] = spellTxtId
+	end
+	
+	----------------------------------------------------------------------------------------------------
 	-- modify monster statistics
 	----------------------------------------------------------------------------------------------------
 	
@@ -2290,6 +2387,31 @@ function events.GameInitialized2()
 		
 	end
 	
+	----------------------------------------------------------------------------------------------------
+	-- monster ranged attacks
+	----------------------------------------------------------------------------------------------------
+
+	for monsterTxtId, monsterRangedAttack in pairs(monsterRangedAttacks) do
+	
+		local monsterTxt = Game.MonstersTxt[monsterTxtId]
+		
+		if monsterRangedAttack.Attack2Chance ~= nil then
+			monsterTxt.Attack2Chance = monsterRangedAttack.Attack2Chance
+			monsterTxt.Attack2.Type = monsterRangedAttack.Attack2.Type
+			monsterTxt.Attack2.DamageDiceCount = monsterRangedAttack.Attack2.DamageDiceCount
+			monsterTxt.Attack2.DamageDiceSides = monsterRangedAttack.Attack2.DamageDiceSides
+			monsterTxt.Attack2.DamageAdd = monsterRangedAttack.Attack2.DamageAdd
+			monsterTxt.Attack2.Missile = monsterRangedAttack.Attack2.Missile
+		end
+		
+		if monsterRangedAttack.SpellChance ~= nil then
+			monsterTxt.SpellChance = monsterRangedAttack.SpellChance
+			monsterTxt.Spell = spellTxtIds[monsterRangedAttack.SpellName]
+			monsterTxt.SpellSkill = monsterRangedAttack.SpellSkill
+		end
+		
+	end
+	
 end
 
 --[[
@@ -2484,16 +2606,18 @@ function events.Tick()
 end
 
 -- Feeblemind fix
-local function disableFeeblemindedMonsterCasting(d)
-	local monsterAddress = d.esi
-	local monsterIndex = (monsterAddress - 0x0056F478) / 0x224
-	local monster = Map.Monsters[monsterIndex]
-	-- set cast chance to 0 for feebleminded monster
+local function disableFeeblemindedMonsterCasting(d, def)
+	-- get default random value
+	local randomRoll = def()
+	-- get monster
+	local monsterIndex, monster = GetMonster(d.esi)
+	-- set random to 99 for feebleminded monster
 	if monster.SpellBuffs[const.MonsterBuff.Feeblemind].ExpireTime ~= 0 then
-		d.al = 0
+		randomRoll = 99
 	end
+	return randomRoll
 end
-mem.autohook2(0x00421C51, disableFeeblemindedMonsterCasting, 7)
+mem.hookcall(0x00421C5C, 0, 0, disableFeeblemindedMonsterCasting)
 
 -- Summon hirelings
 local function bringMonsterToParty(monster)

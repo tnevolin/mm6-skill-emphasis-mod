@@ -1,3 +1,9 @@
+# version 63
+
+* Added ranged attack of different kind to some lesser outdoor monsters. The attack type is either weaker version of what advanced kind already has (Goblin King, Mystic of Baa) or something lore wise (Catpurse throws knifes, Skeleton shoots arrows). That reduces the slaughter shooting over the river tactics as well as increase value of shield spell (more arrow shooting monsters).
+
+Highly experimental feature as I manually modified monsters statistics. Please report any irregularities.
+
 # version 62
 
 * Added blaster entries everywhere bow goes. I completely forgot blaster is a weapon. :(

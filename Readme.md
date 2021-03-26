@@ -118,12 +118,6 @@ All weapon bonuses are counted!!! Player can mix and match them as they see fit 
 
 # Two-handed weapon specials
 
-## Double own damage
-
-Two handed weapons confer double damage for their listed damage value. This gives party some damage boost at the beginning of the game when combat skills are yet undevelopped.
-
-I didn't change actual item descriptions as spears can be used both with one and two hands. The bonus is calculated correctly in character stats screen. Consider this a two hand holding special bonus.
-
 ## Extra damage per skill level
 
 Two handed weapon receives extra damage per skill level regardless or rank. This also adds some boost to two handed weapons those suck otherwise except maybe 2h axe which is about as good as axe-sword combo without this bonus. With this bonus it becomes a best offensive weapon in hands of non specialized melee fighter.
