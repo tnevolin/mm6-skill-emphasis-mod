@@ -149,13 +149,15 @@ Archer and all its promotions doubles skill based attack and speed bonuses to al
 
 Single wield is inferior to any other wielding type as it was in vanilla. It is a waste to not use extra hand. If not for offense than for defense (shield) at least.
 
-Dual wield in this mod combines attack and speed bonuses from both weapon giving dual wielding some boost. Not too big, though. Attack improves badly in long run. Speed progresses well at the beginning but then slows down and get capped. Damage is the only bonus that keeps progressing well beyond levels 20-30. Unfortunately, only weapons that could be held in off hand (sword, dagger) do not confer damage bonus. So dual wielding does better in this mod comparing to vanilla but not enough to confidently outrun two-handed weapon progression.
+Dual wield in this mod combines attack and speed bonuses from both weapon giving dual wielding some boost. The inherent problem with wielding two different items in both hands (weapon-weapon or weapon-shield) is that skill points are split between two skills slowing down their progression comparing to a single type two-handed weapon that doesn't share skill point pool with anything else. Therefore, two-handed axe generally progresses about 1.4 time faster than any *different* weapons combo. That is 1.4 more accuracy \* 1.4 more speed \* 1.4 more damage. Two-handed weapon is always preferable for Archer as a single non specialized melee fighter class that can hold them. Magic classes (Cleric, Druid, Sorcerer) are not capable of wielding any significantly offensive 2h or dual combo.
 
-The inherent problem with wielding two different items in both hands (weapon-weapon or weapon-shield) is that skill points are split between two skills slowing down their progression comparing to a single type two-handed weapon that doesn't share skill point pool with anything else. Therefore, two-handed axe generally progresses about 1.4 time faster than any *different* type dual combo. That is 1.4 more accuracy \* 1.4 more speed \* 1.4 more damage. Two-handed weapon is always preferrable for Archer as a single non specialized melee fighter class that can hold them. Magic classes (Cleric, Druid, Sourcerer) are not capable of wielding any significantly offensive 2h or dual combo.
-
-Specialized melee fighter classes (Paladin, Knight) are special cases as they receive damage bonus for **every** weapon held. As such Knight should definitely prefer axe-sword dual wielding for max offense benefit. He does not need to sacrifice weapon offensive power for additional protection as his plate and abundant HP protect him enough already. Paladin receives half of Knight damage bonus and, therefore, may opt for either dual or two-handed wielding - player's choice.
+Specialized melee fighter classes (Paladin, Knight) receive damage bonus for **every** weapon held. As such Knight should definitely prefer axe-sword dual wielding for max offense benefit. He does not need to sacrifice weapon offensive power for additional protection as his plate and abundant HP protect him enough already. Paladin receives half of Knight damage bonus and, therefore, may opt for either dual or two-handed wielding - player's choice.
 
 Sword-sword and dagger-dagger combos are special case as they progress as fast as two-handed weapon due to same weapon type in both hands. However, since they both lack damage bonus, these combos have mediocre offense and do not compete with axe-sword, spear-sword options.
+
+## Dagger special ability
+
+Dagger damage grows with number of monster surrounding the party. With 10+ monsters around double daggers become best combo. May be useful to switch to it fighting groups in dungeons.
 
 ## Class weapon usage suggestions
 
@@ -179,11 +181,11 @@ Same is true for Paladin about mace paralyzing ability. Get it for 20% loss in d
 
 ![Other classes damage rate progression by skill level](_images/weapon_nonmelee.png)
 
-Archer does not possess close combat bonuses yet it is still capable of using all weapons. Two-handed axe is a clear preference for them due to 2h damage bonus. Besides, since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is somewhate weaker on offense but beefs up AC. Everything else is worse.
+Archer does not possess close combat bonuses yet it is still capable of using all weapons. Two-handed axe is a clear preference for them due to 2h damage bonus. Besides, since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is somewhate weaker on offense but higher on attack to penetrate heavy armor. Everything else is worse.
 
 ### Cleric
 
-Mace for paralyzing. Shield for extra protection if you don't care about small recovery penalty.
+Mace for paralyzing. Shield for extra protection if you don't care about small recovery penalty. Shield also protects entire party from projectiles.
 
 ### Druid
 
