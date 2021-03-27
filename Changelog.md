@@ -1,6 +1,9 @@
 # version 64
 
-* Guardian Angel adds 10 x skill to endurance for the purpose of not dying when inconsious.
+* Guardian Angel spell modification.
+	* Spell lowers death HP threshold by 10 per skill point for all characters.
+	* Spell duration is 1 hours + 5 minutes times skill level.
+	* Spell description is updated accordingly.
 
 # version 63
 

@@ -2272,6 +2272,10 @@ function events.GameInitialized2()
 		Game.SpellsTxt[spellIndex].Description = Game.SpellsTxt[spellIndex].Description .. string.format("\n\nmodified damage = %d + %d-%d per point of skill", spellPowers[spellIndex][const.Novice].fixedMin, spellPowers[spellIndex][const.Novice].variableMin, spellPowers[spellIndex][const.Novice].variableMax)
 	end
 	
+	-- guardian angel
+	
+	Game.SpellsTxt[spellTxtIds["Guardian Angel"]].Description = string.replace(Game.SpellsTxt[spellTxtIds["Guardian Angel"]].Description, "Guardian Angel lasts for 1 hour per point of skill in Spirit Magic", "Guardian Angel lasts for 1 hour plus 5 minutes per point of skill in Spirit Magic") .. string.format("\n\nWhile active Guardian Angel lowers the death HP threshold by 10 per point of skill in Spirit Magic for all characters.")
+	
 	----------------------------------------------------------------------------------------------------
 	-- professions
 	----------------------------------------------------------------------------------------------------
@@ -3387,20 +3391,29 @@ mem.hookcall(0x0042A228, 2, 1, meleeAttackMonster)
 -- guardian angel adds to endurance to preserve character
 ----------------------------------------------------------------------------------------------------
 
-local guardianAngelCasterPlayer
+local guardianAngelPower
+
+--mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
+--mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
 
 local function guardianAngelCharacterTrySubtractSpellPoints(d, def, characterPointer, spellPoints)
-	-- store guardian angel caster
+	-- get caster
 	local playerIndex, player = GetPlayer(d.ebp)
-	guardianAngelCasterPlayer = player
+	-- get caster skill
+	local level, rank = SplitSkill(player.Skills[const.Skills.Spirit])
+	-- store spell power
+	guardianAngelPower = level
+	-- execute original method
+	return def(characterPointer, spellPoints)
 end
 mem.hookcall(0x00426BB0, 1, 1, guardianAngelCharacterTrySubtractSpellPoints)
 
 local function guardianAngelSetSpellBuff(d, def, spellBuffAddress, expireTimeLow, expireTimeHigh, skill, strength, overlay, caster)
-	-- get caster skill
-	local level, rank = SplitSkill(guardianAngelCasterPlayer.Skills[const.Skills.Spirit])
-	-- set spell buff with level as strength
-	def(spellBuffAddress, expireTimeLow, expireTimeHigh, skill, level, overlay, caster)
+	-- set correct duration
+	local duration = guardianAngelPower * 300 + 3600
+	expireTimeLow = Game.Time + duration * 128 / 30
+	-- set spell buff with correct power
+	def(spellBuffAddress, expireTimeLow, expireTimeHigh, skill, guardianAngelPower, overlay, caster)
 end
 mem.hookcall(0x00426C0F, 1, 6, guardianAngelSetSpellBuff)
 
