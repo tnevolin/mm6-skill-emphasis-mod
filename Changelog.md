@@ -1,3 +1,7 @@
+# version 64
+
+* Guardian Angel adds 10 x skill to endurance for the purpose of not dying when inconsious.
+
 # version 63
 
 * Added ranged attack of different kind to some lesser outdoor monsters. The attack type is either weaker version of what advanced kind already has (Goblin King, Mystic of Baa) or something lore wise (Catpurse throws knifes, Skeleton shoots arrows). That reduces the slaughter shooting over the river tactics as well as increase value of shield spell (more arrow shooting monsters).

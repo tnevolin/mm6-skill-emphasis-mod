@@ -623,23 +623,17 @@ local housePrices =
 
 local modifiedBookValues =
 {
-	[100] = 50,
-	[200] = 100,
-	[300] = 200,
-	[400] = 300,
-	[500] = 500,
-	[750] = 1000,
-	[1000] = 2000,
-	[1500] = 5000,
-	[2000] = 10000,
-	[2500] = 15000,
-	[3000] = 20000,
-	[3500] = 25000,
-	[4000] = 30000,
-	[5000] = 50000,
-	[6000] = 70000,
-	[7500] = 100000,
-	[10000] = 200000,
+	[0] = 100,
+	[1] = 200,
+	[2] = 300,
+	[3] = 500,
+	[4] = 1000,
+	[5] = 2000,
+	[6] = 5000,
+	[7] = 10000,
+	[8] = 20000,
+	[9] = 50000,
+	[10] = 100000,
 }
 
 -- monster ranged attacks
@@ -1845,24 +1839,52 @@ function events.GameInitialized2()
 	end
 	
 	----------------------------------------------------------------------------------------------------
+	-- monster ranged attacks
+	----------------------------------------------------------------------------------------------------
+
+	for monsterTxtId, monsterRangedAttack in pairs(monsterRangedAttacks) do
+	
+		local monsterTxt = Game.MonstersTxt[monsterTxtId]
+		
+		if monsterRangedAttack.Attack2Chance ~= nil then
+			monsterTxt.Attack2Chance = monsterRangedAttack.Attack2Chance
+			monsterTxt.Attack2.Type = monsterRangedAttack.Attack2.Type
+			monsterTxt.Attack2.DamageDiceCount = monsterRangedAttack.Attack2.DamageDiceCount
+			monsterTxt.Attack2.DamageDiceSides = monsterRangedAttack.Attack2.DamageDiceSides
+			monsterTxt.Attack2.DamageAdd = monsterRangedAttack.Attack2.DamageAdd
+			monsterTxt.Attack2.Missile = monsterRangedAttack.Attack2.Missile
+		end
+		
+		if monsterRangedAttack.SpellChance ~= nil then
+			monsterTxt.SpellChance = monsterRangedAttack.SpellChance
+			monsterTxt.Spell = spellTxtIds[monsterRangedAttack.SpellName]
+			monsterTxt.SpellSkill = monsterRangedAttack.SpellSkill
+		end
+		
+	end
+	
+	----------------------------------------------------------------------------------------------------
 	-- modify monster statistics
 	----------------------------------------------------------------------------------------------------
 	
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 	
+		local monsterTxt = Game.MonstersTxt[monsterTxtIndex]
+	
 		-- multiply monster hit points
 		
-		Game.MonstersTxt[monsterTxtIndex].FullHitPoints = Game.MonstersTxt[monsterTxtIndex].FullHitPoints * monsterHitPointsMultiplier
+		monsterTxt.FullHitPoints = monsterTxt.FullHitPoints * monsterHitPointsMultiplier
 		
 		-- multiply monster damage
 		
-		Game.MonstersTxt[monsterTxtIndex].Attack1.DamageDiceCount = Game.MonstersTxt[monsterTxtIndex].Attack1.DamageDiceCount * monsterDamageMultiplier
-		Game.MonstersTxt[monsterTxtIndex].Attack1.DamageAdd = Game.MonstersTxt[monsterTxtIndex].Attack1.DamageAdd * monsterDamageMultiplier
+		monsterTxt.Attack1.DamageDiceCount = monsterTxt.Attack1.DamageDiceCount * monsterDamageMultiplier
+		monsterTxt.Attack1.DamageAdd = monsterTxt.Attack1.DamageAdd * monsterDamageMultiplier
 		
-		Game.MonstersTxt[monsterTxtIndex].Attack2.DamageDiceCount = Game.MonstersTxt[monsterTxtIndex].Attack2.DamageDiceCount * monsterDamageMultiplier
-		Game.MonstersTxt[monsterTxtIndex].Attack2.DamageAdd = Game.MonstersTxt[monsterTxtIndex].Attack2.DamageAdd * monsterDamageMultiplier
+		monsterTxt.Attack2.DamageDiceCount = monsterTxt.Attack2.DamageDiceCount * monsterDamageMultiplier
+		monsterTxt.Attack2.DamageAdd = monsterTxt.Attack2.DamageAdd * monsterDamageMultiplier
 		
-		Game.MonstersTxt[monsterTxtIndex].SpellSkill = Game.MonstersTxt[monsterTxtIndex].SpellSkill * monsterDamageMultiplier
+		local skillLevel, skillMastery = SplitSkill(monsterTxt.SpellSkill)
+		monsterTxt.SpellSkill = JoinSkill(skillLevel * monsterDamageMultiplier, skillMastery)
 		
 		-- modify multiply monster armor class
 		
@@ -1906,16 +1928,28 @@ function events.GameInitialized2()
 	----------------------------------------------------------------------------------------------------
 	-- book values
 	----------------------------------------------------------------------------------------------------
-
-	for itemTxtIndex = 0, Game.ItemsTxt.high do
+	
+	-- normal books
+	
+	local normalBookBaseIndex = 300
+	for itemTxtIndex = normalBookBaseIndex, Game.ItemsTxt.high do
 
 		local itemTxt = Game.ItemsTxt[itemTxtIndex]
+		local bookLevel = math.fmod((itemTxtIndex - normalBookBaseIndex), 11)
 		
-		if itemTxt.EquipStat == const.ItemType.Book - 1 then
-			if modifiedBookValues[itemTxt.Value] ~= nil then
-				itemTxt.Value = modifiedBookValues[itemTxt.Value]
-			end
-		end
+		itemTxt.Value = modifiedBookValues[bookLevel]
+			
+	end
+
+	-- mirror books
+	
+	local mirrorBookBaseIndex = 377
+	for itemTxtIndex = mirrorBookBaseIndex, Game.ItemsTxt.high do
+
+		local itemTxt = Game.ItemsTxt[itemTxtIndex]
+		local bookLevel = math.fmod((itemTxtIndex - mirrorBookBaseIndex), 11)
+		
+		itemTxt.Value = modifiedBookValues[bookLevel] * 10
 			
 	end
 
@@ -2383,31 +2417,6 @@ function events.GameInitialized2()
 			itemTxt.Mod1DiceCount = 4
 			itemTxt.Mod1DiceSides = 3
 			itemTxt.Notes = string.gsub(itemTxt.Notes, "+1D6", "extra dice roll")
-		end
-		
-	end
-	
-	----------------------------------------------------------------------------------------------------
-	-- monster ranged attacks
-	----------------------------------------------------------------------------------------------------
-
-	for monsterTxtId, monsterRangedAttack in pairs(monsterRangedAttacks) do
-	
-		local monsterTxt = Game.MonstersTxt[monsterTxtId]
-		
-		if monsterRangedAttack.Attack2Chance ~= nil then
-			monsterTxt.Attack2Chance = monsterRangedAttack.Attack2Chance
-			monsterTxt.Attack2.Type = monsterRangedAttack.Attack2.Type
-			monsterTxt.Attack2.DamageDiceCount = monsterRangedAttack.Attack2.DamageDiceCount
-			monsterTxt.Attack2.DamageDiceSides = monsterRangedAttack.Attack2.DamageDiceSides
-			monsterTxt.Attack2.DamageAdd = monsterRangedAttack.Attack2.DamageAdd
-			monsterTxt.Attack2.Missile = monsterRangedAttack.Attack2.Missile
-		end
-		
-		if monsterRangedAttack.SpellChance ~= nil then
-			monsterTxt.SpellChance = monsterRangedAttack.SpellChance
-			monsterTxt.Spell = spellTxtIds[monsterRangedAttack.SpellName]
-			monsterTxt.SpellSkill = monsterRangedAttack.SpellSkill
 		end
 		
 	end
@@ -3373,4 +3382,40 @@ local function meleeAttackMonster(d, def, attackStructure, monsterIndex, knockba
 	
 end
 mem.hookcall(0x0042A228, 2, 1, meleeAttackMonster)
+
+----------------------------------------------------------------------------------------------------
+-- guardian angel adds to endurance to preserve character
+----------------------------------------------------------------------------------------------------
+
+local guardianAngelCasterPlayer
+
+local function guardianAngelCharacterTrySubtractSpellPoints(d, def, characterPointer, spellPoints)
+	-- store guardian angel caster
+	local playerIndex, player = GetPlayer(d.ebp)
+	guardianAngelCasterPlayer = player
+end
+mem.hookcall(0x00426BB0, 1, 1, guardianAngelCharacterTrySubtractSpellPoints)
+
+local function guardianAngelSetSpellBuff(d, def, spellBuffAddress, expireTimeLow, expireTimeHigh, skill, strength, overlay, caster)
+	-- get caster skill
+	local level, rank = SplitSkill(guardianAngelCasterPlayer.Skills[const.Skills.Spirit])
+	-- set spell buff with level as strength
+	def(spellBuffAddress, expireTimeLow, expireTimeHigh, skill, level, overlay, caster)
+end
+mem.hookcall(0x00426C0F, 1, 6, guardianAngelSetSpellBuff)
+
+local guardianAngelEnduranceBonusPerLevel = 10
+local function changedCharacterCalcStatBonusByItems(d, def, characterPointer, statId)
+	-- calculate default bonus
+	local statBonus = def(characterPointer, statId)
+	-- guardian angel buff
+	local guardianAngelBuff = Party.SpellBuffs[const.PartyBuff.GuardianAngel]
+	-- increase bonus to make it positive so character doesn't die with guardian angel
+	if guardianAngelBuff.ExpireTime ~= 0 then
+		statBonus = statBonus + guardianAngelEnduranceBonusPerLevel * guardianAngelBuff.Power
+	end
+	return statBonus
+end
+mem.hookcall(0x0047FF37, 1, 1, changedCharacterCalcStatBonusByItems)
+mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
 
