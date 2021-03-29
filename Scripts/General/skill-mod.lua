@@ -3213,12 +3213,19 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 	
 	local textLines = {}
 	
-	local player = Party.Players[Game.CurrentPlayer]
-	local meleeDamageRate = getAverageDamageRate(player, false, monsterTxt.ArmorClass)
-	local rangedDamageRate = getAverageDamageRate(player, true, monsterTxt.ArmorClass)
-	table.insert(textLines, {["key"] = "Damage Rate melee", ["value"] = string.format("%d", meleeDamageRate), ["type"] = "damageRate", })
-	table.insert(textLines, {["key"] = "Damage Rate ranged", ["value"] = string.format("%d", rangedDamageRate), ["type"] = "damageRate", })
-	table.insert(textLines, {["key"] = "", ["value"] = "", })
+	-- player damage rate on monster
+	if Game.CurrentPlayer >= 0 and Game.CurrentPlayer <= 3 then
+		local player = Party.Players[Game.CurrentPlayer]
+		local meleeDamageRate = getAverageDamageRate(player, false, monsterTxt.ArmorClass)
+		local rangedDamageRate = getAverageDamageRate(player, true, monsterTxt.ArmorClass)
+		table.insert(textLines, {["key"] = "Damage Rate melee", ["value"] = string.format("%d", meleeDamageRate), ["type"] = "damageRate", })
+		table.insert(textLines, {["key"] = "Damage Rate ranged", ["value"] = string.format("%d", rangedDamageRate), ["type"] = "damageRate", })
+		table.insert(textLines, {["key"] = "", ["value"] = "", })
+	else
+		table.insert(textLines, {["key"] = "", ["value"] = "", })
+		table.insert(textLines, {["key"] = "", ["value"] = "", })
+		table.insert(textLines, {["key"] = "", ["value"] = "", })
+	end
 	
 	table.insert(textLines, {["key"] = "Full Hit Points", ["value"] = string.format("%d", monsterTxt.FullHitPoints)})
 	table.insert(textLines, {["key"] = "Armor Class", ["value"] = string.format("%d", monsterTxt.ArmorClass)})

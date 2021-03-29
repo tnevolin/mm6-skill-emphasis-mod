@@ -1,3 +1,7 @@
+# version 65
+
+* Fixed occasional crash when checking monster stats.
+
 # version 64
 
 * Guardian Angel spell modification.
