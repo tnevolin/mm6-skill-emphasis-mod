@@ -4,9 +4,8 @@
 
 I think it includes everything I have planned for it. So I am no longer actively working on it. However, I still see some faint traffic on this repository. With that in mind please feel free to:
 
-* Let me know that you are using or used it so I can get sense of user base coverage. Unfortunately, github is not tracking downloads. :(
-* File bug report by creating issue in this project or posting it to the forum on celectialheaven.com.
-* Post on the forum that you are using this mod and would like more features or modifications or to merge it into some bigger mod.
+* Let me know that you are using or used it so I can get sense of user base coverage. Unfortunately, github is not tracking downloads. 😥
+* File bug report or feature request or merge request by creating issue in this project or posting it to the forum on celectialheaven.com.
 
 # Goal
 
