@@ -133,7 +133,7 @@ Two handed weapon receives extra damage per skill level regardless or rank. This
 
 MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
 
-## Additional melee weapon damage bonus per level for classes
+## Additional melee weapon damage bonus per --SKILL-- level for classes
 
 |class|bonus|
 |----|----:|
