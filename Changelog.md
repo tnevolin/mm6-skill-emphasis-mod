@@ -1,3 +1,7 @@
+# version 66
+
+* Fixed shield reducing projectile damage.
+
 # version 65
 
 * Fixed occasional crash when checking monster stats.

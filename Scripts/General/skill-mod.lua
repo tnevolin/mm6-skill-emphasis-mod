@@ -2942,7 +2942,7 @@ local function modifiedCharacterStrikeWithDamageProjectile(d, def, playerPointer
 		local playerEquipmentData = getPlayerEquipmentData(player)
 		
 		if playerEquipmentData.shield.equipped then
-			damageMultiplier = damageMultiplier * math.pow(1 - shieldProjectileDamageReductionPerLevel, playerEquipmentData.extra.level)
+			damageMultiplier = damageMultiplier * math.pow(1 - shieldProjectileDamageReductionPerLevel, playerEquipmentData.shield.level)
 		end
 		
 	end
