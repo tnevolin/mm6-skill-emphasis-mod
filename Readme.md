@@ -1,5 +1,12 @@
 # Might & Magic 6: skill emphasis mod
 
+# Note to users
+
+I think it includes everything I have planned for it. So I am no longer actively working on it. However, I still see some faint traffic on this repository. With that in mind please feel free to:
+
+* Let me know that you are using or used it so I can get sense of user base coverage. Unfortunately, github is not tracking downloads. 😥
+* File bug report or feature request or merge request by creating issue in this project or posting it to the forum on celectialheaven.com.
+
 # Goal
 
 RPG character advancement should be mainly based on their skill progression with some small non skill based effects here and there from equipment, barrels, quests, etc. Putting it simply high skill should be a primary source of every property character has. That what R in RPG is. You build a role by pumping skill points into certain area. Like if you are focusing on axe skill only then you expect this character to be an outstanding axeman but appalling swordsman. This is **NOT** like that in M&M engine. Mastering the skill is undoubtedly more difficult endeavor than acquiring an expensive item. Yet those expensive items give about same bonus in attack and damage as mastering the skill. I would love to turn this around and give skills their well deserved attention. Usually one could raise their selected skills somewhere to level 10 on average by the end of the game. Since there are so few of them we should make player to cherish each skill point and use every possibility to invest more in primary weapon skills.
@@ -126,7 +133,7 @@ Two handed weapon receives extra damage per skill level regardless or rank. This
 
 MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
 
-## Additional melee weapon damage bonus per level for classes
+## Additional melee weapon damage bonus per --SKILL-- level for classes
 
 |class|bonus|
 |----|----:|
