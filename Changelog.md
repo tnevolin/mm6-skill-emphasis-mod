@@ -1,3 +1,7 @@
+# version 67
+
+* Fixed Shrapmetal. It does not autoaim anymore as it should. 
+
 # version 66
 
 * Fixed shield reducing projectile damage.

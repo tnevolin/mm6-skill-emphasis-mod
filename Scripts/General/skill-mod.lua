@@ -2544,6 +2544,9 @@ local function navigateMissile(object)
 		or
 		-- Poison Spray
 		object.SpellType == 26
+		or
+		-- Shrapmetal
+		object.SpellType == 92
 	then
 		return
 	end
