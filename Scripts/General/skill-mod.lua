@@ -1430,13 +1430,7 @@ function events.CalcStatBonusBySkills(t)
 				
 				-- calculate new bonus
 				
-				local newBonus =
-					math.round
-					(
-						(weaponNewAttackBonusByMastery[main.skill][main.rank] * mainEffectiveSkillLevel)
-						+
-						(weaponNewAttackBonusByMastery[extra.skill][extra.rank] * extraEffectiveSkillLevel)
-					)
+				local newBonus = math.round((weaponNewAttackBonusByMastery[main.skill][main.rank] * mainEffectiveSkillLevel) + (weaponNewAttackBonusByMastery[extra.skill][extra.rank] * extraEffectiveSkillLevel))
 			
 				-- recalculate bonus
 				
