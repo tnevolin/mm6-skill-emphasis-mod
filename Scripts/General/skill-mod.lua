@@ -1055,8 +1055,8 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 			meleeWeapon1EffectiveSkillLevel = equipmentData1.level
 			meleeWeapon2EffectiveSkillLevel = equipmentData2.level
 		else
-			meleeWeapon1EffectiveSkillLevel = math.round(equipmentData1.level / math.sqrt(2))
-			meleeWeapon2EffectiveSkillLevel = math.round(equipmentData2.level / math.sqrt(2))
+			meleeWeapon1EffectiveSkillLevel = (equipmentData1.level / math.sqrt(2))
+			meleeWeapon2EffectiveSkillLevel = (equipmentData2.level / math.sqrt(2))
 		end
 	
 		-- calculate old and new recovery bonuses
@@ -1088,8 +1088,8 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		if equipmentData1.rank >= const.Expert then
 			oldRecoveryBonus1 = oldRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill] * equipmentData1.level)
 		end
-		newRecoveryBonus1 = newRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * meleeWeapon1EffectiveSkillLevel)
-		newRecoveryBonus2 = newRecoveryBonus2 + (weaponSkillRecoveryBonuses[equipmentData2.skill] * recoveryBonusByMastery[equipmentData2.rank] * meleeWeapon2EffectiveSkillLevel)
+		newRecoveryBonus1 = math.round(newRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill] * recoveryBonusByMastery[equipmentData1.rank] * meleeWeapon1EffectiveSkillLevel))
+		newRecoveryBonus2 = math.round(newRecoveryBonus2 + (weaponSkillRecoveryBonuses[equipmentData2.skill] * recoveryBonusByMastery[equipmentData2.rank] * meleeWeapon2EffectiveSkillLevel))
 		
 		-- replace old with new bonus
 		
@@ -1420,8 +1420,8 @@ function events.CalcStatBonusBySkills(t)
 					mainEffectiveSkillLevel = main.level
 					extraEffectiveSkillLevel = extra.level
 				else
-					mainEffectiveSkillLevel = math.round(main.level / math.sqrt(2))
-					extraEffectiveSkillLevel = math.round(extra.level / math.sqrt(2))
+					mainEffectiveSkillLevel = (main.level / math.sqrt(2))
+					extraEffectiveSkillLevel = (extra.level / math.sqrt(2))
 				end
 			
 				-- calculate old bonus
@@ -1431,9 +1431,12 @@ function events.CalcStatBonusBySkills(t)
 				-- calculate new bonus
 				
 				local newBonus =
-					(weaponNewAttackBonusByMastery[main.skill][main.rank] * mainEffectiveSkillLevel)
-					+
-					(weaponNewAttackBonusByMastery[extra.skill][extra.rank] * extraEffectiveSkillLevel)
+					math.round
+					(
+						(weaponNewAttackBonusByMastery[main.skill][main.rank] * mainEffectiveSkillLevel)
+						+
+						(weaponNewAttackBonusByMastery[extra.skill][extra.rank] * extraEffectiveSkillLevel)
+					)
 			
 				-- recalculate bonus
 				
@@ -1490,8 +1493,8 @@ function events.CalcStatBonusBySkills(t)
 					mainEffectiveSkillLevel = main.level
 					extraEffectiveSkillLevel = extra.level
 				else
-					mainEffectiveSkillLevel = math.round(main.level / math.sqrt(2))
-					extraEffectiveSkillLevel = math.round(extra.level / math.sqrt(2))
+					mainEffectiveSkillLevel = (main.level / math.sqrt(2))
+					extraEffectiveSkillLevel = (extra.level / math.sqrt(2))
 				end
 			
 				-- subtract old bonus
@@ -1506,22 +1509,22 @@ function events.CalcStatBonusBySkills(t)
 				end
 				
 				-- add new bonus for main weapon
-				t.Result = t.Result + weaponSkillDamageBonuses[main.skill] * (damageBonusByMastery[main.rank] * mainEffectiveSkillLevel)
+				t.Result = t.Result + math.round(weaponSkillDamageBonuses[main.skill] * (damageBonusByMastery[main.rank] * mainEffectiveSkillLevel))
 				
 				-- add new bonus for extra weapon if any
 				if extra.weapon then
-					t.Result = t.Result + weaponSkillDamageBonuses[extra.skill] * (damageBonusByMastery[extra.rank] * extraEffectiveSkillLevel)
+					t.Result = t.Result + math.round(weaponSkillDamageBonuses[extra.skill] * (damageBonusByMastery[extra.rank] * extraEffectiveSkillLevel))
 				end
 				
 				-- add class bonus for main hand weapon
 				if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
-					t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * mainEffectiveSkillLevel)
+					t.Result = t.Result + math.round(classMeleeWeaponSkillDamageBonus[t.Player.Class] * mainEffectiveSkillLevel)
 				end
 				
 				-- add class bonus for extra hand weapon if any and different from main weapon
 				if extra.weapon and extra.skill ~= main.skill then
 					if classMeleeWeaponSkillDamageBonus[t.Player.Class] ~= nil then
-						t.Result = t.Result + (classMeleeWeaponSkillDamageBonus[t.Player.Class] * extraEffectiveSkillLevel)
+						t.Result = t.Result + math.round(classMeleeWeaponSkillDamageBonus[t.Player.Class] * extraEffectiveSkillLevel)
 					end
 				end
 				
