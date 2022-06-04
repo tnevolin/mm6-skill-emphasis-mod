@@ -1,3 +1,13 @@
+# version 68
+
+* Sword speed bonus: 0-4-4.
+* Axe speed bonus: 0-2-2.
+* Sword damage bonus: 0-0-1.
+* Bow damage bonus: 0-1-1.
+* Archer bow damage bonus: 1-1-1.
+* Dual wield uses full skill level instead of dividing by sqrt(2).
+* Melee weapon group is split to two groups: {sword, dagger} and others.
+
 # version 67
 
 * Fixed Shrapmetal. It does not autoaim anymore as it should. 
