@@ -291,7 +291,7 @@ local weaponNewAttackBonusByMastery =
 	[const.Skills.Mace] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 }
 -- not used anymore --
---local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
+-- local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 -- local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
@@ -1129,10 +1129,10 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		-- skill bonuses
 		
 		if equipmentData1.rank >= const.Expert then
-			oldRecoveryBonus1 = oldRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill][equipmentData1.rank] * equipmentData1.level)
+			oldRecoveryBonus1 = oldRecoveryBonus1 + (oldWeaponSkillRecoveryBonuses[equipmentData1.skill][equipmentData1.rank] * equipmentData1.level)
 		end
-		newRecoveryBonus1 = (newRecoveryBonus1 + (weaponSkillRecoveryBonuses[equipmentData1.skill][equipmentData1.rank] * meleeWeapon1EffectiveSkillLevel))
-		newRecoveryBonus2 = (newRecoveryBonus2 + (weaponSkillRecoveryBonuses[equipmentData2.skill][equipmentData2.rank] * meleeWeapon2EffectiveSkillLevel))
+		newRecoveryBonus1 = (newRecoveryBonus1 + (newWeaponSkillRecoveryBonuses[equipmentData1.skill][equipmentData1.rank] * meleeWeapon1EffectiveSkillLevel))
+		newRecoveryBonus2 = (newRecoveryBonus2 + (newWeaponSkillRecoveryBonuses[equipmentData2.skill][equipmentData2.rank] * meleeWeapon2EffectiveSkillLevel))
 		
 		-- replace old with new bonus
 		

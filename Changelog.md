@@ -1,3 +1,7 @@
+# version 69
+
+* Fixed bug with dual wielding use.
+
 # version 68
 
 * Sword speed bonus: 0-4-4.
