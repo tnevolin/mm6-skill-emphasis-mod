@@ -146,7 +146,7 @@ local newWeaponBaseRecoveryBonuses =
 	[const.Skills.Sword] = 10,
 	[const.Skills.Spear] = 20,
 	[const.Skills.Mace] = 20,
-	[const.Skills.Dagger] = 60,
+	[const.Skills.Dagger] = 40,
 }
 
 -- weapon skill attack bonuses (by rank)
@@ -183,7 +183,7 @@ local oldWeaponSkillRecoveryBonuses =
 	[const.Skills.Dagger]	= {0, 0, 0, },
 	[const.Skills.Axe]		= {0, 1, 1, },
 	[const.Skills.Spear]	= {0, 0, 0, },
-	[const.Skills.Bow]		= {0, 1, 1, },
+	[const.Skills.Bow]		= {1, 2, 2, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 	[const.Skills.Mace]		= {0, 0, 0, },
 }
@@ -194,7 +194,7 @@ local newWeaponSkillRecoveryBonuses =
 	[const.Skills.Dagger]	= {0, 0, 0, },
 	[const.Skills.Axe]		= {0, 2, 2, },
 	[const.Skills.Spear]	= {0, 0, 0, },
-	[const.Skills.Bow]		= {4, 5, 6, },
+	[const.Skills.Bow]		= {2, 2, 2, },
 	[const.Skills.Mace]		= {0, 0, 0, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 }
@@ -217,10 +217,10 @@ local newWeaponSkillDamageBonuses =
 	[const.Skills.Staff]	= {0, 0, 0, },
 	[const.Skills.Sword]	= {0, 0, 1, },
 	[const.Skills.Dagger]	= {0, 0, 0, },
-	[const.Skills.Axe]		= {2, 3, 4, },
-	[const.Skills.Spear]	= {2, 3, 4, },
+	[const.Skills.Axe]		= {1, 2, 3, },
+	[const.Skills.Spear]	= {1, 2, 3, },
 	[const.Skills.Bow]		= {0, 1, 1, },
-	[const.Skills.Mace]		= {2, 3, 4, },
+	[const.Skills.Mace]		= {1, 2, 3, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 }
 
@@ -286,7 +286,7 @@ local newArmorSkillResistanceBonuses =
 -- local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 -- local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 -- local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
-local twoHandedWeaponDamageBonus = 3
+local twoHandedWeaponDamageBonus = 1
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
 local learningSkillExtraMultiplier = 2
 local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
@@ -316,9 +316,9 @@ local classRangedWeaponSkillAttackBonusMultiplier =
 }
 local classRangedWeaponSkillSpeedBonusMultiplier =
 {
-	[const.Class.Archer] = 2,
-	[const.Class.BattleMage] = 2,
-	[const.Class.WarriorMage] = 2,
+	[const.Class.Archer] = 0,
+	[const.Class.BattleMage] = 0,
+	[const.Class.WarriorMage] = 0,
 }
 local classRangedWeaponSkillDamageBonus =
 {
@@ -387,214 +387,237 @@ local protectionSpellExtraMultiplier = 2
 
 local spellPowers =
 {
-	--[[
-	-- Fire Bolt
-	[4] =
-	{
-		[const.Novice] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 7, },
-		[const.Expert] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 7, },
-		[const.Master] = {fixedMin = 7, fixedMax = 7, variableMin = 1, variableMax = 7, },
-	},
-	--]]
-	-- Ring of Fire
-	[7] =
-	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
-	},
-	-- Fire Blast
-	[8] =
-	{
-		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 3, },
-		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 3, },
-		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 3, },
-	},
-	-- Meteor Shower
-	[9] =
-	{
-		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
-		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
-		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
-	},
-	-- Inferno
-	[10] =
-	{
-		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
-		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
-		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
-	},
-	--[[
-	-- Incinerate
-	[11] =
-	{
-		[const.Novice] = {fixedMin = 21, fixedMax = 21, variableMin = 1, variableMax = 21, },
-		[const.Expert] = {fixedMin = 21, fixedMax = 21, variableMin = 1, variableMax = 21, },
-		[const.Master] = {fixedMin = 21, fixedMax = 21, variableMin = 1, variableMax = 21, },
-	},
-	--]]
-	-- Sparks
-	[15] =
-	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 1, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 1, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 1, },
-	},
-	--[[
-	-- Lightning Bolt
-	[18] =
-	{
-		[const.Novice] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 12, },
-		[const.Expert] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 12, },
-		[const.Master] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 12, },
-	},
-	--]]
-	--[[
-	-- Implosion
-	[20] =
-	{
-		[const.Novice] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 17, },
-		[const.Expert] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 17, },
-		[const.Master] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 17, },
-	},
-	--]]
-	-- Starburst
-	[22] =
-	{
-		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
-		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
-		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
-	},
-	-- Poison Spray
-	[26] =
-	{
-		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
-		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
-		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 2, },
-	},
-	--[[
-	-- Ice Bolt
-	[28] =
-	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 10, },
-	},
-	--]]
-	--[[
-	-- Acid Burst
-	[30] =
-	{
-		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 15, },
-		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 15, },
-		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 15, },
-	},
-	--]]
-	-- Ice Blast
-	[32] =
-	{
-		[const.Novice] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
-		[const.Expert] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
-		[const.Master] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
-	},
-	--[[
-	-- Deadly Swarm
-	[37] =
-	{
-		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 6, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 6, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 6, },
-	},
-	--]]
-	-- Blades
-	[39] =
-	{
-		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
-		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
-		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
-	},
-	-- Death Blossom
-	[43] =
-	{
-		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
-		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
-		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
-	},
-	--[[
-	-- Mind Blast
-	[58] =
-	{
-		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
-		[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
-		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
-	},
-	--]]
-	--[[
-	-- Psychic Shock
-	[65] =
-	{
-		[const.Novice] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
-		[const.Expert] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
-		[const.Master] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
-	},
-	--]]
-	--[[
-	-- Harm
-	[70] =
-	{
-		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 4, },
-		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 4, },
-		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 4, },
-	},
-	--]]
-	--[[
-	-- Flying Fist
-	[76] =
-	{
-		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-	},
-	--]]
-	-- Destroy Undead
-	[82] =
-	{
-		[const.Novice] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
-		[const.Expert] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
-		[const.Master] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
-	},
-	-- Prismatic Light
-	[84] =
-	{
-		[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
-		[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
-		[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
-	},
-	--[[
-	-- Sun Ray
-	[87] =
-	{
-		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
-		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
-		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 30, },
-	},
-	--]]
-	--[[
-	-- Toxic Cloud
-	[90] =
-	{
-		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-	},
-	--]]
-	-- Shrapmetal
-	[92] =
-	{
-		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 6, },
-		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 6, },
-		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 1, variableMax = 6, },
-	},
+-- Fire Bolt
+[4] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+},
+-- Ring of Fire
+[7] =
+{
+[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 4, },
+},
+-- Fire Blast
+[8] =
+{
+[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
+[const.Expert] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 4, },
+[const.Master] = {fixedMin = 2, fixedMax = 2, variableMin = 1, variableMax = 5, },
+},
+-- Meteor Shower
+[9] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+},
+-- Inferno
+[10] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 4, },
+},
+-- Incinerate
+[11] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 21, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 21, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 21, },
+},
+-- Sparks
+[15] =
+{
+[const.Novice] = {fixedMin = 1, fixedMax = 5, variableMin = 1, variableMax = 2, },
+[const.Expert] = {fixedMin = 1, fixedMax = 5, variableMin = 1, variableMax = 2, },
+[const.Master] = {fixedMin = 1, fixedMax = 5, variableMin = 1, variableMax = 2, },
+},
+--[[
+-- Lightning Bolt
+[18] =
+{
+[const.Novice] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 8, },
+[const.Expert] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 8, },
+[const.Master] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 8, },
+},
+--]]
+--[[
+-- Implosion
+[20] =
+{
+[const.Novice] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 10, },
+[const.Expert] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 10, },
+[const.Master] = {fixedMin = 17, fixedMax = 17, variableMin = 1, variableMax = 10, },
+},
+--]]
+-- Starburst
+[22] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 6, },
+},
+-- Poison Spray
+[26] =
+{
+[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
+[const.Expert] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
+[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
+},
+--[[
+-- Ice Bolt
+[28] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 70, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 70, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 70, },
+},
+--]]
+--[[
+-- Acid Burst
+[30] =
+{
+[const.Novice] = {fixedMin = 9, fixedMax = 9, variableMin = 1, variableMax = 9, },
+[const.Expert] = {fixedMin = 9, fixedMax = 9, variableMin = 1, variableMax = 9, },
+[const.Master] = {fixedMin = 9, fixedMax = 9, variableMin = 1, variableMax = 9, },
+},
+--]]
+-- Ice Blast
+[32] =
+{
+[const.Novice] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 3, },
+[const.Expert] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 3, },
+},
+--[[
+--]]
+-- Deadly Swarm
+[37] =
+{
+[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 3, },
+[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 1, variableMax = 3, },
+},
+--]]
+-- Blades
+[39] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 7, },
+},
+-- Death Blossom
+[43] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 10, },
+},
+-- Mind Blast
+[58] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 5, },
+},
+-- Psychic Shock
+[65] =
+{
+[const.Novice] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 24, },
+[const.Expert] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 24, },
+[const.Master] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 24, },
+},
+--[[
+-- Harm
+[70] =
+{
+[const.Novice] = {fixedMin = 50, fixedMax = 50, variableMin = 1, variableMax = 20, },
+[const.Expert] = {fixedMin = 50, fixedMax = 50, variableMin = 1, variableMax = 20, },
+[const.Master] = {fixedMin = 50, fixedMax = 50, variableMin = 1, variableMax = 20, },
+},
+--]]
+
+-- Flying Fist
+[76] =
+{
+[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
+[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
+[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
+},
+-- Destroy Undead
+[82] =
+{
+[const.Novice] = {fixedMin = 20, fixedMax = 80, variableMin = 1, variableMax = 40, },
+[const.Expert] = {fixedMin = 20, fixedMax = 80, variableMin = 1, variableMax = 40, },
+[const.Master] = {fixedMin = 20, fixedMax = 80, variableMin = 1, variableMax = 40, },
+},
+-- Prismatic Light
+[84] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 8, },
+},
+-- Sun Ray
+[87] =
+{
+[const.Novice] = {fixedMin = 30, fixedMax = 70, variableMin = 1, variableMax = 30, },
+[const.Expert] = {fixedMin = 30, fixedMax = 70, variableMin = 1, variableMax = 30, },
+[const.Master] = {fixedMin = 30, fixedMax = 70, variableMin = 1, variableMax = 30, },
+},
+-- Toxic Cloud
+[90] =
+{
+[const.Novice] = {fixedMin = 20, fixedMax = 30, variableMin = 1, variableMax = 15, },
+[const.Expert] = {fixedMin = 20, fixedMax = 30, variableMin = 1, variableMax = 15, },
+[const.Master] = {fixedMin = 20, fixedMax = 30, variableMin = 1, variableMax = 15, },
+},
+-- Shrapmetal
+[92] =
+{
+[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 9, },
+[const.Expert] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 9, },
+[const.Master] = {fixedMin = 4, fixedMax = 4, variableMin = 1, variableMax = 9, },
+},
+-- Flame Arrow
+[2] =
+{
+[const.Novice] = {fixedMin = 1, fixedMax = 6, variableMin = 1, variableMax = 2, },
+[const.Expert] = {fixedMin = 1, fixedMax = 6, variableMin = 1, variableMax = 2, },
+[const.Master] = {fixedMin = 1, fixedMax = 6, variableMin = 1, variableMax = 2, },
+},
+-- Magic Arrow
+[35] =
+{
+[const.Novice] = {fixedMin = 1, fixedMax = 6, variableMin = 1, variableMax = 3, },
+[const.Expert] = {fixedMin = 1, fixedMax = 6, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 1, fixedMax = 6, variableMin = 1, variableMax = 3, },
+},
+-- Spirit Arrow
+[45] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+},
+-- Cold Beam
+[24] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 2, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+},
+-- Static Charge
+[13] =
+{
+[const.Novice] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 2, },
+[const.Expert] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+[const.Master] = {fixedMin = 0, fixedMax = 0, variableMin = 1, variableMax = 3, },
+},
 }
 local spellBuffPowers =
 {
@@ -1974,15 +1997,15 @@ function events.GameInitialized2()
 		monsterTxt.FullHitPoints = monsterTxt.FullHitPoints * monsterHitPointsMultiplier
 		
 		-- multiply monster damage
-		
-		monsterTxt.Attack1.DamageDiceCount = monsterTxt.Attack1.DamageDiceCount * monsterDamageMultiplier
-		monsterTxt.Attack1.DamageAdd = monsterTxt.Attack1.DamageAdd * monsterDamageMultiplier
-		
-		monsterTxt.Attack2.DamageDiceCount = monsterTxt.Attack2.DamageDiceCount * monsterDamageMultiplier
-		monsterTxt.Attack2.DamageAdd = monsterTxt.Attack2.DamageAdd * monsterDamageMultiplier
-		
+				local monsterLevel = Game.MonstersTxt[monsterTxtIndex].Level
+		monsterTxt.Attack1.DamageDiceSides = math.round(monsterTxt.Attack1.DamageDiceSides * ((monsterLevel+5)/20 +1))
+		monsterTxt.Attack1.DamageAdd = math.round(monsterTxt.Attack1.DamageAdd * ((monsterLevel+5)/20 +1))
+
+		monsterTxt.Attack2.DamageDiceSides = math.round(monsterTxt.Attack2.DamageDiceSides * ((monsterLevel+5)/20 +1))
+		monsterTxt.Attack2.DamageAdd = math.round(monsterTxt.Attack2.DamageAdd * ((monsterLevel+5)/20 +1))
+
 		local skillLevel, skillMastery = SplitSkill(monsterTxt.SpellSkill)
-		monsterTxt.SpellSkill = JoinSkill(skillLevel * monsterDamageMultiplier, skillMastery)
+		monsterTxt.SpellSkill = math.round(JoinSkill(skillLevel * ((monsterLevel+5)/30 +1)), skillMastery)
 		
 		-- modify multiply monster armor class
 		
@@ -2440,16 +2463,16 @@ function events.GameInitialized2()
 	Game.ClassKinds.StartingSkills[3][const.Skills.Chain] = 3
 	Game.ClassKinds.StartingSkills[3][const.Skills.Diplomacy] = 3
 	-- archer
-	Game.ClassKinds.StartingSkills[4][const.Skills.Spear] = 1
+	Game.ClassKinds.StartingSkills[4][const.Skills.Spear] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Leather] = 1
-	Game.ClassKinds.StartingSkills[4][const.Skills.Bow] = 2
+	Game.ClassKinds.StartingSkills[4][const.Skills.Bow] = 1
 	Game.ClassKinds.StartingSkills[4][const.Skills.Air] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Water] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Earth] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Axe] = 3
 	Game.ClassKinds.StartingSkills[4][const.Skills.Dagger] = 3
 	Game.ClassKinds.StartingSkills[4][const.Skills.Diplomacy] = 3
-	Game.ClassKinds.StartingSkills[4][const.Skills.IdentifyItem] = 3
+	Game.ClassKinds.StartingSkills[4][const.Skills.IdentifyItem] = 2
 	-- druid
 	Game.ClassKinds.StartingSkills[5][const.Skills.Fire] = 2
 	Game.ClassKinds.StartingSkills[5][const.Skills.Air] = 2
