@@ -286,7 +286,7 @@ local newArmorSkillResistanceBonuses =
 -- local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 -- local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 -- local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
-local twoHandedWeaponDamageBonus = 1
+local twoHandedWeaponDamageBonus = 2
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
 local learningSkillExtraMultiplier = 2
 local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
@@ -2476,10 +2476,10 @@ function events.GameInitialized2()
 	-- druid
 	Game.ClassKinds.StartingSkills[5][const.Skills.Fire] = 2
 	Game.ClassKinds.StartingSkills[5][const.Skills.Air] = 2
-	Game.ClassKinds.StartingSkills[5][const.Skills.Mind] = 2
+	Game.ClassKinds.StartingSkills[5][const.Skills.Mind] = 3
 	Game.ClassKinds.StartingSkills[5][const.Skills.Repair] = 3
 	Game.ClassKinds.StartingSkills[5][const.Skills.Learning] = 3
-	Game.ClassKinds.StartingSkills[5][const.Skills.Meditation] = 3
+	Game.ClassKinds.StartingSkills[5][const.Skills.Meditation] = 2
 	
 	----------------------------------------------------------------------------------------------------
 	-- item stats
