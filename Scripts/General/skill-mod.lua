@@ -301,8 +301,8 @@ local maceEffect = {["base"] = 5, ["multiplier"] = 1, ["duration"] = 5, }
 -- class weapon skill damage bonus
 local classMeleeWeaponSkillDamageBonus =
 {
-	[const.Class.Knight] = 2,
-	[const.Class.Cavalier] = 3,
+	[const.Class.Knight] = 1,
+	[const.Class.Cavalier] = 2,
 	[const.Class.Champion] = 4,
 	[const.Class.Paladin] = 0,
 	[const.Class.Crusader] = 1,
@@ -335,7 +335,7 @@ local shieldProjectileDamageReductionPerLevel = 0.02
 
 -- monster settings
 
-local monsterHitPointsMultiplier = 2
+local monsterHitPointsMultiplier = 2.5
 local monsterDamageMultiplier = 2
 local monsterArmorClassMultiplier = 2
 local monsterLevelMultiplier = 1
@@ -652,8 +652,8 @@ local spellStatsBuffPowers =
 -- monster engagement distance
 
 local standardEngagementDistance = 0x1600
-local extendedEngagementDistance = 0x2C00
-
+--local extendedEngagementDistance = 0x2C00
+local extendedEngagementDistance = 0x1600
 -- house prices
 
 local templeHealingPrice = 10
@@ -2022,7 +2022,7 @@ function events.GameInitialized2()
 		-- monster movement speed is increased
 		
 		local monsterMoveSpeed = Game.MonstersTxt[monsterTxtIndex].MoveSpeed
-		monsterMoveSpeed = monsterMoveSpeed + (400 - monsterMoveSpeed) / 2 + 150
+		monsterMoveSpeed = monsterMoveSpeed + (400 - monsterMoveSpeed) / 2 + 40
 		Game.MonstersTxt[monsterTxtIndex].MoveSpeed = monsterMoveSpeed
 		
 		-- monster experience
