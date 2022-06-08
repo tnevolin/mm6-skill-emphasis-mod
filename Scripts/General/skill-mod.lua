@@ -1419,6 +1419,10 @@ function events.CalcStatBonusBySkills(t)
 			
 			local newBonus = 0
 			
+			-- add new bonus for ranged weapon
+			
+			t.Result = t.Result + newWeaponSkillDamageBonuses[bow.skill][bow.rank] * bow.level
+			
 			-- add class bonus for ranged weapon
 			
 			if classRangedWeaponSkillDamageBonus[t.Player.Class] ~= nil then
