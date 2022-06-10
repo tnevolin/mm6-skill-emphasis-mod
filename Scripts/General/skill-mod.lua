@@ -267,7 +267,7 @@ local newWeaponSkillResistanceBonuses =
 
 local newArmorSkillACBonuses =
 {
-	[const.Skills.Shield]	= {4, 6, 8, },
+	[const.Skills.Shield]	= {2, 3, 4, },
 	[const.Skills.Leather]	= {2, 3, 4, },
 	[const.Skills.Chain]	= {4, 6, 8, },
 	[const.Skills.Plate]	= {6, 9,12, },
@@ -286,7 +286,7 @@ local newArmorSkillResistanceBonuses =
 -- local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
 -- local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
 -- local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
-local twoHandedWeaponDamageBonus = 2
+local twoHandedWeaponDamageBonus = 3
 local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
 local learningSkillExtraMultiplier = 2
 local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
@@ -301,12 +301,12 @@ local maceEffect = {["base"] = 5, ["multiplier"] = 1, ["duration"] = 5, }
 -- class weapon skill damage bonus
 local classMeleeWeaponSkillDamageBonus =
 {
-	[const.Class.Knight] = 1,
-	[const.Class.Cavalier] = 2,
-	[const.Class.Champion] = 4,
+	[const.Class.Knight] = 0.5,
+	[const.Class.Cavalier] = 1,
+	[const.Class.Champion] = 2,
 	[const.Class.Paladin] = 0,
-	[const.Class.Crusader] = 1,
-	[const.Class.Hero] = 2,
+	[const.Class.Crusader] = 0.5,
+	[const.Class.Hero] = 1,
 }
 local classRangedWeaponSkillAttackBonusMultiplier =
 {
@@ -659,7 +659,7 @@ local extendedEngagementDistance = 0x1600
 local templeHealingPrice = 10
 local innRoomPrice = 10
 local innFoodQuantity = 10
-local innFoodPrice = 100
+local innFoodPrice = 60
 local housePrices =
 {
 	-- training grounds
@@ -683,13 +683,13 @@ local modifiedBookValues =
 	[1] = 200,
 	[2] = 300,
 	[3] = 500,
-	[4] = 1000,
-	[5] = 2000,
-	[6] = 5000,
-	[7] = 10000,
+	[4] = 700,
+	[5] = 1200,
+	[6] = 2000,
+	[7] = 4000,
 	[8] = 20000,
-	[9] = 50000,
-	[10] = 100000,
+	[9] = 40000,
+	[10] = 60000,
 }
 
 -- monster ranged attacks
@@ -1438,6 +1438,10 @@ function events.CalcStatBonusBySkills(t)
 			-- calculate new bonus
 			
 			local newBonus = 0
+			
+				-- add new bonus for ranged weapon
+
+			t.Result = t.Result + newWeaponSkillDamageBonuses[bow.skill][bow.rank] * bow.level
 			
 			-- add class bonus for ranged weapon
 			
@@ -2902,7 +2906,7 @@ local function modifiedTempleHealingPrice(d, def, playerPointer, cost)
 	
 	-- scale price with party experience level
 	
-	result = math.round(result * partyExperienceLevel)
+	result = math.round(result * partyExperienceLevel^0.7)
 	
 	-- return result
 	
