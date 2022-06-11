@@ -3471,7 +3471,6 @@ mem.asmpatch(0x00421DD9, string.format("cmp     eax, %d", 1000), 5)
 ----------------------------------------------------------------------------------------------------
 
 function configureShrineEvent(eventId, shrineIndex, statisticsName, hintStringIndex, statusTextNothingIndex, statusText10Index, statusText3Index)
-MessageBox("eventId=" .. eventId .. ", shrineIndex=" .. shrineIndex .. ", statisticsName=" .. statisticsName .. ", hintStringIndex=" .. hintStringIndex .. ", statusTextNothingIndex=" .. statusTextNothingIndex .. ", statusText10Index=" .. statusText10Index .. ", statusText3Index=" .. statusText3Index)
 
 	-- initialize shrine blessings table and value
 
