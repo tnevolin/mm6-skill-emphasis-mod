@@ -1,3 +1,11 @@
+# version 71
+
+* Fixed Altar of Electricity.
+
+# version 70
+
+* Added handler for ranged weapon damage calculation by skill.
+
 # version 69
 
 * Fixed bug with dual wielding use.

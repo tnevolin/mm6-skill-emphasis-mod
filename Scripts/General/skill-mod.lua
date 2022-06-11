@@ -678,9 +678,9 @@ local modifiedBookValues =
 	[10] = 100000,
 }
 
--- monster ranged attacks
+-- custom monster modifications
 
-local monsterRangedAttacks =
+local monsterInfos =
 {
 	-- Follower of Baa
 	[139] = {["SpellChance"] = 10, ["SpellName"] = "Mind Blast", ["SpellSkill"] = JoinSkill(1, const.Novice), },
@@ -761,6 +761,7 @@ local SkillDescriptionsRanks =
 -- ======================================= --
 
 -- converts float int bytes representation to float
+
 local function convertIntToFloat(x)
 
   local sign = 1
@@ -778,6 +779,7 @@ local function convertIntToFloat(x)
 end
 
 -- formats number for skill rank description
+
 local function formatSkillRankNumber(number, rightPosition)
 
 	if rightPosition == nil then
@@ -829,6 +831,7 @@ local function GetMonsterTxt(p)
 end
 
 -- collects relevant player weapon data
+
 local function getPlayerEquipmentData(player)
 
 	local equipmentData =
@@ -1825,8 +1828,12 @@ mem.asmpatch(0x0043188D, "jmp     0x23", 2)
 function events.CalcSpellDamage(t)
 
 	if spellPowers[t.Spell] ~= nil then
+	
+		-- custom spell power
+	
 		local spellPower = spellPowers[t.Spell][t.Mastery]
 		t.Result = randomSpellPower(spellPower, t.Skill)
+		
 	end
 	
 end
@@ -1958,26 +1965,42 @@ function events.GameInitialized2()
 	end
 	
 	----------------------------------------------------------------------------------------------------
-	-- monster ranged attacks
+	-- monster customization
 	----------------------------------------------------------------------------------------------------
-
-	for monsterTxtId, monsterRangedAttack in pairs(monsterRangedAttacks) do
+	
+	for monsterTxtId, monsterInfo in pairs(monsterInfos) do
 	
 		local monsterTxt = Game.MonstersTxt[monsterTxtId]
 		
-		if monsterRangedAttack.Attack2Chance ~= nil then
-			monsterTxt.Attack2Chance = monsterRangedAttack.Attack2Chance
-			monsterTxt.Attack2.Type = monsterRangedAttack.Attack2.Type
-			monsterTxt.Attack2.DamageDiceCount = monsterRangedAttack.Attack2.DamageDiceCount
-			monsterTxt.Attack2.DamageDiceSides = monsterRangedAttack.Attack2.DamageDiceSides
-			monsterTxt.Attack2.DamageAdd = monsterRangedAttack.Attack2.DamageAdd
-			monsterTxt.Attack2.Missile = monsterRangedAttack.Attack2.Missile
+		-- Attack1
+		
+		if monsterInfo.Attack1 ~= nil then
+			for key, value in pairs(monsterInfo.Attack1) do
+				monsterTxt.Attack1[key] = value
+			end
+		end
+			
+		-- Attack2
+		
+		if monsterInfo.Attack2Chance ~= nil then
+			monsterTxt.Attack2Chance = monsterInfo.Attack2.Chance
+			if monsterInfo.Attack2 ~= nil then
+				for key, value in pairs(monsterInfo.Attack2) do
+					monsterTxt.Attack1[key] = value
+				end
+			end
 		end
 		
-		if monsterRangedAttack.SpellChance ~= nil then
-			monsterTxt.SpellChance = monsterRangedAttack.SpellChance
-			monsterTxt.Spell = spellTxtIds[monsterRangedAttack.SpellName]
-			monsterTxt.SpellSkill = monsterRangedAttack.SpellSkill
+		-- Spell
+		
+		if monsterInfo.SpellChance ~= nil then
+			monsterTxt.SpellChance = monsterInfo.SpellChance
+			if monsterInfo.SpellName ~= nil then
+				monsterTxt.Spell = spellTxtIds[monsterInfo.SpellName]
+			end
+			if monsterInfo.SpellSkill ~= nil then
+				monsterTxt.SpellSkill = monsterInfo.SpellSkill
+			end
 		end
 		
 	end
@@ -3448,6 +3471,7 @@ mem.asmpatch(0x00421DD9, string.format("cmp     eax, %d", 1000), 5)
 ----------------------------------------------------------------------------------------------------
 
 function configureShrineEvent(eventId, shrineIndex, statisticsName, hintStringIndex, statusTextNothingIndex, statusText10Index, statusText3Index)
+MessageBox("eventId=" .. eventId .. ", shrineIndex=" .. shrineIndex .. ", statisticsName=" .. statisticsName .. ", hintStringIndex=" .. hintStringIndex .. ", statusTextNothingIndex=" .. statusTextNothingIndex .. ", statusText10Index=" .. statusText10Index .. ", statusText3Index=" .. statusText3Index)
 
 	-- initialize shrine blessings table and value
 
