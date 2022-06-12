@@ -200,6 +200,7 @@ local newWeaponSkillRecoveryBonuses =
 }
 
 -- weapon skill damage bonuses (by rank)
+-- ranged weapon damage bonus has no effect
 
 local oldWeaponSkillDamageBonuses =
 {
@@ -219,7 +220,7 @@ local newWeaponSkillDamageBonuses =
 	[const.Skills.Dagger]	= {0, 0, 0, },
 	[const.Skills.Axe]		= {2, 3, 4, },
 	[const.Skills.Spear]	= {2, 3, 4, },
-	[const.Skills.Bow]		= {0, 1, 1, },
+	[const.Skills.Bow]		= {0, 0, 0, },
 	[const.Skills.Mace]		= {2, 3, 4, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 }
@@ -280,6 +281,15 @@ local newArmorSkillResistanceBonuses =
 	[const.Skills.Leather]	= {4, 6, 8, },
 	[const.Skills.Chain]	= {2, 3, 4, },
 	[const.Skills.Plate]	= {0, 0, 0, },
+}
+
+-- armor skill damage reduction (by rank)
+
+local newArmorSkillDamageMultiplier =
+{
+	[const.Skills.Leather]	= {1.00, 1.00, 1.00, },
+	[const.Skills.Chain]	= {1.00, 1.00, 0.67, },
+	[const.Skills.Plate]	= {1.00, 1.00, 0.50, },
 }
 
 -- local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
@@ -729,9 +739,23 @@ local monsterInfos =
 	[ 87] = {["Attack2Chance"] = 40, ["Attack2"] = {["Type"] = const.Damage.Energy, ["DamageDiceCount"] = 10, ["DamageDiceSides"] = 5, ["DamageAdd"] = 0, ["Missile"] = missiles["Energy"], }, },
 }
 
--- ======================================= --
--- Additional structures
--- ======================================= --
+-- set melee recovery cap
+
+mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
+-- originally 0x0040688B then moved to MM6patch.dll
+-- .text:00406889     call    near ptr address + 2
+mem.asmpatch(0x03322D6A, string.format("mov    eax,%d", meleeRecoveryCap), 5)
+
+mem.asmpatch(0x0042A237, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
+mem.asmpatch(0x0042A240, string.format("mov    DWORD [esp+0x28],%d", meleeRecoveryCap), 8)
+
+-- buried in the MM6patch.dll
+mem.asmpatch(0x03322951, string.format("cmp    edi,%d", meleeRecoveryCap), 3)
+mem.asmpatch(0x03322960, string.format("mov    edi,%d", meleeRecoveryCap), 5)
+
+----------------------------------------------------------------------------------------------------
+-- additional structures
+----------------------------------------------------------------------------------------------------
 
 function structs.f.GameExtraStructure(define)
 	define
@@ -747,9 +771,9 @@ local SkillDescriptionsRanks =
 	[const.Master] = GameExtra.SkillDescriptionsMaster,
 }
 
--- ======================================= --
--- Helper functions --
--- ======================================= --
+----------------------------------------------------------------------------------------------------
+-- helper functions
+----------------------------------------------------------------------------------------------------
 
 -- converts float int bytes representation to float
 
@@ -1040,6 +1064,7 @@ local function getPlayerEquipmentData(player)
 end
 
 -- calculate new and old recovery difference
+
 local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 
 	local correction = 0
@@ -1141,6 +1166,7 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 end
 
 -- generate random spell power
+
 local function randomSpellPower(spellPower, level)
 	local r = math.random(spellPower.fixedMin, spellPower.fixedMax)
 	for i = 1, level do
@@ -1150,84 +1176,9 @@ local function randomSpellPower(spellPower, level)
 end
 
 -- calculate distance from party to monster side
+
 local function getDistanceToMonster(monster)
 	return math.sqrt((Party.X - monster.X) * (Party.X - monster.X) + (Party.Y - monster.Y) * (Party.Y - monster.Y)) - monster.BodyRadius
-end
-
--- set melee recovery cap
-
-mem.asmpatch(0x00406886, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
--- originally 0x0040688B then moved to MM6patch.dll
--- .text:00406889     call    near ptr address + 2
-mem.asmpatch(0x03322D6A, string.format("mov    eax,%d", meleeRecoveryCap), 5)
-
-mem.asmpatch(0x0042A237, string.format("cmp    eax,%d", meleeRecoveryCap), 3)
-mem.asmpatch(0x0042A240, string.format("mov    DWORD [esp+0x28],%d", meleeRecoveryCap), 8)
-
--- buried in the MM6patch.dll
-mem.asmpatch(0x03322951, string.format("cmp    edi,%d", meleeRecoveryCap), 3)
-mem.asmpatch(0x03322960, string.format("mov    edi,%d", meleeRecoveryCap), 5)
-
--- corrects attack delay
-
-function events.GetAttackDelay(t)
-
-	local equipmentData = getPlayerEquipmentData(t.Player)
-	
-	-- weapon
-	
-	if t.Ranged then
-	
-		local bow = equipmentData.bow
-	
-		if bow.weapon then
-		
-			t.Result = t.Result + getWeaponRecoveryCorrection(bow)
-			
-		end
-		
-	else
-	
-		local main = equipmentData.main
-		local extra = equipmentData.extra
-		
-		if main.weapon then
-			
-			-- single wield
-			if not equipmentData.dualWield then
-				
-				t.Result = t.Result + getWeaponRecoveryCorrection(main)
-				
-			-- dual wield
-			else
-			
-				-- no axe and no sword in main hand and sword in extra hand = extra hand skill defines recovery
-				if main.skill ~= const.Skills.Axe and main.skill ~= const.Skills.Sword and extra.skill == const.Skills.Sword then
-					t.Result = t.Result + getWeaponRecoveryCorrection(extra, main)
-				-- everything else = main hand skill defines recovery
-				else
-					t.Result = t.Result + getWeaponRecoveryCorrection(main, extra)
-				end
-				
-			end
-			
-		end
-		
-	end
-	
-	-- turn recovery time into a multiplier rather than divisor
-	
-	local recoveryBonus = 100 - t.Result
-	local correctedRecoveryTime = math.floor(100 / (1 + recoveryBonus / 100))
-	
-	t.Result = correctedRecoveryTime
-	
-	-- cap melee recovery
-	
-	if not t.Ranged then
-		t.Result = math.max(meleeRecoveryCap, t.Result)
-	end
-	
 end
 
 -- fast flat distance from party to monster
@@ -1315,9 +1266,73 @@ local function setProfessionCost(professionIndex, cost)
 	
 end
 
--- ======================================= --
--- Modifications --
--- ======================================= --
+----------------------------------------------------------------------------------------------------
+-- modification events
+----------------------------------------------------------------------------------------------------
+
+-- corrects attack delay
+
+function events.GetAttackDelay(t)
+
+	local equipmentData = getPlayerEquipmentData(t.Player)
+	
+	-- weapon
+	
+	if t.Ranged then
+	
+		local bow = equipmentData.bow
+	
+		if bow.weapon then
+		
+			t.Result = t.Result + getWeaponRecoveryCorrection(bow)
+			
+		end
+		
+	else
+	
+		local main = equipmentData.main
+		local extra = equipmentData.extra
+		
+		if main.weapon then
+			
+			-- single wield
+			if not equipmentData.dualWield then
+				
+				t.Result = t.Result + getWeaponRecoveryCorrection(main)
+				
+			-- dual wield
+			else
+			
+				-- no axe and no sword in main hand and sword in extra hand = extra hand skill defines recovery
+				if main.skill ~= const.Skills.Axe and main.skill ~= const.Skills.Sword and extra.skill == const.Skills.Sword then
+					t.Result = t.Result + getWeaponRecoveryCorrection(extra, main)
+				-- everything else = main hand skill defines recovery
+				else
+					t.Result = t.Result + getWeaponRecoveryCorrection(main, extra)
+				end
+				
+			end
+			
+		end
+		
+	end
+	
+	-- turn recovery time into a multiplier rather than divisor
+	
+	local recoveryBonus = 100 - t.Result
+	local correctedRecoveryTime = math.floor(100 / (1 + recoveryBonus / 100))
+	
+	t.Result = correctedRecoveryTime
+	
+	-- cap melee recovery
+	
+	if not t.Ranged then
+		t.Result = math.max(meleeRecoveryCap, t.Result)
+	end
+	
+end
+
+-- calculate stat bonus by item
 
 function events.CalcStatBonusByItems(t)
 
@@ -1369,6 +1384,8 @@ function events.CalcStatBonusByItems(t)
 	end
 	
 end
+
+-- calculate stat bonus by skill
 
 function events.CalcStatBonusBySkills(t)
 
@@ -1694,6 +1711,30 @@ function events.CalcStatBonusBySkills(t)
 			-- add new bonus
 			
 			t.Result = t.Result + (newArmorSkillACBonuses[armor.skill][armor.rank] * armor.level)
+			
+		end
+		
+	end
+	
+end
+
+-- modify damage to player
+
+function events.CalcDamageToPlayer(t)
+
+	local equipmentData = getPlayerEquipmentData(t.Player)
+	
+	-- calculate physical damage by armor skill
+	
+	if t.DamageKind == const.Damage.Phys then
+	
+		local armor = equipmentData.armor
+	
+		if armor.equipped then
+		
+			local damageMultiplier = (newArmorSkillDamageMultiplier[armor.skill][armor.rank])
+			
+			t.Damage = math.round(t.Damage * damageMultiplier)
 			
 		end
 		
