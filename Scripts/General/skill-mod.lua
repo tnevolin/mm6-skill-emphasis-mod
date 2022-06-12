@@ -336,8 +336,8 @@ local classRangedWeaponSkillDamageBonus =
 	[const.Class.WarriorMage] = 1,
 }
 
--- plate cover chances by mastery
-local plateCoverChanceByMastery = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
+-- plate cover chances by rank
+local plateCoverChances = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
 
 -- shield projectile damage multiplier by mastery
 local shieldProjectileDamageReductionPerLevel = 0.02
@@ -2298,7 +2298,7 @@ function events.GameInitialized2()
 				" %s |                 %s |              %s |",
 				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Plate][rank], 77),
 				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Plate + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0)), 209),
-				formatSkillRankNumber(plateCoverChanceByMastery[rank] * 100, 316)
+				formatSkillRankNumber(plateCoverChances[rank] * 100, 316)
 			)
 	end
 	
@@ -3011,9 +3011,7 @@ local function modifiedInnFoodPrice(d, def)
 end
 mem.hookcall(0x0049ED69, 0, 0, modifiedInnFoodPrice)
 
-----------------------------------------------------------------------------------------------------
 -- plate wearer attracts attaks
-----------------------------------------------------------------------------------------------------
 
 local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 
@@ -3039,16 +3037,16 @@ local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 		
 		for playerIndex = 0,3 do
 		
-			local player = Party.Players[playerIndex]
-			local playerEquipmentData = getPlayerEquipmentData(player)
-		
 			if playerIndex ~= targetPlayerIndex then
 			
+				local player = Party.Players[playerIndex]
+				local playerEquipmentData = getPlayerEquipmentData(player)
+				
 				-- switch to substitute player only if they wear plate
 				
 				if playerEquipmentData.armor.skill == const.Skills.Plate then
 				
-					local substituteProbability = substituteProbability + plateCoverChanceByMastery[playerEquipmentData.armor.rank]
+					substituteProbability = substituteProbability + plateCoverChances[playerEquipmentData.armor.rank]
 					
 					if roll < substituteProbability then
 						substitutePlayerIndex = playerIndex

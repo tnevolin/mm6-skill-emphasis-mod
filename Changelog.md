@@ -1,3 +1,7 @@
+# version 72
+
+* Fixed bug when second plate wearer didn't cover.
+
 # version 71
 
 * Fixed Altar of Electricity.
