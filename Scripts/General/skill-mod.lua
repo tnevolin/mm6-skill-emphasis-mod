@@ -283,7 +283,7 @@ local newArmorSkillResistanceBonuses =
 	[const.Skills.Plate]	= {0, 0, 0, },
 }
 
--- armor skill damage reduction (by rank)
+-- armor skill damage multiplier (by rank)
 
 local newArmorSkillDamageMultiplier =
 {
@@ -1092,9 +1092,9 @@ local function getWeaponRecoveryCorrection(equipmentData1, equipmentData2)
 		-- class bonus
 		
 		if equipmentData1.Skill == const.Skills.Bow or equipmentData1.Skill == const.Skills.Blaster then
-			local rangedWeaponSkillAttackBonusMultiplier = classRangedWeaponSkillAttackBonusMultiplier[t.Player.Class]
-			if rangedWeaponSkillAttackBonusMultiplier ~= nil then
-				newRecoveryBonus = newRecoveryBonus * rangedWeaponSkillAttackBonusMultiplier
+			local rangedWeaponSkillSpeedBonusMultiplier = classRangedWeaponSkillSpeedBonusMultiplier[t.Player.Class]
+			if rangedWeaponSkillSpeedBonusMultiplier ~= nil then
+				newRecoveryBonus = newRecoveryBonus * rangedWeaponSkillSpeedBonusMultiplier
 			end
 		end
 		
@@ -1974,7 +1974,9 @@ mem.asmpatch(
 	0x2D
 )
 
+----------------------------------------------------------------------------------------------------
 -- game initialization
+----------------------------------------------------------------------------------------------------
 
 function events.GameInitialized2()
 
