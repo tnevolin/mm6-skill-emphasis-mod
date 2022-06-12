@@ -343,13 +343,14 @@ local plateCoverChances = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Ma
 -- shield projectile damage multiplier by mastery
 local shieldProjectileDamageReductionPerLevel = 0.02
 
--- monster settings
+-- monster global settings
 
 local monsterHitPointsMultiplier = 2
 local monsterDamageMultiplier = 2
 local monsterArmorClassMultiplier = 2
 local monsterLevelMultiplier = 1
 local monsterExperienceMultiplier = 1
+local monsterEnergyAttackStrengthMultiplier = 0.5
 
 -- skill set groups advancing together within a group for a single character
 
@@ -539,15 +540,13 @@ local spellPowers =
 		[const.Master] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 2, },
 	},
 	--]]
-	--[[
 	-- Psychic Shock
 	[65] =
 	{
-		[const.Novice] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
-		[const.Expert] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
-		[const.Master] = {fixedMin = 19, fixedMax = 19, variableMin = 1, variableMax = 19, },
+		[const.Novice] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+		[const.Expert] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+		[const.Master] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
 	},
-	--]]
 	--[[
 	-- Harm
 	[70] =
@@ -737,6 +736,8 @@ local monsterInfos =
 	[ 86] = {["Attack2Chance"] = 35, ["Attack2"] = {["Type"] = const.Damage.Cold, ["DamageDiceCount"] = 9, ["DamageDiceSides"] = 5, ["DamageAdd"] = 0, ["Missile"] = missiles["Cold"], }, },
 	-- Colossal Hydra
 	[ 87] = {["Attack2Chance"] = 40, ["Attack2"] = {["Type"] = const.Damage.Energy, ["DamageDiceCount"] = 10, ["DamageDiceSides"] = 5, ["DamageAdd"] = 0, ["Missile"] = missiles["Energy"], }, },
+	-- Devil Master
+	[ 26] = {["SpellChance"] = 20, ["SpellName"] = "Meteor Shower", ["SpellSkill"] = JoinSkill(2, const.Master), },
 }
 
 -- set melee recovery cap
@@ -2038,6 +2039,9 @@ function events.GameInitialized2()
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 	
 		local monsterTxt = Game.MonstersTxt[monsterTxtIndex]
+if monsterTxt.Name == "Devil Master" then
+	MessageBox(monsterTxtIndex)
+end
 	
 		-- multiply monster hit points
 		
@@ -2056,25 +2060,37 @@ function events.GameInitialized2()
 		
 		-- modify multiply monster armor class
 		
-		local monsterArmorClass = Game.MonstersTxt[monsterTxtIndex].ArmorClass
+		local monsterArmorClass = monsterTxt.ArmorClass
 		monsterArmorClass = math.round(monsterArmorClass * (1 + (100 - monsterArmorClass) / 100)) * monsterArmorClassMultiplier
-		Game.MonstersTxt[monsterTxtIndex].ArmorClass = monsterArmorClass
+		monsterTxt.ArmorClass = monsterArmorClass
 		
 		-- modify and multiply monster level
 		
-		local monsterLevel = Game.MonstersTxt[monsterTxtIndex].Level
+		local monsterLevel = monsterTxt.Level
 		monsterLevel = math.round(monsterLevel * (1 + (100 - monsterLevel) / 100)) * monsterLevelMultiplier
-		Game.MonstersTxt[monsterTxtIndex].Level = monsterLevel
+		monsterTxt.Level = monsterLevel
 		
 		-- monster movement speed is increased
 		
-		local monsterMoveSpeed = Game.MonstersTxt[monsterTxtIndex].MoveSpeed
+		local monsterMoveSpeed = monsterTxt.MoveSpeed
 		monsterMoveSpeed = monsterMoveSpeed + (400 - monsterMoveSpeed) / 2 + 150
-		Game.MonstersTxt[monsterTxtIndex].MoveSpeed = monsterMoveSpeed
+		monsterTxt.MoveSpeed = monsterMoveSpeed
 		
 		-- monster experience
 		
-		Game.MonstersTxt[monsterTxtIndex].Experience = Game.MonstersTxt[monsterTxtIndex].Experience * monsterExperienceMultiplier
+		monsterTxt.Experience = monsterTxt.Experience * monsterExperienceMultiplier
+		
+		-- monster energy attack
+		
+		if monsterTxt.Attack1.Type == const.Damage.Energy then
+			monsterTxt.Attack1.DamageDiceSides = math.round(monsterTxt.Attack1.DamageDiceSides * monsterEnergyAttackStrengthMultiplier)
+			monsterTxt.Attack1.DamageAdd = math.round(monsterTxt.Attack1.DamageAdd * monsterEnergyAttackStrengthMultiplier)
+		end
+		
+		if monsterTxt.Attack2Chance ~= nil and monsterTxt.Attack2.Type == const.Damage.Energy then
+			monsterTxt.Attack2.DamageDiceSides = math.round(monsterTxt.Attack2.DamageDiceSides * monsterEnergyAttackStrengthMultiplier)
+			monsterTxt.Attack2.DamageAdd = math.round(monsterTxt.Attack2.DamageAdd * monsterEnergyAttackStrengthMultiplier)
+		end
 		
 	end
 	
