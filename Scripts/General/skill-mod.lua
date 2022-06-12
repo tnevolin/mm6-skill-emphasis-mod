@@ -642,6 +642,8 @@ local extendedEngagementDistance = 0x2C00
 
 -- house prices
 
+local templeHealingPricePerHP = 0.25
+local templeHealingPricePerSP = 0.25
 local templeHealingPrice = 10
 local innRoomPrice = 10
 local innFoodQuantity = 10
@@ -2039,10 +2041,7 @@ function events.GameInitialized2()
 	for monsterTxtIndex = 1,Game.MonstersTxt.high do
 	
 		local monsterTxt = Game.MonstersTxt[monsterTxtIndex]
-if monsterTxt.Name == "Devil Master" then
-	MessageBox(monsterTxtIndex)
-end
-	
+		
 		-- multiply monster hit points
 		
 		monsterTxt.FullHitPoints = monsterTxt.FullHitPoints * monsterHitPointsMultiplier
@@ -2951,25 +2950,42 @@ mem.asmpatch(0x00402D09, string.format("add     eax, 0h"), 5)
 
 local function modifiedTempleHealingPrice(d, def, playerPointer, cost)
 
+	local playerIndex, player = GetPlayer(playerPointer)
+	
 	-- call original function
 	
 	local result = def(playerPointer, cost)
 	
-	-- overwrite value
+	-- get ailment multiplier
 	
-	result = templeHealingPrice * (result / convertIntToFloat(cost))
+	local ailmentMultiplier = (result / convertIntToFloat(cost))
 	
 	-- get party experience level
 	
 	local partyExperienceLevel = getPartyExperienceLevel()
 	
-	-- scale price with party experience level
+	-- get restored HP and SP
 	
-	result = math.round(result * partyExperienceLevel)
+	local fullHP = player:GetFullHP()
+	local fullSP = player:GetFullSP()
+	local restoredHP = math.max(0, fullHP - player.HP)
+	local restoredSP = math.max(0, fullSP - player.SP)
+	
+	-- get healing price
+	
+	local healingPrice = math.max(0, math.round(partyExperienceLevel * (templeHealingPricePerHP * restoredHP + templeHealingPricePerSP * restoredSP)))
+	
+	-- get restoration price
+	
+	local restorationPrice = math.max(0, math.round(partyExperienceLevel * (templeHealingPricePerHP * fullHP + templeHealingPricePerSP * fullSP) * (ailmentMultiplier - 1)))
+	
+	-- get total price
+	
+	local totalPrice = healingPrice + restorationPrice
 	
 	-- return result
 	
-	return result
+	return totalPrice
 	
 end
 mem.hookcall(0x0049DD76, 1, 1, modifiedTempleHealingPrice)
