@@ -228,7 +228,7 @@ local newWeaponSkillRecoveryBonuses =
 	[const.Skills.Dagger]	= {0, 0, 0, },
 	[const.Skills.Axe]		= {0, 2, 2, },
 	[const.Skills.Spear]	= {0, 0, 0, },
-	[const.Skills.Bow]		= {2, 2, 2, },
+	[const.Skills.Bow]		= {6, 6, 6, },
 	[const.Skills.Mace]		= {0, 0, 0, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 }
@@ -325,15 +325,15 @@ local classMeleeWeaponSkillDamageBonus =
 }
 local classRangedWeaponSkillAttackBonusMultiplier =
 {
-	[const.Class.Archer] = 2,
-	[const.Class.BattleMage] = 2,
-	[const.Class.WarriorMage] = 2,
+	[const.Class.Archer] = 4,
+	[const.Class.BattleMage] = 6,
+	[const.Class.WarriorMage] = 8,
 }
 local classRangedWeaponSkillSpeedBonusMultiplier =
 {
-	[const.Class.Archer] = 0,
-	[const.Class.BattleMage] = 0,
-	[const.Class.WarriorMage] = 0,
+	[const.Class.Archer] = 4,
+	[const.Class.BattleMage] = 4,
+	[const.Class.WarriorMage] = 4,
 }
 local classRangedWeaponSkillDamageBonus =
 {
@@ -366,7 +366,6 @@ local characterLinkedSkillGroups =
 			[const.Skills.Axe] = true,
 			[const.Skills.Spear] = true,
 			[const.Skills.Mace] = true,
-			[const.Skills.Bow] = true,
 		},
 	["meleeExtra"] =
 		{
