@@ -1,3 +1,7 @@
+# version 73
+
+* Fixed shield displaed recovery penalties not being reduced with mastery.
+
 # version 72
 
 * Fixed bug when second plate wearer didn't cover.

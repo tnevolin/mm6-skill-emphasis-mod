@@ -2256,7 +2256,7 @@ function events.GameInitialized2()
 			string.format(
 				" %s |                 %s |",
 				formatSkillRankNumber(armorSkillNewBonusBySkillAndRank[const.Skills.Shield][rank], 77),
-				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1], 209)
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0)), 209)
 			)
 	end
 	
