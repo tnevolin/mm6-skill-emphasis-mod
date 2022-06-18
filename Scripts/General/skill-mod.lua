@@ -291,13 +291,13 @@ local newArmorSkillResistanceBonuses =
 	[const.Skills.Plate]	= {0, 0, 0, },
 }
 
--- armor skill damage multiplier (by rank)
+-- armor skill damage reduction exponential multiplier (by rank)
 
 local newArmorSkillDamageMultiplier =
 {
 	[const.Skills.Leather]	= {1.00, 1.00, 1.00, },
-	[const.Skills.Chain]	= {1.00, 1.00, 0.67, },
-	[const.Skills.Plate]	= {1.00, 1.00, 0.50, },
+	[const.Skills.Chain]	= {1.00, 1.00, 0.99, },
+	[const.Skills.Plate]	= {1.00, 1.00, 0.98, },
 }
 
 -- local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
@@ -1743,7 +1743,7 @@ function events.CalcDamageToPlayer(t)
 	
 		if armor.equipped then
 		
-			local damageMultiplier = (newArmorSkillDamageMultiplier[armor.skill][armor.rank])
+			local damageMultiplier = math.pow(newArmorSkillDamageMultiplier[armor.skill][armor.rank], playerEquipmentData.armor.level)
 			
 			t.Damage = math.round(t.Damage * damageMultiplier)
 			
