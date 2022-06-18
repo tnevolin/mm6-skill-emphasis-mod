@@ -51,6 +51,14 @@ local spellTxtIds = {}
 -- configuration
 ----------------------------------------------------------------------------------------------------
 
+-- party melee range (experimental)
+
+mem.prot(true)
+-- that is default value - change it
+mem.u8[0x004B9418] = 0x4079733333333333
+mem.prot(false)
+-- mem.u1[0x004B9418] = 0x33
+
 -- melee recovery cap
 
 local meleeRecoveryCap = 10
