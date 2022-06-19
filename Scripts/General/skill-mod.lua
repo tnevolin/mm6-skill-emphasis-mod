@@ -2007,6 +2007,8 @@ function events.GameInitialized2()
 	
 	for monsterTxtId, monsterInfo in pairs(monsterInfos) do
 	
+		-- get monster
+		
 		local monsterTxt = Game.MonstersTxt[monsterTxtId]
 		
 		-- Attack1
@@ -2038,6 +2040,34 @@ function events.GameInitialized2()
 			if monsterInfo.SpellSkill ~= nil then
 				monsterTxt.SpellSkill = monsterInfo.SpellSkill
 			end
+		end
+		
+		-- process other custom values in monsterInfo
+
+		for key, value in pairs(monsterInfo) do
+		
+			-- skip Attack1, Attack2, Spell
+			
+			if key == "Attack1" or key == "Attack2Chance" or key == "Attack2" or key == "SpellChance" or key == "Spell" or key == "SpellSkill" then
+			
+				-- do nothing - it is already processed
+				
+			elseif key == "Resistances" then
+			
+				-- apply custom resistances
+			
+				for resistanceDamageType, resistanceValue in pairs(value) do
+					monsterTxt.Resistances[resistanceDamageType] = resistanceValue
+				end
+				
+			else
+			
+				-- apply all other flat values
+				
+				monsterTxt[key] = value
+				
+			end
+			
 		end
 		
 	end
