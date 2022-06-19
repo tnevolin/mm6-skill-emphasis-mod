@@ -713,7 +713,7 @@ local monsterInfos =
 	-- Magyar Matron
 	[  6] = {["Attack2Chance"] = 30, ["Attack2"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 7, ["DamageDiceSides"] = 8, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], }, },
 	-- Goblin
-	[ 76] = {["SpellChance"] = 10, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(1, const.Novice), },
+	[ 76] = {["SpellChance"] = 100, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(10, const.Novice), },
 	-- Goblin Shaman
 	[ 77] = {["SpellChance"] = 20, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(2, const.Novice), },
 	-- Goblin King
@@ -1443,7 +1443,7 @@ function events.CalcStatBonusBySkills(t)
 			-- add class bonus for ranged weapon
 			
 			if classRangedWeaponSkillDamageBonus[t.Player.Class] ~= nil then
-				t.Result = t.Result + (classRangedWeaponSkillDamageBonus[t.Player.Class] * main.level)
+				t.Result = t.Result + (classRangedWeaponSkillDamageBonus[t.Player.Class] * bow.level)
 			end
 			
 			-- recalculate bonus
@@ -3074,6 +3074,7 @@ mem.hookcall(0x00430C4B, 0, 1, modifiedMonsterChooseTargetMember)
 ----------------------------------------------------------------------------------------------------
 
 local function modifiedCharacterStrikeWithDamageProjectile(d, def, playerPointer, damage, damageKind)
+MessageBox(damage)
 
 	-- compute damage reduction
 	
