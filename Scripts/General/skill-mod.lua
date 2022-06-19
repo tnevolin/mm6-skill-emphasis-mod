@@ -2335,7 +2335,7 @@ function events.GameInitialized2()
 			string.format(
 				" %s |                 %s |",
 				formatSkillRankNumber(newArmorSkillACBonuses[const.Skills.Shield][rank], 77),
-				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1], 209)
+				formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1] * (rank == const.Novice and 1 or (rank == const.Expert and 0.5 or 0)), 209)
 			)
 	end
 	
@@ -3170,6 +3170,7 @@ mem.hookcall(0x00430C4B, 0, 1, modifiedMonsterChooseTargetMember)
 ----------------------------------------------------------------------------------------------------
 
 local function modifiedCharacterStrikeWithDamageProjectile(d, def, playerPointer, damage, damageKind)
+MessageBox(damage)
 
 	-- compute damage reduction
 	
@@ -3677,4 +3678,42 @@ local function changedCharacterCalcStatBonusByItems(d, def, characterPointer, st
 end
 mem.hookcall(0x0047FF37, 1, 1, changedCharacterCalcStatBonusByItems)
 mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
+
+----------------------------------------------------------------------------------------------------
+-- Monster_CalculateDamage
+----------------------------------------------------------------------------------------------------
+
+local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType)
+
+	-- get monster
+	
+	local monsterIndex, monster = GetMonster(d.edi)
+	
+	-- execute original code
+	
+	local damage = def(monsterPointer, attackType)
+	
+	if attackType == 0 then
+		-- primary attack is calculated correctly
+		return damage
+	elseif attackType == 1 then
+		-- secondary attach uses attack1 DamageAdd
+		-- replace Attack1.DamageAdd with Attack2.DamageAdd
+		damage = damage - monster.Attack1.DamageAdd + monster.Attack2.DamageAdd
+		return damage
+	elseif attackType == 2 and (monster.Spell == 44 or monster.Spell == 95) then
+		-- don't recalculate Mass Distortion or Finger of Death
+		return damage
+	end
+	
+	-- calculate spell damage same way as for party
+	
+	local spellSkill, spellMastery = SplitSkill(monster.SpellSkill)
+	damage = Game.CalcSpellDamage(monster.Spell, spellSkill, spellMastery, 0)
+	
+	return damage
+	
+end
+mem.hookcall(0x00431D4F, 1, 1, modifiedMonsterCalculateDamage)
+mem.hookcall(0x00431EE3, 1, 1, modifiedMonsterCalculateDamage)
 
