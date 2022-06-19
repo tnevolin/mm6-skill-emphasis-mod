@@ -1,3 +1,12 @@
+# version 74
+
+* Reprogrammed monster damage computations. Experimental. Needs testing.
+	* Attack1 stays as is.
+	* Attack2 used Attack1 base damage. Fixed this to properly use Attack2 base damage instead.
+	* Spell damage had completely inexplicable computation. Fixed it to use proper spell damage computation as in description.
+		* Excluding Mass Distortion - it uses victim HP for damage computation. Hopefully, monsters don't use it.
+		* Excluding Finger of Death - it uses victim HP for damage computation.
+
 # version 73
 
 * Fixed shield displaed recovery penalties not being reduced with mastery.

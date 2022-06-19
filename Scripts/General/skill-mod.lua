@@ -713,7 +713,7 @@ local monsterInfos =
 	-- Magyar Matron
 	[  6] = {["Attack2Chance"] = 30, ["Attack2"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 7, ["DamageDiceSides"] = 8, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], }, },
 	-- Goblin
-	[ 76] = {["SpellChance"] = 100, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(10, const.Novice), },
+	[ 76] = {["SpellChance"] = 10, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(1, const.Novice), },
 	-- Goblin Shaman
 	[ 77] = {["SpellChance"] = 20, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(2, const.Novice), },
 	-- Goblin King
@@ -3582,4 +3582,42 @@ local function changedCharacterCalcStatBonusByItems(d, def, characterPointer, st
 end
 mem.hookcall(0x0047FF37, 1, 1, changedCharacterCalcStatBonusByItems)
 mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
+
+----------------------------------------------------------------------------------------------------
+-- Monster_CalculateDamage
+----------------------------------------------------------------------------------------------------
+
+local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType)
+
+	-- get monster
+	
+	local monsterIndex, monster = GetMonster(d.edi)
+	
+	-- execute original code
+	
+	local damage = def(monsterPointer, attackType)
+	
+	if attackType == 0 then
+		-- primary attack is calculated correctly
+		return damage
+	elseif attackType == 1 then
+		-- secondary attach uses attack1 DamageAdd
+		-- replace Attack1.DamageAdd with Attack2.DamageAdd
+		damage = damage - monster.Attack1.DamageAdd + monster.Attack2.DamageAdd
+		return damage
+	elseif attackType == 2 and (monster.Spell == 44 or monster.Spell == 95) then
+		-- don't recalculate Mass Distortion or Finger of Death
+		return damage
+	end
+	
+	-- calculate spell damage same way as for party
+	
+	local spellSkill, spellMastery = SplitSkill(monster.SpellSkill)
+	damage = Game.CalcSpellDamage(monster.Spell, spellSkill, spellMastery, 0)
+	
+	return damage
+	
+end
+mem.hookcall(0x00431D4F, 1, 1, modifiedMonsterCalculateDamage)
+mem.hookcall(0x00431EE3, 1, 1, modifiedMonsterCalculateDamage)
 
