@@ -1745,7 +1745,7 @@ function events.CalcDamageToPlayer(t)
 		
 			local damageMultiplier = math.pow(newArmorSkillDamageMultiplier[armor.skill][armor.rank], equipmentData.armor.level)
 			
-			t.Damage = math.round(t.Damage * damageMultiplier)
+			t.Result = math.round(t.Damage * damageMultiplier)
 			
 		end
 		
