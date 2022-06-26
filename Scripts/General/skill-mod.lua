@@ -3170,7 +3170,6 @@ mem.hookcall(0x00430C4B, 0, 1, modifiedMonsterChooseTargetMember)
 ----------------------------------------------------------------------------------------------------
 
 local function modifiedCharacterStrikeWithDamageProjectile(d, def, playerPointer, damage, damageKind)
-MessageBox(damage)
 
 	-- compute damage reduction
 	
