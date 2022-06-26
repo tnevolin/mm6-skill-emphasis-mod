@@ -2129,6 +2129,15 @@ function events.GameInitialized2()
 			monsterTxt.Attack2.DamageAdd = math.round(monsterTxt.Attack2.DamageAdd * monsterEnergyAttackStrengthMultiplier)
 		end
 		
+		-- monster resistance
+		
+		for resistanceDamageType, resistanceValue in pairs(monsterTxt.Resistances) do
+			-- reduce former immunity resistance level
+			if (resistanceValue == 200) then
+				monsterTxt.Resistances[resistanceDamageType] = 120
+			end
+		end
+		
 	end
 	
 	----------------------------------------------------------------------------------------------------
