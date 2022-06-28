@@ -2130,11 +2130,11 @@ function events.GameInitialized2()
 		end
 		
 		-- monster resistance
-		
-		for resistanceDamageType, resistanceValue in pairs(monsterTxt.Resistances) do
+
+		for damageType = const.Damage.Phys, const.Damage.Energy do
 			-- reduce former immunity resistance level
-			if (resistanceValue == 200) then
-				monsterTxt.Resistances[resistanceDamageType] = 120
+			if (monsterTxt.Resistances[damageType] == 200) then
+				monsterTxt.Resistances[damageType] = 120
 			end
 		end
 		
