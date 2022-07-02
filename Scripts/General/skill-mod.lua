@@ -1634,6 +1634,7 @@ function events.CalcStatBonusBySkills(t)
 				
 				for monsterIndex = 0, Map.Monsters.high do
 					local monster = Map.Monsters[monsterIndex]
+MessageBox(monster.Bits)
 					local distanceToMonster = getDistanceToMonster(monster)
 					if distanceToMonster < meleeRangeDistance then
 						meleeRangeMonsterCount = meleeRangeMonsterCount + 1
@@ -2174,7 +2175,7 @@ function events.GameInitialized2()
 	-- mirror books
 	
 	local mirrorBookBaseIndex = 377
-	for itemTxtIndex = mirrorBookBaseIndex, GmirrorBookBaseIndex + 22 - 1 do
+	for itemTxtIndex = mirrorBookBaseIndex, mirrorBookBaseIndex + 22 - 1 do
 
 		local itemTxt = Game.ItemsTxt[itemTxtIndex]
 		local bookLevel = math.fmod((itemTxtIndex - mirrorBookBaseIndex), 11)
