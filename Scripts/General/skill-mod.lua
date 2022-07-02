@@ -2003,6 +2003,34 @@ function events.GameInitialized2()
 			end
 		end
 		
+		-- process other custom values in monsterInfo
+
+		for key, value in pairs(monsterInfo) do
+		
+			-- skip Attack1, Attack2, Spell
+			
+			if key == "Attack1" or key == "Attack2Chance" or key == "Attack2" or key == "SpellChance" or key == "Spell" or key == "SpellSkill" then
+			
+				-- do nothing - it is already processed
+				
+			elseif key == "Resistances" then
+			
+				-- apply custom resistances
+			
+				for resistanceDamageType, resistanceValue in pairs(value) do
+					monsterTxt.Resistances[resistanceDamageType] = resistanceValue
+				end
+				
+			else
+			
+				-- apply all other flat values
+				
+				monsterTxt[key] = value
+				
+			end
+			
+		end
+		
 	end
 	
 	----------------------------------------------------------------------------------------------------
@@ -2416,7 +2444,7 @@ function events.GameInitialized2()
 	
 	-- guardian angel
 	
-	Game.SpellsTxt[spellTxtIds["Guardian Angel"]].Description = string.replace(Game.SpellsTxt[spellTxtIds["Guardian Angel"]].Description, "Guardian Angel lasts for 1 hour per point of skill in Spirit Magic", "Guardian Angel lasts for 1 hour plus 5 minutes per point of skill in Spirit Magic") .. string.format("\n\nWhile active Guardian Angel lowers the death HP threshold by 10 per point of skill in Spirit Magic for all characters.")
+	Game.SpellsTxt[spellTxtIds["Guardian Angel"]].Description = string.replace(Game.SpellsTxt[spellTxtIds["Guardian Angel"]].Description, "Guardian Angel lasts for 1 hour per point of skill in Spirit Magic", "Guardian Angel lasts for 1 hour plus 5 minutes per point of skill in Spirit Magic") .. string.format("\n\nWhile active Guardian Angel lowers death HP threshold by 1000 for all characters protecting them from dying of HP loss.")
 	
 	----------------------------------------------------------------------------------------------------
 	-- professions
@@ -2764,18 +2792,35 @@ function events.Tick()
 end
 
 -- Feeblemind fix
+
 local function disableFeeblemindedMonsterCasting(d, def)
 	-- get default random value
 	local randomRoll = def()
 	-- get monster
 	local monsterIndex, monster = GetMonster(d.esi)
-	-- set random to 99 for feebleminded monster
+	-- check monster is feebleminded
 	if monster.SpellBuffs[const.MonsterBuff.Feeblemind].ExpireTime ~= 0 then
+		-- set random roll to 100 to prevent casting
 		randomRoll = 99
 	end
 	return randomRoll
 end
 mem.hookcall(0x00421C5C, 0, 0, disableFeeblemindedMonsterCasting)
+
+-- Feeblemind prevents monster to do bad things
+
+local function disableFeeblemindedMonsterSpecialAbility(d, def, playerPointer, thing)
+	-- get monster
+	local monsterIndex, monster = GetMonster(d.edi)
+	-- check monster is feebleminded
+	if monster.SpellBuffs[const.MonsterBuff.Feeblemind].ExpireTime ~= 0 then
+		-- do nothing
+	else
+		-- do bad thing
+		def(playerPointer, thing)
+	end
+end
+mem.hookcall(0x00431DE7, 1, 1, disableFeeblemindedMonsterSpecialAbility)
 
 -- Summon hirelings
 local function bringMonsterToParty(monster)
@@ -3074,7 +3119,6 @@ mem.hookcall(0x00430C4B, 0, 1, modifiedMonsterChooseTargetMember)
 ----------------------------------------------------------------------------------------------------
 
 local function modifiedCharacterStrikeWithDamageProjectile(d, def, playerPointer, damage, damageKind)
-MessageBox(damage)
 
 	-- compute damage reduction
 	
@@ -3568,7 +3612,7 @@ local function guardianAngelSetSpellBuff(d, def, spellBuffAddress, expireTimeLow
 end
 mem.hookcall(0x00426C0F, 1, 6, guardianAngelSetSpellBuff)
 
-local guardianAngelEnduranceBonusPerLevel = 10
+local guardianAngelEnduranceBonus = 1000
 local function changedCharacterCalcStatBonusByItems(d, def, characterPointer, statId)
 	-- calculate default bonus
 	local statBonus = def(characterPointer, statId)
@@ -3576,12 +3620,11 @@ local function changedCharacterCalcStatBonusByItems(d, def, characterPointer, st
 	local guardianAngelBuff = Party.SpellBuffs[const.PartyBuff.GuardianAngel]
 	-- increase bonus to make it positive so character doesn't die with guardian angel
 	if guardianAngelBuff.ExpireTime ~= 0 then
-		statBonus = statBonus + guardianAngelEnduranceBonusPerLevel * guardianAngelBuff.Power
+		statBonus = statBonus + guardianAngelEnduranceBonus
 	end
 	return statBonus
 end
 mem.hookcall(0x0047FF37, 1, 1, changedCharacterCalcStatBonusByItems)
-mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
 
 ----------------------------------------------------------------------------------------------------
 -- Monster_CalculateDamage

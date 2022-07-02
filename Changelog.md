@@ -1,3 +1,10 @@
+# version 75
+
+* Added code to process other custom values in monsterInfo.
+* Guardian Angel now adds 1000 bonus to Endurance regardless of skill when checking whether unconscious character dies from low HP.
+* Fixed Guardian Angel bug when it caused revivied character to immediatelly die again.
+* Feeblemind now disables monster special abilities to do bad things to character.
+
 # version 74
 
 * Reprogrammed monster damage computations. Experimental. Needs testing.
