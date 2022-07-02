@@ -1986,7 +1986,7 @@ function events.GameInitialized2()
 			monsterTxt.Attack2Chance = monsterInfo.Attack2.Chance
 			if monsterInfo.Attack2 ~= nil then
 				for key, value in pairs(monsterInfo.Attack2) do
-					monsterTxt.Attack1[key] = value
+					monsterTxt.Attack2[key] = value
 				end
 			end
 		end
