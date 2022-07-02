@@ -2102,7 +2102,7 @@ function events.GameInitialized2()
 	-- normal books
 	
 	local normalBookBaseIndex = 300
-	for itemTxtIndex = normalBookBaseIndex, Game.ItemsTxt.high do
+	for itemTxtIndex = normalBookBaseIndex, normalBookBaseIndex + 77 - 1 do
 
 		local itemTxt = Game.ItemsTxt[itemTxtIndex]
 		local bookLevel = math.fmod((itemTxtIndex - normalBookBaseIndex), 11)
@@ -2114,7 +2114,7 @@ function events.GameInitialized2()
 	-- mirror books
 	
 	local mirrorBookBaseIndex = 377
-	for itemTxtIndex = mirrorBookBaseIndex, Game.ItemsTxt.high do
+	for itemTxtIndex = mirrorBookBaseIndex, GmirrorBookBaseIndex + 22 - 1 do
 
 		local itemTxt = Game.ItemsTxt[itemTxtIndex]
 		local bookLevel = math.fmod((itemTxtIndex - mirrorBookBaseIndex), 11)
