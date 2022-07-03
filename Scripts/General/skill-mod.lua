@@ -1634,9 +1634,8 @@ function events.CalcStatBonusBySkills(t)
 				
 				for monsterIndex = 0, Map.Monsters.high do
 					local monster = Map.Monsters[monsterIndex]
-MessageBox(monster.Bits)
 					local distanceToMonster = getDistanceToMonster(monster)
-					if distanceToMonster < meleeRangeDistance then
+					if distanceToMonster < meleeRangeDistance and monster.Active then
 						meleeRangeMonsterCount = meleeRangeMonsterCount + 1
 					end
 				end
@@ -3165,9 +3164,9 @@ local function modifiedMonsterChooseTargetMember(d, def, monsterPointer)
 				local player = Party.Players[playerIndex]
 				local playerEquipmentData = getPlayerEquipmentData(player)
 				
-				-- switch to substitute player only if they wear plate
+				-- switch to substitute player only if they wear plate and alive
 				
-				if playerEquipmentData.armor.skill == const.Skills.Plate then
+				if player:IsConscious() and playerEquipmentData.armor.skill == const.Skills.Plate then
 				
 					substituteProbability = substituteProbability + plateCoverChances[playerEquipmentData.armor.rank]
 					

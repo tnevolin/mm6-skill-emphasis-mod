@@ -1,3 +1,8 @@
+# version 76
+
+* Fixed Dagger crowd damage. It is now accounts for active monsters only.
+* Fixed Plate cover skill. It is now applied to active player only.
+
 # version 75
 
 * Added code to process other custom values in monsterInfo.
