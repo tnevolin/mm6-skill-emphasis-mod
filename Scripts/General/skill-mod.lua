@@ -1993,6 +1993,12 @@ mem.asmpatch(0x0042961A, "lea    edx,[eax+eax*1]", 3)
 -- Master power = 2
 mem.asmpatch(0x0042960D, "lea    ecx,[eax*2+0x0]", 7)
 
+-- duration = 1 hour * skill
+mem.asmpatch(0x0042962E, [[
+		lea    eax,[eax+eax*4]
+		nop
+	]], 4)
+
 -- Day of the Gods
 
 -- Novice power = 05 + skill * 1
