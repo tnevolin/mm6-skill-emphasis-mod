@@ -1986,11 +1986,33 @@ mem.asmpatch(
 )
 
 -- Day of Protection
+
 -- Novice power = 2 (same as in vanilla - no change)
 -- Expert power = 2
 mem.asmpatch(0x0042961A, "lea    edx,[eax+eax*1]", 3)
 -- Master power = 2
 mem.asmpatch(0x0042960D, "lea    ecx,[eax*2+0x0]", 7)
+
+-- Day of the Gods
+
+-- Novice power = 05 + skill * 1
+mem.asmpatch(0x00428A90, [[
+		lea    edx,[ecx+0x5]
+		nop
+	]], 4)
+-- Expert power = 10 + skill * 1
+mem.asmpatch(0x00428A7B, [[
+		lea    ecx,[ecx+0xa]
+		nop
+	]], 4)
+-- Master power = 15 + skill * 1
+mem.asmpatch(0x00428A62, [[
+		lea    eax,[ecx+0xf]
+		nop
+		nop
+		nop
+		nop
+	]], 7)
 
 
 ----------------------------------------------------------------------------------------------------
