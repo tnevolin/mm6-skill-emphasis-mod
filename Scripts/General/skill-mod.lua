@@ -1985,6 +1985,14 @@ mem.asmpatch(
 	0x2D
 )
 
+-- Day of Protection
+-- Novice power = 2 (same as in vanilla - no change)
+-- Expert power = 2
+mem.asmpatch(0x0042961A, "lea    edx,[eax+eax*1]", 3)
+-- Master power = 2
+mem.asmpatch(0x0042960D, "lea    ecx,[eax*2+0x0]", 7)
+
+
 ----------------------------------------------------------------------------------------------------
 -- game initialization
 ----------------------------------------------------------------------------------------------------
