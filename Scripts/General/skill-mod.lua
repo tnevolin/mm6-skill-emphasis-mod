@@ -2020,6 +2020,13 @@ mem.asmpatch(0x00428A62, [[
 		nop
 	]], 7)
 
+-- Novice duration = skill * 1 hour
+mem.asmpatch(0x00428A9E, "shl     eax, 4", 3)
+-- Expert duration = skill * 1 hour
+mem.asmpatch(0x00428A75, "imul    eax, 3600", 6)
+-- Novice duration = skill * 1 hour
+mem.asmpatch(0x00428A5B, "shl     eax, 4", 3)
+
 
 ----------------------------------------------------------------------------------------------------
 -- game initialization
