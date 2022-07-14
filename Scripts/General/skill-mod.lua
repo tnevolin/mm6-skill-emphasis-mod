@@ -1939,6 +1939,8 @@ mem.asmpatch(
 	"mov    DWORD [esp+0x14], ecx\n",
 	0x2D
 )
+-- duration = skill * 2 hours
+mem.asmpatch(0x00423719, "shl     eax, 5", 3)
 
 -- Protection from Electricity
 mem.asmpatch(
@@ -1951,6 +1953,8 @@ mem.asmpatch(
 	"mov    DWORD [esp+0x14], ecx\n",
 	0x2D
 )
+-- duration = skill * 2 hours
+mem.asmpatch(0x004243D4, "shl     eax, 5", 3)
 
 -- Protection from Cold
 mem.asmpatch(
@@ -1962,6 +1966,8 @@ mem.asmpatch(
 	"mov    DWORD [esp+0x14], ecx\n",
 	0x2D
 )
+-- duration = skill * 2 hours
+mem.asmpatch(0x00424FD0, "shl     eax, 5", 3)
 
 -- Protection from Magic
 mem.asmpatch(
@@ -1973,6 +1979,8 @@ mem.asmpatch(
 	"mov    DWORD [esp+0x14], ecx\n",
 	0x2D
 )
+-- duration = skill * 2 hours
+mem.asmpatch(0x004260BE, "shl     eax, 5", 3)
 
 -- Protection from Poison
 mem.asmpatch(
@@ -1984,6 +1992,8 @@ mem.asmpatch(
 	"mov    DWORD [esp+0x14], ecx\n",
 	0x2D
 )
+-- duration = skill * 2 hours
+mem.asmpatch(0x00427EF1, "shl     eax, 5", 3)
 
 -- Day of Protection
 
