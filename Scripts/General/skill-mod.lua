@@ -1911,8 +1911,12 @@ end
 mem.autohook(0x00426C4F, setHeroismPowerExpert, 0x8)
 
 -- Healing Touch
+
+-- Novice strength: no change (was 3-7)
+-- Expert strength: 6-14 (was 5-9)
 mem.asmpatch(0x00426917, "mov     edx, 5", 5)
 mem.asmpatch(0x00426926, "add     eax, 4", 3)
+-- Master strength: 15-35 (was 7-11)
 mem.asmpatch(0x00426903, "mov     edx, 11", 5)
 mem.asmpatch(0x00426912, "add     eax, 13", 3)
 
@@ -2036,6 +2040,27 @@ mem.asmpatch(0x00428A9E, "shl     eax, 4", 3)
 mem.asmpatch(0x00428A75, "imul    eax, 3600", 6)
 -- Novice duration = skill * 1 hour
 mem.asmpatch(0x00428A5B, "shl     eax, 4", 3)
+
+-- hooking CastSpell function for more sophisticated effects
+
+local function modifiedCastSpell(d, def, spellInfoPointer)
+
+	-- read spell ID and caster index
+	
+	local spellId = mem.i2[spellInfoPointer]
+	local casterIndex = mem.i2[spellInfoPointer + 2]
+	
+	-- execute original function
+	
+	def(spellInfoPointer)
+	
+	-- add any extra effects
+	
+--	if (spellId == 1) then
+--	end
+	
+end
+mem.hookcall(0x0042F573, 1, 0, modifiedCastSpell)
 
 
 ----------------------------------------------------------------------------------------------------
