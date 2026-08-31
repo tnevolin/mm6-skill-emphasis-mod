@@ -160,24 +160,28 @@ local armorSkillNewBonusBySkillAndRank =
 {
 	[const.Skills.Shield] =
 	{
+		[0] = 0,
 		[const.Novice] = 4,
 		[const.Expert] = 6,
 		[const.Master] = 8,
 	},
 	[const.Skills.Leather] =
 	{
+		[0] = 0,
 		[const.Novice] = 2,
 		[const.Expert] = 3,
 		[const.Master] = 4,
 	},
 	[const.Skills.Chain] =
 	{
+		[0] = 0,
 		[const.Novice] = 4,
 		[const.Expert] = 6,
 		[const.Master] = 8,
 	},
 	[const.Skills.Plate] =
 	{
+		[0] = 0,
 		[const.Novice] = 6,
 		[const.Expert] = 9,
 		[const.Master] = 12,
@@ -187,12 +191,14 @@ local armorSkillResistanceBonusBySkillAndRank =
 {
 	[const.Skills.Leather] =
 	{
+		[0] = 0,
 		[const.Novice] = 4,
 		[const.Expert] = 6,
 		[const.Master] = 8,
 	},
 	[const.Skills.Chain] =
 	{
+		[0] = 0,
 		[const.Novice] = 2,
 		[const.Expert] = 3,
 		[const.Master] = 4,
@@ -217,14 +223,14 @@ local oldWeaponSkillRecoveryBonuses =
 
 local newWeaponSkillRecoveryBonuses =
 {
-	[const.Skills.Staff]	= {0, 0, 0, },
-	[const.Skills.Sword]	= {0, 4, 4, },
-	[const.Skills.Dagger]	= {0, 0, 0, },
-	[const.Skills.Axe]		= {0, 2, 2, },
-	[const.Skills.Spear]	= {0, 0, 0, },
-	[const.Skills.Bow]		= {4, 5, 6, },
-	[const.Skills.Mace]		= {0, 0, 0, },
-	[const.Skills.Blaster]	= {0, 0, 0, },
+	[const.Skills.Staff]	= {[0] = 0, 0, 0, 0, },
+	[const.Skills.Sword]	= {[0] = 0, 0, 4, 4, },
+	[const.Skills.Dagger]	= {[0] = 0, 0, 0, 0, },
+	[const.Skills.Axe]		= {[0] = 0, 0, 2, 2, },
+	[const.Skills.Spear]	= {[0] = 0, 0, 0, 0, },
+	[const.Skills.Bow]		= {[0] = 0, 4, 5, 6, },
+	[const.Skills.Mace]		= {[0] = 0, 0, 0, 0, },
+	[const.Skills.Blaster]	= {[0] = 0, 0, 0, 0, },
 }
 
 -- old weapon damage bonuses (by rank)
@@ -245,14 +251,14 @@ local oldWeaponSkillDamageBonuses =
 
 local newWeaponSkillDamageBonuses =
 {
-	[const.Skills.Staff]	= {0, 0, 0, },
-	[const.Skills.Sword]	= {0, 0, 1, },
-	[const.Skills.Dagger]	= {0, 0, 0, },
-	[const.Skills.Axe]		= {2, 3, 4, },
-	[const.Skills.Spear]	= {2, 3, 4, },
-	[const.Skills.Bow]		= {0, 1, 1, },
-	[const.Skills.Mace]		= {2, 3, 4, },
-	[const.Skills.Blaster]	= {0, 0, 0, },
+	[const.Skills.Staff]	= {[0] = 0, 0, 0, 0, },
+	[const.Skills.Sword]	= {[0] = 0, 0, 0, 1, },
+	[const.Skills.Dagger]	= {[0] = 0, 0, 0, 0, },
+	[const.Skills.Axe]		= {[0] = 0, 2, 3, 4, },
+	[const.Skills.Spear]	= {[0] = 0, 2, 3, 4, },
+	[const.Skills.Bow]		= {[0] = 0, 0, 1, 1, },
+	[const.Skills.Mace]		= {[0] = 0, 2, 3, 4, },
+	[const.Skills.Blaster]	= {[0] = 0, 0, 0, 0, },
 }
 
 local weaponSkillResistanceBonuses =
@@ -270,33 +276,33 @@ local weaponSkillResistanceBonuses =
 -- skill effect multipliers
 local weaponOldAttackBonusByMastery =
 {
-	[const.Skills.Bow] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
-	[const.Skills.Blaster] = {[const.Novice] = 1, [const.Expert] = 2, [const.Master] = 3, },
-	[const.Skills.Staff] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
-	[const.Skills.Sword] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
-	[const.Skills.Dagger] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
-	[const.Skills.Axe] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
-	[const.Skills.Spear] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
-	[const.Skills.Mace] = {[const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Bow] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Blaster] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 2, [const.Master] = 3, },
+	[const.Skills.Staff] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Sword] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Dagger] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Axe] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Spear] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
+	[const.Skills.Mace] = {[0] = 0, [const.Novice] = 1, [const.Expert] = 1, [const.Master] = 1, },
 }
 local weaponNewAttackBonusByMastery =
 {
-	[const.Skills.Bow] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Blaster] = {[const.Novice] = 2, [const.Expert] = 4, [const.Master] = 6, },
-	[const.Skills.Staff] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Sword] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Dagger] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Axe] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
-	[const.Skills.Spear] = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, },
-	[const.Skills.Mace] = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Bow] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Blaster] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 4, [const.Master] = 6, },
+	[const.Skills.Staff] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Sword] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Dagger] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Axe] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
+	[const.Skills.Spear] = {[0] = 0, [const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, },
+	[const.Skills.Mace] = {[0] = 0, [const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, },
 }
 -- not used anymore --
 -- local recoveryBonusByMastery = {[const.Novice] = 4, [const.Expert] = 5, [const.Master] = 6, }
 -- local damageBonusByMastery = {[const.Novice] = 2, [const.Expert] = 3, [const.Master] = 4, }
-local weaponACBonusByMastery = {[const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
-local weaponResistanceBonusByMastery = {[const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
+local weaponACBonusByMastery = {[0] = 0, [const.Novice] = 4, [const.Expert] = 6, [const.Master] = 8, }
+local weaponResistanceBonusByMastery = {[0] = 0, [const.Novice] = 0, [const.Expert] = 1, [const.Master] = 2, }
 local twoHandedWeaponDamageBonus = 3
-local twoHandedWeaponDamageBonusByMastery = {[const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
+local twoHandedWeaponDamageBonusByMastery = {[0] = 0, [const.Novice] = twoHandedWeaponDamageBonus, [const.Expert] = twoHandedWeaponDamageBonus, [const.Master] = twoHandedWeaponDamageBonus, }
 local learningSkillExtraMultiplier = 2
 local learningSkillMultiplierByMastery = {[const.Novice] = 1 + learningSkillExtraMultiplier, [const.Expert] = 2 + learningSkillExtraMultiplier, [const.Master] = 3 + learningSkillExtraMultiplier, }
 
@@ -337,7 +343,7 @@ local classRangedWeaponSkillDamageBonus =
 }
 
 -- plate cover chances by rank
-local plateCoverChances = {[const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
+local plateCoverChances = {[0] = 0, [const.Novice] = 0.1, [const.Expert] = 0.2, [const.Master] = 0.3, }
 
 -- shield projectile damage multiplier by mastery
 local shieldProjectileDamageReductionPerLevel = 0.02

@@ -1,3 +1,7 @@
+# version 77
+
+* Fixed crash ("attempt to perform arithmetic on a nil value") when a player has an untrained weapon, shield, or armor skill equipped. Attack, damage, recovery, AC, and plate cover bonus tables did not have entries for the untrained rank and returned nil instead of a zero bonus.
+
 # version 76
 
 * Fixed Dagger crowd damage. It is now accounts for active monsters only.
